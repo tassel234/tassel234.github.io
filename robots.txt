@@ -1,0 +1,3 @@
+User-agent: *
+Disallow:
+Sitemap: https://tassel234.github.io/sitemap.xml
