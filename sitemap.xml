@@ -2,13 +2,19 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
-    <loc>https://tassel234.github.io/posts/tech/cv/</loc>
-    <lastmod>2023-08-08T10:49:22+08:00</lastmod>
-  </url><url>
     <loc>https://tassel234.github.io/</loc>
-    <lastmod>2023-08-08T10:49:22+08:00</lastmod>
+    <lastmod>2023-08-08T13:09:38+08:00</lastmod>
   </url><url>
     <loc>https://tassel234.github.io/posts/</loc>
+    <lastmod>2023-08-08T13:09:38+08:00</lastmod>
+  </url><url>
+    <loc>https://tassel234.github.io/posts/read/re/</loc>
+    <lastmod>2023-08-08T13:09:38+08:00</lastmod>
+  </url><url>
+    <loc>https://tassel234.github.io/posts/read/</loc>
+    <lastmod>2023-08-08T13:09:38+08:00</lastmod>
+  </url><url>
+    <loc>https://tassel234.github.io/posts/tech/cv/</loc>
     <lastmod>2023-08-08T10:49:22+08:00</lastmod>
   </url><url>
     <loc>https://tassel234.github.io/posts/tech/</loc>
@@ -43,7 +49,5 @@
     <loc>https://tassel234.github.io/series/</loc>
   </url><url>
     <loc>https://tassel234.github.io/tags/</loc>
-  </url><url>
-    <loc>https://tassel234.github.io/posts/read/</loc>
   </url>
 </urlset>
