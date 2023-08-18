@@ -6,7 +6,16 @@
     <description>Recent content on hrkr&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Thu, 17 Aug 2023 23:51:20 +0800</lastBuildDate><atom:link href="https://tassel234.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Fri, 18 Aug 2023 22:16:44 +0800</lastBuildDate><atom:link href="https://tassel234.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Hugo搭建个人博客</title>
+      <link>https://tassel234.github.io/posts/tech/hugo%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/</link>
+      <pubDate>Fri, 18 Aug 2023 22:16:44 +0800</pubDate>
+      
+      <guid>https://tassel234.github.io/posts/tech/hugo%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/</guid>
+      <description>github和git的基础知识（可跳过不看） Github 代码上边的Raw、Blame是什么意思？ Raw：文件内容。 blame：按行显示最新提交的信息。 Pin，该词可被译为：钉住、按住。被Pin的仓库会显示在个人主页中，类似于仓库置顶。 Watch，默认是Unwatch，如果你想关注某个仓库，</description>
+    </item>
+    
     <item>
       <title>《外婆的道歉信》读后感</title>
       <link>https://tassel234.github.io/posts/read/%E5%A4%96%E5%A9%86%E7%9A%84%E9%81%93%E6%AD%89%E4%BF%A1%E8%AF%BB%E5%90%8E%E6%84%9F/</link>
@@ -34,78 +43,7 @@
       <description>正值暑假，又热又闷。 学校的图书馆周日不开放，学习任务也没有完成。 我今天本该在宿舍在宿舍睡觉吃饭学习，但因为前几周的经历，我意识到宿舍学习的效率是有一点惨不忍睹的。 考虑之下，我决定去青浦图书馆学习和旅行。 青浦图书馆坐落于青浦新城区夏阳湖上，有水上博物馆的美称，夏阳湖旁边是就是青浦博</description>
     </item>
     
-    <item>
-      <title>Re</title>
-      <link>https://tassel234.github.io/posts/read/re/</link>
-      <pubDate>Tue, 08 Aug 2023 13:09:38 +0800</pubDate>
-      
-      <guid>https://tassel234.github.io/posts/read/re/</guid>
-      <description>为</description>
-    </item>
     
-    <item>
-      <title>Cv</title>
-      <link>https://tassel234.github.io/posts/tech/cv/</link>
-      <pubDate>Tue, 08 Aug 2023 10:49:22 +0800</pubDate>
-      
-      <guid>https://tassel234.github.io/posts/tech/cv/</guid>
-      <description>wwwww</description>
-    </item>
-    
-    <item>
-      <title>Ji</title>
-      <link>https://tassel234.github.io/posts/tech/ji/</link>
-      <pubDate>Tue, 08 Aug 2023 10:48:36 +0800</pubDate>
-      
-      <guid>https://tassel234.github.io/posts/tech/ji/</guid>
-      <description>23445</description>
-    </item>
-    
-    <item>
-      <title>Ft</title>
-      <link>https://tassel234.github.io/posts/note/ft/</link>
-      <pubDate>Tue, 08 Aug 2023 00:28:06 +0800</pubDate>
-      
-      <guid>https://tassel234.github.io/posts/note/ft/</guid>
-      <description>qddsdw</description>
-    </item>
-    
-    <item>
-      <title>De</title>
-      <link>https://tassel234.github.io/posts/note/de/</link>
-      <pubDate>Tue, 08 Aug 2023 00:27:59 +0800</pubDate>
-      
-      <guid>https://tassel234.github.io/posts/note/de/</guid>
-      <description>whwh </description>
-    </item>
-    
-    <item>
-      <title>Xs</title>
-      <link>https://tassel234.github.io/posts/note/xs/</link>
-      <pubDate>Tue, 08 Aug 2023 00:27:37 +0800</pubDate>
-      
-      <guid>https://tassel234.github.io/posts/note/xs/</guid>
-      <description>wdwdgggg</description>
-    </item>
-    
-    <item>
-      <title>Ss</title>
-      <link>https://tassel234.github.io/posts/life/ss/</link>
-      <pubDate>Tue, 08 Aug 2023 00:22:29 +0800</pubDate>
-      
-      <guid>https://tassel234.github.io/posts/life/ss/</guid>
-      <description>boke
-sstest</description>
-    </item>
-    
-    <item>
-      <title>Jj</title>
-      <link>https://tassel234.github.io/posts/tech/jj/</link>
-      <pubDate>Tue, 08 Aug 2023 00:21:30 +0800</pubDate>
-      
-      <guid>https://tassel234.github.io/posts/tech/jj/</guid>
-      <description>wer</description>
-    </item>
     
   </channel>
 </rss>

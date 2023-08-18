@@ -1,0 +1,582 @@
+<!DOCTYPE html>
+<html lang="en" dir="auto">
+
+<head><meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="robots" content="index, follow">
+<title>Hugo搭建个人博客 | hrkr&#39;s Blog</title>
+<meta name="keywords" content="">
+<meta name="description" content="github和git的基础知识（可跳过不看） Github 代码上边的Raw、Blame是什么意思？ Raw：文件内容。 blame：按行显示最新提交的信息。 Pin，该词可被译为：钉住、按住。被Pin的仓库会显示在个人主页中，类似于仓库置顶。 Watch，默认是Unwatch，如果你想关注某个仓库，">
+<meta name="author" content="hrkr">
+<link rel="canonical" href="https://tassel234.github.io/posts/tech/hugo%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/">
+<link crossorigin="anonymous" href="/assets/css/stylesheet.css" rel="preload stylesheet" as="style">
+<script defer crossorigin="anonymous" src="/assets/js/highlight.js" onload="hljs.initHighlightingOnLoad();"></script>
+<link rel="icon" href="https://tassel234.github.io/img/">
+<link rel="icon" type="image/png" sizes="16x16" href="https://tassel234.github.io/img/">
+<link rel="icon" type="image/png" sizes="32x32" href="https://tassel234.github.io/img/">
+<link rel="apple-touch-icon" href="https://tassel234.github.io/img/Q.jpg">
+<link rel="mask-icon" href="https://tassel234.github.io/img/Q.jpg">
+<meta name="theme-color" content="#2e2e33">
+<meta name="msapplication-TileColor" content="#2e2e33">
+<noscript>
+    <style>
+        #theme-toggle,
+        .top-link {
+            display: none;
+        }
+
+    </style>
+    <style>
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --theme: rgb(29, 30, 32);
+                --entry: rgb(46, 46, 51);
+                --primary: rgb(218, 218, 219);
+                --secondary: rgb(155, 156, 157);
+                --tertiary: rgb(65, 66, 68);
+                --content: rgb(196, 196, 197);
+                --hljs-bg: rgb(46, 46, 51);
+                --code-bg: rgb(55, 56, 62);
+                --border: rgb(51, 51, 51);
+            }
+
+            .list {
+                background: var(--theme);
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-track {
+                background: 0 0;
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-thumb {
+                border-color: var(--theme);
+            }
+        }
+
+    </style>
+</noscript><meta property="og:title" content="Hugo搭建个人博客" />
+<meta property="og:description" content="github和git的基础知识（可跳过不看） Github 代码上边的Raw、Blame是什么意思？ Raw：文件内容。 blame：按行显示最新提交的信息。 Pin，该词可被译为：钉住、按住。被Pin的仓库会显示在个人主页中，类似于仓库置顶。 Watch，默认是Unwatch，如果你想关注某个仓库，" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://tassel234.github.io/posts/tech/hugo%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2023-08-18T22:16:44+08:00" />
+<meta property="article:modified_time" content="2023-08-18T22:16:44+08:00" />
+
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Hugo搭建个人博客"/>
+<meta name="twitter:description" content="github和git的基础知识（可跳过不看） Github 代码上边的Raw、Blame是什么意思？ Raw：文件内容。 blame：按行显示最新提交的信息。 Pin，该词可被译为：钉住、按住。被Pin的仓库会显示在个人主页中，类似于仓库置顶。 Watch，默认是Unwatch，如果你想关注某个仓库，"/>
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position":  1 ,
+      "name": "Posts",
+      "item": "https://tassel234.github.io/posts/"
+    }, 
+    {
+      "@type": "ListItem",
+      "position":  2 ,
+      "name": "技术",
+      "item": "https://tassel234.github.io/posts/tech/"
+    }, 
+    {
+      "@type": "ListItem",
+      "position":  3 ,
+      "name": "Hugo搭建个人博客",
+      "item": "https://tassel234.github.io/posts/tech/hugo%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/"
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "Hugo搭建个人博客",
+  "name": "Hugo搭建个人博客",
+  "description": "github和git的基础知识（可跳过不看） Github 代码上边的Raw、Blame是什么意思？ Raw：文件内容。 blame：按行显示最新提交的信息。 Pin，该词可被译为：钉住、按住。被Pin的仓库会显示在个人主页中，类似于仓库置顶。 Watch，默认是Unwatch，如果你想关注某个仓库，",
+  "keywords": [
+    
+  ],
+  "articleBody": "github和git的基础知识（可跳过不看）  Github 代码上边的Raw、Blame是什么意思？\n  Raw：文件内容。 blame：按行显示最新提交的信息。\n Pin，该词可被译为：钉住、按住。被Pin的仓库会显示在个人主页中，类似于仓库置顶。 Watch，默认是Unwatch，如果你想关注某个仓库，当这个库有新的通知时就会提醒你。 star,表示喜爱。\nFork代表从别人的代码仓库中复制一份到自己的代码库，包含了别人库中的提交历史记录。经过fork后的代码库是完全独立的，由自己维护，可以进行任何魔改。改完之后自己可以通过Pull Request向原来的库提交合并请求。 1. Fork别人的仓库：复制别人仓库（代码、文件、提交历史记录、issue等），复制后的仓库在自己的github账号中存着。 2. Clone远程仓库：将这个复制后的远程仓库克隆到本地。 3. 在工作区对代码进行CRUD操作（增删改查） 4. 将代码的更改提交暂存区（git add .） 5. 将暂存区的文件提交到本地仓库（git commit -m ‘小修一下’） 6. 将本地仓库的代码推送到远程仓库（git push） 7. 给别人的仓库发送Pull Request：如果原作者认为你的修改版本不错，就会将你代码中的修改合并到自己的库中。\n可以在写编写markdown文件于github网站\nGit是一款分布式源代码管理工具(版本控制工具) ，可以对我们写的代码进行托管和版本记录（每上传一次形成一个版本，可以找回）。github和git的关系非常紧密，hub在百度翻译有如下解释：\n n. 轮毂; (某地或活动的)中心; [例句]The island’s social hub is the Cafe Sport 该岛的社交中心是“体育咖啡馆”。 可以理解为github以git为传输路径，把程序员上传过的代码集中,迭代，存放在github的仓库中，方便和其他程序员的合作或交流。\n git的进一步学习\n前言 本文介绍如何使用Github+Hugo+PaperMod主题搭建一个人博客。\n此文章也记录了我搭建博客较为详细的步骤和一些在博客搭建过程中出现的问题和解决方案。\n参考资料 23年的hugo博客搭建视频\nsulv的博客\n333rd的博客\nrosefinch-midsummer的博客\n前置工作 需要一个github账号,可以在网页打开github,推荐使用fastgithub软件，翻墙也行。\n下载hugo,推荐安装比较原始的版本，后面会解释为什么。\n下载地址\n下载和安装git，见视频\n安装github desktop，使用该软件可以从本地库克隆到github仓库，并可以完成较为方便的上传更新。\n安装fastgithub，可以获得非常快的github访问速度，而且不用翻墙。\n下载fastgithub\n搭建博客  先下载好hugo,推荐下载hugo v0.85.0版本，之前我下载了最新版本，死活不能把配置文件改成yaml格式，也就没办法直接调用别人写好的漂亮的网站结构。接下来的文字是对视频的总结，更直观的步骤请查阅hugo博客搭建视频 把下载好后把hugo.exe所在的文件夹地址放置在环境变量的系统变量中。 在cmd窗口输入hugo version查看版本和确认安装成功。  生成新站点，hugo new site / -f yml ， 实例hugo new site D:/path/to/newst -f yml ，  -f yml是把toml文件格式改成yaml格式，最新版这个指令修改不了配置文件（config）格式。\n然后就可以在文件夹找到生成的站点   在路径栏目输入cmd,打开，\n  输入hugo new posts/tech/文章名称.md生成第一篇博客文章。应该在tech目录下写一个_index.md文件用于索引。\n  安装主题，使用命令行git clone https://github.com/adityatelange/hugo-PaperMod.git\n  下载最新版本，实际上后面cmd提示hugo版本和papermod版本不完全匹配，但最后还是可以生成不错的博客页面，然后对config.yaml进行重写，赋值代码和粘贴config.yml此外写入的md文本应该在github复制最新版，旧版会报错。\n写好了开始生成静态页面，站点目录的cmd输入hugo version在本地查看\n 站点目录的cmd输入hugo生成文件夹public\n  在public的文件夹的cmd进行git 导入，输入git init,一个文件夹导入一次就够了\n  博客上传 配置FastGithub(可以跳过不看) 双击打开FastGithub.UI.exe应用程序,程序会在后台运行。\nfirefox提示连接有潜在的安全问题 设置-隐私与安全-证书-查看证书-证书颁发机构，导入cacert/fastgithub.cer，勾选“信任由此证书颁发机构来标识网站”\n安全性说明\nFastGithub为每台不同的主机生成自颁发CA证书，保存在cacert文件夹下。客户端设备需要安装和无条件信任自颁发的CA证书，请不要将证书私钥泄露给他人，以免造成损失。\n合法性说明\n《国际联网暂行规定》第六条规定：“计算机信息网络直接进行国际联网，必须使用邮电部国家公用电信网提供的国际出入口信道。任何单位和个人不得自行建立或者使用其他信道进行国际联网。” FastGithub本地代理使用的都是“公用电信网提供的国际出入口信道”，从国外Github服务器到国内用户电脑上FastGithub程序的流量，使用的是正常流量通道，其间未对流量进行任何额外加密（仅有网页原有的TLS加密，区别于VPN的流量加密），而FastGithub获取到网页数据之后发生的整个代理过程完全在国内，不再适用国际互联网相关之规定。\n通过git和github desktop将博客上传到github 输入上述两串代码，然后在github desktop进行上传，浏览器的github就可以更新了。\n上传点击fetch origin按钮.\n网页显示 在GitHub网页端，点击hugo博客代码存放库，点击settings,点击pages,修改Branch的none为master,等待一会，就可以生成网页了。\n更新 hugo -F –cleanDestinationDir完成public文件夹的更新, 然后再重复上传步骤即可.\n添加图片 笔者使用的是vnote，记markdown笔记。 图片引用代码如下： ![](vx_images/ex.png =481x)\n首先应该在static文件夹下创建vx_images文件夹，再把要用的图片导入，但有两个问题。\n 不能加图片大小，也就是把 =481x去掉 前面应该加一个/  最后应该这样写\n如何改进博客 创建拥有美观界面的博客 sulv大佬已经写好了一个优美的yaml配置文件,我们只需要复制粘贴到config配置文件就可以了。 但博客网页的yaml代码不能成功执行，因为sulv的博客和333rd的博客的博客都是创作于几年前，hugo和papermod的版本更新导致了各种问题，所以应该直接在github中复制，config.yml\n至于配置头像，联系方式等，也请参照上面两个博客。\n改进指南 插件\n建站\n统计部署\n为什么要写博客  通过强迫自己记笔记，对知识进行整理，对日常和灵感进行记录 可以促进知识的输出，检验自己的掌握程度，类似费曼学习法 博客本身可以促进学习，并且有助于和别人交流自己的想法  ",
+  "wordCount" : "2898",
+  "inLanguage": "en",
+  "datePublished": "2023-08-18T22:16:44+08:00",
+  "dateModified": "2023-08-18T22:16:44+08:00",
+  "author":{
+    "@type": "Person",
+    "name": "hrkr"
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://tassel234.github.io/posts/tech/hugo%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "hrkr's Blog",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://tassel234.github.io/img/"
+    }
+  }
+}
+</script>
+</head>
+
+<body class="" id="top">
+<script>
+    if (localStorage.getItem("pref-theme") === "dark") {
+        document.body.classList.add('dark');
+    } else if (localStorage.getItem("pref-theme") === "light") {
+        document.body.classList.remove('dark')
+    } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        document.body.classList.add('dark');
+    }
+
+</script>
+
+<header class="header">
+    <nav class="nav">
+        <div class="logo">
+            <a href="https://tassel234.github.io/" accesskey="h" title="hrkr&#39;s Blog (Alt + H)">
+                <img src="https://tassel234.github.io/img/Q.jpg" alt="" aria-label="logo"
+                    height="35">hrkr&#39;s Blog</a>
+            <div class="logo-switches">
+                <button id="theme-toggle" accesskey="t" title="(Alt + T)">
+                    <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                    <svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                </button>
+            </div>
+        </div>
+        <ul id="menu">
+            <li>
+                <a href="https://tassel234.github.io/search" title="🔍 搜索 (Alt &#43; /)" accesskey=/>
+                    <span>🔍 搜索</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://tassel234.github.io/" title="🏠 主页">
+                    <span>🏠 主页</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://tassel234.github.io/posts" title="📚 文章">
+                    <span>📚 文章</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://tassel234.github.io/tags" title="🧩 标签">
+                    <span>🧩 标签</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://tassel234.github.io/archives/" title="⏱️ 时间轴">
+                    <span>⏱️ 时间轴</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://tassel234.github.io/about" title="🙋🏻‍♂️ 关于">
+                    <span>🙋🏻‍♂️ 关于</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://tassel234.github.io/links" title="🤝 友链">
+                    <span>🤝 友链</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+</header>
+<main class="main">
+
+<article class="post-single">
+  <header class="post-header">
+    <div class="breadcrumbs"><a href="https://tassel234.github.io/">Home</a>&nbsp;»&nbsp;<a href="https://tassel234.github.io/posts/">Posts</a>&nbsp;»&nbsp;<a href="https://tassel234.github.io/posts/tech/">技术</a></div>
+    <h1 class="post-title">
+      Hugo搭建个人博客
+    </h1>
+    <div class="post-meta"><span title='2023-08-18 22:16:44 +0800 CST'>2023-08-18</span>&nbsp;·&nbsp;6 min&nbsp;·&nbsp;hrkr
+
+</div>
+  </header> <div class="toc">
+    <details  open>
+        <summary accesskey="c" title="(Alt + C)">
+            <span class="details">Table of Contents</span>
+        </summary>
+
+        <div class="inner"><ul>
+                <li>
+                    <a href="#github%e5%92%8cgit%e7%9a%84%e5%9f%ba%e7%a1%80%e7%9f%a5%e8%af%86%e5%8f%af%e8%b7%b3%e8%bf%87%e4%b8%8d%e7%9c%8b" aria-label="github和git的基础知识（可跳过不看）">github和git的基础知识（可跳过不看）</a></li>
+                <li>
+                    <a href="#%e5%89%8d%e8%a8%80" aria-label="前言">前言</a><ul>
+                        
+                <li>
+                    <a href="#%e5%8f%82%e8%80%83%e8%b5%84%e6%96%99" aria-label="参考资料">参考资料</a></li>
+                <li>
+                    <a href="#%e5%89%8d%e7%bd%ae%e5%b7%a5%e4%bd%9c" aria-label="前置工作">前置工作</a></li></ul>
+                </li>
+                <li>
+                    <a href="#%e6%90%ad%e5%bb%ba%e5%8d%9a%e5%ae%a2" aria-label="搭建博客">搭建博客</a></li>
+                <li>
+                    <a href="#%e5%8d%9a%e5%ae%a2%e4%b8%8a%e4%bc%a0" aria-label="博客上传">博客上传</a><ul>
+                        
+                <li>
+                    <a href="#%e9%85%8d%e7%bd%aefastgithub%e5%8f%af%e4%bb%a5%e8%b7%b3%e8%bf%87%e4%b8%8d%e7%9c%8b" aria-label="配置FastGithub(可以跳过不看)">配置FastGithub(可以跳过不看)</a></li>
+                <li>
+                    <a href="#%e9%80%9a%e8%bf%87git%e5%92%8cgithub-desktop%e5%b0%86%e5%8d%9a%e5%ae%a2%e4%b8%8a%e4%bc%a0%e5%88%b0github" aria-label="通过git和github desktop将博客上传到github">通过git和github desktop将博客上传到github</a></li>
+                <li>
+                    <a href="#%e7%bd%91%e9%a1%b5%e6%98%be%e7%a4%ba" aria-label="网页显示">网页显示</a></li>
+                <li>
+                    <a href="#%e6%9b%b4%e6%96%b0" aria-label="更新">更新</a></li>
+                <li>
+                    <a href="#%e6%b7%bb%e5%8a%a0%e5%9b%be%e7%89%87" aria-label="添加图片">添加图片</a></li></ul>
+                </li>
+                <li>
+                    <a href="#%e5%a6%82%e4%bd%95%e6%94%b9%e8%bf%9b%e5%8d%9a%e5%ae%a2" aria-label="如何改进博客">如何改进博客</a><ul>
+                        
+                <li>
+                    <a href="#%e5%88%9b%e5%bb%ba%e6%8b%a5%e6%9c%89%e7%be%8e%e8%a7%82%e7%95%8c%e9%9d%a2%e7%9a%84%e5%8d%9a%e5%ae%a2" aria-label="创建拥有美观界面的博客">创建拥有美观界面的博客</a></li>
+                <li>
+                    <a href="#%e6%94%b9%e8%bf%9b%e6%8c%87%e5%8d%97" aria-label="改进指南">改进指南</a></li></ul>
+                </li>
+                <li>
+                    <a href="#%e4%b8%ba%e4%bb%80%e4%b9%88%e8%a6%81%e5%86%99%e5%8d%9a%e5%ae%a2" aria-label="为什么要写博客">为什么要写博客</a>
+                </li>
+            </ul>
+        </div>
+    </details>
+</div>
+
+  <div class="post-content"><h2 id="github和git的基础知识可跳过不看">github和git的基础知识（可跳过不看）<a hidden class="anchor" aria-hidden="true" href="#github和git的基础知识可跳过不看">#</a></h2>
+<blockquote>
+<p>Github 代码上边的Raw、Blame是什么意思？</p>
+</blockquote>
+<blockquote>
+<p>Raw：文件内容。
+blame：按行显示最新提交的信息。</p>
+</blockquote>
+<p>Pin，该词可被译为：钉住、按住。被Pin的仓库会显示在个人主页中，类似于仓库置顶。
+Watch，默认是Unwatch，如果你想关注某个仓库，当这个库有新的通知时就会提醒你。
+star,表示喜爱。</p>
+<p><strong>Fork</strong>代表从别人的代码仓库中复制一份到自己的代码库，包含了别人库中的提交历史记录。经过fork后的代码库是完全独立的，由自己维护，可以进行任何魔改。改完之后自己可以通过Pull Request向原来的库提交合并请求。
+1. Fork别人的仓库：复制别人仓库（代码、文件、提交历史记录、issue等），复制后的仓库在自己的github账号中存着。
+2. Clone远程仓库：将这个复制后的远程仓库克隆到本地。
+3. 在工作区对代码进行CRUD操作（增删改查）
+4. 将代码的更改提交暂存区（git add .）
+5.  将暂存区的文件提交到本地仓库（git commit -m &lsquo;小修一下&rsquo;）
+6. 将本地仓库的代码推送到远程仓库（git push）
+7. 给别人的仓库发送Pull Request：如果原作者认为你的修改版本不错，就会将你代码中的修改合并到自己的库中。</p>
+<p>可以在写编写markdown文件于github网站</p>
+<p>Git是一款分布式源代码管理工具(版本控制工具) ，可以对我们写的代码进行托管和版本记录（每上传一次形成一个版本，可以找回）。github和git的关系非常紧密，hub在百度翻译有如下解释：</p>
+<blockquote>
+<p>n. 	轮毂; (某地或活动的)中心;
+[例句]The island&rsquo;s social hub is the Cafe Sport
+该岛的社交中心是“体育咖啡馆”。
+可以理解为github以git为传输路径，把程序员上传过的代码集中,迭代，存放在github的仓库中，方便和其他程序员的合作或交流。</p>
+</blockquote>
+<p><a href="https://www.zhihu.com/question/38008771/answers/updated?utm_id=0">git的进一步学习</a></p>
+<h2 id="前言">前言<a hidden class="anchor" aria-hidden="true" href="#前言">#</a></h2>
+<p>本文介绍如何使用Github+Hugo+PaperMod主题搭建一个人博客。</p>
+<p>此文章也记录了我搭建博客较为详细的步骤和一些在博客搭建过程中出现的问题和解决方案。</p>
+<h3 id="参考资料">参考资料<a hidden class="anchor" aria-hidden="true" href="#参考资料">#</a></h3>
+<p><a href="https://www.bilibili.com/video/BV1zu41187o4/">23年的hugo博客搭建视频</a></p>
+<p><a href="https://www.sulvblog.cn/posts/blog/build_hugo/">sulv的博客</a></p>
+<p><a href="https://333rd.net/posts/tech/hugo%E9%83%A8%E7%BD%B2%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A22/">333rd的博客</a></p>
+<p><a href="https://rosefinch-midsummer.github.io/posts/tech/%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA%E5%A4%A7%E8%87%B4%E6%B5%81%E7%A8%8B/">rosefinch-midsummer的博客</a></p>
+<h3 id="前置工作">前置工作<a hidden class="anchor" aria-hidden="true" href="#前置工作">#</a></h3>
+<p>需要一个github账号,可以在网页打开github,推荐使用fastgithub软件，翻墙也行。</p>
+<p>下载hugo,推荐安装比较原始的版本，后面会解释为什么。</p>
+<p><a href="https://github.com/gohugoio/hugo/releases/tag/v0.85.0">下载地址</a></p>
+<p>下载和安装git，见视频</p>
+<p>安装github desktop，使用该软件可以从本地库克隆到github仓库，并可以完成较为方便的上传更新。</p>
+<p>安装fastgithub，可以获得非常快的github访问速度，而且不用翻墙。</p>
+<p><a href="https://pan.quark.cn/s/eca59830b261">下载fastgithub</a></p>
+<h2 id="搭建博客">搭建博客<a hidden class="anchor" aria-hidden="true" href="#搭建博客">#</a></h2>
+<ol>
+<li>先下载好hugo,推荐下载hugo v0.85.0版本，之前我下载了最新版本，死活不能把配置文件改成yaml格式，也就没办法直接调用别人写好的漂亮的网站结构。接下来的文字是对视频的总结，更直观的步骤请查阅<a href="https://www.bilibili.com/video/BV1zu41187o4/">hugo博客搭建视频</a></li>
+<li>把下载好后把hugo.exe所在的文件夹地址放置在环境变量的系统变量中。</li>
+<li>在cmd窗口输入<code>hugo version</code>查看版本和确认安装成功。
+<img loading="lazy" src="/vx_images/121743411258452.png" alt=""  />
+</li>
+<li>生成新站点，hugo new site &lt;想要存储到的位置&gt;/&lt;站点名字&gt; -f yml ，
+实例<code>hugo new site D:/path/to/newst -f yml</code> ，</li>
+</ol>
+<p>-f yml是把toml文件格式改成yaml格式，最新版这个指令修改不了配置文件（config）格式。</p>
+<ol start="5">
+<li>然后就可以在文件夹找到生成的站点</li>
+</ol>
+<p><img loading="lazy" src="/vx_images/208104711263470.png" alt=""  />
+</p>
+<ol start="6">
+<li>
+<p>在路径栏目输入cmd,打开，</p>
+</li>
+<li>
+<p>输入<code>hugo new posts/tech/文章名称.md</code>生成第一篇博客文章。应该在tech目录下写一个_index.md文件用于索引。</p>
+</li>
+<li>
+<p>安装主题，使用命令行git clone <a href="https://github.com/adityatelange/hugo-PaperMod.git">https://github.com/adityatelange/hugo-PaperMod.git</a></p>
+</li>
+</ol>
+<p>下载最新版本，实际上后面cmd提示hugo版本和papermod版本不完全匹配，但最后还是可以生成不错的博客页面，然后对config.yaml进行重写，赋值代码和粘贴<a href="https://github.com/xyming108/sulv-hugo-papermod/blob/main/config.yml">config.yml</a>此外写入的md文本应该在github复制最新版，旧版会报错。</p>
+<p>写好了开始生成静态页面，站点目录的cmd输入hugo version在本地查看</p>
+<ol start="9">
+<li>
+<p>站点目录的cmd输入hugo生成文件夹public</p>
+</li>
+<li>
+<p>在public的文件夹的cmd进行git 导入，输入git init,一个文件夹导入一次就够了</p>
+</li>
+</ol>
+<h2 id="博客上传">博客上传<a hidden class="anchor" aria-hidden="true" href="#博客上传">#</a></h2>
+<h3 id="配置fastgithub可以跳过不看">配置FastGithub(可以跳过不看)<a hidden class="anchor" aria-hidden="true" href="#配置fastgithub可以跳过不看">#</a></h3>
+<p>双击打开FastGithub.UI.exe应用程序,程序会在后台运行。</p>
+<p>firefox提示连接有潜在的安全问题
+设置-&gt;隐私与安全-&gt;证书-&gt;查看证书-&gt;证书颁发机构，导入cacert/fastgithub.cer，勾选“信任由此证书颁发机构来标识网站”</p>
+<p>安全性说明</p>
+<p>FastGithub为每台不同的主机生成自颁发CA证书，保存在cacert文件夹下。客户端设备需要安装和无条件信任自颁发的CA证书，请不要将证书私钥泄露给他人，以免造成损失。</p>
+<p>合法性说明</p>
+<p>《国际联网暂行规定》第六条规定：“计算机信息网络直接进行国际联网，必须使用邮电部国家公用电信网提供的国际出入口信道。任何单位和个人不得自行建立或者使用其他信道进行国际联网。”
+FastGithub本地代理使用的都是“公用电信网提供的国际出入口信道”，从国外Github服务器到国内用户电脑上FastGithub程序的流量，使用的是正常流量通道，其间未对流量进行任何额外加密（仅有网页原有的TLS加密，区别于VPN的流量加密），而FastGithub获取到网页数据之后发生的整个代理过程完全在国内，不再适用国际互联网相关之规定。</p>
+<h3 id="通过git和github-desktop将博客上传到github">通过git和github desktop将博客上传到github<a hidden class="anchor" aria-hidden="true" href="#通过git和github-desktop将博客上传到github">#</a></h3>
+<p><img loading="lazy" src="/vx_images/43394621249285.png" alt=""  />
+</p>
+<p>输入上述两串代码，然后在github desktop进行上传，浏览器的github就可以更新了。</p>
+<p>上传点击fetch origin按钮.</p>
+<p><img loading="lazy" src="/vx_images/9072011256355.png" alt="上传点击这个按钮
+"  />
+</p>
+<h3 id="网页显示">网页显示<a hidden class="anchor" aria-hidden="true" href="#网页显示">#</a></h3>
+<p>在GitHub网页端，点击hugo博客代码存放库，点击settings,点击pages,修改Branch的none为master,等待一会，就可以生成网页了。</p>
+<h3 id="更新">更新<a hidden class="anchor" aria-hidden="true" href="#更新">#</a></h3>
+<p>hugo -F &ndash;cleanDestinationDir完成public文件夹的更新,
+然后再重复上传步骤即可.</p>
+<h3 id="添加图片">添加图片<a hidden class="anchor" aria-hidden="true" href="#添加图片">#</a></h3>
+<p>笔者使用的是vnote，记markdown笔记。
+图片引用代码如下：
+![](vx_images/ex.png =481x)</p>
+<p>首先应该在static文件夹下创建vx_images文件夹，再把要用的图片导入，但有两个问题。</p>
+<ol>
+<li>不能加图片大小，也就是把 =481x去掉</li>
+<li>前面应该加一个/</li>
+</ol>
+<p><img loading="lazy" src="/vx_images/ex.png" alt=""  />
+最后应该这样写</p>
+<h2 id="如何改进博客">如何改进博客<a hidden class="anchor" aria-hidden="true" href="#如何改进博客">#</a></h2>
+<h3 id="创建拥有美观界面的博客">创建拥有美观界面的博客<a hidden class="anchor" aria-hidden="true" href="#创建拥有美观界面的博客">#</a></h3>
+<p>sulv大佬已经写好了一个优美的yaml配置文件,我们只需要复制粘贴到config配置文件就可以了。
+但博客网页的yaml代码不能成功执行，因为<a href="https://www.sulvblog.cn/posts/blog/build_hugo/">sulv的博客</a>和<a href="https://333rd.net/posts/tech/hugo%E9%83%A8%E7%BD%B2%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A22/">333rd的博客</a>的博客都是创作于几年前，hugo和papermod的版本更新导致了各种问题，所以应该直接在github中复制，<a href="https://github.com/xyming108/sulv-hugo-papermod/blob/main/config.yml">config.yml</a></p>
+<p>至于配置头像，联系方式等，也请参照上面两个博客。</p>
+<h3 id="改进指南">改进指南<a hidden class="anchor" aria-hidden="true" href="#改进指南">#</a></h3>
+<p><a href="https://zhuanlan.zhihu.com/p/497671233">插件</a></p>
+<p><a href="https://www.sulvblog.cn/posts/blog/">建站</a></p>
+<p><a href="https://rosefinch-midsummer.github.io/posts/tech/%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA%E5%A4%A7%E8%87%B4%E6%B5%81%E7%A8%8B/">统计部署</a></p>
+<h2 id="为什么要写博客">为什么要写博客<a hidden class="anchor" aria-hidden="true" href="#为什么要写博客">#</a></h2>
+<ol>
+<li>通过强迫自己记笔记，对知识进行整理，对日常和灵感进行记录</li>
+<li>可以促进知识的输出，检验自己的掌握程度，类似费曼学习法</li>
+<li>博客本身可以促进学习，并且有助于和别人交流自己的想法</li>
+</ol>
+
+
+  </div>
+
+  <footer class="post-footer">
+    <ul class="post-tags">
+    </ul>
+<nav class="paginav">
+  <a class="next" href="https://tassel234.github.io/posts/read/%E5%A4%96%E5%A9%86%E7%9A%84%E9%81%93%E6%AD%89%E4%BF%A1%E8%AF%BB%E5%90%8E%E6%84%9F/">
+    <span class="title">Next »</span>
+    <br>
+    <span>《外婆的道歉信》读后感</span>
+  </a>
+</nav>
+
+
+<div class="share-buttons">
+    <a target="_blank" rel="noopener noreferrer" aria-label="share Hugo搭建个人博客 on twitter"
+        href="https://twitter.com/intent/tweet/?text=Hugo%e6%90%ad%e5%bb%ba%e4%b8%aa%e4%ba%ba%e5%8d%9a%e5%ae%a2&amp;url=https%3a%2f%2ftassel234.github.io%2fposts%2ftech%2fhugo%25E6%2590%25AD%25E5%25BB%25BA%25E4%25B8%25AA%25E4%25BA%25BA%25E5%258D%259A%25E5%25AE%25A2%2f&amp;hashtags=">
+        <svg version="1.1" viewBox="0 0 512 512" xml:space="preserve" height="30px" width="30px" fill="currentColor">
+            <path
+                d="M449.446,0c34.525,0 62.554,28.03 62.554,62.554l0,386.892c0,34.524 -28.03,62.554 -62.554,62.554l-386.892,0c-34.524,0 -62.554,-28.03 -62.554,-62.554l0,-386.892c0,-34.524 28.029,-62.554 62.554,-62.554l386.892,0Zm-253.927,424.544c135.939,0 210.268,-112.643 210.268,-210.268c0,-3.218 0,-6.437 -0.153,-9.502c14.406,-10.421 26.973,-23.448 36.935,-38.314c-13.18,5.824 -27.433,9.809 -42.452,11.648c15.326,-9.196 26.973,-23.602 32.49,-40.92c-14.252,8.429 -30.038,14.56 -46.896,17.931c-13.487,-14.406 -32.644,-23.295 -53.946,-23.295c-40.767,0 -73.87,33.104 -73.87,73.87c0,5.824 0.613,11.494 1.992,16.858c-61.456,-3.065 -115.862,-32.49 -152.337,-77.241c-6.284,10.881 -9.962,23.601 -9.962,37.088c0,25.594 13.027,48.276 32.95,61.456c-12.107,-0.307 -23.448,-3.678 -33.41,-9.196l0,0.92c0,35.862 25.441,65.594 59.311,72.49c-6.13,1.686 -12.72,2.606 -19.464,2.606c-4.751,0 -9.348,-0.46 -13.946,-1.38c9.349,29.426 36.628,50.728 68.965,51.341c-25.287,19.771 -57.164,31.571 -91.8,31.571c-5.977,0 -11.801,-0.306 -17.625,-1.073c32.337,21.15 71.264,33.41 112.95,33.41Z" />
+        </svg>
+    </a>
+    <a target="_blank" rel="noopener noreferrer" aria-label="share Hugo搭建个人博客 on linkedin"
+        href="https://www.linkedin.com/shareArticle?mini=true&amp;url=https%3a%2f%2ftassel234.github.io%2fposts%2ftech%2fhugo%25E6%2590%25AD%25E5%25BB%25BA%25E4%25B8%25AA%25E4%25BA%25BA%25E5%258D%259A%25E5%25AE%25A2%2f&amp;title=Hugo%e6%90%ad%e5%bb%ba%e4%b8%aa%e4%ba%ba%e5%8d%9a%e5%ae%a2&amp;summary=Hugo%e6%90%ad%e5%bb%ba%e4%b8%aa%e4%ba%ba%e5%8d%9a%e5%ae%a2&amp;source=https%3a%2f%2ftassel234.github.io%2fposts%2ftech%2fhugo%25E6%2590%25AD%25E5%25BB%25BA%25E4%25B8%25AA%25E4%25BA%25BA%25E5%258D%259A%25E5%25AE%25A2%2f">
+        <svg version="1.1" viewBox="0 0 512 512" xml:space="preserve" height="30px" width="30px" fill="currentColor">
+            <path
+                d="M449.446,0c34.525,0 62.554,28.03 62.554,62.554l0,386.892c0,34.524 -28.03,62.554 -62.554,62.554l-386.892,0c-34.524,0 -62.554,-28.03 -62.554,-62.554l0,-386.892c0,-34.524 28.029,-62.554 62.554,-62.554l386.892,0Zm-288.985,423.278l0,-225.717l-75.04,0l0,225.717l75.04,0Zm270.539,0l0,-129.439c0,-69.333 -37.018,-101.586 -86.381,-101.586c-39.804,0 -57.634,21.891 -67.617,37.266l0,-31.958l-75.021,0c0.995,21.181 0,225.717 0,225.717l75.02,0l0,-126.056c0,-6.748 0.486,-13.492 2.474,-18.315c5.414,-13.475 17.767,-27.434 38.494,-27.434c27.135,0 38.007,20.707 38.007,51.037l0,120.768l75.024,0Zm-307.552,-334.556c-25.674,0 -42.448,16.879 -42.448,39.002c0,21.658 16.264,39.002 41.455,39.002l0.484,0c26.165,0 42.452,-17.344 42.452,-39.002c-0.485,-22.092 -16.241,-38.954 -41.943,-39.002Z" />
+        </svg>
+    </a>
+    <a target="_blank" rel="noopener noreferrer" aria-label="share Hugo搭建个人博客 on reddit"
+        href="https://reddit.com/submit?url=https%3a%2f%2ftassel234.github.io%2fposts%2ftech%2fhugo%25E6%2590%25AD%25E5%25BB%25BA%25E4%25B8%25AA%25E4%25BA%25BA%25E5%258D%259A%25E5%25AE%25A2%2f&title=Hugo%e6%90%ad%e5%bb%ba%e4%b8%aa%e4%ba%ba%e5%8d%9a%e5%ae%a2">
+        <svg version="1.1" viewBox="0 0 512 512" xml:space="preserve" height="30px" width="30px" fill="currentColor">
+            <path
+                d="M449.446,0c34.525,0 62.554,28.03 62.554,62.554l0,386.892c0,34.524 -28.03,62.554 -62.554,62.554l-386.892,0c-34.524,0 -62.554,-28.03 -62.554,-62.554l0,-386.892c0,-34.524 28.029,-62.554 62.554,-62.554l386.892,0Zm-3.446,265.638c0,-22.964 -18.616,-41.58 -41.58,-41.58c-11.211,0 -21.361,4.457 -28.841,11.666c-28.424,-20.508 -67.586,-33.757 -111.204,-35.278l18.941,-89.121l61.884,13.157c0.756,15.734 13.642,28.29 29.56,28.29c16.407,0 29.706,-13.299 29.706,-29.701c0,-16.403 -13.299,-29.702 -29.706,-29.702c-11.666,0 -21.657,6.792 -26.515,16.578l-69.105,-14.69c-1.922,-0.418 -3.939,-0.042 -5.585,1.036c-1.658,1.073 -2.811,2.761 -3.224,4.686l-21.152,99.438c-44.258,1.228 -84.046,14.494 -112.837,35.232c-7.468,-7.164 -17.589,-11.591 -28.757,-11.591c-22.965,0 -41.585,18.616 -41.585,41.58c0,16.896 10.095,31.41 24.568,37.918c-0.639,4.135 -0.99,8.328 -0.99,12.576c0,63.977 74.469,115.836 166.33,115.836c91.861,0 166.334,-51.859 166.334,-115.836c0,-4.218 -0.347,-8.387 -0.977,-12.493c14.564,-6.47 24.735,-21.034 24.735,-38.001Zm-119.474,108.193c-20.27,20.241 -59.115,21.816 -70.534,21.816c-11.428,0 -50.277,-1.575 -70.522,-21.82c-3.007,-3.008 -3.007,-7.882 0,-10.889c3.003,-2.999 7.882,-3.003 10.885,0c12.777,12.781 40.11,17.317 59.637,17.317c19.522,0 46.86,-4.536 59.657,-17.321c3.016,-2.999 7.886,-2.995 10.885,0.008c3.008,3.011 3.003,7.882 -0.008,10.889Zm-5.23,-48.781c-16.373,0 -29.701,-13.324 -29.701,-29.698c0,-16.381 13.328,-29.714 29.701,-29.714c16.378,0 29.706,13.333 29.706,29.714c0,16.374 -13.328,29.698 -29.706,29.698Zm-160.386,-29.702c0,-16.381 13.328,-29.71 29.714,-29.71c16.369,0 29.689,13.329 29.689,29.71c0,16.373 -13.32,29.693 -29.689,29.693c-16.386,0 -29.714,-13.32 -29.714,-29.693Z" />
+        </svg>
+    </a>
+    <a target="_blank" rel="noopener noreferrer" aria-label="share Hugo搭建个人博客 on facebook"
+        href="https://facebook.com/sharer/sharer.php?u=https%3a%2f%2ftassel234.github.io%2fposts%2ftech%2fhugo%25E6%2590%25AD%25E5%25BB%25BA%25E4%25B8%25AA%25E4%25BA%25BA%25E5%258D%259A%25E5%25AE%25A2%2f">
+        <svg version="1.1" viewBox="0 0 512 512" xml:space="preserve" height="30px" width="30px" fill="currentColor">
+            <path
+                d="M449.446,0c34.525,0 62.554,28.03 62.554,62.554l0,386.892c0,34.524 -28.03,62.554 -62.554,62.554l-106.468,0l0,-192.915l66.6,0l12.672,-82.621l-79.272,0l0,-53.617c0,-22.603 11.073,-44.636 46.58,-44.636l36.042,0l0,-70.34c0,0 -32.71,-5.582 -63.982,-5.582c-65.288,0 -107.96,39.569 -107.96,111.204l0,62.971l-72.573,0l0,82.621l72.573,0l0,192.915l-191.104,0c-34.524,0 -62.554,-28.03 -62.554,-62.554l0,-386.892c0,-34.524 28.029,-62.554 62.554,-62.554l386.892,0Z" />
+        </svg>
+    </a>
+    <a target="_blank" rel="noopener noreferrer" aria-label="share Hugo搭建个人博客 on whatsapp"
+        href="https://api.whatsapp.com/send?text=Hugo%e6%90%ad%e5%bb%ba%e4%b8%aa%e4%ba%ba%e5%8d%9a%e5%ae%a2%20-%20https%3a%2f%2ftassel234.github.io%2fposts%2ftech%2fhugo%25E6%2590%25AD%25E5%25BB%25BA%25E4%25B8%25AA%25E4%25BA%25BA%25E5%258D%259A%25E5%25AE%25A2%2f">
+        <svg version="1.1" viewBox="0 0 512 512" xml:space="preserve" height="30px" width="30px" fill="currentColor">
+            <path
+                d="M449.446,0c34.525,0 62.554,28.03 62.554,62.554l0,386.892c0,34.524 -28.03,62.554 -62.554,62.554l-386.892,0c-34.524,0 -62.554,-28.03 -62.554,-62.554l0,-386.892c0,-34.524 28.029,-62.554 62.554,-62.554l386.892,0Zm-58.673,127.703c-33.842,-33.881 -78.847,-52.548 -126.798,-52.568c-98.799,0 -179.21,80.405 -179.249,179.234c-0.013,31.593 8.241,62.428 23.927,89.612l-25.429,92.884l95.021,-24.925c26.181,14.28 55.659,21.807 85.658,21.816l0.074,0c98.789,0 179.206,-80.413 179.247,-179.243c0.018,-47.895 -18.61,-92.93 -52.451,-126.81Zm-126.797,275.782l-0.06,0c-26.734,-0.01 -52.954,-7.193 -75.828,-20.767l-5.441,-3.229l-56.386,14.792l15.05,-54.977l-3.542,-5.637c-14.913,-23.72 -22.791,-51.136 -22.779,-79.287c0.033,-82.142 66.867,-148.971 149.046,-148.971c39.793,0.014 77.199,15.531 105.329,43.692c28.128,28.16 43.609,65.592 43.594,105.4c-0.034,82.149 -66.866,148.983 -148.983,148.984Zm81.721,-111.581c-4.479,-2.242 -26.499,-13.075 -30.604,-14.571c-4.105,-1.495 -7.091,-2.241 -10.077,2.241c-2.986,4.483 -11.569,14.572 -14.182,17.562c-2.612,2.988 -5.225,3.364 -9.703,1.12c-4.479,-2.241 -18.91,-6.97 -36.017,-22.23c-13.314,-11.876 -22.304,-26.542 -24.916,-31.026c-2.612,-4.484 -0.279,-6.908 1.963,-9.14c2.016,-2.007 4.48,-5.232 6.719,-7.847c2.24,-2.615 2.986,-4.484 4.479,-7.472c1.493,-2.99 0.747,-5.604 -0.374,-7.846c-1.119,-2.241 -10.077,-24.288 -13.809,-33.256c-3.635,-8.733 -7.327,-7.55 -10.077,-7.688c-2.609,-0.13 -5.598,-0.158 -8.583,-0.158c-2.986,0 -7.839,1.121 -11.944,5.604c-4.105,4.484 -15.675,15.32 -15.675,37.364c0,22.046 16.048,43.342 18.287,46.332c2.24,2.99 31.582,48.227 76.511,67.627c10.685,4.615 19.028,7.371 25.533,9.434c10.728,3.41 20.492,2.929 28.209,1.775c8.605,-1.285 26.499,-10.833 30.231,-21.295c3.732,-10.464 3.732,-19.431 2.612,-21.298c-1.119,-1.869 -4.105,-2.99 -8.583,-5.232Z" />
+        </svg>
+    </a>
+    <a target="_blank" rel="noopener noreferrer" aria-label="share Hugo搭建个人博客 on telegram"
+        href="https://telegram.me/share/url?text=Hugo%e6%90%ad%e5%bb%ba%e4%b8%aa%e4%ba%ba%e5%8d%9a%e5%ae%a2&amp;url=https%3a%2f%2ftassel234.github.io%2fposts%2ftech%2fhugo%25E6%2590%25AD%25E5%25BB%25BA%25E4%25B8%25AA%25E4%25BA%25BA%25E5%258D%259A%25E5%25AE%25A2%2f">
+        <svg version="1.1" xml:space="preserve" viewBox="2 2 28 28" height="30px" width="30px" fill="currentColor">
+            <path
+                d="M26.49,29.86H5.5a3.37,3.37,0,0,1-2.47-1,3.35,3.35,0,0,1-1-2.47V5.48A3.36,3.36,0,0,1,3,3,3.37,3.37,0,0,1,5.5,2h21A3.38,3.38,0,0,1,29,3a3.36,3.36,0,0,1,1,2.46V26.37a3.35,3.35,0,0,1-1,2.47A3.38,3.38,0,0,1,26.49,29.86Zm-5.38-6.71a.79.79,0,0,0,.85-.66L24.73,9.24a.55.55,0,0,0-.18-.46.62.62,0,0,0-.41-.17q-.08,0-16.53,6.11a.59.59,0,0,0-.41.59.57.57,0,0,0,.43.52l4,1.24,1.61,4.83a.62.62,0,0,0,.63.43.56.56,0,0,0,.4-.17L16.54,20l4.09,3A.9.9,0,0,0,21.11,23.15ZM13.8,20.71l-1.21-4q8.72-5.55,8.78-5.55c.15,0,.23,0,.23.16a.18.18,0,0,1,0,.06s-2.51,2.3-7.52,6.8Z" />
+        </svg>
+    </a>
+</div>
+  </footer>
+</article>
+    </main>
+    
+<footer class="footer">
+    <span>&copy; 2023 <a href="https://tassel234.github.io/">hrkr&#39;s Blog</a></span>
+    <span>
+        Powered by
+        <a href="https://gohugo.io/" rel="noopener noreferrer" target="_blank">Hugo</a> &
+        <a href="https://github.com/adityatelange/hugo-PaperMod/" rel="noopener" target="_blank">PaperMod</a>
+    </span>
+</footer>
+<a href="#top" aria-label="go to top" title="Go to Top (Alt + G)" class="top-link" id="top-link" accesskey="g">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentColor">
+        <path d="M12 6H0l6-6z" />
+    </svg>
+</a>
+
+<script>
+    let menu = document.getElementById('menu')
+    if (menu) {
+        menu.scrollLeft = localStorage.getItem("menu-scroll-position");
+        menu.onscroll = function () {
+            localStorage.setItem("menu-scroll-position", menu.scrollLeft);
+        }
+    }
+
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener("click", function (e) {
+            e.preventDefault();
+            var id = this.getAttribute("href").substr(1);
+            if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView({
+                    behavior: "smooth"
+                });
+            } else {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView();
+            }
+            if (id === "top") {
+                history.replaceState(null, null, " ");
+            } else {
+                history.pushState(null, null, `#${id}`);
+            }
+        });
+    });
+
+</script>
+<script>
+    var mybutton = document.getElementById("top-link");
+    window.onscroll = function () {
+        if (document.body.scrollTop > 800 || document.documentElement.scrollTop > 800) {
+            mybutton.style.visibility = "visible";
+            mybutton.style.opacity = "1";
+        } else {
+            mybutton.style.visibility = "hidden";
+            mybutton.style.opacity = "0";
+        }
+    };
+
+</script>
+<script>
+    document.getElementById("theme-toggle").addEventListener("click", () => {
+        if (document.body.className.includes("dark")) {
+            document.body.classList.remove('dark');
+            localStorage.setItem("pref-theme", 'light');
+        } else {
+            document.body.classList.add('dark');
+            localStorage.setItem("pref-theme", 'dark');
+        }
+    })
+
+</script>
+<script>
+    document.querySelectorAll('pre > code').forEach((codeblock) => {
+        const container = codeblock.parentNode.parentNode;
+
+        const copybutton = document.createElement('button');
+        copybutton.classList.add('copy-code');
+        copybutton.innerHTML = 'copy';
+
+        function copyingDone() {
+            copybutton.innerHTML = 'copied!';
+            setTimeout(() => {
+                copybutton.innerHTML = 'copy';
+            }, 2000);
+        }
+
+        copybutton.addEventListener('click', (cb) => {
+            if ('clipboard' in navigator) {
+                navigator.clipboard.writeText(codeblock.textContent);
+                copyingDone();
+                return;
+            }
+
+            const range = document.createRange();
+            range.selectNodeContents(codeblock);
+            const selection = window.getSelection();
+            selection.removeAllRanges();
+            selection.addRange(range);
+            try {
+                document.execCommand('copy');
+                copyingDone();
+            } catch (e) { };
+            selection.removeRange(range);
+        });
+
+        if (container.classList.contains("highlight")) {
+            container.appendChild(copybutton);
+        } else if (container.parentNode.firstChild == container) {
+            
+        } else if (codeblock.parentNode.parentNode.parentNode.parentNode.parentNode.nodeName == "TABLE") {
+            
+            codeblock.parentNode.parentNode.parentNode.parentNode.parentNode.appendChild(copybutton);
+        } else {
+            
+            codeblock.parentNode.appendChild(copybutton);
+        }
+    });
+</script>
+</body>
+
+</html>

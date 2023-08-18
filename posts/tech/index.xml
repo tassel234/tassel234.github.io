@@ -6,32 +6,14 @@
     <description>Recent content in 技术 on hrkr&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Tue, 08 Aug 2023 10:49:22 +0800</lastBuildDate><atom:link href="https://tassel234.github.io/posts/tech/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Fri, 18 Aug 2023 22:16:44 +0800</lastBuildDate><atom:link href="https://tassel234.github.io/posts/tech/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>Cv</title>
-      <link>https://tassel234.github.io/posts/tech/cv/</link>
-      <pubDate>Tue, 08 Aug 2023 10:49:22 +0800</pubDate>
+      <title>Hugo搭建个人博客</title>
+      <link>https://tassel234.github.io/posts/tech/hugo%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/</link>
+      <pubDate>Fri, 18 Aug 2023 22:16:44 +0800</pubDate>
       
-      <guid>https://tassel234.github.io/posts/tech/cv/</guid>
-      <description>wwwww</description>
-    </item>
-    
-    <item>
-      <title>Ji</title>
-      <link>https://tassel234.github.io/posts/tech/ji/</link>
-      <pubDate>Tue, 08 Aug 2023 10:48:36 +0800</pubDate>
-      
-      <guid>https://tassel234.github.io/posts/tech/ji/</guid>
-      <description>23445</description>
-    </item>
-    
-    <item>
-      <title>Jj</title>
-      <link>https://tassel234.github.io/posts/tech/jj/</link>
-      <pubDate>Tue, 08 Aug 2023 00:21:30 +0800</pubDate>
-      
-      <guid>https://tassel234.github.io/posts/tech/jj/</guid>
-      <description>wer</description>
+      <guid>https://tassel234.github.io/posts/tech/hugo%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/</guid>
+      <description>github和git的基础知识（可跳过不看） Github 代码上边的Raw、Blame是什么意思？ Raw：文件内容。 blame：按行显示最新提交的信息。 Pin，该词可被译为：钉住、按住。被Pin的仓库会显示在个人主页中，类似于仓库置顶。 Watch，默认是Unwatch，如果你想关注某个仓库，</description>
     </item>
     
   </channel>
