@@ -6,7 +6,25 @@
     <description>Recent content in 学习记录&amp;笔记 on hrkr&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Mon, 21 Aug 2023 17:37:33 +0800</lastBuildDate><atom:link href="https://tassel234.github.io/posts/note/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 22 Aug 2023 22:49:16 +0800</lastBuildDate><atom:link href="https://tassel234.github.io/posts/note/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>C&#43;&#43;学习笔记-1（类和对象-1）</title>
+      <link>https://tassel234.github.io/posts/note/c&#43;&#43;%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0-1%E7%B1%BB%E5%92%8C%E5%AF%B9%E8%B1%A1-1/</link>
+      <pubDate>Tue, 22 Aug 2023 22:49:16 +0800</pubDate>
+      
+      <guid>https://tassel234.github.io/posts/note/c&#43;&#43;%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0-1%E7%B1%BB%E5%92%8C%E5%AF%B9%E8%B1%A1-1/</guid>
+      <description>类的定义 （1）定义类 面向程序设计更偏向于把每一个细节都做好，从每一个零件开始是制造汽车。面向对象编程偏向于把很多细小的零件已经主装好了，保留集成了很多接口，只需要把部件进行拼接就可以得到产品。 面向对象编程的意义在于自然界都是由实体组成，面向对象也是软件开发的主流方式。 面对对象的三</description>
+    </item>
+    
+    <item>
+      <title>C&#43;&#43;入门学习笔记 2(语句和函数)</title>
+      <link>https://tassel234.github.io/posts/note/c&#43;&#43;%E5%85%A5%E9%97%A8%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0-2%E8%AF%AD%E5%8F%A5%E5%92%8C%E5%87%BD%E6%95%B0/</link>
+      <pubDate>Mon, 21 Aug 2023 21:05:48 +0800</pubDate>
+      
+      <guid>https://tassel234.github.io/posts/note/c&#43;&#43;%E5%85%A5%E9%97%A8%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0-2%E8%AF%AD%E5%8F%A5%E5%92%8C%E5%87%BD%E6%95%B0/</guid>
+      <description>注释语句 /* ......块注释内容 */ //......行注释内容 输入和输出 标准输入输出流库的头文件 cin输入时，为了分隔多项数据，默认要求在键盘输入数据之间使用空格、Tab键、回车作为分隔符。 #include &amp;lt;iostream&amp;gt; #include &amp;lt;iomanip&amp;gt; using namespace std; int main() { bool v; int a,m,n; double x,y,z,p,f; float f1;//除了已经定义的变量，下面出现的oct,setw都</description>
+    </item>
+    
     <item>
       <title>图论入门-1</title>
       <link>https://tassel234.github.io/posts/note/%E5%9B%BE%E8%AE%BA%E5%85%A5%E9%97%A8-1/</link>
@@ -17,7 +35,7 @@
     </item>
     
     <item>
-      <title>Python数学建模算法 1（库的基本使用和绘图基础）</title>
+      <title>Python数学建模算法-1（库的基本使用和绘图基础）</title>
       <link>https://tassel234.github.io/posts/note/python%E6%95%B0%E5%AD%A6%E5%BB%BA%E6%A8%A1%E7%AE%97%E6%B3%95-1%E5%BA%93%E7%9A%84%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8%E5%92%8C%E7%BB%98%E5%9B%BE%E5%9F%BA%E7%A1%80/</link>
       <pubDate>Sat, 19 Aug 2023 23:56:42 +0800</pubDate>
       
@@ -26,12 +44,12 @@
     </item>
     
     <item>
-      <title>C&#43;&#43;入门学习笔记(1)</title>
-      <link>https://tassel234.github.io/posts/note/c&#43;&#43;%E5%85%A5%E9%97%A8%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B01/</link>
+      <title>C&#43;&#43;入门学习笔记-1（引言和基础知识）</title>
+      <link>https://tassel234.github.io/posts/note/c&#43;&#43;%E5%85%A5%E9%97%A8%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0-1%E5%BC%95%E8%A8%80%E5%92%8C%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/</link>
       <pubDate>Wed, 16 Aug 2023 19:33:51 +0800</pubDate>
       
-      <guid>https://tassel234.github.io/posts/note/c&#43;&#43;%E5%85%A5%E9%97%A8%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B01/</guid>
-      <description>引言和基础知识 前言 使用资源 西工大网课(在慕课和b站都可以找到资源) Bjarne Stroustrup《C++程序设计语言》 洛谷的一些编程题 主要以网课为主. 引言 计算机系统由硬件和软件共同组成。硬件主体为输入输出设备，存储器，运算器，控制器。软件又分为系统软件和应用软件。应用软件就是用户下载的音</description>
+      <guid>https://tassel234.github.io/posts/note/c&#43;&#43;%E5%85%A5%E9%97%A8%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0-1%E5%BC%95%E8%A8%80%E5%92%8C%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/</guid>
+      <description>前言 使用资源 西工大网课(在慕课和b站都可以找到资源) Bjarne Stroustrup《C++程序设计语言》 洛谷的一些编程题 主要以网课为主. 引言 计算机系统由硬件和软件共同组成。硬件主体为输入输出设备，存储器，运算器，控制器。软件又分为系统软件和应用软件。应用软件就是用户下载的音乐播放器，聊天</description>
     </item>
     
   </channel>

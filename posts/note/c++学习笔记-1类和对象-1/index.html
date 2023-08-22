@@ -1,0 +1,886 @@
+<!DOCTYPE html>
+<html lang="en" dir="auto">
+
+<head><meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="robots" content="index, follow">
+<title>C&#43;&#43;学习笔记-1（类和对象-1） | hrkr&#39;s Blog</title>
+<meta name="keywords" content="">
+<meta name="description" content="类的定义 （1）定义类 面向程序设计更偏向于把每一个细节都做好，从每一个零件开始是制造汽车。面向对象编程偏向于把很多细小的零件已经主装好了，保留集成了很多接口，只需要把部件进行拼接就可以得到产品。 面向对象编程的意义在于自然界都是由实体组成，面向对象也是软件开发的主流方式。 面对对象的三">
+<meta name="author" content="hrkr">
+<link rel="canonical" href="https://tassel234.github.io/posts/note/c&#43;&#43;%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0-1%E7%B1%BB%E5%92%8C%E5%AF%B9%E8%B1%A1-1/">
+<link crossorigin="anonymous" href="/assets/css/stylesheet.css" rel="preload stylesheet" as="style">
+<script defer crossorigin="anonymous" src="/assets/js/highlight.js" onload="hljs.initHighlightingOnLoad();"></script>
+<link rel="icon" href="https://tassel234.github.io/img/">
+<link rel="icon" type="image/png" sizes="16x16" href="https://tassel234.github.io/img/">
+<link rel="icon" type="image/png" sizes="32x32" href="https://tassel234.github.io/img/">
+<link rel="apple-touch-icon" href="https://tassel234.github.io/img/Q.jpg">
+<link rel="mask-icon" href="https://tassel234.github.io/img/Q.jpg">
+<meta name="theme-color" content="#2e2e33">
+<meta name="msapplication-TileColor" content="#2e2e33">
+<noscript>
+    <style>
+        #theme-toggle,
+        .top-link {
+            display: none;
+        }
+
+    </style>
+    <style>
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --theme: rgb(29, 30, 32);
+                --entry: rgb(46, 46, 51);
+                --primary: rgb(218, 218, 219);
+                --secondary: rgb(155, 156, 157);
+                --tertiary: rgb(65, 66, 68);
+                --content: rgb(196, 196, 197);
+                --hljs-bg: rgb(46, 46, 51);
+                --code-bg: rgb(55, 56, 62);
+                --border: rgb(51, 51, 51);
+            }
+
+            .list {
+                background: var(--theme);
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-track {
+                background: 0 0;
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-thumb {
+                border-color: var(--theme);
+            }
+        }
+
+    </style>
+</noscript><meta property="og:title" content="C&#43;&#43;学习笔记-1（类和对象-1）" />
+<meta property="og:description" content="类的定义 （1）定义类 面向程序设计更偏向于把每一个细节都做好，从每一个零件开始是制造汽车。面向对象编程偏向于把很多细小的零件已经主装好了，保留集成了很多接口，只需要把部件进行拼接就可以得到产品。 面向对象编程的意义在于自然界都是由实体组成，面向对象也是软件开发的主流方式。 面对对象的三" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://tassel234.github.io/posts/note/c&#43;&#43;%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0-1%E7%B1%BB%E5%92%8C%E5%AF%B9%E8%B1%A1-1/" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2023-08-22T22:49:16+08:00" />
+<meta property="article:modified_time" content="2023-08-22T22:49:16+08:00" />
+
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="C&#43;&#43;学习笔记-1（类和对象-1）"/>
+<meta name="twitter:description" content="类的定义 （1）定义类 面向程序设计更偏向于把每一个细节都做好，从每一个零件开始是制造汽车。面向对象编程偏向于把很多细小的零件已经主装好了，保留集成了很多接口，只需要把部件进行拼接就可以得到产品。 面向对象编程的意义在于自然界都是由实体组成，面向对象也是软件开发的主流方式。 面对对象的三"/>
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position":  1 ,
+      "name": "Posts",
+      "item": "https://tassel234.github.io/posts/"
+    }, 
+    {
+      "@type": "ListItem",
+      "position":  2 ,
+      "name": "学习记录\u0026笔记",
+      "item": "https://tassel234.github.io/posts/note/"
+    }, 
+    {
+      "@type": "ListItem",
+      "position":  3 ,
+      "name": "C++学习笔记-1（类和对象-1）",
+      "item": "https://tassel234.github.io/posts/note/c++%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0-1%E7%B1%BB%E5%92%8C%E5%AF%B9%E8%B1%A1-1/"
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "C++学习笔记-1（类和对象-1）",
+  "name": "C\u002b\u002b学习笔记-1（类和对象-1）",
+  "description": "类的定义 （1）定义类 面向程序设计更偏向于把每一个细节都做好，从每一个零件开始是制造汽车。面向对象编程偏向于把很多细小的零件已经主装好了，保留集成了很多接口，只需要把部件进行拼接就可以得到产品。 面向对象编程的意义在于自然界都是由实体组成，面向对象也是软件开发的主流方式。 面对对象的三",
+  "keywords": [
+    
+  ],
+  "articleBody": "类的定义 （1）定义类 面向程序设计更偏向于把每一个细节都做好，从每一个零件开始是制造汽车。面向对象编程偏向于把很多细小的零件已经主装好了，保留集成了很多接口，只需要把部件进行拼接就可以得到产品。\n面向对象编程的意义在于自然界都是由实体组成，面向对象也是软件开发的主流方式。\n面对对象的三大特征，分别是抽象，封装，继承。抽象指的是将成员和成员的行为分别表示为数据成员和成员函数。封装就是把抽象来的对象代码写到类里面，并设计一些接口。继承和派生，指的是可以对一些类进行修改，得到子类，比如把本科学生信息管理系统稍作修改就可以变成研究生学生信息管理系统。\n类的定义和结构体相似，但比结构体多了对共有，私有成员的声明，还有就是类里面可以由函数。公有成员就是所有类的用户都可以使用，私有成员是只有类的成员可以用，被保护的成员基本和私有成员相同，但派生继承的类的成员也可以访问\n函数可以定义先声明在类的里面，然后定义在类外。使用：：符号\nclass Data { //Data类定义 void set(int d); //成员函数原型声明，与 void set(int); 等价 int get() { //成员函数类内部定义 return data; } //get函数定义结束 int data; //数据成员 }; //Data类定义结束 void Data::set(int d) //成员函数类外部定义 { data=d; //访问类的数据成员 } 类定义一般放在程序文件开头，或者放到头文件中被程序文件包含， 此时这个定义是全局的。在全局作用域内，该定义处处可见，因此 同作用域内的所有函数都可以使用它。\n类定义向编译器声明了一种新的数据类型，该数据类型有不同类型 的数据成员和成员函数。因此尽管数据成员类似变量的定义，但类 型声明时并不会产生该成员的实体，即为它分配存储空间。\n（2）成员的访问控制 类的每个成员都有访问控制属性，由以下三种访问标号说明：public（公有的）、private（私有的）和protected（保护的）。\npublic实现了类的外部接口。私有成员用private标号声明，只有类成员可以访问私有成员，类用户的访问是不允许的。显然，private实现了私有成员的隐蔽。保护成员用protected标号声明，在不考虑继承的情况下，protected的性质和private的性质一致，但保护成员可以被派生类的类成员访问。\n实际编程中，为了使程序清晰，每一种成员访问限定符在类体中只出现一次\n（3）类的数据成员 类的数据成员可以是基本类型、数组、指针、引用、共用体、枚举 类型、void指针、const限定等数据类型。\n但不可以是自身，后面会提到构造函数，可以构造同名的函数体。\n（4）类的成员函数 在成员函数中可以访问这个类的任何成员，无论它是公有的 或是私有的，是类内部声明的还是类外部定义的。\n（::）是作用域限定符（field qualifed）。如果在作用域限定符的前面没有类名，或者函数前面既无类名又无作用域限定符，例 如：::set(10) 或 set(10）则表示set函数不属于任何类，这个函数不是成员函数，而是全局的普通函数。此时的（::）不是类作用域限定符的含义，而是命名空间域限定符的含义。\n类的成员函数可以指定为inline，即内联函数。声明在类外或者类内都可以。\n可以对成员函数重载或使用默认参数。需要注意，声明成员函数的多个重载版本或指定成员函数的默认参 数，只能在类内部中进行。\n用类实例化一个对象时，系统会为每一个对象分配存储空问。如果 一个类包括了数据成员和成员函数，则要分别为数据和函数的代码 分配存储空间。 （5）类的声明 类不能具有自身类型的数据成员。然而，只要类名一经出现就可以 认为该类己声明。因此，类的数据成员可以是指向自身类型的指针 或引用。\nclass Point; //Point类声明，非Point类定义，因为没有类体 class Line { Point a; //错误，不能使用仅有类声明而没有类定义的类定义数 据对象 Point *pp, \u0026rp; //正确，只有类声明，即可用它定义该类的指 针或引用 Line b; //错误，类不能具有自身类型的数据成员 Line *pl, \u0026rl; //正确，类可以有指向自身类型的指针或引用 的数据成员 }; 对象的定义和使用 （1）对象的的定义 从现在起，“对象”一词专门表示类的实体。\nPoint a,b; //C++特色定义对象 class Point x,y; //兼容C语言特色定义对象 具体定义方式和结构体类似\n（2）对象的动态建立和释放 利用new运算符可以动态地分配对象空间，delete运算符释放对象空间。 用new运算动态分配得到的对象是无名的，它返回一个指向新对象的指针的值，即分配得到是对象的内存单元的起始地址。程序通过这个地址可以间接访问这个对象，因此需要定义一个指向类的对象的指针变量来存放该地址。显然，用new建立的动态对象是通过指针来引用的。\n在执行new运算时，如果内存不足，无法开辟所需的内存空间，C++编译器会返回一个0值指针。\n#include using namespace std; class Box { public: int width, length, height; }; int main() { Box * p=new Box; p-width=10; p-length=20; p-height=30; 1 coutwidthlengthheight（3）对象成员的引用 访问对象中的成员可以有3种方法：\n①通过对象名和对象成员引用运算符（.）访问对象中的成员；\n②通过指向对象的指针和指针成员引用运算符（-）访问对象中的成员；\n③通过对象的引用变量和对象成员引用运算符（.）访问对象中的成员；\n需要注意，从类外部只能访问类公有的成员\nvoid caller1() { Data A, *p, *p1; //定义对象指针变量 p1=\u0026A; //p1指向对象A p1-data=100; //正确，类外部可以访问类的public数据成员 p1-fun(1,2,3); //正确，类外部可以访问类的public成员函数 p = new Data; //动态分配Data对象 p-data=100; //正确，类外部可以访问类的public数据成员 p-fun(1,2,3); //正确，类外部可以访问类的public成员函数 delete p; //撤销p所指向的Data对象 } void caller1() { Data A, \u0026r=A; //定义对象引用变量 r.data=100; //正确，类外部可以访问类的public数据成员 r.fun(1,2,3); //正确，类外部可以访问类的public成员函数 } （4）对象的赋值 如果一个类定义了两个或多个对象，则这些同类的对象之间可以互相赋值。这里所指的对象的“值”是指对象中所有数据成员的值。\n（5）对象、对象指针或对象引用作为函数的参数和返回值 当形参是对象时，实参要求是相同类的对象名，C++不能对类对象进行任何隐式类型转换。此时形参是实参对象的副本。实际编程中，传递对象时需要考虑类的规模带来的调用开销，如果开销很大时建议不用对象作为函数参数。\n当形参是对象指针时，实参要求是同类对象的指针，C++不能对对象指针进行任何隐式类型转换。采用地址传递方式，在函数中若按间接引用方式修改了形参对象本质上就是修改实参对象。因此，使用对象指针作为函数参数可以向主调函数传回变化后的对象。\n当形参是对象引用时，实参要求是同类的对象，其功能与对象指针相似。\n#include  using namespace std; void func1(Data a,Data *p,Data \u0026r) { a.data=100; p-data=200; r.data=300; } int main() { Data A, B, C; A.fun(1,2,3); B.fun(4,5,6); C.fun(7,8,9); func1(A,\u0026B,C);//将对象A、B的地址、对象C的引用传递到函数func1 return 0; 如果不希望在函数中修改实参对象的值，函数形参可以作const限定\nvoid func2(Data a,const Data *p,const Data \u0026r) { a.data=100; p-data=200; //错误，左值是const对象 r.data=300; //错误，左值是const对象 } 函数返回值可以是对象、对象指针或对象引用。函数返回对象指针或引用，本质上返回的是对象的地址而不是它的存储内容，因此不要返回局部对象的指针或引用，因为它在函数返回后是无效的。\nData* func() { Data a; Data *p=\u0026a; return p; //返回局部对象a的指针p } void caller() { Data *p1; p1=func(); p1-data=100; //a已不存在，引用错误 } 构造函数 （1）什么是构造函数 在类的对象创建之处就会被执行，用来对数据成员（公有还是私有都可以）进行赋值，函数的名字要和类的名字相同。 类的数据成员是不能在类定义时初始化的，因为本身不分配存储空间如果一个类中所有的数据成员是公有的，则可以在定义对象时对数据成员进行初始化，如果类中的数据成员是私有的，如private的或protected的，就不能用这种方法初始化，因为外部不能直接访问私有的数据成员。构造函数不需要人为调用，而是在建立对象时自动被执行。\n（2）构造函数的定义 与其他任何函数一样，构造函数可以声明为内联的。\n#include  using namespace std; class Cuboid { //Cuboid类表示长方体 public: Cuboid(int l,int h, int d); //构造函数 int volumn() { return length*height*depth; } //计算体积 private: int length,height,depth; //长、高、深 }; Cuboid::Cuboid(int l,int h,int d) //外部定义的构造函数 { length=l, height=h, depth=d; //初始化数据成员 cout构造函数一般声明为公有的（public），因为创建对象通常是在类的外部进行的。如果构造函数声明为保护的（protected）或私有的（protected），那就意味着在类外部创建对象（并调用构造函数）是错误的。\n每个构造函数应该为每个数据成员提供初始化。否则将使那些数据成员处于未定义的状态。而使用一个未定义的成员是错误的。\n构造函数初始化列表 与普通函数一样，构造函数具有函数名、形参列表和函数体。与其他函数不同的是，构造函数可以包含一个构造函数初始化列表。与其他的成员函数一样，构造函数可以定义在类的内部或外部，但构造函数初始化列表只在构造函数的定义中而不是函数原型声明中指定。\n#include  using namespace std; class Cuboid { //Cuboid类表示长方体 public: Cuboid(int l,int h, int d); //构造函数 int volumn() { return length*height*depth; }; //计算体积 private: int length,height,depth; //长、高、深 }; Cuboid::Cuboid(int l,int h,int d) :length(l),heght(h),depth(d) //带构造函数初始化列表的构造函数 { cout如果没有为类类型的数据成员提供初始化列表，编译器会隐式地使用该成员的默认构造函数。如果那个类没有默认构造函数，则编译器会报告错误。在这种情况下，为了初始化类类型的数据成员，必须提供初始化列表。\n一般地，没有默认构造函数的成员，以及const或引用类型的成员，都必须在构造函数初始化列表中进行初始化。\n（3）构造函数的重载 在一个类中可以定义多个构造函数版本，即构造函数允许被重载，只要每个构造函数的形参列表是唯一的\n尽管在一个类中可以包含多个构造函数，但是对于每一个对象来说，建立对象时只执行其中一个，并非每个构造函数都被执行。\n（4）带默认参数的构造函数 构造函数的参数允许使用默认值。对类的设计者来说，使用默认参数可以减少代码重复；对类的使用者者来说，使用默认参数可以方便地用适当的参数进行初始化。\n必须在类的内部指定构造函数的默认参数，不能在类外部指定默认参数。\n如果构造函数的全部参数都指定了默认值，则在定义对象时可以给一个或几个实参，也可以不给出实参。这时，就与无参数的构造函数有歧义了。\nclass Point { public: Point(){x=y=0;} Point(int a=1,int b=1):x(a),y(b) { }; void display() { cout一般地，不应同时使用构造函数的重载和带默认参数的构造函数。\n默认构造函数和复制构造函数 （1）定义默认构造函数 默认构造函数就是在没有显式提供初始化式时调用的构造函数，它 是一个不带参数的构造函数。如果定义某个类的对象时没有提供初 始化式就会使用默认构造函数。\n它由不带参数的构造函数，或者所有形参均是默认参数的构造函数 定义。\n任何一个类有且只有一个默认构造函数。如果定义的类中没有显式 定义任何构造函数，编译器会自动为该类生成默认构造函数，称为 合成默认构造函数.一个类哪怕只定义了一个构造函数，编译器也不会再生成默认构造 函数。一般地，任何一个类都应定义一个默认构造函数。\n（2）隐式类类型转换 #include  using namespace std; class Data { //Data类定义 public: Data(const string\u0026 str=\"\") : s1(str) { } //const限定 引用字符串类型 为str变量设置默认初值 提供初始化列表 void SetString(const Data\u0026 r) //期待的是Data类型的对象 { s1=r.s1; } void print() { cout类名(const 指定数据类型\u0026 obj)\nC++关键字explicit用来修饰类的构造函数，指明该构造函数是显式 的。explicit关键字只能用于类内部的构造函数声明上，在类定义外 部不能重复它。\n可以禁止由构造函数定义的隐式转换，方法是通过将构造函数声明 为explicit，来防止在需要隐式转换的上下文中使用构造函数。\n（3）复制构造函数与合成复制构造函数 ►复制构造函数又称为拷贝构造函数，它是一种特殊的构造函数。它 的作用就是用一个已经生成的对象来初始化另一个同类的对象。\nPoint pt1(10,20); Point pt2=pt1 复制构造函数定义的一般形式为：\n类名(const 类名\u0026 obj) { 函数体 } class Point { //Point类 public: Point() : x(0), y(0) { } //默认构造函数 Point(const Point\u0026 r) : x(r.x), y(r.y) { } //复制构造函 数 Point(int a,int b) : x(a), y(b) { } //带参数构造函数 private: int x,y; }; ►复制构造函数有且只有一个本类类型对象的引用形参，通常使用const限定。\n每个类必须有一个复制构造函数。如果类没有定义复制构造函数， 编译器就会自动合成一个，称为合成复制构造函数 与合成默认构造函数不同，即使定义了其他构造函数，编译器也会合成复制构造函数。\n►以下3种情况会使用复制构造函数。\n►（1）用一个对象显式或隐式初始化另一个对象。\n►C++支持两种初始化形式：复制初始化和直接初始化。复制初始化 使用等号（=），而直接初始化将初始化式放在圆括号中。\n►复制初始化和直接初始化是有区别的：直接初始化会调用与实参匹 配的构造函数；而复制初始化总是调用复制构造函数。\nPoint pt1(10,20); Point pt2=pt1; //复制初始化 Point pt3(pt1); //直接初始化 （2）函数参数按值传递对象时或函数返回对象时 当函数形参为对象类型，而非指针和引用类型时，函数调用按值传 递对象，即编译器调用复制构造函数产生一个实参对象副本传递到 函数中。\n类似地，以对象类型作为返回值时，编译器调用复制构造函数产生 一个return语句中的值的副本返回到调用函数。\n（3）根据元素初始化式列表初始化数组元素时。\n总的来说，正是有了复制构造函数，函数才可以传递对象和返回对 象，对象数组才能用初值列表的形式初始化。\n（4）深复制与浅复制 是合成复制构造函数和复制构造函数的区别。 若复制对象但未复制资源内容称为浅复制， 如果一个拥有资源（如用new得到的动态内存）的类对象发生复制 的时候，若对象数据与资源内容一起复制，称为深复制。\n#include  #include  using namespace std; class CA { public: CA(int b,char *cstr) //构造函数 { a=b; str=new char[b]; strcpy(str,cstr); } CA(const CA \u0026C) //复制构造函数 { a=C.a; str=new char[a]; //深复制，浅复制则写成str=C.str; if(str!=0) strcpy(str,C.str); } void show() { cout析构函数 （1）析构函数的定义 析构函数：当对象脱离其作用域时（例如对象所在的函数已调用完 毕），系统会自动执行析构函数。析构函数往往用来做“清理善后” 的工作（例如在建立对象时用new开辟了一段内存空间，则在该对 象消亡前应在析构函数中用delete释放这段存储空间）。\n一个类可以有多个构造函数，但是只能有一个析构函数。\n#include  #include  using namespace std; class Point { public: Point(int a,int b):x(a),y(b){} //带参数的构造函数 ~Point() //析构函数 { cout（2）合成析构函数 与复制构造函数不同，编译器总是会为类生成一个析构函数，称为合成析构函数 需要注意，合成析构函数并不删除指针成员所指向的对象，它需要 程序员显式编写析构函数去处理。\n（3）何时需要编写析构函数 需要注意，合成析构函数并不删除指针成员所指向的对象，它需要 程序员显式编写析构函数去处理。\n如果类需要析构函数，则该类几乎必然需要定义自己的复制构造函 数和赋值运算符重载，这个规则称为析构函数三法则(三个同时出现)\n#include  using namespace std; class CString { //CString类 public: CString(const char *str); //单个参数构造函数 ~CString(); //析构函数 void show() { cout（4）构造函数和析构函数的调用次序 构造函数和析构函数的调用很像一个栈的先进后出，调用析构函数 的次序正好与调用构造函数的次序相反。最先被调用的构造函数， 其对应的（同一对象中的）析构函数最后被调用，而最后被调用的 构造函数，其对应的析构函数最先被调用。\n",
+  "wordCount" : "6463",
+  "inLanguage": "en",
+  "datePublished": "2023-08-22T22:49:16+08:00",
+  "dateModified": "2023-08-22T22:49:16+08:00",
+  "author":{
+    "@type": "Person",
+    "name": "hrkr"
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://tassel234.github.io/posts/note/c++%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0-1%E7%B1%BB%E5%92%8C%E5%AF%B9%E8%B1%A1-1/"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "hrkr's Blog",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://tassel234.github.io/img/"
+    }
+  }
+}
+</script>
+</head>
+
+<body class="" id="top">
+<script>
+    if (localStorage.getItem("pref-theme") === "dark") {
+        document.body.classList.add('dark');
+    } else if (localStorage.getItem("pref-theme") === "light") {
+        document.body.classList.remove('dark')
+    } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        document.body.classList.add('dark');
+    }
+
+</script>
+
+<header class="header">
+    <nav class="nav">
+        <div class="logo">
+            <a href="https://tassel234.github.io/" accesskey="h" title="hrkr&#39;s Blog (Alt + H)">
+                <img src="https://tassel234.github.io/img/Q.jpg" alt="" aria-label="logo"
+                    height="35">hrkr&#39;s Blog</a>
+            <div class="logo-switches">
+                <button id="theme-toggle" accesskey="t" title="(Alt + T)">
+                    <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                    <svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                </button>
+            </div>
+        </div>
+        <ul id="menu">
+            <li>
+                <a href="https://tassel234.github.io/search" title="🔍 搜索 (Alt &#43; /)" accesskey=/>
+                    <span>🔍 搜索</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://tassel234.github.io/" title="🏠 主页">
+                    <span>🏠 主页</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://tassel234.github.io/posts" title="📚 文章">
+                    <span>📚 文章</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://tassel234.github.io/tags" title="🧩 标签">
+                    <span>🧩 标签</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://tassel234.github.io/archives/" title="⏱️ 时间轴">
+                    <span>⏱️ 时间轴</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://tassel234.github.io/about" title="🙋🏻‍♂️ 关于">
+                    <span>🙋🏻‍♂️ 关于</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://tassel234.github.io/links" title="🤝 友链">
+                    <span>🤝 友链</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+</header>
+<main class="main">
+
+<article class="post-single">
+  <header class="post-header">
+    <div class="breadcrumbs"><a href="https://tassel234.github.io/">Home</a>&nbsp;»&nbsp;<a href="https://tassel234.github.io/posts/">Posts</a>&nbsp;»&nbsp;<a href="https://tassel234.github.io/posts/note/">学习记录&amp;笔记</a></div>
+    <h1 class="post-title">
+      C&#43;&#43;学习笔记-1（类和对象-1）
+    </h1>
+    <div class="post-meta"><span title='2023-08-22 22:49:16 +0800 CST'>2023-08-22</span>&nbsp;·&nbsp;13 min&nbsp;·&nbsp;hrkr
+
+</div>
+  </header> <div class="toc">
+    <details  open>
+        <summary accesskey="c" title="(Alt + C)">
+            <span class="details">Table of Contents</span>
+        </summary>
+
+        <div class="inner"><ul>
+                <li>
+                    <a href="#%e7%b1%bb%e7%9a%84%e5%ae%9a%e4%b9%89" aria-label="类的定义">类的定义</a><ul>
+                        
+                <li>
+                    <a href="#1%e5%ae%9a%e4%b9%89%e7%b1%bb" aria-label="（1）定义类">（1）定义类</a></li>
+                <li>
+                    <a href="#2%e6%88%90%e5%91%98%e7%9a%84%e8%ae%bf%e9%97%ae%e6%8e%a7%e5%88%b6" aria-label="（2）成员的访问控制">（2）成员的访问控制</a></li>
+                <li>
+                    <a href="#3%e7%b1%bb%e7%9a%84%e6%95%b0%e6%8d%ae%e6%88%90%e5%91%98" aria-label="（3）类的数据成员">（3）类的数据成员</a></li>
+                <li>
+                    <a href="#4%e7%b1%bb%e7%9a%84%e6%88%90%e5%91%98%e5%87%bd%e6%95%b0" aria-label="（4）类的成员函数">（4）类的成员函数</a></li>
+                <li>
+                    <a href="#5%e7%b1%bb%e7%9a%84%e5%a3%b0%e6%98%8e" aria-label="（5）类的声明">（5）类的声明</a></li></ul>
+                </li>
+                <li>
+                    <a href="#%e5%af%b9%e8%b1%a1%e7%9a%84%e5%ae%9a%e4%b9%89%e5%92%8c%e4%bd%bf%e7%94%a8" aria-label="对象的定义和使用">对象的定义和使用</a><ul>
+                        
+                <li>
+                    <a href="#1%e5%af%b9%e8%b1%a1%e7%9a%84%e7%9a%84%e5%ae%9a%e4%b9%89" aria-label="（1）对象的的定义">（1）对象的的定义</a></li>
+                <li>
+                    <a href="#2%e5%af%b9%e8%b1%a1%e7%9a%84%e5%8a%a8%e6%80%81%e5%bb%ba%e7%ab%8b%e5%92%8c%e9%87%8a%e6%94%be" aria-label="（2）对象的动态建立和释放">（2）对象的动态建立和释放</a></li>
+                <li>
+                    <a href="#3%e5%af%b9%e8%b1%a1%e6%88%90%e5%91%98%e7%9a%84%e5%bc%95%e7%94%a8" aria-label="（3）对象成员的引用">（3）对象成员的引用</a></li>
+                <li>
+                    <a href="#4%e5%af%b9%e8%b1%a1%e7%9a%84%e8%b5%8b%e5%80%bc" aria-label="（4）对象的赋值">（4）对象的赋值</a></li>
+                <li>
+                    <a href="#5%e5%af%b9%e8%b1%a1%e5%af%b9%e8%b1%a1%e6%8c%87%e9%92%88%e6%88%96%e5%af%b9%e8%b1%a1%e5%bc%95%e7%94%a8%e4%bd%9c%e4%b8%ba%e5%87%bd%e6%95%b0%e7%9a%84%e5%8f%82%e6%95%b0%e5%92%8c%e8%bf%94%e5%9b%9e%e5%80%bc" aria-label="（5）对象、对象指针或对象引用作为函数的参数和返回值">（5）对象、对象指针或对象引用作为函数的参数和返回值</a></li></ul>
+                </li>
+                <li>
+                    <a href="#%e6%9e%84%e9%80%a0%e5%87%bd%e6%95%b0" aria-label="构造函数">构造函数</a><ul>
+                        
+                <li>
+                    <a href="#1%e4%bb%80%e4%b9%88%e6%98%af%e6%9e%84%e9%80%a0%e5%87%bd%e6%95%b0" aria-label="（1）什么是构造函数">（1）什么是构造函数</a></li>
+                <li>
+                    <a href="#2%e6%9e%84%e9%80%a0%e5%87%bd%e6%95%b0%e7%9a%84%e5%ae%9a%e4%b9%89" aria-label="（2）构造函数的定义">（2）构造函数的定义</a></li>
+                <li>
+                    <a href="#3%e6%9e%84%e9%80%a0%e5%87%bd%e6%95%b0%e7%9a%84%e9%87%8d%e8%bd%bd" aria-label="（3）构造函数的重载">（3）构造函数的重载</a></li>
+                <li>
+                    <a href="#4%e5%b8%a6%e9%bb%98%e8%ae%a4%e5%8f%82%e6%95%b0%e7%9a%84%e6%9e%84%e9%80%a0%e5%87%bd%e6%95%b0" aria-label="（4）带默认参数的构造函数">（4）带默认参数的构造函数</a></li></ul>
+                </li>
+                <li>
+                    <a href="#%e9%bb%98%e8%ae%a4%e6%9e%84%e9%80%a0%e5%87%bd%e6%95%b0%e5%92%8c%e5%a4%8d%e5%88%b6%e6%9e%84%e9%80%a0%e5%87%bd%e6%95%b0" aria-label="默认构造函数和复制构造函数">默认构造函数和复制构造函数</a><ul>
+                        
+                <li>
+                    <a href="#1%e5%ae%9a%e4%b9%89%e9%bb%98%e8%ae%a4%e6%9e%84%e9%80%a0%e5%87%bd%e6%95%b0" aria-label="（1）定义默认构造函数">（1）定义默认构造函数</a></li>
+                <li>
+                    <a href="#2%e9%9a%90%e5%bc%8f%e7%b1%bb%e7%b1%bb%e5%9e%8b%e8%bd%ac%e6%8d%a2" aria-label="（2）隐式类类型转换">（2）隐式类类型转换</a></li>
+                <li>
+                    <a href="#3%e5%a4%8d%e5%88%b6%e6%9e%84%e9%80%a0%e5%87%bd%e6%95%b0%e4%b8%8e%e5%90%88%e6%88%90%e5%a4%8d%e5%88%b6%e6%9e%84%e9%80%a0%e5%87%bd%e6%95%b0" aria-label="（3）复制构造函数与合成复制构造函数">（3）复制构造函数与合成复制构造函数</a></li>
+                <li>
+                    <a href="#4%e6%b7%b1%e5%a4%8d%e5%88%b6%e4%b8%8e%e6%b5%85%e5%a4%8d%e5%88%b6" aria-label="（4）深复制与浅复制">（4）深复制与浅复制</a></li></ul>
+                </li>
+                <li>
+                    <a href="#%e6%9e%90%e6%9e%84%e5%87%bd%e6%95%b0" aria-label="析构函数">析构函数</a><ul>
+                        
+                <li>
+                    <a href="#1%e6%9e%90%e6%9e%84%e5%87%bd%e6%95%b0%e7%9a%84%e5%ae%9a%e4%b9%89" aria-label="（1）析构函数的定义">（1）析构函数的定义</a></li>
+                <li>
+                    <a href="#2%e5%90%88%e6%88%90%e6%9e%90%e6%9e%84%e5%87%bd%e6%95%b0" aria-label="（2）合成析构函数">（2）合成析构函数</a></li>
+                <li>
+                    <a href="#3%e4%bd%95%e6%97%b6%e9%9c%80%e8%a6%81%e7%bc%96%e5%86%99%e6%9e%90%e6%9e%84%e5%87%bd%e6%95%b0" aria-label="（3）何时需要编写析构函数">（3）何时需要编写析构函数</a></li>
+                <li>
+                    <a href="#4%e6%9e%84%e9%80%a0%e5%87%bd%e6%95%b0%e5%92%8c%e6%9e%90%e6%9e%84%e5%87%bd%e6%95%b0%e7%9a%84%e8%b0%83%e7%94%a8%e6%ac%a1%e5%ba%8f" aria-label="（4）构造函数和析构函数的调用次序">（4）构造函数和析构函数的调用次序</a>
+                </li>
+            </ul>
+            </li>
+            </ul>
+        </div>
+    </details>
+</div>
+
+  <div class="post-content"><h2 id="类的定义">类的定义<a hidden class="anchor" aria-hidden="true" href="#类的定义">#</a></h2>
+<h3 id="1定义类">（1）定义类<a hidden class="anchor" aria-hidden="true" href="#1定义类">#</a></h3>
+<p>面向程序设计更偏向于把每一个细节都做好，从每一个零件开始是制造汽车。面向对象编程偏向于把很多细小的零件已经主装好了，保留集成了很多接口，只需要把部件进行拼接就可以得到产品。</p>
+<p>面向对象编程的意义在于自然界都是由实体组成，面向对象也是软件开发的主流方式。</p>
+<p>面对对象的三大特征，分别是抽象，封装，继承。抽象指的是将成员和成员的行为分别表示为数据成员和成员函数。封装就是把抽象来的对象代码写到类里面，并设计一些接口。继承和派生，指的是可以对一些类进行修改，得到子类，比如把本科学生信息管理系统稍作修改就可以变成研究生学生信息管理系统。</p>
+<p>类的定义和结构体相似，但比结构体多了对共有，私有成员的声明，还有就是类里面可以由函数。公有成员就是所有类的用户都可以使用，私有成员是只有类的成员可以用，被保护的成员基本和私有成员相同，但派生继承的类的成员也可以访问</p>
+<p>函数可以定义先声明在类的里面，然后定义在类外。使用：：符号</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback"> class Data { //Data类定义
+ void set(int d);
+ //成员函数原型声明，与 void set(int); 等价
+ int get() { //成员函数类内部定义
+ return data;
+ } //get函数定义结束
+ int data; //数据成员
+ }; //Data类定义结束
+ void Data::set(int d) //成员函数类外部定义
+ {
+ data=d; //访问类的数据成员
+ }
+
+
+</code></pre></div><p>类定义一般放在程序文件开头，或者放到头文件中被程序文件包含，
+此时这个定义是全局的。在全局作用域内，该定义处处可见，因此
+同作用域内的所有函数都可以使用它。</p>
+<p>类定义向编译器声明了一种新的数据类型，该数据类型有不同类型
+的数据成员和成员函数。因此尽管数据成员类似变量的定义，但类
+型声明时并不会产生该成员的实体，即为它分配存储空间。</p>
+<h3 id="2成员的访问控制">（2）成员的访问控制<a hidden class="anchor" aria-hidden="true" href="#2成员的访问控制">#</a></h3>
+<p>类的每个成员都有访问控制属性，由以下三种访问标号说明：public（公有的）、private（私有的）和protected（保护的）。</p>
+<p>public实现了类的外部接口。私有成员用private标号声明，只有类成员可以访问私有成员，类用户的访问是不允许的。显然，private实现了私有成员的隐蔽。保护成员用protected标号声明，在不考虑继承的情况下，protected的性质和private的性质一致，但保护成员可以被派生类的类成员访问。</p>
+<p>实际编程中，为了使程序清晰，每一种成员访问限定符在类体中只出现一次</p>
+<h3 id="3类的数据成员">（3）类的数据成员<a hidden class="anchor" aria-hidden="true" href="#3类的数据成员">#</a></h3>
+<p>类的数据成员可以是基本类型、数组、指针、引用、共用体、枚举
+类型、void指针、const限定等数据类型。</p>
+<p>但不可以是自身，后面会提到构造函数，可以构造同名的函数体。</p>
+<h3 id="4类的成员函数">（4）类的成员函数<a hidden class="anchor" aria-hidden="true" href="#4类的成员函数">#</a></h3>
+<p>在成员函数中可以访问这个类的任何成员，无论它是公有的
+或是私有的，是类内部声明的还是类外部定义的。</p>
+<p>（::）是作用域限定符（field qualifed）。如果在作用域限定符的前面没有类名，或者函数前面既无类名又无作用域限定符，例
+如：::set(10) 或 set(10）则表示set函数不属于任何类，这个函数不是成员函数，而是全局的普通函数。此时的（::）不是类作用域限定符的含义，而是命名空间域限定符的含义。</p>
+<p>类的成员函数可以指定为inline，即内联函数。声明在类外或者类内都可以。</p>
+<p>可以对成员函数重载或使用默认参数。需要注意，声明成员函数的多个重载版本或指定成员函数的默认参
+数，只能在类内部中进行。</p>
+<p>用类实例化一个对象时，系统会为每一个对象分配存储空问。如果
+一个类包括了数据成员和成员函数，则要分别为数据和函数的代码
+分配存储空间。
+<img loading="lazy" src="/vx_images/115042623263255.png" alt=""  />
+</p>
+<h3 id="5类的声明">（5）类的声明<a hidden class="anchor" aria-hidden="true" href="#5类的声明">#</a></h3>
+<p>类不能具有自身类型的数据成员。然而，只要类名一经出现就可以
+认为该类己声明。因此，类的数据成员可以是指向自身类型的指针
+或引用。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">class Point; //Point类声明，非Point类定义，因为没有类体 
+class Line {
+Point a; //错误，不能使用仅有类声明而没有类定义的类定义数
+据对象
+Point *pp, &amp;rp; //正确，只有类声明，即可用它定义该类的指
+针或引用
+Line b; //错误，类不能具有自身类型的数据成员
+Line *pl, &amp;rl; //正确，类可以有指向自身类型的指针或引用
+的数据成员
+}; 
+
+</code></pre></div><h2 id="对象的定义和使用">对象的定义和使用<a hidden class="anchor" aria-hidden="true" href="#对象的定义和使用">#</a></h2>
+<h3 id="1对象的的定义">（1）对象的的定义<a hidden class="anchor" aria-hidden="true" href="#1对象的的定义">#</a></h3>
+<p>从现在起，“对象”一词专门表示类的实体。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">Point a,b; //C++特色定义对象
+class Point x,y; //兼容C语言特色定义对象
+</code></pre></div><p>具体定义方式和结构体类似</p>
+<h3 id="2对象的动态建立和释放">（2）对象的动态建立和释放<a hidden class="anchor" aria-hidden="true" href="#2对象的动态建立和释放">#</a></h3>
+<p>利用new运算符可以动态地分配对象空间，delete运算符释放对象空间。
+用new运算动态分配得到的对象是无名的，它返回一个指向新对象的指针的值，即分配得到是对象的内存单元的起始地址。程序通过这个地址可以间接访问这个对象，因此需要定义一个指向类的对象的指针变量来存放该地址。显然，用new建立的动态对象是通过指针来引用的。</p>
+<p>在执行new运算时，如果内存不足，无法开辟所需的内存空间，C++编译器会返回一个0值指针。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">#include&lt;iostream&gt;
+ using namespace std;
+ class Box
+ { public:
+ int width, length, height;
+ };
+ int main()
+ {
+ Box * p=new Box;
+ p-&gt;width=10; p-&gt;length=20; p-&gt;height=30;
+1 cout&lt;&lt;p-&gt;width&lt;&lt;&#34;\t&#34;&lt;&lt;p-&gt;length&lt;&lt;&#34;\t&#34;&lt;&lt;p-&gt;height&lt;&lt;endl;
+ delete p;
+ return 0;
+ 
+</code></pre></div><h3 id="3对象成员的引用">（3）对象成员的引用<a hidden class="anchor" aria-hidden="true" href="#3对象成员的引用">#</a></h3>
+<p>访问对象中的成员可以有3种方法：</p>
+<p>①通过对象名和对象成员引用运算符（.）访问对象中的成员；</p>
+<p>②通过指向对象的指针和指针成员引用运算符（-&gt;）访问对象中的成员；</p>
+<p>③通过对象的引用变量和对象成员引用运算符（.）访问对象中的成员；</p>
+<p>需要注意，从类外部只能访问类公有的成员</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">void caller1()
+{
+Data A, *p, *p1; //定义对象指针变量
+p1=&amp;A; //p1指向对象A
+p1-&gt;data=100; //正确，类外部可以访问类的public数据成员
+p1-&gt;fun(1,2,3); //正确，类外部可以访问类的public成员函数
+p = new Data; //动态分配Data对象
+p-&gt;data=100; //正确，类外部可以访问类的public数据成员
+p-&gt;fun(1,2,3); //正确，类外部可以访问类的public成员函数
+delete p; //撤销p所指向的Data对象
+}
+
+</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">void caller1()
+{
+Data A, &amp;r=A; //定义对象引用变量
+r.data=100; //正确，类外部可以访问类的public数据成员
+r.fun(1,2,3); //正确，类外部可以访问类的public成员函数
+}
+
+</code></pre></div><h3 id="4对象的赋值">（4）对象的赋值<a hidden class="anchor" aria-hidden="true" href="#4对象的赋值">#</a></h3>
+<p>如果一个类定义了两个或多个对象，则这些同类的对象之间可以互相赋值。这里所指的对象的“值”是指对象中所有数据成员的值。</p>
+<h3 id="5对象对象指针或对象引用作为函数的参数和返回值">（5）对象、对象指针或对象引用作为函数的参数和返回值<a hidden class="anchor" aria-hidden="true" href="#5对象对象指针或对象引用作为函数的参数和返回值">#</a></h3>
+<p>当形参是对象时，实参要求是相同类的对象名，C++不能对类对象进行任何隐式类型转换。此时形参是实参对象的副本。实际编程中，传递对象时需要考虑类的规模带来的调用开销，如果开销很大时建议不用对象作为函数参数。</p>
+<p>当形参是对象指针时，实参要求是同类对象的指针，C++不能对对象指针进行任何隐式类型转换。采用地址传递方式，在函数中若按间接引用方式修改了形参对象本质上就是修改实参对象。因此，使用对象指针作为函数参数可以向主调函数传回变化后的对象。</p>
+<p>当形参是对象引用时，实参要求是同类的对象，其功能与对象指针相似。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">#include &lt;iostream&gt;
+ using namespace std;
+ void func1(Data a,Data *p,Data &amp;r)
+ {
+ a.data=100; p-&gt;data=200; r.data=300;
+ }
+ int main()
+ {
+ Data A, B, C;
+ A.fun(1,2,3); B.fun(4,5,6); C.fun(7,8,9);
+ func1(A,&amp;B,C);//将对象A、B的地址、对象C的引用传递到函数func1
+ return 0;
+ 
+</code></pre></div><p>如果不希望在函数中修改实参对象的值，函数形参可以作const限定</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">void func2(Data a,const Data *p,const Data &amp;r)
+{
+a.data=100;
+p-&gt;data=200; //错误，左值是const对象
+r.data=300; //错误，左值是const对象
+}
+
+</code></pre></div><p>函数返回值可以是对象、对象指针或对象引用。函数返回对象指针或引用，本质上返回的是对象的地址而不是它的存储内容，因此不要返回局部对象的指针或引用，因为它在函数返回后是无效的。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">Data* func() { Data a; Data *p=&amp;a; return p; //返回局部对象a的指针p }
+void caller() 
+{ Data *p1;
+ p1=func(); 
+ p1-&gt;data=100; //a已不存在，引用错误 
+ }
+
+</code></pre></div><h2 id="构造函数">构造函数<a hidden class="anchor" aria-hidden="true" href="#构造函数">#</a></h2>
+<h3 id="1什么是构造函数">（1）什么是构造函数<a hidden class="anchor" aria-hidden="true" href="#1什么是构造函数">#</a></h3>
+<p>在类的对象创建之处就会被执行，用来对数据成员（公有还是私有都可以）进行赋值，函数的名字要和类的名字相同。
+类的数据成员是不能在类定义时初始化的，因为本身不分配存储空间如果一个类中所有的数据成员是公有的，则可以在定义对象时对数据成员进行初始化，如果类中的数据成员是私有的，如private的或protected的，就不能用这种方法初始化，因为外部不能直接访问私有的数据成员。构造函数不需要人为调用，而是在建立对象时自动被执行。</p>
+<h3 id="2构造函数的定义">（2）构造函数的定义<a hidden class="anchor" aria-hidden="true" href="#2构造函数的定义">#</a></h3>
+<p>与其他任何函数一样，构造函数可以声明为内联的。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">#include &lt;iostream&gt;
+ using namespace std;
+ class Cuboid { //Cuboid类表示长方体
+ public:
+ Cuboid(int l,int h, int d); //构造函数
+ int volumn() { return length*height*depth; } //计算体积
+ private:
+ int length,height,depth; //长、高、深
+ };
+ Cuboid::Cuboid(int l,int h,int d) //外部定义的构造函数
+ {
+ length=l, height=h, depth=d; //初始化数据成员
+ cout&lt;&lt;&#34;Cuboid: &#34;&lt;&lt;&#34;L=&#34;&lt;&lt;l&lt;&lt;&#34;
+,H=&#34;&lt;&lt;h&lt;&lt;&#34;
+,D=&#34;&lt;&lt;d&lt;&lt;endl;
+ }
+ int main()
+ {
+ Cuboid a(1,2,3); //定义长方体对象a，调用构造函数初始化
+ cout&lt;&lt;&#34;volumn=&#34;&lt;&lt;a.volumn()&lt;&lt;endl; //输出体积
+ Cuboid b(10,20,30); //定义长方体对象b，调用构造函数初始化
+ cout&lt;&lt;&#34;volumn=&#34;&lt;&lt;b.volumn()&lt;&lt;endl; //输出体积
+ return 0;
+ 
+</code></pre></div><p>构造函数一般声明为公有的（public），因为创建对象通常是在类的外部进行的。如果构造函数声明为保护的（protected）或私有的（protected），那就意味着在类外部创建对象（并调用构造函数）是错误的。</p>
+<p>每个构造函数应该为每个数据成员提供初始化。否则将使那些数据成员处于未定义的状态。而使用一个未定义的成员是错误的。</p>
+<p><strong>构造函数初始化列表</strong>
+与普通函数一样，构造函数具有函数名、形参列表和函数体。与其他函数不同的是，构造函数可以包含一个构造函数初始化列表。与其他的成员函数一样，构造函数可以定义在类的内部或外部，但构造函数初始化列表只在构造函数的定义中而不是函数原型声明中指定。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">#include &lt;iostream&gt;
+ using namespace std;
+ class Cuboid { //Cuboid类表示长方体 public:
+ Cuboid(int l,int h, int d); //构造函数
+ int volumn() { return length*height*depth; }; //计算体积
+ private:
+ int length,height,depth; //长、高、深
+ };
+ Cuboid::Cuboid(int l,int h,int d) :length(l),heght(h),depth(d)
+ //带构造函数初始化列表的构造函数
+ {
+ cout&lt;&lt;&#34;Cuboid: &#34;&lt;&lt;&#34;L=&#34;&lt;&lt;l&lt;&lt;&#34;
+,H=&#34;&lt;&lt;h&lt;&lt;&#34;
+,D=&#34;&lt;&lt;d&lt;&lt;endl;
+ }
+
+</code></pre></div><p>如果没有为类类型的数据成员提供初始化列表，编译器会隐式地使用该成员的默认构造函数。如果那个类没有默认构造函数，则编译器会报告错误。在这种情况下，为了初始化类类型的数据成员，必须提供初始化列表。</p>
+<p>一般地，没有默认构造函数的成员，以及const或引用类型的成员，都必须在构造函数初始化列表中进行初始化。</p>
+<h3 id="3构造函数的重载">（3）构造函数的重载<a hidden class="anchor" aria-hidden="true" href="#3构造函数的重载">#</a></h3>
+<p>在一个类中可以定义多个构造函数版本，即构造函数允许被重载，只要每个构造函数的形参列表是唯一的</p>
+<p>尽管在一个类中可以包含多个构造函数，但是对于每一个对象来说，建立对象时只执行其中一个，并非每个构造函数都被执行。</p>
+<h3 id="4带默认参数的构造函数">（4）带默认参数的构造函数<a hidden class="anchor" aria-hidden="true" href="#4带默认参数的构造函数">#</a></h3>
+<p>构造函数的参数允许使用默认值。对类的设计者来说，使用默认参数可以减少代码重复；对类的使用者者来说，使用默认参数可以方便地用适当的参数进行初始化。</p>
+<p>必须在类的内部指定构造函数的默认参数，不能在类外部指定默认参数。</p>
+<p>如果构造函数的全部参数都指定了默认值，则在定义对象时可以给一个或几个实参，也可以不给出实参。这时，就与无参数的构造函数有歧义了。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">class Point { 
+public:
+ Point(){x=y=0;}
+ Point(int a=1,int b=1):x(a),y(b) { };
+ void display() { cout&lt;&lt;&#34;x=&#34;&lt;&lt;x&lt;&lt;&#34;
+,y=&#34;&lt;&lt;y&lt;&lt;endl; }
+private:
+ int x,y; //坐标值
+};
+int main()
+{
+ Point k; //出现歧义，既可以x=0，y=0；也可以x=1，y=1
+ return 0;
+}
+
+</code></pre></div><p><strong>一般地，不应同时使用构造函数的重载和带默认参数的构造函数。</strong></p>
+<h2 id="默认构造函数和复制构造函数">默认构造函数和复制构造函数<a hidden class="anchor" aria-hidden="true" href="#默认构造函数和复制构造函数">#</a></h2>
+<h3 id="1定义默认构造函数">（1）定义默认构造函数<a hidden class="anchor" aria-hidden="true" href="#1定义默认构造函数">#</a></h3>
+<p>默认构造函数就是在没有显式提供初始化式时调用的构造函数，它
+是一个不带参数的构造函数。如果定义某个类的对象时没有提供初
+始化式就会使用默认构造函数。</p>
+<p>它由不带参数的构造函数，或者所有形参均是默认参数的构造函数
+定义。</p>
+<p>任何一个类有且只有一个默认构造函数。如果定义的类中没有显式
+定义任何构造函数，编译器会自动为该类生成默认构造函数，称为
+合成默认构造函数.一个类哪怕只定义了一个构造函数，编译器也不会再生成默认构造
+函数。一般地，任何一个类都应定义一个默认构造函数。</p>
+<h3 id="2隐式类类型转换">（2）隐式类类型转换<a hidden class="anchor" aria-hidden="true" href="#2隐式类类型转换">#</a></h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">#include &lt;iostream&gt;
+ using namespace std;
+ class Data { //Data类定义
+ public:
+ Data(const string&amp; str=&#34;&#34;) : s1(str) { }
+ //const限定  引用字符串类型 为str变量设置默认初值  提供初始化列表
+ void SetString(const Data&amp; r) //期待的是Data类型的对象
+ { s1=r.s1; }
+ void print() { cout&lt;&lt;s1&lt;&lt;endl; }
+ private:
+ string s1;
+ }
+  int main()
+ {
+ Data a,b,c(&#34;world&#34;);
+ string i=&#34;string&#34;;
+ a.SetString(c);
+ b.SetString(string(&#34;world&#34;)); //隐式转换
+ a.print(); b.print();
+ Data d=Data(i); //隐式转换
+ d.print();
+ return 0;
+ 
+
+</code></pre></div><p>类名(const 指定数据类型&amp; obj)</p>
+<p>C++关键字explicit用来修饰类的构造函数，指明该构造函数是显式
+的。explicit关键字只能用于类内部的构造函数声明上，在类定义外
+部不能重复它。</p>
+<p>可以禁止由构造函数定义的隐式转换，方法是通过将构造函数声明
+为explicit，来防止在需要隐式转换的上下文中使用构造函数。</p>
+<h3 id="3复制构造函数与合成复制构造函数">（3）复制构造函数与合成复制构造函数<a hidden class="anchor" aria-hidden="true" href="#3复制构造函数与合成复制构造函数">#</a></h3>
+<p>►复制构造函数又称为拷贝构造函数，它是一种特殊的构造函数。它
+的作用就是用一个已经生成的对象来初始化另一个同类的对象。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">Point pt1(10,20); Point pt2=pt1
+</code></pre></div><p>复制构造函数定义的一般形式为：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">类名(const 类名&amp; obj)
+{
+函数体
+}
+</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">class Point { //Point类
+public:
+Point() : x(0), y(0) { } //默认构造函数
+Point(const Point&amp; r) : x(r.x), y(r.y) { } //复制构造函
+数
+Point(int a,int b) : x(a), y(b) { } //带参数构造函数
+private:
+int x,y;
+};
+
+</code></pre></div><p>►复制构造函数有且只有一个本类类型对象的引用形参，通常使用const限定。</p>
+<p>每个类必须有一个复制构造函数。如果类没有定义复制构造函数，
+编译器就会自动合成一个，称为合成复制构造函数
+与合成默认构造函数不同，即使定义了其他构造函数，编译器也会合成复制构造函数。</p>
+<p>►以下3种情况会使用复制构造函数。</p>
+<p>►（1）用一个对象显式或隐式初始化另一个对象。</p>
+<p>►C++支持两种初始化形式：复制初始化和直接初始化。复制初始化
+使用等号（=），而直接初始化将初始化式放在圆括号中。</p>
+<p>►复制初始化和直接初始化是有区别的：直接初始化会调用与实参匹
+配的构造函数；而复制初始化总是调用复制构造函数。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">Point pt1(10,20);
+Point pt2=pt1; //复制初始化
+Point pt3(pt1); //直接初始化
+</code></pre></div><p>（2）函数参数按值传递对象时或函数返回对象时
+当函数形参为对象类型，而非指针和引用类型时，函数调用按值传
+递对象，即编译器调用复制构造函数产生一个实参对象副本传递到
+函数中。</p>
+<p>类似地，以对象类型作为返回值时，编译器调用复制构造函数产生
+一个return语句中的值的副本返回到调用函数。</p>
+<p>（3）根据元素初始化式列表初始化数组元素时。</p>
+<p>总的来说，正是有了复制构造函数，函数才可以传递对象和返回对
+象，对象数组才能用初值列表的形式初始化。</p>
+<h3 id="4深复制与浅复制">（4）深复制与浅复制<a hidden class="anchor" aria-hidden="true" href="#4深复制与浅复制">#</a></h3>
+<p>是合成复制构造函数和复制构造函数的区别。
+若复制对象但未复制资源内容称为浅复制，
+如果一个拥有资源（如用new得到的动态内存）的类对象发生复制
+的时候，若对象数据与资源内容一起复制，称为深复制。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">#include &lt;iostream&gt;
+ #include &lt;string.h&gt;
+ using namespace std;
+ class CA
+ {
+ public:
+ CA(int b,char *cstr) //构造函数
+ { a=b; str=new char[b];
+ strcpy(str,cstr);
+ }
+ CA(const CA &amp;C) //复制构造函数
+ {
+ a=C.a; str=new char[a]; //深复制，浅复制则写成str=C.str;
+ if(str!=0) strcpy(str,C.str);
+ }
+ void show() 
+ { cout&lt;&lt;str&lt;&lt;endl; } 
+ ~CA() //析构函数 
+ { 
+ delete str; 
+ } 
+ private: 
+ int a; 
+char *str; 
+ };  int main() 
+ { 
+ CA a(10,&#34;hello&#34;); 
+ CA b=a; 
+ b.show(); 
+ return 0; 
+ }
+</code></pre></div><h2 id="析构函数">析构函数<a hidden class="anchor" aria-hidden="true" href="#析构函数">#</a></h2>
+<h3 id="1析构函数的定义">（1）析构函数的定义<a hidden class="anchor" aria-hidden="true" href="#1析构函数的定义">#</a></h3>
+<p>析构函数：当对象脱离其作用域时（例如对象所在的函数已调用完
+毕），系统会自动执行析构函数。析构函数往往用来做“清理善后”
+的工作（例如在建立对象时用new开辟了一段内存空间，则在该对
+象消亡前应在析构函数中用delete释放这段存储空间）。</p>
+<p>一个类可以有多个构造函数，但是只能有一个析构函数。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">#include &lt;iostream&gt; 
+ #include &lt;string.h&gt; 
+ using namespace std; 
+ class Point 
+ { public: 
+ Point(int a,int b):x(a),y(b){} //带参数的构造函数 
+ ~Point() //析构函数 
+ { cout&lt;&lt;&#34;析构函数被调用。&#34;&lt;&lt;endl; } 
+ void show() { cout&lt;&lt;x&lt;&lt;&#34;,&#34;&lt;&lt;y&lt;&lt;endl; } 
+ private: 
+ int x,y; 
+ }; 
+ int main() 
+ { Point pt1(10,20); 
+ pt1.show(); 
+ return 0;
+</code></pre></div><h3 id="2合成析构函数">（2）合成析构函数<a hidden class="anchor" aria-hidden="true" href="#2合成析构函数">#</a></h3>
+<p>与复制构造函数不同，编译器总是会为类生成一个析构函数，称为合成析构函数
+需要注意，合成析构函数并不删除指针成员所指向的对象，它需要
+程序员显式编写析构函数去处理。</p>
+<h3 id="3何时需要编写析构函数">（3）何时需要编写析构函数<a hidden class="anchor" aria-hidden="true" href="#3何时需要编写析构函数">#</a></h3>
+<p>需要注意，合成析构函数并不删除指针成员所指向的对象，它需要
+程序员显式编写析构函数去处理。</p>
+<p>如果类需要析构函数，则该类几乎必然需要定义自己的复制构造函
+数和赋值运算符重载，这个规则称为析构函数三法则(三个同时出现)</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">#include &lt;iostream&gt;
+ using namespace std;
+ class CString { //CString类
+ public:
+ CString(const char *str); //单个参数构造函数
+ ~CString(); //析构函数
+ void show() { cout&lt;&lt;p&lt;&lt;endl; } //显示字符串
+ private:
+ char *p; //存储字符串动态内存区
+ CString::CString(const char *str) 
+  { 
+  p=new char[strlen(str)+1]; //为存储str动态分配内存 
+  strcpy(p,str); //复制str到p 
+  cout&lt;&lt;&#34;构造：&#34;&lt;&lt;str&lt;&lt;endl; 
+  } 
+ CString::~CString() 
+  { 
+  cout&lt;&lt;&#34;析构：&#34;&lt;&lt;p&lt;&lt;endl; 
+  delete [] p; //析构函数必须是否p占用的内存 
+  } 
+  int main() 
+  { 
+  CString s1(&#34;C++&#34;), s2=&#34;JavaScript&#34;; //定义对象 
+  s1.show(); s2.show(); 
+  return 0; 
+  }
+
+</code></pre></div><h3 id="4构造函数和析构函数的调用次序">（4）构造函数和析构函数的调用次序<a hidden class="anchor" aria-hidden="true" href="#4构造函数和析构函数的调用次序">#</a></h3>
+<p>构造函数和析构函数的调用很像一个栈的先进后出，调用析构函数
+的次序正好与调用构造函数的次序相反。最先被调用的构造函数，
+其对应的（同一对象中的）析构函数最后被调用，而最后被调用的
+构造函数，其对应的析构函数最先被调用。</p>
+
+
+  </div>
+
+  <footer class="post-footer">
+    <ul class="post-tags">
+    </ul>
+<nav class="paginav">
+  <a class="next" href="https://tassel234.github.io/posts/note/c&#43;&#43;%E5%85%A5%E9%97%A8%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0-2%E8%AF%AD%E5%8F%A5%E5%92%8C%E5%87%BD%E6%95%B0/">
+    <span class="title">Next »</span>
+    <br>
+    <span>C&#43;&#43;入门学习笔记 2(语句和函数)</span>
+  </a>
+</nav>
+
+
+<div class="share-buttons">
+    <a target="_blank" rel="noopener noreferrer" aria-label="share C&#43;&#43;学习笔记-1（类和对象-1） on twitter"
+        href="https://twitter.com/intent/tweet/?text=C%2b%2b%e5%ad%a6%e4%b9%a0%e7%ac%94%e8%ae%b0-1%ef%bc%88%e7%b1%bb%e5%92%8c%e5%af%b9%e8%b1%a1-1%ef%bc%89&amp;url=https%3a%2f%2ftassel234.github.io%2fposts%2fnote%2fc%2b%2b%25E5%25AD%25A6%25E4%25B9%25A0%25E7%25AC%2594%25E8%25AE%25B0-1%25E7%25B1%25BB%25E5%2592%258C%25E5%25AF%25B9%25E8%25B1%25A1-1%2f&amp;hashtags=">
+        <svg version="1.1" viewBox="0 0 512 512" xml:space="preserve" height="30px" width="30px" fill="currentColor">
+            <path
+                d="M449.446,0c34.525,0 62.554,28.03 62.554,62.554l0,386.892c0,34.524 -28.03,62.554 -62.554,62.554l-386.892,0c-34.524,0 -62.554,-28.03 -62.554,-62.554l0,-386.892c0,-34.524 28.029,-62.554 62.554,-62.554l386.892,0Zm-253.927,424.544c135.939,0 210.268,-112.643 210.268,-210.268c0,-3.218 0,-6.437 -0.153,-9.502c14.406,-10.421 26.973,-23.448 36.935,-38.314c-13.18,5.824 -27.433,9.809 -42.452,11.648c15.326,-9.196 26.973,-23.602 32.49,-40.92c-14.252,8.429 -30.038,14.56 -46.896,17.931c-13.487,-14.406 -32.644,-23.295 -53.946,-23.295c-40.767,0 -73.87,33.104 -73.87,73.87c0,5.824 0.613,11.494 1.992,16.858c-61.456,-3.065 -115.862,-32.49 -152.337,-77.241c-6.284,10.881 -9.962,23.601 -9.962,37.088c0,25.594 13.027,48.276 32.95,61.456c-12.107,-0.307 -23.448,-3.678 -33.41,-9.196l0,0.92c0,35.862 25.441,65.594 59.311,72.49c-6.13,1.686 -12.72,2.606 -19.464,2.606c-4.751,0 -9.348,-0.46 -13.946,-1.38c9.349,29.426 36.628,50.728 68.965,51.341c-25.287,19.771 -57.164,31.571 -91.8,31.571c-5.977,0 -11.801,-0.306 -17.625,-1.073c32.337,21.15 71.264,33.41 112.95,33.41Z" />
+        </svg>
+    </a>
+    <a target="_blank" rel="noopener noreferrer" aria-label="share C&#43;&#43;学习笔记-1（类和对象-1） on linkedin"
+        href="https://www.linkedin.com/shareArticle?mini=true&amp;url=https%3a%2f%2ftassel234.github.io%2fposts%2fnote%2fc%2b%2b%25E5%25AD%25A6%25E4%25B9%25A0%25E7%25AC%2594%25E8%25AE%25B0-1%25E7%25B1%25BB%25E5%2592%258C%25E5%25AF%25B9%25E8%25B1%25A1-1%2f&amp;title=C%2b%2b%e5%ad%a6%e4%b9%a0%e7%ac%94%e8%ae%b0-1%ef%bc%88%e7%b1%bb%e5%92%8c%e5%af%b9%e8%b1%a1-1%ef%bc%89&amp;summary=C%2b%2b%e5%ad%a6%e4%b9%a0%e7%ac%94%e8%ae%b0-1%ef%bc%88%e7%b1%bb%e5%92%8c%e5%af%b9%e8%b1%a1-1%ef%bc%89&amp;source=https%3a%2f%2ftassel234.github.io%2fposts%2fnote%2fc%2b%2b%25E5%25AD%25A6%25E4%25B9%25A0%25E7%25AC%2594%25E8%25AE%25B0-1%25E7%25B1%25BB%25E5%2592%258C%25E5%25AF%25B9%25E8%25B1%25A1-1%2f">
+        <svg version="1.1" viewBox="0 0 512 512" xml:space="preserve" height="30px" width="30px" fill="currentColor">
+            <path
+                d="M449.446,0c34.525,0 62.554,28.03 62.554,62.554l0,386.892c0,34.524 -28.03,62.554 -62.554,62.554l-386.892,0c-34.524,0 -62.554,-28.03 -62.554,-62.554l0,-386.892c0,-34.524 28.029,-62.554 62.554,-62.554l386.892,0Zm-288.985,423.278l0,-225.717l-75.04,0l0,225.717l75.04,0Zm270.539,0l0,-129.439c0,-69.333 -37.018,-101.586 -86.381,-101.586c-39.804,0 -57.634,21.891 -67.617,37.266l0,-31.958l-75.021,0c0.995,21.181 0,225.717 0,225.717l75.02,0l0,-126.056c0,-6.748 0.486,-13.492 2.474,-18.315c5.414,-13.475 17.767,-27.434 38.494,-27.434c27.135,0 38.007,20.707 38.007,51.037l0,120.768l75.024,0Zm-307.552,-334.556c-25.674,0 -42.448,16.879 -42.448,39.002c0,21.658 16.264,39.002 41.455,39.002l0.484,0c26.165,0 42.452,-17.344 42.452,-39.002c-0.485,-22.092 -16.241,-38.954 -41.943,-39.002Z" />
+        </svg>
+    </a>
+    <a target="_blank" rel="noopener noreferrer" aria-label="share C&#43;&#43;学习笔记-1（类和对象-1） on reddit"
+        href="https://reddit.com/submit?url=https%3a%2f%2ftassel234.github.io%2fposts%2fnote%2fc%2b%2b%25E5%25AD%25A6%25E4%25B9%25A0%25E7%25AC%2594%25E8%25AE%25B0-1%25E7%25B1%25BB%25E5%2592%258C%25E5%25AF%25B9%25E8%25B1%25A1-1%2f&title=C%2b%2b%e5%ad%a6%e4%b9%a0%e7%ac%94%e8%ae%b0-1%ef%bc%88%e7%b1%bb%e5%92%8c%e5%af%b9%e8%b1%a1-1%ef%bc%89">
+        <svg version="1.1" viewBox="0 0 512 512" xml:space="preserve" height="30px" width="30px" fill="currentColor">
+            <path
+                d="M449.446,0c34.525,0 62.554,28.03 62.554,62.554l0,386.892c0,34.524 -28.03,62.554 -62.554,62.554l-386.892,0c-34.524,0 -62.554,-28.03 -62.554,-62.554l0,-386.892c0,-34.524 28.029,-62.554 62.554,-62.554l386.892,0Zm-3.446,265.638c0,-22.964 -18.616,-41.58 -41.58,-41.58c-11.211,0 -21.361,4.457 -28.841,11.666c-28.424,-20.508 -67.586,-33.757 -111.204,-35.278l18.941,-89.121l61.884,13.157c0.756,15.734 13.642,28.29 29.56,28.29c16.407,0 29.706,-13.299 29.706,-29.701c0,-16.403 -13.299,-29.702 -29.706,-29.702c-11.666,0 -21.657,6.792 -26.515,16.578l-69.105,-14.69c-1.922,-0.418 -3.939,-0.042 -5.585,1.036c-1.658,1.073 -2.811,2.761 -3.224,4.686l-21.152,99.438c-44.258,1.228 -84.046,14.494 -112.837,35.232c-7.468,-7.164 -17.589,-11.591 -28.757,-11.591c-22.965,0 -41.585,18.616 -41.585,41.58c0,16.896 10.095,31.41 24.568,37.918c-0.639,4.135 -0.99,8.328 -0.99,12.576c0,63.977 74.469,115.836 166.33,115.836c91.861,0 166.334,-51.859 166.334,-115.836c0,-4.218 -0.347,-8.387 -0.977,-12.493c14.564,-6.47 24.735,-21.034 24.735,-38.001Zm-119.474,108.193c-20.27,20.241 -59.115,21.816 -70.534,21.816c-11.428,0 -50.277,-1.575 -70.522,-21.82c-3.007,-3.008 -3.007,-7.882 0,-10.889c3.003,-2.999 7.882,-3.003 10.885,0c12.777,12.781 40.11,17.317 59.637,17.317c19.522,0 46.86,-4.536 59.657,-17.321c3.016,-2.999 7.886,-2.995 10.885,0.008c3.008,3.011 3.003,7.882 -0.008,10.889Zm-5.23,-48.781c-16.373,0 -29.701,-13.324 -29.701,-29.698c0,-16.381 13.328,-29.714 29.701,-29.714c16.378,0 29.706,13.333 29.706,29.714c0,16.374 -13.328,29.698 -29.706,29.698Zm-160.386,-29.702c0,-16.381 13.328,-29.71 29.714,-29.71c16.369,0 29.689,13.329 29.689,29.71c0,16.373 -13.32,29.693 -29.689,29.693c-16.386,0 -29.714,-13.32 -29.714,-29.693Z" />
+        </svg>
+    </a>
+    <a target="_blank" rel="noopener noreferrer" aria-label="share C&#43;&#43;学习笔记-1（类和对象-1） on facebook"
+        href="https://facebook.com/sharer/sharer.php?u=https%3a%2f%2ftassel234.github.io%2fposts%2fnote%2fc%2b%2b%25E5%25AD%25A6%25E4%25B9%25A0%25E7%25AC%2594%25E8%25AE%25B0-1%25E7%25B1%25BB%25E5%2592%258C%25E5%25AF%25B9%25E8%25B1%25A1-1%2f">
+        <svg version="1.1" viewBox="0 0 512 512" xml:space="preserve" height="30px" width="30px" fill="currentColor">
+            <path
+                d="M449.446,0c34.525,0 62.554,28.03 62.554,62.554l0,386.892c0,34.524 -28.03,62.554 -62.554,62.554l-106.468,0l0,-192.915l66.6,0l12.672,-82.621l-79.272,0l0,-53.617c0,-22.603 11.073,-44.636 46.58,-44.636l36.042,0l0,-70.34c0,0 -32.71,-5.582 -63.982,-5.582c-65.288,0 -107.96,39.569 -107.96,111.204l0,62.971l-72.573,0l0,82.621l72.573,0l0,192.915l-191.104,0c-34.524,0 -62.554,-28.03 -62.554,-62.554l0,-386.892c0,-34.524 28.029,-62.554 62.554,-62.554l386.892,0Z" />
+        </svg>
+    </a>
+    <a target="_blank" rel="noopener noreferrer" aria-label="share C&#43;&#43;学习笔记-1（类和对象-1） on whatsapp"
+        href="https://api.whatsapp.com/send?text=C%2b%2b%e5%ad%a6%e4%b9%a0%e7%ac%94%e8%ae%b0-1%ef%bc%88%e7%b1%bb%e5%92%8c%e5%af%b9%e8%b1%a1-1%ef%bc%89%20-%20https%3a%2f%2ftassel234.github.io%2fposts%2fnote%2fc%2b%2b%25E5%25AD%25A6%25E4%25B9%25A0%25E7%25AC%2594%25E8%25AE%25B0-1%25E7%25B1%25BB%25E5%2592%258C%25E5%25AF%25B9%25E8%25B1%25A1-1%2f">
+        <svg version="1.1" viewBox="0 0 512 512" xml:space="preserve" height="30px" width="30px" fill="currentColor">
+            <path
+                d="M449.446,0c34.525,0 62.554,28.03 62.554,62.554l0,386.892c0,34.524 -28.03,62.554 -62.554,62.554l-386.892,0c-34.524,0 -62.554,-28.03 -62.554,-62.554l0,-386.892c0,-34.524 28.029,-62.554 62.554,-62.554l386.892,0Zm-58.673,127.703c-33.842,-33.881 -78.847,-52.548 -126.798,-52.568c-98.799,0 -179.21,80.405 -179.249,179.234c-0.013,31.593 8.241,62.428 23.927,89.612l-25.429,92.884l95.021,-24.925c26.181,14.28 55.659,21.807 85.658,21.816l0.074,0c98.789,0 179.206,-80.413 179.247,-179.243c0.018,-47.895 -18.61,-92.93 -52.451,-126.81Zm-126.797,275.782l-0.06,0c-26.734,-0.01 -52.954,-7.193 -75.828,-20.767l-5.441,-3.229l-56.386,14.792l15.05,-54.977l-3.542,-5.637c-14.913,-23.72 -22.791,-51.136 -22.779,-79.287c0.033,-82.142 66.867,-148.971 149.046,-148.971c39.793,0.014 77.199,15.531 105.329,43.692c28.128,28.16 43.609,65.592 43.594,105.4c-0.034,82.149 -66.866,148.983 -148.983,148.984Zm81.721,-111.581c-4.479,-2.242 -26.499,-13.075 -30.604,-14.571c-4.105,-1.495 -7.091,-2.241 -10.077,2.241c-2.986,4.483 -11.569,14.572 -14.182,17.562c-2.612,2.988 -5.225,3.364 -9.703,1.12c-4.479,-2.241 -18.91,-6.97 -36.017,-22.23c-13.314,-11.876 -22.304,-26.542 -24.916,-31.026c-2.612,-4.484 -0.279,-6.908 1.963,-9.14c2.016,-2.007 4.48,-5.232 6.719,-7.847c2.24,-2.615 2.986,-4.484 4.479,-7.472c1.493,-2.99 0.747,-5.604 -0.374,-7.846c-1.119,-2.241 -10.077,-24.288 -13.809,-33.256c-3.635,-8.733 -7.327,-7.55 -10.077,-7.688c-2.609,-0.13 -5.598,-0.158 -8.583,-0.158c-2.986,0 -7.839,1.121 -11.944,5.604c-4.105,4.484 -15.675,15.32 -15.675,37.364c0,22.046 16.048,43.342 18.287,46.332c2.24,2.99 31.582,48.227 76.511,67.627c10.685,4.615 19.028,7.371 25.533,9.434c10.728,3.41 20.492,2.929 28.209,1.775c8.605,-1.285 26.499,-10.833 30.231,-21.295c3.732,-10.464 3.732,-19.431 2.612,-21.298c-1.119,-1.869 -4.105,-2.99 -8.583,-5.232Z" />
+        </svg>
+    </a>
+    <a target="_blank" rel="noopener noreferrer" aria-label="share C&#43;&#43;学习笔记-1（类和对象-1） on telegram"
+        href="https://telegram.me/share/url?text=C%2b%2b%e5%ad%a6%e4%b9%a0%e7%ac%94%e8%ae%b0-1%ef%bc%88%e7%b1%bb%e5%92%8c%e5%af%b9%e8%b1%a1-1%ef%bc%89&amp;url=https%3a%2f%2ftassel234.github.io%2fposts%2fnote%2fc%2b%2b%25E5%25AD%25A6%25E4%25B9%25A0%25E7%25AC%2594%25E8%25AE%25B0-1%25E7%25B1%25BB%25E5%2592%258C%25E5%25AF%25B9%25E8%25B1%25A1-1%2f">
+        <svg version="1.1" xml:space="preserve" viewBox="2 2 28 28" height="30px" width="30px" fill="currentColor">
+            <path
+                d="M26.49,29.86H5.5a3.37,3.37,0,0,1-2.47-1,3.35,3.35,0,0,1-1-2.47V5.48A3.36,3.36,0,0,1,3,3,3.37,3.37,0,0,1,5.5,2h21A3.38,3.38,0,0,1,29,3a3.36,3.36,0,0,1,1,2.46V26.37a3.35,3.35,0,0,1-1,2.47A3.38,3.38,0,0,1,26.49,29.86Zm-5.38-6.71a.79.79,0,0,0,.85-.66L24.73,9.24a.55.55,0,0,0-.18-.46.62.62,0,0,0-.41-.17q-.08,0-16.53,6.11a.59.59,0,0,0-.41.59.57.57,0,0,0,.43.52l4,1.24,1.61,4.83a.62.62,0,0,0,.63.43.56.56,0,0,0,.4-.17L16.54,20l4.09,3A.9.9,0,0,0,21.11,23.15ZM13.8,20.71l-1.21-4q8.72-5.55,8.78-5.55c.15,0,.23,0,.23.16a.18.18,0,0,1,0,.06s-2.51,2.3-7.52,6.8Z" />
+        </svg>
+    </a>
+</div>
+  </footer>
+</article>
+    </main>
+    
+<footer class="footer">
+    <span>&copy; 2023 <a href="https://tassel234.github.io/">hrkr&#39;s Blog</a></span>
+    <span>
+        Powered by
+        <a href="https://gohugo.io/" rel="noopener noreferrer" target="_blank">Hugo</a> &
+        <a href="https://github.com/adityatelange/hugo-PaperMod/" rel="noopener" target="_blank">PaperMod</a>
+    </span>
+</footer>
+<a href="#top" aria-label="go to top" title="Go to Top (Alt + G)" class="top-link" id="top-link" accesskey="g">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentColor">
+        <path d="M12 6H0l6-6z" />
+    </svg>
+</a>
+
+<script>
+    let menu = document.getElementById('menu')
+    if (menu) {
+        menu.scrollLeft = localStorage.getItem("menu-scroll-position");
+        menu.onscroll = function () {
+            localStorage.setItem("menu-scroll-position", menu.scrollLeft);
+        }
+    }
+
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener("click", function (e) {
+            e.preventDefault();
+            var id = this.getAttribute("href").substr(1);
+            if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView({
+                    behavior: "smooth"
+                });
+            } else {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView();
+            }
+            if (id === "top") {
+                history.replaceState(null, null, " ");
+            } else {
+                history.pushState(null, null, `#${id}`);
+            }
+        });
+    });
+
+</script>
+<script>
+    var mybutton = document.getElementById("top-link");
+    window.onscroll = function () {
+        if (document.body.scrollTop > 800 || document.documentElement.scrollTop > 800) {
+            mybutton.style.visibility = "visible";
+            mybutton.style.opacity = "1";
+        } else {
+            mybutton.style.visibility = "hidden";
+            mybutton.style.opacity = "0";
+        }
+    };
+
+</script>
+<script>
+    document.getElementById("theme-toggle").addEventListener("click", () => {
+        if (document.body.className.includes("dark")) {
+            document.body.classList.remove('dark');
+            localStorage.setItem("pref-theme", 'light');
+        } else {
+            document.body.classList.add('dark');
+            localStorage.setItem("pref-theme", 'dark');
+        }
+    })
+
+</script>
+<script>
+    document.querySelectorAll('pre > code').forEach((codeblock) => {
+        const container = codeblock.parentNode.parentNode;
+
+        const copybutton = document.createElement('button');
+        copybutton.classList.add('copy-code');
+        copybutton.innerHTML = 'copy';
+
+        function copyingDone() {
+            copybutton.innerHTML = 'copied!';
+            setTimeout(() => {
+                copybutton.innerHTML = 'copy';
+            }, 2000);
+        }
+
+        copybutton.addEventListener('click', (cb) => {
+            if ('clipboard' in navigator) {
+                navigator.clipboard.writeText(codeblock.textContent);
+                copyingDone();
+                return;
+            }
+
+            const range = document.createRange();
+            range.selectNodeContents(codeblock);
+            const selection = window.getSelection();
+            selection.removeAllRanges();
+            selection.addRange(range);
+            try {
+                document.execCommand('copy');
+                copyingDone();
+            } catch (e) { };
+            selection.removeRange(range);
+        });
+
+        if (container.classList.contains("highlight")) {
+            container.appendChild(copybutton);
+        } else if (container.parentNode.firstChild == container) {
+            
+        } else if (codeblock.parentNode.parentNode.parentNode.parentNode.parentNode.nodeName == "TABLE") {
+            
+            codeblock.parentNode.parentNode.parentNode.parentNode.parentNode.appendChild(copybutton);
+        } else {
+            
+            codeblock.parentNode.appendChild(copybutton);
+        }
+    });
+</script>
+</body>
+
+</html>
