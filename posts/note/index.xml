@@ -6,7 +6,16 @@
     <description>Recent content in 学习记录&amp;笔记 on hrkr&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Tue, 22 Aug 2023 22:49:16 +0800</lastBuildDate><atom:link href="https://tassel234.github.io/posts/note/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 23 Aug 2023 23:28:48 +0800</lastBuildDate><atom:link href="https://tassel234.github.io/posts/note/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>使用Cpp实现数据结构-1（链表）</title>
+      <link>https://tassel234.github.io/posts/note/%E4%BD%BF%E7%94%A8cpp%E5%AE%9E%E7%8E%B0%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84-1%E9%93%BE%E8%A1%A8/</link>
+      <pubDate>Wed, 23 Aug 2023 23:28:48 +0800</pubDate>
+      
+      <guid>https://tassel234.github.io/posts/note/%E4%BD%BF%E7%94%A8cpp%E5%AE%9E%E7%8E%B0%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84-1%E9%93%BE%E8%A1%A8/</guid>
+      <description>资源 （主）图解数据结构，使用C++ 吴灿明 （源代码来自这里） 使用软件&amp;quot;算法动画图解&amp;quot; 我的第一本算法书（书中彩色配图来自上面那个软件） 算法简单介绍 算法加数据结构构成可执行程序。 算法的五个条件，输入，输出，有效，明确，有穷 链表 链表主要用于两个目的：一是建立不定长度的</description>
+    </item>
+    
     <item>
       <title>C&#43;&#43;学习笔记-1（类和对象-1）</title>
       <link>https://tassel234.github.io/posts/note/c&#43;&#43;%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0-1%E7%B1%BB%E5%92%8C%E5%AF%B9%E8%B1%A1-1/</link>
@@ -17,7 +26,7 @@
     </item>
     
     <item>
-      <title>C&#43;&#43;入门学习笔记 2(语句和函数)</title>
+      <title>C&#43;&#43;入门学习笔记-2(语句和函数)</title>
       <link>https://tassel234.github.io/posts/note/c&#43;&#43;%E5%85%A5%E9%97%A8%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0-2%E8%AF%AD%E5%8F%A5%E5%92%8C%E5%87%BD%E6%95%B0/</link>
       <pubDate>Mon, 21 Aug 2023 21:05:48 +0800</pubDate>
       
@@ -31,7 +40,7 @@
       <pubDate>Mon, 21 Aug 2023 17:37:33 +0800</pubDate>
       
       <guid>https://tassel234.github.io/posts/note/%E5%9B%BE%E8%AE%BA%E5%85%A5%E9%97%A8-1/</guid>
-      <description>前言 使用资源 （主）程序员的数学4：图论 算法图解动画软件演示 计算之魂 目标指向 了解图的基本知识，可以对图论模型进行数学建模和程序求解。 图的基础知识 什么是图 在数学中，图是描述于一组对象的结构，其中某些对象对在某种意义上是“相关的”。这些对象对应于称为顶点的数学抽象（也称为节点或点），并</description>
+      <description>前言 使用资源 （主）程序员的数学4：图论 算法图解动画软件演示 计算之魂&amp;ndash;吴军 目标指向 了解图的基本知识，可以对图论模型进行数学建模和程序求解。 图的基础知识 什么是图 在数学中，图是描述于一组对象的结构，其中某些对象对在某种意义上是“相关的”。这些对象对应于称为顶点的数学抽象（也</description>
     </item>
     
     <item>

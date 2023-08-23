@@ -1,0 +1,772 @@
+<!DOCTYPE html>
+<html lang="en" dir="auto">
+
+<head><meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="robots" content="index, follow">
+<title>使用Cpp实现数据结构-1（链表） | hrkr&#39;s Blog</title>
+<meta name="keywords" content="">
+<meta name="description" content="资源 （主）图解数据结构，使用C&#43;&#43; 吴灿明 （源代码来自这里） 使用软件&quot;算法动画图解&quot; 我的第一本算法书（书中彩色配图来自上面那个软件） 算法简单介绍 算法加数据结构构成可执行程序。 算法的五个条件，输入，输出，有效，明确，有穷 链表 链表主要用于两个目的：一是建立不定长度的">
+<meta name="author" content="hrkr">
+<link rel="canonical" href="https://tassel234.github.io/posts/note/%E4%BD%BF%E7%94%A8cpp%E5%AE%9E%E7%8E%B0%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84-1%E9%93%BE%E8%A1%A8/">
+<link crossorigin="anonymous" href="/assets/css/stylesheet.css" rel="preload stylesheet" as="style">
+<script defer crossorigin="anonymous" src="/assets/js/highlight.js" onload="hljs.initHighlightingOnLoad();"></script>
+<link rel="icon" href="https://tassel234.github.io/img/">
+<link rel="icon" type="image/png" sizes="16x16" href="https://tassel234.github.io/img/">
+<link rel="icon" type="image/png" sizes="32x32" href="https://tassel234.github.io/img/">
+<link rel="apple-touch-icon" href="https://tassel234.github.io/img/Q.jpg">
+<link rel="mask-icon" href="https://tassel234.github.io/img/Q.jpg">
+<meta name="theme-color" content="#2e2e33">
+<meta name="msapplication-TileColor" content="#2e2e33">
+<noscript>
+    <style>
+        #theme-toggle,
+        .top-link {
+            display: none;
+        }
+
+    </style>
+    <style>
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --theme: rgb(29, 30, 32);
+                --entry: rgb(46, 46, 51);
+                --primary: rgb(218, 218, 219);
+                --secondary: rgb(155, 156, 157);
+                --tertiary: rgb(65, 66, 68);
+                --content: rgb(196, 196, 197);
+                --hljs-bg: rgb(46, 46, 51);
+                --code-bg: rgb(55, 56, 62);
+                --border: rgb(51, 51, 51);
+            }
+
+            .list {
+                background: var(--theme);
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-track {
+                background: 0 0;
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-thumb {
+                border-color: var(--theme);
+            }
+        }
+
+    </style>
+</noscript><meta property="og:title" content="使用Cpp实现数据结构-1（链表）" />
+<meta property="og:description" content="资源 （主）图解数据结构，使用C&#43;&#43; 吴灿明 （源代码来自这里） 使用软件&quot;算法动画图解&quot; 我的第一本算法书（书中彩色配图来自上面那个软件） 算法简单介绍 算法加数据结构构成可执行程序。 算法的五个条件，输入，输出，有效，明确，有穷 链表 链表主要用于两个目的：一是建立不定长度的" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://tassel234.github.io/posts/note/%E4%BD%BF%E7%94%A8cpp%E5%AE%9E%E7%8E%B0%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84-1%E9%93%BE%E8%A1%A8/" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2023-08-23T23:28:48+08:00" />
+<meta property="article:modified_time" content="2023-08-23T23:28:48+08:00" />
+
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="使用Cpp实现数据结构-1（链表）"/>
+<meta name="twitter:description" content="资源 （主）图解数据结构，使用C&#43;&#43; 吴灿明 （源代码来自这里） 使用软件&quot;算法动画图解&quot; 我的第一本算法书（书中彩色配图来自上面那个软件） 算法简单介绍 算法加数据结构构成可执行程序。 算法的五个条件，输入，输出，有效，明确，有穷 链表 链表主要用于两个目的：一是建立不定长度的"/>
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position":  1 ,
+      "name": "Posts",
+      "item": "https://tassel234.github.io/posts/"
+    }, 
+    {
+      "@type": "ListItem",
+      "position":  2 ,
+      "name": "学习记录\u0026笔记",
+      "item": "https://tassel234.github.io/posts/note/"
+    }, 
+    {
+      "@type": "ListItem",
+      "position":  3 ,
+      "name": "使用Cpp实现数据结构-1（链表）",
+      "item": "https://tassel234.github.io/posts/note/%E4%BD%BF%E7%94%A8cpp%E5%AE%9E%E7%8E%B0%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84-1%E9%93%BE%E8%A1%A8/"
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "使用Cpp实现数据结构-1（链表）",
+  "name": "使用Cpp实现数据结构-1（链表）",
+  "description": "资源 （主）图解数据结构，使用C++ 吴灿明 （源代码来自这里） 使用软件\u0026quot;算法动画图解\u0026quot; 我的第一本算法书（书中彩色配图来自上面那个软件） 算法简单介绍 算法加数据结构构成可执行程序。 算法的五个条件，输入，输出，有效，明确，有穷 链表 链表主要用于两个目的：一是建立不定长度的",
+  "keywords": [
+    
+  ],
+  "articleBody": "资源 （主）图解数据结构，使用C++ 吴灿明 （源代码来自这里）\n使用软件\"算法动画图解\"\n我的第一本算法书（书中彩色配图来自上面那个软件）\n算法简单介绍 算法加数据结构构成可执行程序。\n算法的五个条件，输入，输出，有效，明确，有穷\n链表 链表主要用于两个目的：一是建立不定长度的数组。二是链表可以 在不重新安排整个存储结构的情况下，方便且迅速地插入和删除数 据元素。\n动态分配内存 3.1.1 C++的动态分配变量\n数据类型* 指针名称 = new 数据类型 int* p = new int delete p; 可以拓展到结构体或类\n#include  #include  using namespace std; int main() { int *intptr = new int(50); //声明一指向整数的指针,在该内存中存入整数值50 float *floatptr = new float; //声明一指向浮点数的指针,但未指定内存中存储的数据值 cout 3.1.2 动态分配数组\n#include  #include  using namespace std; int main(){ int no,count=0, Total=0; // 定义整数变量 count 与 Total coutno; int *ptr=new int[no]; // 动态分配数组为n个元素 cout ptr[count]; // 采用数组下标来输入数组元素 } for (count=0; count 单向链表 在C++网课学习期间已经对该部分内容有部分了解，和网课不同的是本书的程序不是由结构体，而是由类写的。\n接下来的笔记主要以程序为主，笔记以标注//形式写出。\n3.2.1 单向链表的创建与遍历\n#include  using namespace std; class list { public: int num,score; char name[10]; class list *next; }; typedef class list node;//删除class也可以，有class是偏c语言的写法 typedef node *link; int main() { link newnode,ptr,delptr; //声明三个链表结构的指针 coutdelptr-num; coutdelptr-name; coutdelptr-score; ptr=delptr; //保留链表头指针，以ptr为指向当前节点的指针 for (int i=1;inewnode-num; coutnewnode-name; coutnewnode-score; newnode-next=NULL; ptr-next=newnode; //把新节点加在链表后面 ptr=ptr-next; //让ptr保持在链表的最后面 } coutnumnamescorenext; //ptr按序往后遍历整个链表 delete delptr; //释放内存空间 } } 3.2.2 单向链表中新节点的插入\n方法同网课\n3.2.3 单向链表中节点的删除\ny=ptr-next; ptr-next=y-next; delete y; 也可以采用网课讲的方法。\n3.2.4 单向链表的反转 （指全部数据）\n/* [示范]:将学生成绩按学号反转打印出来 */ #include  #include  #include  #include  using namespace std; class list { public: int num,score; char name[10]; class list *next; }; typedef class list node; typedef node *link; int main() { link ptr,last,before; int i,j,findword=0,data[12][2]; char namedata[12][10]={{\"Allen\"},{\"Mako\"},{\"Lean\"}, {\"Melissa\"},{\"Angel\"},{\"Sabrina\"},{\"Joyce\"}, {\"Jasica\"},{\"Hanson\"},{\"Amy\"},{\"Bob\"},{\"Jack\"}}; srand((unsigned)time(NULL)); for (i=0;inum=data[0][0]; for (j=0;jname[j]=namedata[0][j]; head-score=data[0][1]; head-next=NULL; ptr=head; for(i=1;inum=data[i][0]; for (j=0;jname[j]=namedata[i][j]; newnode-score=data[i][1]; newnode-next=NULL; ptr-next=newnode; ptr=ptr-next; } ptr=head; i=0; coutnumnamescore\"; i++; if(i=3) //三个元素为一行 { coutnext; } ptr=head; before=NULL; coutnext; before-next=last; } ptr=before; while(ptr!=NULL) { coutnumnamescore\"; i++; if(i=3) { coutnext; } } 3.2.5 多项式链表表示法\n/* [示范]:多项式相加 */ #include  using namespace std; class list //声明链表结构 { public : int coef,exp; class list *next; }; typedef class list node; typedef node *link; link creat_link(int data[4]); void print_link(link head);//函数定义 link sum_link(link a,link b); int main() { link a,b,c; int data1[4]={3,0,4,2}; //多项式A的系数 int data2[4]={6,8,6,9}; //多项式B的系数 coutcoef=data[i]; newnode-exp=3-i; newnode-next=NULL; head=newnode; ptr=head; } else if(data[i]!=0) { newnode-coef=data[i]; newnode-exp=3-i; newnode-next=NULL; ptr-next=newnode; ptr=newnode; } } return head; } void print_link(link head) //打印多项式子程序 { while(head!=NULL) { if(head-exp==1 \u0026\u0026 head-coef!=0)\t//X^1时不显示指数 coutcoefexp!=0 \u0026\u0026 head-coef!=0) coutcoefexpcoef!=0) //X^0时不显示变量 coutcoef; head=head-next; } coutexp==b-exp)\t//指数相等，系数相加 { sum[i]=a-coef+b-coef; a=a-next; b=b-next; i++; } else if(b-exp  a-exp)\t//B指数较大，指定系数给C { sum[i]=b-coef; b=b-next; i++; } else if(a-exp  b-exp)\t//A指数较大，指定系数给C { sum[i]=a-coef; a=a-next; i++; } } } return creat_link(sum);\t//建立相加结果的链表C } 环形链表 单链表如果头指针丢失，整个链表就会丢失。\n对单向链表进行了改进，把尾节点本该空着的指针改为指向头节点。这样每一个节点都可以作为头指针。\n环形链表通常应用于内存工作区和IO缓冲区。\n双向链表 把指针增加为2个，一个指向前方，一个指向后方，增加链表的结实长度，让链表不会因为某指针，链接的断裂而失去数据。同时也可以反方向遍历。\n",
+  "wordCount" : "2332",
+  "inLanguage": "en",
+  "datePublished": "2023-08-23T23:28:48+08:00",
+  "dateModified": "2023-08-23T23:28:48+08:00",
+  "author":{
+    "@type": "Person",
+    "name": "hrkr"
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://tassel234.github.io/posts/note/%E4%BD%BF%E7%94%A8cpp%E5%AE%9E%E7%8E%B0%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84-1%E9%93%BE%E8%A1%A8/"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "hrkr's Blog",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://tassel234.github.io/img/"
+    }
+  }
+}
+</script>
+</head>
+
+<body class="" id="top">
+<script>
+    if (localStorage.getItem("pref-theme") === "dark") {
+        document.body.classList.add('dark');
+    } else if (localStorage.getItem("pref-theme") === "light") {
+        document.body.classList.remove('dark')
+    } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        document.body.classList.add('dark');
+    }
+
+</script>
+
+<header class="header">
+    <nav class="nav">
+        <div class="logo">
+            <a href="https://tassel234.github.io/" accesskey="h" title="hrkr&#39;s Blog (Alt + H)">
+                <img src="https://tassel234.github.io/img/Q.jpg" alt="" aria-label="logo"
+                    height="35">hrkr&#39;s Blog</a>
+            <div class="logo-switches">
+                <button id="theme-toggle" accesskey="t" title="(Alt + T)">
+                    <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                    <svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                </button>
+            </div>
+        </div>
+        <ul id="menu">
+            <li>
+                <a href="https://tassel234.github.io/search" title="🔍 搜索 (Alt &#43; /)" accesskey=/>
+                    <span>🔍 搜索</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://tassel234.github.io/" title="🏠 主页">
+                    <span>🏠 主页</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://tassel234.github.io/posts" title="📚 文章">
+                    <span>📚 文章</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://tassel234.github.io/tags" title="🧩 标签">
+                    <span>🧩 标签</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://tassel234.github.io/archives/" title="⏱️ 时间轴">
+                    <span>⏱️ 时间轴</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://tassel234.github.io/about" title="🙋🏻‍♂️ 关于">
+                    <span>🙋🏻‍♂️ 关于</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://tassel234.github.io/links" title="🤝 友链">
+                    <span>🤝 友链</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+</header>
+<main class="main">
+
+<article class="post-single">
+  <header class="post-header">
+    <div class="breadcrumbs"><a href="https://tassel234.github.io/">Home</a>&nbsp;»&nbsp;<a href="https://tassel234.github.io/posts/">Posts</a>&nbsp;»&nbsp;<a href="https://tassel234.github.io/posts/note/">学习记录&amp;笔记</a></div>
+    <h1 class="post-title">
+      使用Cpp实现数据结构-1（链表）
+    </h1>
+    <div class="post-meta"><span title='2023-08-23 23:28:48 +0800 CST'>2023-08-23</span>&nbsp;·&nbsp;5 min&nbsp;·&nbsp;hrkr
+
+</div>
+  </header> <div class="toc">
+    <details  open>
+        <summary accesskey="c" title="(Alt + C)">
+            <span class="details">Table of Contents</span>
+        </summary>
+
+        <div class="inner"><ul>
+                <li>
+                    <a href="#%e8%b5%84%e6%ba%90" aria-label="资源">资源</a></li>
+                <li>
+                    <a href="#%e7%ae%97%e6%b3%95%e7%ae%80%e5%8d%95%e4%bb%8b%e7%bb%8d" aria-label="算法简单介绍">算法简单介绍</a></li>
+                <li>
+                    <a href="#%e9%93%be%e8%a1%a8" aria-label="链表">链表</a><ul>
+                        
+                <li>
+                    <a href="#%e5%8a%a8%e6%80%81%e5%88%86%e9%85%8d%e5%86%85%e5%ad%98" aria-label="动态分配内存">动态分配内存</a></li>
+                <li>
+                    <a href="#%e5%8d%95%e5%90%91%e9%93%be%e8%a1%a8" aria-label="单向链表">单向链表</a></li>
+                <li>
+                    <a href="#%e7%8e%af%e5%bd%a2%e9%93%be%e8%a1%a8" aria-label="环形链表">环形链表</a></li>
+                <li>
+                    <a href="#%e5%8f%8c%e5%90%91%e9%93%be%e8%a1%a8" aria-label="双向链表">双向链表</a>
+                </li>
+            </ul>
+            </li>
+            </ul>
+        </div>
+    </details>
+</div>
+
+  <div class="post-content"><h2 id="资源">资源<a hidden class="anchor" aria-hidden="true" href="#资源">#</a></h2>
+<p>（主）图解数据结构，使用C++ 吴灿明 （源代码来自这里）</p>
+<p>使用软件&quot;算法动画图解&quot;</p>
+<p>我的第一本算法书（书中彩色配图来自上面那个软件）</p>
+<h2 id="算法简单介绍">算法简单介绍<a hidden class="anchor" aria-hidden="true" href="#算法简单介绍">#</a></h2>
+<p>算法加数据结构构成可执行程序。</p>
+<p>算法的五个条件，输入，输出，有效，明确，有穷</p>
+<h2 id="链表">链表<a hidden class="anchor" aria-hidden="true" href="#链表">#</a></h2>
+<p>链表主要用于两个目的：一是建立不定长度的数组。二是链表可以
+在不重新安排整个存储结构的情况下，方便且迅速地插入和删除数
+据元素。</p>
+<h3 id="动态分配内存">动态分配内存<a hidden class="anchor" aria-hidden="true" href="#动态分配内存">#</a></h3>
+<p>3.1.1  C++的动态分配变量</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">数据类型* 指针名称 = new 数据类型
+int* p = new int
+delete p;
+</code></pre></div><p>可以拓展到结构体或类</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">#include &lt;iostream&gt; 
+#include &lt;cstdlib&gt;  
+using namespace std;
+                                        
+int main()
+{
+    int *intptr = new int(50);
+    //声明一指向整数的指针,在该内存中存入整数值50
+    float *floatptr = new float;
+    //声明一指向浮点数的指针,但未指定内存中存储的数据值
+    cout &lt;&lt; &#34;intptr 指向的数据值：&#34; &lt;&lt; *intptr &lt;&lt; &#34;\n\n&#34;;
+    *floatptr = 0.5;
+    cout &lt;&lt; &#34;floatptr 指向的数据值：&#34; &lt;&lt; *floatptr &lt;&lt; &#34;\n\n&#34;;
+
+    delete intptr;
+    delete floatptr;
+  
+    return 0;
+}
+</code></pre></div><p>3.1.2  动态分配数组</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">#include &lt;iostream&gt;        
+#include &lt;cstdlib&gt; 
+
+using namespace std;
+
+int main(){
+    int no,count=0, Total=0;   	// 定义整数变量 count 与 Total
+    cout&lt;&lt;&#34;要输入计算的个数为:&#34;;
+    cin&gt;&gt;no; 
+    int *ptr=new int[no]; 		// 动态分配数组为n个元素 
+    cout&lt;&lt;endl;	
+    for (count=0; count &lt; no; count++)	 
+    {	 cout &lt;&lt; &#34;输入ptr[&#34; &lt;&lt; count &lt;&lt; &#34;]:&#34;;
+   		 cin &gt;&gt; ptr[count];    	// 采用数组下标来输入数组元素
+    }
+    for (count=0; count &lt; no; count++)
+         Total+=*(ptr+count);  	// 采用指针变量运算来存取数组的元素值
+    cout&lt;&lt;&#34;---------------------------------------&#34;&lt;&lt;endl;
+    cout &lt;&lt; no&lt;&lt;&#34;个数的总和=&#34; &lt;&lt; Total;    // 显示结果
+    cout &lt;&lt; endl; 
+    delete [] ptr;           	// 释放分配给 ptr 的内存空间
+    ptr=NULL;	     
+    return 0; 
+}
+</code></pre></div><h3 id="单向链表">单向链表<a hidden class="anchor" aria-hidden="true" href="#单向链表">#</a></h3>
+<p>在C++网课学习期间已经对该部分内容有部分了解，和网课不同的是本书的程序不是由结构体，而是由类写的。</p>
+<p>接下来的笔记主要以程序为主，笔记以标注//形式写出。</p>
+<p>3.2.1  单向链表的创建与遍历</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">#include &lt;iostream&gt;
+using namespace std;
+class list
+{
+	public:
+ 	   int num,score;
+	   char name[10];
+	   class list *next;
+};
+typedef class list node;//删除class也可以，有class是偏c语言的写法 
+typedef node *link;
+int main()
+{  
+	link newnode,ptr,delptr; //声明三个链表结构的指针
+	cout&lt;&lt;&#34;请输入 5 位学生的数据：&#34;&lt;&lt;endl;
+	delptr=new node;   		//delptr暂当链表头指针
+	if (!delptr)
+	{  
+		cout&lt;&lt;&#34;[Error!!内存分配失败!]&#34;&lt;&lt;endl;
+		exit(1);
+	}
+	cout&lt;&lt;&#34;请输入学号：&#34;;
+	cin&gt;&gt;delptr-&gt;num;
+	cout&lt;&lt;&#34;请输入姓名：&#34;;
+	cin&gt;&gt;delptr-&gt;name;
+	cout&lt;&lt;&#34;请输入成绩：&#34;;
+	cin&gt;&gt;delptr-&gt;score;
+	ptr=delptr;   			//保留链表头指针，以ptr为指向当前节点的指针
+	for (int i=1;i&lt;5;i++)
+	{  
+		newnode=new node;  	//创建新节点
+		if(!newnode)
+		{  
+			cout&lt;&lt;&#34;[Error!!内存分配失败!&#34;&lt;&lt;endl;
+			exit(1);
+		}
+		cout&lt;&lt;&#34;请输入学号：&#34;;
+		cin&gt;&gt;newnode-&gt;num;
+		cout&lt;&lt;&#34;请输入姓名：&#34;;
+		cin&gt;&gt;newnode-&gt;name;
+		cout&lt;&lt;&#34;请输入成绩：&#34;;
+		cin&gt;&gt;newnode-&gt;score;
+		newnode-&gt;next=NULL;
+		ptr-&gt;next=newnode; 	//把新节点加在链表后面
+		ptr=ptr-&gt;next;     	//让ptr保持在链表的最后面
+	}
+    cout&lt;&lt;&#34;\n  学  生  成  绩&#34;&lt;&lt;endl;
+    cout&lt;&lt;&#34; 学号\t姓名\t成绩\n=====================&#34;&lt;&lt;endl;
+	ptr=delptr;            //让ptr回到链表头
+	while(ptr!=NULL)
+	{  
+		cout&lt;&lt;ptr-&gt;num&lt;&lt;&#34;\t&#34;&lt;&lt;ptr-&gt;name&lt;&lt;&#34;\t&#34;&lt;&lt;ptr-&gt;score&lt;&lt;endl;
+	    delptr=ptr;
+		ptr=ptr-&gt;next;     //ptr按序往后遍历整个链表
+        delete delptr;     //释放内存空间
+	}
+}
+</code></pre></div><p>3.2.2  单向链表中新节点的插入</p>
+<p>方法同网课</p>
+<p>3.2.3  单向链表中节点的删除</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">y=ptr-&gt;next;
+ptr-&gt;next=y-&gt;next;
+delete y;
+</code></pre></div><p>也可以采用网课讲的方法。</p>
+<p>3.2.4  单向链表的反转 （指全部数据）</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">/*
+
+[示范]:将学生成绩按学号反转打印出来
+*/
+#include &lt;iostream&gt;
+#include &lt;iomanip&gt;
+#include &lt;ctime&gt;
+#include &lt;cstdlib&gt;
+using namespace std;
+class list
+{
+    public:
+        int num,score;
+        char name[10];
+        class list *next;
+};
+typedef class list node;
+typedef node *link;
+int main()
+{
+    link ptr,last,before;
+    int i,j,findword=0,data[12][2];
+    char namedata[12][10]={{&#34;Allen&#34;},{&#34;Mako&#34;},{&#34;Lean&#34;},
+                           {&#34;Melissa&#34;},{&#34;Angel&#34;},{&#34;Sabrina&#34;},{&#34;Joyce&#34;},
+                           {&#34;Jasica&#34;},{&#34;Hanson&#34;},{&#34;Amy&#34;},{&#34;Bob&#34;},{&#34;Jack&#34;}};
+    srand((unsigned)time(NULL));
+    for (i=0;i&lt;12;i++)
+    {  
+        data[i][0]=i+1;
+        data[i][1]=rand()%50+51;//随机给成绩 
+    }
+    link head=new node;	//建立链表头指针
+    if(!head)
+    {  
+        cout&lt;&lt;&#34;Error!! 内存分配失败!!&#34;&lt;&lt;endl;
+        exit(1);
+    }
+    head-&gt;num=data[0][0];
+    for (j=0;j&lt;10;j++)
+        head-&gt;name[j]=namedata[0][j];
+    head-&gt;score=data[0][1];
+    head-&gt;next=NULL;
+    ptr=head;
+    for(i=1;i&lt;12;i++) //建立链表
+    {  
+        link newnode=new node;
+        newnode-&gt;num=data[i][0];
+        for (j=0;j&lt;10;j++)
+            newnode-&gt;name[j]=namedata[i][j];
+        newnode-&gt;score=data[i][1];
+        newnode-&gt;next=NULL;
+        ptr-&gt;next=newnode;
+        ptr=ptr-&gt;next;
+    }
+    ptr=head;
+    i=0;
+    cout&lt;&lt;&#34;原始链表数据：&#34;&lt;&lt;endl;               
+    while (ptr!=NULL)
+    {   //打印链表数据
+        cout&lt;&lt;&#34;[&#34;&lt;&lt;setw(2)&lt;&lt;ptr-&gt;num&lt;&lt;setw(8)
+        &lt;&lt;ptr-&gt;name&lt;&lt;setw(3)&lt;&lt;ptr-&gt;score&lt;&lt;&#34;] -&gt; &#34;;
+        i++;
+        if(i&gt;=3) 	//三个元素为一行
+        {
+            cout&lt;&lt;endl;
+            i=0;
+        }
+        ptr=ptr-&gt;next;
+    }
+    ptr=head;
+    before=NULL;
+    cout&lt;&lt;&#34;\n反转后链表数据：&#34;&lt;&lt;endl;
+    while(ptr!=NULL) //链表反转
+    {  
+        last=before;
+        before=ptr;
+        ptr=ptr-&gt;next;
+        before-&gt;next=last;
+    }
+    ptr=before;
+    while(ptr!=NULL)
+    {
+        cout&lt;&lt;&#34;[&#34;&lt;&lt;setw(2)&lt;&lt;ptr-&gt;num&lt;&lt;setw(8)
+        &lt;&lt;ptr-&gt;name&lt;&lt;setw(3)&lt;&lt;ptr-&gt;score&lt;&lt;&#34;] -&gt; &#34;;
+        i++;
+        if(i&gt;=3)
+        {
+            cout&lt;&lt;endl;
+            i=0;
+        }
+        ptr=ptr-&gt;next;
+    }
+}
+</code></pre></div><p>3.2.5  多项式链表表示法</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">/*
+
+[示范]:多项式相加
+*/
+#include &lt;iostream&gt;
+using namespace std;
+class list //声明链表结构
+{  
+	public :
+	    int coef,exp;
+	    class list *next;
+};
+typedef class list node;
+typedef node *link;
+link creat_link(int data[4]);
+void print_link(link head);//函数定义
+link sum_link(link a,link b);
+int main()
+{  
+	link a,b,c;
+	int data1[4]={3,0,4,2}; //多项式A的系数
+	int data2[4]={6,8,6,9}; //多项式B的系数
+	cout&lt;&lt;&#34;原始多项式：&#34;&lt;&lt;endl&lt;&lt;&#34;A=&#34;;
+	a=creat_link(data1);    //建立多项式A
+	b=creat_link(data2);    //建立多项式B
+	print_link(a);          //打印多项式A
+	cout&lt;&lt;&#34;B=&#34;;
+	print_link(b);          //打印多项式B
+	cout&lt;&lt;&#34;多项式相加的结果：\nC=&#34;;
+	c=sum_link(a,b);        //C为A、B多项式相加的结果
+	print_link(c);          //打印多项式C
+}
+link creat_link(int data[4])//建立多项式子程序
+{
+	link head,newnode,ptr;
+	for(int i=0;i&lt;4;i++)
+	{  
+		newnode = new node;
+		if(!newnode)
+		{  
+			cout&lt;&lt;&#34;Error!! 内存分配失败!!&#34;&lt;&lt;endl;
+			exit(1);
+		}
+		if(i==0)
+		{  
+			newnode-&gt;coef=data[i];
+			newnode-&gt;exp=3-i;
+			newnode-&gt;next=NULL;
+			head=newnode;
+			ptr=head;
+		}
+		else if(data[i]!=0)
+		{  
+			newnode-&gt;coef=data[i];
+			newnode-&gt;exp=3-i;
+			newnode-&gt;next=NULL;
+			ptr-&gt;next=newnode;
+			ptr=newnode;
+		}
+	}
+	return head;
+}
+void print_link(link head) //打印多项式子程序
+{  
+	while(head!=NULL) 
+	{  
+		if(head-&gt;exp==1 &amp;&amp; head-&gt;coef!=0)	//X^1时不显示指数
+			cout&lt;&lt;head-&gt;coef&lt;&lt;&#34;X + &#34;;
+		else if(head-&gt;exp!=0 &amp;&amp; head-&gt;coef!=0)
+			cout&lt;&lt;head-&gt;coef&lt;&lt;&#34;X^&#34;&lt;&lt;head-&gt;exp&lt;&lt;&#34; + &#34;;
+		else if(head-&gt;coef!=0)           	//X^0时不显示变量
+			cout&lt;&lt;head-&gt;coef;
+		head=head-&gt;next;
+	}
+	cout&lt;&lt;endl;
+}
+link sum_link(link a,link b) //多项式相加子程序
+{  
+	int sum[4],i=0;
+	link ptr;
+	ptr=b;
+	while(a!=NULL) //判断多项式1
+	{  
+		b=ptr; 	//重复比较A和B的指数
+		while(b!=NULL)
+		{  
+			if(a-&gt;exp==b-&gt;exp)	//指数相等，系数相加
+			{  
+				sum[i]=a-&gt;coef+b-&gt;coef;
+				a=a-&gt;next;
+				b=b-&gt;next;
+				i++;
+			}
+			else if(b-&gt;exp &gt; a-&gt;exp)	//B指数较大，指定系数给C
+			{  
+				sum[i]=b-&gt;coef;
+				b=b-&gt;next;
+				i++;
+			}
+			else if(a-&gt;exp &gt; b-&gt;exp)	//A指数较大，指定系数给C
+			{  
+				sum[i]=a-&gt;coef;
+				a=a-&gt;next;
+				i++;
+			}
+		}
+	}
+	return creat_link(sum);	//建立相加结果的链表C
+}
+</code></pre></div><h3 id="环形链表">环形链表<a hidden class="anchor" aria-hidden="true" href="#环形链表">#</a></h3>
+<p>单链表如果头指针丢失，整个链表就会丢失。</p>
+<p>对单向链表进行了改进，把尾节点本该空着的指针改为指向头节点。这样每一个节点都可以作为头指针。</p>
+<p>环形链表通常应用于内存工作区和IO缓冲区。</p>
+<h3 id="双向链表">双向链表<a hidden class="anchor" aria-hidden="true" href="#双向链表">#</a></h3>
+<p>把指针增加为2个，一个指向前方，一个指向后方，增加链表的结实长度，让链表不会因为某指针，链接的断裂而失去数据。同时也可以反方向遍历。</p>
+
+
+  </div>
+
+  <footer class="post-footer">
+    <ul class="post-tags">
+    </ul>
+<nav class="paginav">
+  <a class="next" href="https://tassel234.github.io/posts/note/c&#43;&#43;%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0-1%E7%B1%BB%E5%92%8C%E5%AF%B9%E8%B1%A1-1/">
+    <span class="title">Next »</span>
+    <br>
+    <span>C&#43;&#43;学习笔记-1（类和对象-1）</span>
+  </a>
+</nav>
+
+
+<div class="share-buttons">
+    <a target="_blank" rel="noopener noreferrer" aria-label="share 使用Cpp实现数据结构-1（链表） on twitter"
+        href="https://twitter.com/intent/tweet/?text=%e4%bd%bf%e7%94%a8Cpp%e5%ae%9e%e7%8e%b0%e6%95%b0%e6%8d%ae%e7%bb%93%e6%9e%84-1%ef%bc%88%e9%93%be%e8%a1%a8%ef%bc%89&amp;url=https%3a%2f%2ftassel234.github.io%2fposts%2fnote%2f%25E4%25BD%25BF%25E7%2594%25A8cpp%25E5%25AE%259E%25E7%258E%25B0%25E6%2595%25B0%25E6%258D%25AE%25E7%25BB%2593%25E6%259E%2584-1%25E9%2593%25BE%25E8%25A1%25A8%2f&amp;hashtags=">
+        <svg version="1.1" viewBox="0 0 512 512" xml:space="preserve" height="30px" width="30px" fill="currentColor">
+            <path
+                d="M449.446,0c34.525,0 62.554,28.03 62.554,62.554l0,386.892c0,34.524 -28.03,62.554 -62.554,62.554l-386.892,0c-34.524,0 -62.554,-28.03 -62.554,-62.554l0,-386.892c0,-34.524 28.029,-62.554 62.554,-62.554l386.892,0Zm-253.927,424.544c135.939,0 210.268,-112.643 210.268,-210.268c0,-3.218 0,-6.437 -0.153,-9.502c14.406,-10.421 26.973,-23.448 36.935,-38.314c-13.18,5.824 -27.433,9.809 -42.452,11.648c15.326,-9.196 26.973,-23.602 32.49,-40.92c-14.252,8.429 -30.038,14.56 -46.896,17.931c-13.487,-14.406 -32.644,-23.295 -53.946,-23.295c-40.767,0 -73.87,33.104 -73.87,73.87c0,5.824 0.613,11.494 1.992,16.858c-61.456,-3.065 -115.862,-32.49 -152.337,-77.241c-6.284,10.881 -9.962,23.601 -9.962,37.088c0,25.594 13.027,48.276 32.95,61.456c-12.107,-0.307 -23.448,-3.678 -33.41,-9.196l0,0.92c0,35.862 25.441,65.594 59.311,72.49c-6.13,1.686 -12.72,2.606 -19.464,2.606c-4.751,0 -9.348,-0.46 -13.946,-1.38c9.349,29.426 36.628,50.728 68.965,51.341c-25.287,19.771 -57.164,31.571 -91.8,31.571c-5.977,0 -11.801,-0.306 -17.625,-1.073c32.337,21.15 71.264,33.41 112.95,33.41Z" />
+        </svg>
+    </a>
+    <a target="_blank" rel="noopener noreferrer" aria-label="share 使用Cpp实现数据结构-1（链表） on linkedin"
+        href="https://www.linkedin.com/shareArticle?mini=true&amp;url=https%3a%2f%2ftassel234.github.io%2fposts%2fnote%2f%25E4%25BD%25BF%25E7%2594%25A8cpp%25E5%25AE%259E%25E7%258E%25B0%25E6%2595%25B0%25E6%258D%25AE%25E7%25BB%2593%25E6%259E%2584-1%25E9%2593%25BE%25E8%25A1%25A8%2f&amp;title=%e4%bd%bf%e7%94%a8Cpp%e5%ae%9e%e7%8e%b0%e6%95%b0%e6%8d%ae%e7%bb%93%e6%9e%84-1%ef%bc%88%e9%93%be%e8%a1%a8%ef%bc%89&amp;summary=%e4%bd%bf%e7%94%a8Cpp%e5%ae%9e%e7%8e%b0%e6%95%b0%e6%8d%ae%e7%bb%93%e6%9e%84-1%ef%bc%88%e9%93%be%e8%a1%a8%ef%bc%89&amp;source=https%3a%2f%2ftassel234.github.io%2fposts%2fnote%2f%25E4%25BD%25BF%25E7%2594%25A8cpp%25E5%25AE%259E%25E7%258E%25B0%25E6%2595%25B0%25E6%258D%25AE%25E7%25BB%2593%25E6%259E%2584-1%25E9%2593%25BE%25E8%25A1%25A8%2f">
+        <svg version="1.1" viewBox="0 0 512 512" xml:space="preserve" height="30px" width="30px" fill="currentColor">
+            <path
+                d="M449.446,0c34.525,0 62.554,28.03 62.554,62.554l0,386.892c0,34.524 -28.03,62.554 -62.554,62.554l-386.892,0c-34.524,0 -62.554,-28.03 -62.554,-62.554l0,-386.892c0,-34.524 28.029,-62.554 62.554,-62.554l386.892,0Zm-288.985,423.278l0,-225.717l-75.04,0l0,225.717l75.04,0Zm270.539,0l0,-129.439c0,-69.333 -37.018,-101.586 -86.381,-101.586c-39.804,0 -57.634,21.891 -67.617,37.266l0,-31.958l-75.021,0c0.995,21.181 0,225.717 0,225.717l75.02,0l0,-126.056c0,-6.748 0.486,-13.492 2.474,-18.315c5.414,-13.475 17.767,-27.434 38.494,-27.434c27.135,0 38.007,20.707 38.007,51.037l0,120.768l75.024,0Zm-307.552,-334.556c-25.674,0 -42.448,16.879 -42.448,39.002c0,21.658 16.264,39.002 41.455,39.002l0.484,0c26.165,0 42.452,-17.344 42.452,-39.002c-0.485,-22.092 -16.241,-38.954 -41.943,-39.002Z" />
+        </svg>
+    </a>
+    <a target="_blank" rel="noopener noreferrer" aria-label="share 使用Cpp实现数据结构-1（链表） on reddit"
+        href="https://reddit.com/submit?url=https%3a%2f%2ftassel234.github.io%2fposts%2fnote%2f%25E4%25BD%25BF%25E7%2594%25A8cpp%25E5%25AE%259E%25E7%258E%25B0%25E6%2595%25B0%25E6%258D%25AE%25E7%25BB%2593%25E6%259E%2584-1%25E9%2593%25BE%25E8%25A1%25A8%2f&title=%e4%bd%bf%e7%94%a8Cpp%e5%ae%9e%e7%8e%b0%e6%95%b0%e6%8d%ae%e7%bb%93%e6%9e%84-1%ef%bc%88%e9%93%be%e8%a1%a8%ef%bc%89">
+        <svg version="1.1" viewBox="0 0 512 512" xml:space="preserve" height="30px" width="30px" fill="currentColor">
+            <path
+                d="M449.446,0c34.525,0 62.554,28.03 62.554,62.554l0,386.892c0,34.524 -28.03,62.554 -62.554,62.554l-386.892,0c-34.524,0 -62.554,-28.03 -62.554,-62.554l0,-386.892c0,-34.524 28.029,-62.554 62.554,-62.554l386.892,0Zm-3.446,265.638c0,-22.964 -18.616,-41.58 -41.58,-41.58c-11.211,0 -21.361,4.457 -28.841,11.666c-28.424,-20.508 -67.586,-33.757 -111.204,-35.278l18.941,-89.121l61.884,13.157c0.756,15.734 13.642,28.29 29.56,28.29c16.407,0 29.706,-13.299 29.706,-29.701c0,-16.403 -13.299,-29.702 -29.706,-29.702c-11.666,0 -21.657,6.792 -26.515,16.578l-69.105,-14.69c-1.922,-0.418 -3.939,-0.042 -5.585,1.036c-1.658,1.073 -2.811,2.761 -3.224,4.686l-21.152,99.438c-44.258,1.228 -84.046,14.494 -112.837,35.232c-7.468,-7.164 -17.589,-11.591 -28.757,-11.591c-22.965,0 -41.585,18.616 -41.585,41.58c0,16.896 10.095,31.41 24.568,37.918c-0.639,4.135 -0.99,8.328 -0.99,12.576c0,63.977 74.469,115.836 166.33,115.836c91.861,0 166.334,-51.859 166.334,-115.836c0,-4.218 -0.347,-8.387 -0.977,-12.493c14.564,-6.47 24.735,-21.034 24.735,-38.001Zm-119.474,108.193c-20.27,20.241 -59.115,21.816 -70.534,21.816c-11.428,0 -50.277,-1.575 -70.522,-21.82c-3.007,-3.008 -3.007,-7.882 0,-10.889c3.003,-2.999 7.882,-3.003 10.885,0c12.777,12.781 40.11,17.317 59.637,17.317c19.522,0 46.86,-4.536 59.657,-17.321c3.016,-2.999 7.886,-2.995 10.885,0.008c3.008,3.011 3.003,7.882 -0.008,10.889Zm-5.23,-48.781c-16.373,0 -29.701,-13.324 -29.701,-29.698c0,-16.381 13.328,-29.714 29.701,-29.714c16.378,0 29.706,13.333 29.706,29.714c0,16.374 -13.328,29.698 -29.706,29.698Zm-160.386,-29.702c0,-16.381 13.328,-29.71 29.714,-29.71c16.369,0 29.689,13.329 29.689,29.71c0,16.373 -13.32,29.693 -29.689,29.693c-16.386,0 -29.714,-13.32 -29.714,-29.693Z" />
+        </svg>
+    </a>
+    <a target="_blank" rel="noopener noreferrer" aria-label="share 使用Cpp实现数据结构-1（链表） on facebook"
+        href="https://facebook.com/sharer/sharer.php?u=https%3a%2f%2ftassel234.github.io%2fposts%2fnote%2f%25E4%25BD%25BF%25E7%2594%25A8cpp%25E5%25AE%259E%25E7%258E%25B0%25E6%2595%25B0%25E6%258D%25AE%25E7%25BB%2593%25E6%259E%2584-1%25E9%2593%25BE%25E8%25A1%25A8%2f">
+        <svg version="1.1" viewBox="0 0 512 512" xml:space="preserve" height="30px" width="30px" fill="currentColor">
+            <path
+                d="M449.446,0c34.525,0 62.554,28.03 62.554,62.554l0,386.892c0,34.524 -28.03,62.554 -62.554,62.554l-106.468,0l0,-192.915l66.6,0l12.672,-82.621l-79.272,0l0,-53.617c0,-22.603 11.073,-44.636 46.58,-44.636l36.042,0l0,-70.34c0,0 -32.71,-5.582 -63.982,-5.582c-65.288,0 -107.96,39.569 -107.96,111.204l0,62.971l-72.573,0l0,82.621l72.573,0l0,192.915l-191.104,0c-34.524,0 -62.554,-28.03 -62.554,-62.554l0,-386.892c0,-34.524 28.029,-62.554 62.554,-62.554l386.892,0Z" />
+        </svg>
+    </a>
+    <a target="_blank" rel="noopener noreferrer" aria-label="share 使用Cpp实现数据结构-1（链表） on whatsapp"
+        href="https://api.whatsapp.com/send?text=%e4%bd%bf%e7%94%a8Cpp%e5%ae%9e%e7%8e%b0%e6%95%b0%e6%8d%ae%e7%bb%93%e6%9e%84-1%ef%bc%88%e9%93%be%e8%a1%a8%ef%bc%89%20-%20https%3a%2f%2ftassel234.github.io%2fposts%2fnote%2f%25E4%25BD%25BF%25E7%2594%25A8cpp%25E5%25AE%259E%25E7%258E%25B0%25E6%2595%25B0%25E6%258D%25AE%25E7%25BB%2593%25E6%259E%2584-1%25E9%2593%25BE%25E8%25A1%25A8%2f">
+        <svg version="1.1" viewBox="0 0 512 512" xml:space="preserve" height="30px" width="30px" fill="currentColor">
+            <path
+                d="M449.446,0c34.525,0 62.554,28.03 62.554,62.554l0,386.892c0,34.524 -28.03,62.554 -62.554,62.554l-386.892,0c-34.524,0 -62.554,-28.03 -62.554,-62.554l0,-386.892c0,-34.524 28.029,-62.554 62.554,-62.554l386.892,0Zm-58.673,127.703c-33.842,-33.881 -78.847,-52.548 -126.798,-52.568c-98.799,0 -179.21,80.405 -179.249,179.234c-0.013,31.593 8.241,62.428 23.927,89.612l-25.429,92.884l95.021,-24.925c26.181,14.28 55.659,21.807 85.658,21.816l0.074,0c98.789,0 179.206,-80.413 179.247,-179.243c0.018,-47.895 -18.61,-92.93 -52.451,-126.81Zm-126.797,275.782l-0.06,0c-26.734,-0.01 -52.954,-7.193 -75.828,-20.767l-5.441,-3.229l-56.386,14.792l15.05,-54.977l-3.542,-5.637c-14.913,-23.72 -22.791,-51.136 -22.779,-79.287c0.033,-82.142 66.867,-148.971 149.046,-148.971c39.793,0.014 77.199,15.531 105.329,43.692c28.128,28.16 43.609,65.592 43.594,105.4c-0.034,82.149 -66.866,148.983 -148.983,148.984Zm81.721,-111.581c-4.479,-2.242 -26.499,-13.075 -30.604,-14.571c-4.105,-1.495 -7.091,-2.241 -10.077,2.241c-2.986,4.483 -11.569,14.572 -14.182,17.562c-2.612,2.988 -5.225,3.364 -9.703,1.12c-4.479,-2.241 -18.91,-6.97 -36.017,-22.23c-13.314,-11.876 -22.304,-26.542 -24.916,-31.026c-2.612,-4.484 -0.279,-6.908 1.963,-9.14c2.016,-2.007 4.48,-5.232 6.719,-7.847c2.24,-2.615 2.986,-4.484 4.479,-7.472c1.493,-2.99 0.747,-5.604 -0.374,-7.846c-1.119,-2.241 -10.077,-24.288 -13.809,-33.256c-3.635,-8.733 -7.327,-7.55 -10.077,-7.688c-2.609,-0.13 -5.598,-0.158 -8.583,-0.158c-2.986,0 -7.839,1.121 -11.944,5.604c-4.105,4.484 -15.675,15.32 -15.675,37.364c0,22.046 16.048,43.342 18.287,46.332c2.24,2.99 31.582,48.227 76.511,67.627c10.685,4.615 19.028,7.371 25.533,9.434c10.728,3.41 20.492,2.929 28.209,1.775c8.605,-1.285 26.499,-10.833 30.231,-21.295c3.732,-10.464 3.732,-19.431 2.612,-21.298c-1.119,-1.869 -4.105,-2.99 -8.583,-5.232Z" />
+        </svg>
+    </a>
+    <a target="_blank" rel="noopener noreferrer" aria-label="share 使用Cpp实现数据结构-1（链表） on telegram"
+        href="https://telegram.me/share/url?text=%e4%bd%bf%e7%94%a8Cpp%e5%ae%9e%e7%8e%b0%e6%95%b0%e6%8d%ae%e7%bb%93%e6%9e%84-1%ef%bc%88%e9%93%be%e8%a1%a8%ef%bc%89&amp;url=https%3a%2f%2ftassel234.github.io%2fposts%2fnote%2f%25E4%25BD%25BF%25E7%2594%25A8cpp%25E5%25AE%259E%25E7%258E%25B0%25E6%2595%25B0%25E6%258D%25AE%25E7%25BB%2593%25E6%259E%2584-1%25E9%2593%25BE%25E8%25A1%25A8%2f">
+        <svg version="1.1" xml:space="preserve" viewBox="2 2 28 28" height="30px" width="30px" fill="currentColor">
+            <path
+                d="M26.49,29.86H5.5a3.37,3.37,0,0,1-2.47-1,3.35,3.35,0,0,1-1-2.47V5.48A3.36,3.36,0,0,1,3,3,3.37,3.37,0,0,1,5.5,2h21A3.38,3.38,0,0,1,29,3a3.36,3.36,0,0,1,1,2.46V26.37a3.35,3.35,0,0,1-1,2.47A3.38,3.38,0,0,1,26.49,29.86Zm-5.38-6.71a.79.79,0,0,0,.85-.66L24.73,9.24a.55.55,0,0,0-.18-.46.62.62,0,0,0-.41-.17q-.08,0-16.53,6.11a.59.59,0,0,0-.41.59.57.57,0,0,0,.43.52l4,1.24,1.61,4.83a.62.62,0,0,0,.63.43.56.56,0,0,0,.4-.17L16.54,20l4.09,3A.9.9,0,0,0,21.11,23.15ZM13.8,20.71l-1.21-4q8.72-5.55,8.78-5.55c.15,0,.23,0,.23.16a.18.18,0,0,1,0,.06s-2.51,2.3-7.52,6.8Z" />
+        </svg>
+    </a>
+</div>
+  </footer>
+</article>
+    </main>
+    
+<footer class="footer">
+    <span>&copy; 2023 <a href="https://tassel234.github.io/">hrkr&#39;s Blog</a></span>
+    <span>
+        Powered by
+        <a href="https://gohugo.io/" rel="noopener noreferrer" target="_blank">Hugo</a> &
+        <a href="https://github.com/adityatelange/hugo-PaperMod/" rel="noopener" target="_blank">PaperMod</a>
+    </span>
+</footer>
+<a href="#top" aria-label="go to top" title="Go to Top (Alt + G)" class="top-link" id="top-link" accesskey="g">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentColor">
+        <path d="M12 6H0l6-6z" />
+    </svg>
+</a>
+
+<script>
+    let menu = document.getElementById('menu')
+    if (menu) {
+        menu.scrollLeft = localStorage.getItem("menu-scroll-position");
+        menu.onscroll = function () {
+            localStorage.setItem("menu-scroll-position", menu.scrollLeft);
+        }
+    }
+
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener("click", function (e) {
+            e.preventDefault();
+            var id = this.getAttribute("href").substr(1);
+            if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView({
+                    behavior: "smooth"
+                });
+            } else {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView();
+            }
+            if (id === "top") {
+                history.replaceState(null, null, " ");
+            } else {
+                history.pushState(null, null, `#${id}`);
+            }
+        });
+    });
+
+</script>
+<script>
+    var mybutton = document.getElementById("top-link");
+    window.onscroll = function () {
+        if (document.body.scrollTop > 800 || document.documentElement.scrollTop > 800) {
+            mybutton.style.visibility = "visible";
+            mybutton.style.opacity = "1";
+        } else {
+            mybutton.style.visibility = "hidden";
+            mybutton.style.opacity = "0";
+        }
+    };
+
+</script>
+<script>
+    document.getElementById("theme-toggle").addEventListener("click", () => {
+        if (document.body.className.includes("dark")) {
+            document.body.classList.remove('dark');
+            localStorage.setItem("pref-theme", 'light');
+        } else {
+            document.body.classList.add('dark');
+            localStorage.setItem("pref-theme", 'dark');
+        }
+    })
+
+</script>
+<script>
+    document.querySelectorAll('pre > code').forEach((codeblock) => {
+        const container = codeblock.parentNode.parentNode;
+
+        const copybutton = document.createElement('button');
+        copybutton.classList.add('copy-code');
+        copybutton.innerHTML = 'copy';
+
+        function copyingDone() {
+            copybutton.innerHTML = 'copied!';
+            setTimeout(() => {
+                copybutton.innerHTML = 'copy';
+            }, 2000);
+        }
+
+        copybutton.addEventListener('click', (cb) => {
+            if ('clipboard' in navigator) {
+                navigator.clipboard.writeText(codeblock.textContent);
+                copyingDone();
+                return;
+            }
+
+            const range = document.createRange();
+            range.selectNodeContents(codeblock);
+            const selection = window.getSelection();
+            selection.removeAllRanges();
+            selection.addRange(range);
+            try {
+                document.execCommand('copy');
+                copyingDone();
+            } catch (e) { };
+            selection.removeRange(range);
+        });
+
+        if (container.classList.contains("highlight")) {
+            container.appendChild(copybutton);
+        } else if (container.parentNode.firstChild == container) {
+            
+        } else if (codeblock.parentNode.parentNode.parentNode.parentNode.parentNode.nodeName == "TABLE") {
+            
+            codeblock.parentNode.parentNode.parentNode.parentNode.parentNode.appendChild(copybutton);
+        } else {
+            
+            codeblock.parentNode.appendChild(copybutton);
+        }
+    });
+</script>
+</body>
+
+</html>
