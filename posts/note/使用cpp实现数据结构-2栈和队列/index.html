@@ -1,0 +1,1366 @@
+<!DOCTYPE html>
+<html lang="en" dir="auto">
+
+<head><meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="robots" content="index, follow">
+<title>使用Cpp实现数据结构-2（栈和队列） | hrkr&#39;s Blog</title>
+<meta name="keywords" content="">
+<meta name="description" content="堆栈简介 基本知识 也可以简写为栈，具有后进先出的特性（LIFO） 与链表和数组一样，栈的数据也是线性排列，但在栈中，添加和删除数据的操作只能在一端进行，访问数据也只能访问到顶端的数据。想要访问中间的数据时，就必须通过出栈操作将目标数据移到栈顶才行。 放入栈的顶端，称为压入PUSH,从顶">
+<meta name="author" content="hrkr">
+<link rel="canonical" href="https://tassel234.github.io/posts/note/%E4%BD%BF%E7%94%A8cpp%E5%AE%9E%E7%8E%B0%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84-2%E6%A0%88%E5%92%8C%E9%98%9F%E5%88%97/">
+<link crossorigin="anonymous" href="/assets/css/stylesheet.css" rel="preload stylesheet" as="style">
+<script defer crossorigin="anonymous" src="/assets/js/highlight.js" onload="hljs.initHighlightingOnLoad();"></script>
+<link rel="icon" href="https://tassel234.github.io/img/">
+<link rel="icon" type="image/png" sizes="16x16" href="https://tassel234.github.io/img/">
+<link rel="icon" type="image/png" sizes="32x32" href="https://tassel234.github.io/img/">
+<link rel="apple-touch-icon" href="https://tassel234.github.io/img/Q.jpg">
+<link rel="mask-icon" href="https://tassel234.github.io/img/Q.jpg">
+<meta name="theme-color" content="#2e2e33">
+<meta name="msapplication-TileColor" content="#2e2e33">
+<noscript>
+    <style>
+        #theme-toggle,
+        .top-link {
+            display: none;
+        }
+
+    </style>
+    <style>
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --theme: rgb(29, 30, 32);
+                --entry: rgb(46, 46, 51);
+                --primary: rgb(218, 218, 219);
+                --secondary: rgb(155, 156, 157);
+                --tertiary: rgb(65, 66, 68);
+                --content: rgb(196, 196, 197);
+                --hljs-bg: rgb(46, 46, 51);
+                --code-bg: rgb(55, 56, 62);
+                --border: rgb(51, 51, 51);
+            }
+
+            .list {
+                background: var(--theme);
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-track {
+                background: 0 0;
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-thumb {
+                border-color: var(--theme);
+            }
+        }
+
+    </style>
+</noscript><meta property="og:title" content="使用Cpp实现数据结构-2（栈和队列）" />
+<meta property="og:description" content="堆栈简介 基本知识 也可以简写为栈，具有后进先出的特性（LIFO） 与链表和数组一样，栈的数据也是线性排列，但在栈中，添加和删除数据的操作只能在一端进行，访问数据也只能访问到顶端的数据。想要访问中间的数据时，就必须通过出栈操作将目标数据移到栈顶才行。 放入栈的顶端，称为压入PUSH,从顶" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://tassel234.github.io/posts/note/%E4%BD%BF%E7%94%A8cpp%E5%AE%9E%E7%8E%B0%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84-2%E6%A0%88%E5%92%8C%E9%98%9F%E5%88%97/" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2023-08-24T23:29:13+08:00" />
+<meta property="article:modified_time" content="2023-08-24T23:29:13+08:00" />
+
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="使用Cpp实现数据结构-2（栈和队列）"/>
+<meta name="twitter:description" content="堆栈简介 基本知识 也可以简写为栈，具有后进先出的特性（LIFO） 与链表和数组一样，栈的数据也是线性排列，但在栈中，添加和删除数据的操作只能在一端进行，访问数据也只能访问到顶端的数据。想要访问中间的数据时，就必须通过出栈操作将目标数据移到栈顶才行。 放入栈的顶端，称为压入PUSH,从顶"/>
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position":  1 ,
+      "name": "Posts",
+      "item": "https://tassel234.github.io/posts/"
+    }, 
+    {
+      "@type": "ListItem",
+      "position":  2 ,
+      "name": "学习记录\u0026笔记",
+      "item": "https://tassel234.github.io/posts/note/"
+    }, 
+    {
+      "@type": "ListItem",
+      "position":  3 ,
+      "name": "使用Cpp实现数据结构-2（栈和队列）",
+      "item": "https://tassel234.github.io/posts/note/%E4%BD%BF%E7%94%A8cpp%E5%AE%9E%E7%8E%B0%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84-2%E6%A0%88%E5%92%8C%E9%98%9F%E5%88%97/"
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "使用Cpp实现数据结构-2（栈和队列）",
+  "name": "使用Cpp实现数据结构-2（栈和队列）",
+  "description": "堆栈简介 基本知识 也可以简写为栈，具有后进先出的特性（LIFO） 与链表和数组一样，栈的数据也是线性排列，但在栈中，添加和删除数据的操作只能在一端进行，访问数据也只能访问到顶端的数据。想要访问中间的数据时，就必须通过出栈操作将目标数据移到栈顶才行。 放入栈的顶端，称为压入PUSH,从顶",
+  "keywords": [
+    
+  ],
+  "articleBody": "堆栈简介 基本知识 也可以简写为栈，具有后进先出的特性（LIFO）\n与链表和数组一样，栈的数据也是线性排列，但在栈中，添加和删除数据的操作只能在一端进行，访问数据也只能访问到顶端的数据。想要访问中间的数据时，就必须通过出栈操作将目标数据移到栈顶才行。\n放入栈的顶端，称为压入PUSH,从顶端取出，称为弹出pop\n栈只能在一端操作，这一点看起来似乎十分不便，但在只需要访问最新数据时，使用它就比较方便了。另外，我们将要在接下来学习深度优先搜索算法，通常会选择最新的数据作为候补顶点。在候补顶点的管理上就可以使用栈。\n代码实现 使用数组实现堆栈 #include  #include  #define MAXSTACK 100\t//定义堆栈的最大容量 using namespace std; int stack[MAXSTACK];\t//声明用于堆栈操作的数组 int top=-1;\t//堆栈的顶端 //判断是否为空堆栈 int isEmpty() { if(top==-1) return 1; else return 0; } //将指定的数据压入堆栈 int push(int data) { if(top=MAXSTACK) { coutvalue; push(value); } cout//发牌程序 #include  #include  #include  #include  using namespace std; void Swap(int*,int*); void push(int statck[],int MAX,int val); int pop(int stack[]); int top=-1; int main(void) { int card[52],stack[52]={0}; int i,j,k=0, ascVal; char suit[4][10]={\"草花\",\"方块\",\"红桃\",\"黑桃\"}; int style; srand((unsigned)time(NULL));//srand函数是C语言中的种子函数,它的功能是生成一个随机数。 //srand(1); 直接使用1来初始化种子。不过为了防止随机数每次重复，常常使用系统时间来初始化， //即使用 time函数来获得系统时间，它的返回值为从 00:00:00 GMT, January 1, 1970 到现在所持续的秒数， //然后将time_t型数据转化为(unsigned)型再传给srand函数，即: srand((unsigned) time(\u0026t)); //还有一个经常用法，不需要定义time_t型t变量,即: srand((unsigned) time(NULL)); //直接传入一个空指针，因为你的程序中往往并不需要经过参数获得的数据。 //若去掉这段语句，会造成接下来的数据一直保持在同一个值 for (i=0;i=0) { style = stack[top]/13;\t//计算扑克牌的花色 switch(style)\t//扑克牌花色对应的图标 { case 0:\t//梅花 ascVal=0; break; case 1:\t//方块 ascVal=1; break; case 2:\t//红心 ascVal=2; break; case 3:\t//黑桃 ascVal=3; break; } cout=MAX-1) cout使用链表实现堆栈 使用链表设计堆栈的好处是链表的大小是可以变动的，不会造成内存空间的浪费 缺点是设计复杂\n#include  #include  #include  using namespace std; class Node\t//声明堆栈链表节点 { public: int data;\t//声明存放堆栈数据的变量 class Node *next;\t//堆栈中用来指向下一个节点的指针 }; typedef class Node Stack_Node;\t//定义堆栈中节点的新类型 typedef Stack_Node *Linked_Stack;\t//定义链表堆栈的新类型 Linked_Stack top=NULL;\t//指向堆栈顶端的指针 //判断是否为空堆栈 int isEmpty() { if(top==NULL) return 1; else return 0; } //将指定的数据压入堆栈 void push(int data) { Linked_Stack new_add_node;\t//新加入节点的指针 new_add_node=new Stack_Node;//分配内存给新节点 new_add_node-data=data;\t//将传入的值赋值给节点的数据变量 new_add_node-next=top;\t//将新节点指向堆栈的顶端 top=new_add_node;\t//新节点成为堆栈的顶端 } //从堆栈弹出数据 int pop() { Linked_Stack ptr;\t//指向堆栈顶端的指针 int temp; if(isEmpty())\t//判断堆栈是否为空,如果是则返回-1 { coutnext;\t//将堆栈顶端的指针指向下一个节点 temp=ptr-data;\t//取出堆栈的数据 free(ptr);\t//将节点占用的内存释放 return temp;\t//将从堆栈取出的数据返回给主程序 } } //主程序 int main(void) { int value; int i; coutvalue; push(value); } cout堆栈类模板的实现 样板的设计概念也被称为泛型编程，通过对模板输入特定的数据类型可以形成对应的函数或类。 C++有stl模板库，但本书并没有使用。\n#include  #include  using namespace std; template // 定义链表中的节点 struct Node { Type data;\t// 记录数据 Node* next;\t// 记录下一笔节点的地址 }; template class LinkedList\t// 链表类型 { private: Node* first;\t// 指到第一个节点的指针 public: LinkedList()\t// 构造函数 { first = NULL; } void addNode(Type data);\t// 加入节点 void display();\t// 显示所有的节点 }; templatevoid LinkedList::addNode(Type data) { Node* newNode = new Node;\t// 新增一个节点 newNode-data = data;\t// 记录数据 newNode-next = first;\t// 指向前一个节点 first = newNode;\t// 指向新的节点 } templatevoid LinkedList::display() { Node* currentNode = first; // 从第一个节点开始显示 while( currentNode != NULL ) { cout data \"; currentNode = currentNode-next; } } int main() { LinkedList dblList;\t// 建立一个存储double类型数据的链表 double num;\t// 记录输入的数据 char ch;\t// 记录用户的选择 do{ cout  num; dblList.addNode( num ); cout  ch; }while( ch != 'n' ); cout #include  #include  using namespace std; // 设置类样版的类型参数Type的默认值为整数int,非类型参数的类型为整数int,默认值为5 template // 声明类样板 class Stack { private: Type st[size];\t// 声明一数组作为堆栈的存储空间 int top;\t// 堆栈数据顶端的索引 public: Stack() { top = -1; } void push(Type data);\t// 将数据压入堆栈 Type pop();\t// 将数据从堆栈中弹出 }; template void Stack:: push ( Type data ) { st[ ++top ] = data; } template Type Stack:: pop() { return st[ top-- ]; } int main() { Stack stk_1;\t// 声明一个堆栈对象, 并使用其默认值 Stackstk_2;\t// 声明堆栈对象, 其类型为字符串, 大小为4 stk_1.push( 11 ); stk_1.push( 22 ); stk_1.push( 33 ); cout 递归法详解 斐波那契数列 /* [示范]：斐波那契数列的递归程序 */ #include using namespace std; int fib(int);\t//fib()函数的原型声明 int main() { int i,n; coutn; for(i=0;i汉诺塔问题 /* [示范]:利用汉诺塔函数求出不同圆盘数时圆盘的移动步骤 */ #include  using namespace std; void hanoi(int, int, int, int); // 函数原型 int main(void) { int j; coutj; hanoi(j,1, 2, 3); return 0; } void hanoi(int n, int p1, int p2, int p3) { if (n==1) cout由一些数学公式可得汉诺塔的执行步骤最小为$2^{n} -1$,n代表圆盘的个数\n动态规划法（DPA） 动态规划法（Dynamic Programming Aigorithm）是一种优化算法策略，主要应用于求解具有重叠子问题和最优子结构性质的问题。动态规划法的核心思想是将问题分解为更小的子问题(和分治法类似)，并将子问题的解存储在一个表中（分治法没有的），从而避免了对相同子问题的重复计算。\n动态规划法的基本步骤如下：\n 定义子问题：将原问题分解为若干个子问题。 定义状态：用数学表示子问题的解。 定义状态转移方程：描述子问题之间的关系，如何通过子问题的解计算原问题的解。 初始化边界条件：确定状态转移方程的初始值。 自底向上或自顶向下计算：根据状态转移方程逐步计算子问题的解，最终得到原问题的解。  动态规划法可以应用于各种问题，如最短路径问题、背包问题、字符串匹配问题等。动态规划法的一个重要应用场景是求解最优化问题，例如最大（最小）问题。通过动态规划，可以在多项式时间内求解这些问题，而其他方法（如穷举法）可能需要指数级时间。\n例如使用递归法进行斐波那契数列的Fib(9)计算时，需要反复计算Fib(4),Fib(5)等值，浪费了时间，使用动态规划算法将计算过的结果储存起来，在后续的计算中只需要判断数值的存在与否，若存在就直接调用。\nDijkstra 算法 Dijkstra算法,中文名音译作迪杰斯特拉算法或戴克斯特拉算法。\n回溯法—老鼠走迷宫 回溯法（Backtracking）是一种用于搜索解空间的算法，通常在组合问题、优化问题和约束满足问题等领域中使用。回溯法通过对解空间的节点进行深度优先搜索，尝试找到问题的解。当搜索到某个节点时，如果该节点不能继续搜索下去，就回溯到该节点的父节点并尝试其他分支。回溯法的基本思想是：先广搜索，后深入搜索。\n以下是回溯法的一般步骤：\n 定义问题的解空间：首先需要明确问题的解空间，即所有可能的解的集合。 确定解空间的组织结构：将解空间组织成树形结构，每个节点表示一个部分解。 设计回溯算法的递归函数：递归函数需要完成以下功能： a. 判断当前节点是否包含问题的解，如果是，则保存解并返回。 b. 如果当前节点不能包含问题的解，则回溯到父节点并尝试其他分支。  回溯法是枚举法的一种。\n老鼠走迷宫就是一种回溯法的应用。老鼠走迷宫问题的描述是:假设把一只老鼠放在一个没有盖子的大迷宫盒的入口处，盒中有许多墙，使得大部分路径都被挡住而无法前进。老鼠可以采用尝试错误的方法找到出口。不过，这只老鼠必须在走错路时就退回来并把走过的路记下来，避免下次走重复的路，就这样直到找到出口为止。简单来说，老鼠行进时必须遵守以下3 个原则:\n(1)一次只能走一格。\n(2) 遇到墙无法往前走时，则退回一步找找看是否有其他的路可以走。\n(3)走过的路不会再走第二次。\n人们对这个问题感兴趣的原因是它可以提供一种典型堆栈应用的思考方法。\n/*题目：设计一个 C++程序，使用链表堆栈来找出老鼠走迷宫的路线，1 表示该处有墙无法通过， 0表示[i][i]处无墙可通行，并且将走过的位置对应的数组元素内容标记为 2。*/ #include  #define EAST MAZE[x][y+1] //定义东方的相对位置 #define WEST MAZE[x][y-1] //定义西方的相对位置 #define SOUTH MAZE[x+1][y]\t//定义南方的相对位置 #define NORTH MAZE[x-1][y]\t//定义北方的相对位置 using namespace std; const int ExitX = 8; //定义出口的X坐标在第8列 const int ExitY = 10; //定义出口的Y坐标在第10行 struct list { int x,y; struct list* next; }; typedef struct list node; typedef node* link; int MAZE[10][12] = {1,1,1,1,1,1,1,1,1,1,1,1, //声明迷宫数组 1,0,0,0,1,1,1,1,1,1,1,1, 1,1,1,0,1,1,0,0,0,0,1,1, 1,1,1,0,1,1,0,1,1,0,1,1, 1,1,1,0,0,0,0,1,1,0,1,1,//1是墙，0是可走的路 1,1,1,0,1,1,0,1,1,0,1,1, 1,1,1,0,1,1,0,1,1,0,1,1, 1,1,1,1,1,1,0,1,1,0,1,1, 1,1,0,0,0,0,0,0,1,0,0,1,//最右下角的0代表出口 1,1,1,1,1,1,1,1,1,1,1,1}; link push(link stack,int x,int y); link pop(link stack,int* x,int* y); int chkExit(int ,int ,int,int); int main(void) { int i,j; link path = NULL; int x=1;\t//入口的X坐标 int y=1; //入口的Y坐标 coutx=x; newnode-y=y; newnode-next=stack; stack=newnode; return stack; } link pop(link stack,int* x,int* y) { link top; if(stack!=NULL) { top=stack; stack=stack-next; *x=top-x; *y=top-y; delete top; return stack; } else *x=-1; return stack; } int chkExit(int x,int y,int ex,int ey) { if(x==ex\u0026\u0026y==ey) { if(NORTH==1||SOUTH==1||WEST==1||EAST==2) return 1; if(NORTH==1||SOUTH==1||WEST==2||EAST==1) return 1; if(NORTH==1||SOUTH==2||WEST==1||EAST==1) return 1; if(NORTH==2||SOUTH==1||WEST==1||EAST==1) return 1; } return 0; } 八皇后问题 八皇后问题也是一种常见的堆栈应用实例。在国际象棋中的皇后可以对棋盘中的其他棋子直吃、横吃和对角斜吃(左斜吃或右斜吃都可)。现在要放入多个皇后到棋盘上，后放入的新皇后，放入前必须考虑所放位置的直线方向、横线方向或对角线方向是否已被放置了旧皇后，否则就会被先放入的旧皇后吃掉。这个问题难倒了高斯，但如果使用计算机思维和计算机的算力可以比较轻松的求得结果。\n#include  #include  #include  #define EIGHT 8 //定义堆栈的最大容量 #define TRUE 1 #define FALSE 0 using namespace std; int queen[EIGHT]; //存放8个皇后的行位置 int number=0; //计算总共有几组解 //决定皇后存放的位置 //输出所需要的结果 int attack(int ,int); void print_table() { int x=0,y=0; number+=1; cout\"; else cout\"; cout算术表达式的表示法 我们正常的算数公式书写是中序法，而对于计算机来说处理较为复杂，解决方法就是使用前序法与后序法（后序法只使用一个堆栈缓冲区，前序法两个）。\n中序法转为前序法与后序法 可以使用括号法，值得注意的是每两个数进行一次运算就要一次括号。\n也可以使用堆栈法。\n(1)从右到左读进中序法表达式的每个字符\n(2)如果读进的字符为操作数，则直接输出到前序法表达式中。\n(3) 如果遇到“(”，则弹出堆内的运算符，直到弹出到一个“)”，两者互相抵消。\n(4)“)”的优先级在堆内比任何运算符都小，任何运算符的优先级都高过它，不过在堆栈外却是优先级最高者。\n(5)当运算符准备进入堆栈内时，必须和堆顶端的运算符比较，如果外面的运算符优先级高于或等于堆栈顶端的运算符则压入堆栈，如果优先级低于堆栈顶端的运算符就把堆栈顶端的运算符弹出直到堆栈顶端的运算符优先级低于外面的运算符或堆栈为空时，就再把外面这个运算符压入堆栈\n(6) 中序法表达式读完后，如果运算符堆栈不是空的，则将其内的运算符逐一弹出，输出到前序法表达式中即可。 前序法与后序法表达式转为中序法表达式 也可以使用括号法或堆栈法。\n 括号法的乘法除法运算符在前序法向后括一个，加减法括两个。符号向右取代 括号法的乘法除法运算符在后序法向前括一个，加减法括两个。符号向左取代  中序法求值 需要两个堆栈，一个用于存储运算符，一个存放操作数。 但计算方法和人算大同小异。\n前序法求值 需要两个堆栈，一个用于存储表达式，一个存放操作数。不需要比较操作符的优先级。\n后序法求值 只需要一个堆栈。不需要比较操作符的优先级，计算非常直观简单\n队列 (1)图遍历的广度优先搜索法 (BFS) 就是使用队列。 (2)可用于计算机的模拟，在模拟过程中，由于各种事件 的输入时间不一定，可以使用队列来反映真实的情况。 (3)可用于 CPU 的作业调度 ，利用队列来处理，可实现作业先到先执行的要求。 (4)外围设备联机并发处理系统的应用，也就是让输入/输出的数据先在高速磁驱动器中完成，把磁盘当成一个大型的工作缓冲区，如此可让输入/输出操作快速完成，因而缩短了系统响应的时间，接下来由系统软件负责将磁盘数据输出到打印机，其中就应用了队列的工作原理。\n认识队列 队列的基本操作 create,add,delete,front,empty\n用数组来实现队列 好处是算法简单，只需要front和rear来指队首和队尾，初始值都赋上-1，add,delete时对数据增加。 rear指向最后的元素，front指向最前面的元素的前一个位置，刚开始就是-1。 坏处是只能声明固定长度。\n/* [示范]：实现往队列中加入数据和从队列中取出数据 */ #include  using namespace std; const int MAX=20; //定义队列的大小 int main(void) { int front,rear,val,queue[MAX]={0}; char ch; front=rear=-1; while(rearch; switch(ch) { case 'I': coutval; rear++; queue[rear]=val; break; case 'G': if(rearfront) { front++; cout=rear) { coutfront) { front++; cout用链表实现队列 /* [示范]：以链表来实现队列 */ #include  #include  #include  using namespace std; class Node { public: int data; class Node *next; }; typedef class Node QueueNode; typedef QueueNode *QueueByLinkedList; QueueByLinkedList front=NULL; QueueByLinkedList rear=NULL; //方法enqueue：把数据加入队列 void enqueue(int value) { QueueByLinkedList node; //建立节点 node=new QueueNode; node-data=value; node-next=NULL; //检查是否为空队列 if (rear==NULL) front=node; //如果rear为NULL，表示这是队列的第一个元素（节点） else rear-next=node; //将新元素（新节点）连接至队列末尾 rear=node; //将队列的末尾指针指向新加入的节点 } //方法dequeue：从队列中取出数据 int dequeue() { int value; //检查队列是否为空队列 if (!(front==NULL)) { if(front==rear) rear=NULL; value=front-data; //从队列中取出数据 front=front-next; //将队列的前端指针指向下一个 return value; } else return -1; } int main(void) { int temp; cout环形队列 上述的数组程序可以实现先进先出的排队策略，但没有办法模拟排队的人走了接下来几位向前走的情形，没法加入其他数据。可以利用环形队列解决这个问题。\n当数据满了，把rear的值重写为0. (rear+1)mod n\nfront指向最前面的元素的前一个位置。\nrear指向的下一个是front时判断队列已经满了，队列只可以存放n-1个数据。\n/* [示范]：实现环状队列数据的进队和出队 */ #include  using namespace std; int main(void) { int front,rear,val=0,queue[5]={0}; front=rear=-1; while(rearval; if(val==-2) { if(front==rear) { cout双向队列 一般双向队列的应用可以分为2种，一种是两端都可以加入数据但只有一段可以取出数据，另一种是两端都可以取出数据但只有一段可以加入数据。\n优先队列 每一个元素都赋给了一个优先级，加入任意，但取出时优先级高的先出，不是FIFO了。\n后记 我是使用devc++打开源代码的，其中可能会用目录寻找错误而导致打不开文件，这是因为编码方式不一样，容易出现汉字乱码，可以试试把文件打开路径的中文改成英文或拼音。\n",
+  "wordCount" : "8465",
+  "inLanguage": "en",
+  "datePublished": "2023-08-24T23:29:13+08:00",
+  "dateModified": "2023-08-24T23:29:13+08:00",
+  "author":{
+    "@type": "Person",
+    "name": "hrkr"
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://tassel234.github.io/posts/note/%E4%BD%BF%E7%94%A8cpp%E5%AE%9E%E7%8E%B0%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84-2%E6%A0%88%E5%92%8C%E9%98%9F%E5%88%97/"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "hrkr's Blog",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://tassel234.github.io/img/"
+    }
+  }
+}
+</script>
+</head>
+
+<body class="" id="top">
+<script>
+    if (localStorage.getItem("pref-theme") === "dark") {
+        document.body.classList.add('dark');
+    } else if (localStorage.getItem("pref-theme") === "light") {
+        document.body.classList.remove('dark')
+    } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        document.body.classList.add('dark');
+    }
+
+</script>
+
+<header class="header">
+    <nav class="nav">
+        <div class="logo">
+            <a href="https://tassel234.github.io/" accesskey="h" title="hrkr&#39;s Blog (Alt + H)">
+                <img src="https://tassel234.github.io/img/Q.jpg" alt="" aria-label="logo"
+                    height="35">hrkr&#39;s Blog</a>
+            <div class="logo-switches">
+                <button id="theme-toggle" accesskey="t" title="(Alt + T)">
+                    <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                    <svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                </button>
+            </div>
+        </div>
+        <ul id="menu">
+            <li>
+                <a href="https://tassel234.github.io/search" title="🔍 搜索 (Alt &#43; /)" accesskey=/>
+                    <span>🔍 搜索</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://tassel234.github.io/" title="🏠 主页">
+                    <span>🏠 主页</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://tassel234.github.io/posts" title="📚 文章">
+                    <span>📚 文章</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://tassel234.github.io/tags" title="🧩 标签">
+                    <span>🧩 标签</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://tassel234.github.io/archives/" title="⏱️ 时间轴">
+                    <span>⏱️ 时间轴</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://tassel234.github.io/about" title="🙋🏻‍♂️ 关于">
+                    <span>🙋🏻‍♂️ 关于</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://tassel234.github.io/links" title="🤝 友链">
+                    <span>🤝 友链</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+</header>
+<main class="main">
+
+<article class="post-single">
+  <header class="post-header">
+    <div class="breadcrumbs"><a href="https://tassel234.github.io/">Home</a>&nbsp;»&nbsp;<a href="https://tassel234.github.io/posts/">Posts</a>&nbsp;»&nbsp;<a href="https://tassel234.github.io/posts/note/">学习记录&amp;笔记</a></div>
+    <h1 class="post-title">
+      使用Cpp实现数据结构-2（栈和队列）
+    </h1>
+    <div class="post-meta"><span title='2023-08-24 23:29:13 +0800 CST'>2023-08-24</span>&nbsp;·&nbsp;17 min&nbsp;·&nbsp;hrkr
+
+</div>
+  </header> <div class="toc">
+    <details  open>
+        <summary accesskey="c" title="(Alt + C)">
+            <span class="details">Table of Contents</span>
+        </summary>
+
+        <div class="inner"><ul>
+                <li>
+                    <a href="#%e5%a0%86%e6%a0%88%e7%ae%80%e4%bb%8b" aria-label="堆栈简介">堆栈简介</a><ul>
+                        
+                <li>
+                    <a href="#%e5%9f%ba%e6%9c%ac%e7%9f%a5%e8%af%86" aria-label="基本知识">基本知识</a></li>
+                <li>
+                    <a href="#%e4%bb%a3%e7%a0%81%e5%ae%9e%e7%8e%b0" aria-label="代码实现">代码实现</a><ul>
+                        
+                <li>
+                    <a href="#%e4%bd%bf%e7%94%a8%e6%95%b0%e7%bb%84%e5%ae%9e%e7%8e%b0%e5%a0%86%e6%a0%88" aria-label="使用数组实现堆栈">使用数组实现堆栈</a></li>
+                <li>
+                    <a href="#%e4%bd%bf%e7%94%a8%e9%93%be%e8%a1%a8%e5%ae%9e%e7%8e%b0%e5%a0%86%e6%a0%88" aria-label="使用链表实现堆栈">使用链表实现堆栈</a></li>
+                <li>
+                    <a href="#%e5%a0%86%e6%a0%88%e7%b1%bb%e6%a8%a1%e6%9d%bf%e7%9a%84%e5%ae%9e%e7%8e%b0" aria-label="堆栈类模板的实现">堆栈类模板的实现</a></li></ul>
+                </li></ul>
+                </li>
+                <li>
+                    <a href="#%e9%80%92%e5%bd%92%e6%b3%95%e8%af%a6%e8%a7%a3" aria-label="递归法详解">递归法详解</a><ul>
+                        
+                <li>
+                    <a href="#%e6%96%90%e6%b3%a2%e9%82%a3%e5%a5%91%e6%95%b0%e5%88%97" aria-label="斐波那契数列">斐波那契数列</a></li>
+                <li>
+                    <a href="#%e6%b1%89%e8%af%ba%e5%a1%94%e9%97%ae%e9%a2%98" aria-label="汉诺塔问题">汉诺塔问题</a></li>
+                <li>
+                    <a href="#%e5%8a%a8%e6%80%81%e8%a7%84%e5%88%92%e6%b3%95dpa" aria-label="动态规划法（DPA）">动态规划法（DPA）</a></li>
+                <li>
+                    <a href="#%e5%9b%9e%e6%ba%af%e6%b3%95%e8%80%81%e9%bc%a0%e8%b5%b0%e8%bf%b7%e5%ae%ab" aria-label="回溯法—老鼠走迷宫">回溯法—老鼠走迷宫</a></li>
+                <li>
+                    <a href="#%e5%85%ab%e7%9a%87%e5%90%8e%e9%97%ae%e9%a2%98" aria-label="八皇后问题">八皇后问题</a></li></ul>
+                </li>
+                <li>
+                    <a href="#%e7%ae%97%e6%9c%af%e8%a1%a8%e8%be%be%e5%bc%8f%e7%9a%84%e8%a1%a8%e7%a4%ba%e6%b3%95" aria-label="算术表达式的表示法">算术表达式的表示法</a><ul>
+                        
+                <li>
+                    <a href="#%e4%b8%ad%e5%ba%8f%e6%b3%95%e8%bd%ac%e4%b8%ba%e5%89%8d%e5%ba%8f%e6%b3%95%e4%b8%8e%e5%90%8e%e5%ba%8f%e6%b3%95" aria-label="中序法转为前序法与后序法">中序法转为前序法与后序法</a></li>
+                <li>
+                    <a href="#%e5%89%8d%e5%ba%8f%e6%b3%95%e4%b8%8e%e5%90%8e%e5%ba%8f%e6%b3%95%e8%a1%a8%e8%be%be%e5%bc%8f%e8%bd%ac%e4%b8%ba%e4%b8%ad%e5%ba%8f%e6%b3%95%e8%a1%a8%e8%be%be%e5%bc%8f" aria-label="前序法与后序法表达式转为中序法表达式">前序法与后序法表达式转为中序法表达式</a></li>
+                <li>
+                    <a href="#%e4%b8%ad%e5%ba%8f%e6%b3%95%e6%b1%82%e5%80%bc" aria-label="中序法求值">中序法求值</a></li>
+                <li>
+                    <a href="#%e5%89%8d%e5%ba%8f%e6%b3%95%e6%b1%82%e5%80%bc" aria-label="前序法求值">前序法求值</a></li>
+                <li>
+                    <a href="#%e5%90%8e%e5%ba%8f%e6%b3%95%e6%b1%82%e5%80%bc" aria-label="后序法求值">后序法求值</a></li></ul>
+                </li>
+                <li>
+                    <a href="#%e9%98%9f%e5%88%97" aria-label="队列">队列</a><ul>
+                        
+                <li>
+                    <a href="#%e8%ae%a4%e8%af%86%e9%98%9f%e5%88%97" aria-label="认识队列">认识队列</a><ul>
+                        
+                <li>
+                    <a href="#%e9%98%9f%e5%88%97%e7%9a%84%e5%9f%ba%e6%9c%ac%e6%93%8d%e4%bd%9c" aria-label="队列的基本操作">队列的基本操作</a></li>
+                <li>
+                    <a href="#%e7%94%a8%e6%95%b0%e7%bb%84%e6%9d%a5%e5%ae%9e%e7%8e%b0%e9%98%9f%e5%88%97" aria-label="用数组来实现队列">用数组来实现队列</a></li>
+                <li>
+                    <a href="#%e7%94%a8%e9%93%be%e8%a1%a8%e5%ae%9e%e7%8e%b0%e9%98%9f%e5%88%97" aria-label="用链表实现队列">用链表实现队列</a></li></ul>
+                </li>
+                <li>
+                    <a href="#%e7%8e%af%e5%bd%a2%e9%98%9f%e5%88%97" aria-label="环形队列">环形队列</a></li>
+                <li>
+                    <a href="#%e5%8f%8c%e5%90%91%e9%98%9f%e5%88%97" aria-label="双向队列">双向队列</a></li>
+                <li>
+                    <a href="#%e4%bc%98%e5%85%88%e9%98%9f%e5%88%97" aria-label="优先队列">优先队列</a></li></ul>
+                </li>
+                <li>
+                    <a href="#%e5%90%8e%e8%ae%b0" aria-label="后记">后记</a>
+                </li>
+            </ul>
+        </div>
+    </details>
+</div>
+
+  <div class="post-content"><h2 id="堆栈简介">堆栈简介<a hidden class="anchor" aria-hidden="true" href="#堆栈简介">#</a></h2>
+<h3 id="基本知识">基本知识<a hidden class="anchor" aria-hidden="true" href="#基本知识">#</a></h3>
+<p>也可以简写为栈，具有后进先出的特性（LIFO）</p>
+<p>与链表和数组一样，栈的数据也是线性排列，但在栈中，添加和删除数据的操作只能在一端进行，访问数据也只能访问到顶端的数据。想要访问中间的数据时，就必须通过出栈操作将目标数据移到栈顶才行。</p>
+<p>放入栈的顶端，称为压入PUSH,从顶端取出，称为弹出pop</p>
+<p>栈只能在一端操作，这一点看起来似乎十分不便，但在只需要访问最新数据时，使用它就比较方便了。另外，我们将要在接下来学习深度优先搜索算法，通常会选择最新的数据作为候补顶点。在候补顶点的管理上就可以使用栈。</p>
+<h3 id="代码实现">代码实现<a hidden class="anchor" aria-hidden="true" href="#代码实现">#</a></h3>
+<h4 id="使用数组实现堆栈">使用数组实现堆栈<a hidden class="anchor" aria-hidden="true" href="#使用数组实现堆栈">#</a></h4>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">
+#include &lt;iostream&gt;
+#include &lt;iomanip&gt;
+#define MAXSTACK 100	//定义堆栈的最大容量
+using namespace std;
+int stack[MAXSTACK];	//声明用于堆栈操作的数组
+int top=-1;				//堆栈的顶端
+//判断是否为空堆栈
+int isEmpty() 
+{
+    if(top==-1) return 1;
+    else return 0;
+}
+//将指定的数据压入堆栈
+int push(int data)
+{
+    if(top&gt;=MAXSTACK)
+    {
+       cout&lt;&lt;&#34;堆栈已满,无法再压入&#34;&lt;&lt;endl;
+       return 0; 
+    }
+    else
+    {
+       stack[++top]=data;		//top的值一直在变化，将数据压入堆栈
+       return 1;
+        
+    }
+}
+//从堆栈弹出数据
+int pop()
+{
+    if(isEmpty())			//判断堆栈是否为空,如果是则返回-1
+       return -1;
+    else
+       return stack[top--];	//将数据弹出后,再将堆栈指针往下移
+       //先输出，再自减
+}
+//主程序
+int main(void)
+{
+    int value;
+    int i;
+    cout&lt;&lt;&#34;请按序输入10个数据:&#34;&lt;&lt;endl;
+    for(i=0;i&lt;10;i++)
+    {
+       cin&gt;&gt;value;
+       push(value);
+    }
+    cout&lt;&lt;&#34;====================&#34;&lt;&lt;endl;
+    while(!isEmpty())		//将数据陆续从顶端弹出
+       cout&lt;&lt;&#34;堆栈弹出的顺序为:&#34;&lt;&lt;setw(4)&lt;&lt;pop()&lt;&lt;endl; //C++ setw() 函数用于设置字段的宽度,
+	   //语法格式如下setw(n)n 表示宽度,用数字表示。setw() 函数只对紧接着的输出产生作用。
+	   //当后面紧跟着的输出字段长度小于 n 的时候，在该字段前面用空格补齐，当输出字段长度大于 n 时，全部整体输出。
+
+    cout&lt;&lt;&#34;====================&#34;&lt;&lt;endl;
+    return 0; 
+}
+</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">//发牌程序
+#include &lt;iostream&gt;
+#include &lt;iomanip&gt;
+#include &lt;ctime&gt;
+#include &lt;cstdlib&gt;
+
+using namespace std;
+void Swap(int*,int*);
+void push(int statck[],int MAX,int val);
+int pop(int stack[]);
+int top=-1;
+int main(void)
+{  
+	int card[52],stack[52]={0};
+	int i,j,k=0, ascVal;
+	char suit[4][10]={&#34;草花&#34;,&#34;方块&#34;,&#34;红桃&#34;,&#34;黑桃&#34;};
+	int style;
+	srand((unsigned)time(NULL));//srand函数是C语言中的种子函数,它的功能是生成一个随机数。
+	//srand(1); 直接使用1来初始化种子。不过为了防止随机数每次重复，常常使用系统时间来初始化，
+	//即使用 time函数来获得系统时间，它的返回值为从 00:00:00 GMT, January 1, 1970 到现在所持续的秒数，
+	//然后将time_t型数据转化为(unsigned)型再传给srand函数，即: srand((unsigned) time(&amp;t)); 
+	//还有一个经常用法，不需要定义time_t型t变量,即: srand((unsigned) time(NULL)); 
+	//直接传入一个空指针，因为你的程序中往往并不需要经过参数获得的数据。
+	//若去掉这段语句，会造成接下来的数据一直保持在同一个值 
+	
+	for (i=0;i&lt;52;i++)
+		card[i]=i+1;
+	cout&lt;&lt;&#34;[洗牌中...请稍后!]&#34;&lt;&lt;endl;
+	while(k&lt;30)
+	{
+		for(i=0;i&lt;51;i++)
+			for(j=i+1;j&lt;52;j++)
+				if(rand()%52==2)//不是52也可以，为什么是52呢 
+					Swap(&amp;card[i],&amp;card[j]);//洗牌
+		k++;
+	}
+	i=0;
+	while(i!=52)
+	{
+		push(stack,52,card[i]);//将52张牌压入堆栈
+		i++;
+	}
+	cout&lt;&lt;&#34;[逆时针发牌]&#34;&lt;&lt;endl;
+	cout&lt;&lt;&#34;[显示各家拿到的牌]&#34;&lt;&lt;endl;
+ 	cout&lt;&lt;&#34;  东家\t\t   北家\t\t   西家\t\t   南家&#34;&lt;&lt;endl;
+	cout&lt;&lt;&#34;=========================================================&#34;&lt;&lt;endl;
+	while (top &gt;=0)
+	{  
+		style = stack[top]/13;	//计算扑克牌的花色
+		switch(style)			//扑克牌花色对应的图标
+		{
+			case 0:			//梅花
+				ascVal=0;
+				break;
+			case 1:			//方块
+				ascVal=1;
+				break;
+			case 2:			//红心
+				ascVal=2;
+				break;
+			case 3:			//黑桃
+				ascVal=3;
+				break;
+		}
+		cout&lt;&lt;&#34;[&#34;&lt;&lt;suit[ascVal]&lt;&lt;setw(3)&lt;&lt;stack[top]%13+1&lt;&lt;&#34;]\t&#34;;
+		if(top%4==0)
+			cout&lt;&lt;endl;
+		top--;
+	}
+    return 0;
+}
+void push(int stack[],int MAX,int val)
+{
+	if(top&gt;=MAX-1)
+		cout&lt;&lt;&#34;[堆栈已经满了]&#34;&lt;&lt;endl;
+	else
+	{
+		top++;
+		stack[top]=val;
+	}
+}
+int pop(int stack[])
+{
+	if(top&lt;0)
+		cout&lt;&lt;&#34;[堆栈已经空了]&#34;&lt;&lt;endl;
+	else
+		top--;
+	return stack[top];
+}
+void Swap(int* a,int* b)
+{
+	int temp;
+	temp=*a;
+	*a=*b;
+	*b=temp;
+}
+</code></pre></div><h4 id="使用链表实现堆栈">使用链表实现堆栈<a hidden class="anchor" aria-hidden="true" href="#使用链表实现堆栈">#</a></h4>
+<p>使用链表设计堆栈的好处是链表的大小是可以变动的，不会造成内存空间的浪费
+缺点是设计复杂</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">#include &lt;iostream&gt;
+#include &lt;cstdlib&gt;
+#include &lt;iomanip&gt;
+
+using namespace std;
+class Node		//声明堆栈链表节点
+{
+   public:
+   int data;	//声明存放堆栈数据的变量
+   class Node *next;	//堆栈中用来指向下一个节点的指针
+};
+typedef class Node Stack_Node;		//定义堆栈中节点的新类型
+typedef Stack_Node *Linked_Stack;	//定义链表堆栈的新类型
+Linked_Stack top=NULL;				//指向堆栈顶端的指针
+
+//判断是否为空堆栈
+int isEmpty()
+{
+    if(top==NULL) return 1;
+    else return 0;
+}
+//将指定的数据压入堆栈
+void push(int data)
+{
+    Linked_Stack new_add_node;	//新加入节点的指针
+    
+    new_add_node=new Stack_Node;//分配内存给新节点
+    new_add_node-&gt;data=data;	//将传入的值赋值给节点的数据变量
+    new_add_node-&gt;next=top;		//将新节点指向堆栈的顶端
+    top=new_add_node;			//新节点成为堆栈的顶端
+}
+//从堆栈弹出数据
+int pop()
+{
+    Linked_Stack ptr;		//指向堆栈顶端的指针
+    int temp;
+    if(isEmpty())			//判断堆栈是否为空,如果是则返回-1
+    {
+       cout&lt;&lt;&#34;===目前为空堆栈===&#34;&lt;&lt;endl;
+       return -1;
+    }
+    else
+    {
+        ptr=top;			//指向堆栈的顶端
+        top=top-&gt;next;		//将堆栈顶端的指针指向下一个节点
+        temp=ptr-&gt;data;		//取出堆栈的数据
+        free(ptr);			//将节点占用的内存释放
+        return temp;		//将从堆栈取出的数据返回给主程序
+    }
+}
+//主程序
+int main(void)
+{
+    int value;
+    int i;
+    cout&lt;&lt;&#34;请按序输入10个数据:&#34;&lt;&lt;endl;
+    for(i=0;i&lt;10;i++)
+    {
+       cin&gt;&gt;value;
+       push(value);
+    }
+    cout&lt;&lt;&#34;====================&#34;&lt;&lt;endl;
+    while(!isEmpty()) 	//将数据陆续从顶端弹出
+       cout&lt;&lt;&#34;堆栈弹出的顺序为:&#34;&lt;&lt;setw(2)&lt;&lt;pop()&lt;&lt;endl; 
+    cout&lt;&lt;&#34;====================&#34;&lt;&lt;endl;
+    return 0; 
+}
+</code></pre></div><h4 id="堆栈类模板的实现">堆栈类模板的实现<a hidden class="anchor" aria-hidden="true" href="#堆栈类模板的实现">#</a></h4>
+<p>样板的设计概念也被称为泛型编程，通过对模板输入特定的数据类型可以形成对应的函数或类。
+C++有stl模板库，但本书并没有使用。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">#include &lt;iostream&gt;
+#include &lt;cstdlib&gt;
+using namespace std;
+
+template &lt;class Type&gt;	 // 定义链表中的节点
+struct Node
+{
+    Type data;			// 记录数据
+    Node* next;			// 记录下一笔节点的地址
+};
+template &lt;class Type&gt;
+class LinkedList			// 链表类型
+{
+    private:
+        Node&lt;Type&gt;* first;	    // 指到第一个节点的指针
+    public:
+        LinkedList()			// 构造函数
+        {
+            first = NULL;
+        }
+    void addNode(Type data);	// 加入节点
+    void display();			    // 显示所有的节点
+};
+template&lt;class Type&gt;
+void LinkedList&lt;Type&gt;::addNode(Type data)
+{
+    Node&lt;Type&gt;* newNode = new Node&lt;Type&gt;;	// 新增一个节点
+    newNode-&gt;data = data;		// 记录数据
+    newNode-&gt;next = first;		// 指向前一个节点
+    first = newNode;			// 指向新的节点
+}
+template&lt;class Type&gt;
+void LinkedList&lt;Type&gt;::display()
+{
+    Node&lt;Type&gt;* currentNode = first;    // 从第一个节点开始显示
+    while( currentNode != NULL )
+    {
+        cout &lt;&lt; currentNode-&gt;data &lt;&lt; &#34; -&gt; &#34;;
+	    currentNode = currentNode-&gt;next;
+    }
+}
+
+int main()
+{
+    LinkedList&lt;double&gt; dblList;	    // 建立一个存储double类型数据的链表
+    double num;						// 记录输入的数据
+    char ch;						// 记录用户的选择
+    do{
+        cout &lt;&lt; endl &lt;&lt;&#34;请输入一个数字 : &#34;;
+        cin &gt;&gt; num;
+        dblList.addNode( num );
+        cout &lt;&lt; &#34;继续输入(y / n)?&#34;;
+        cin &gt;&gt; ch;
+    }while( ch != &#39;n&#39; );
+    cout &lt;&lt; endl;
+    dblList.display();			// 显示所有的数据
+    cout &lt;&lt; endl &lt;&lt; endl;
+      
+    return 0;
+}
+</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">#include &lt;iostream&gt;
+#include &lt;cstdlib&gt;
+using namespace std;
+
+// 设置类样版的类型参数Type的默认值为整数int,非类型参数的类型为整数int,默认值为5
+template &lt;class Type = int, int size = 5&gt;		// 声明类样板
+class Stack
+{
+    private:
+        Type st[size];	// 声明一数组作为堆栈的存储空间
+        int top;		// 堆栈数据顶端的索引
+    public:
+        Stack()
+        {
+            top = -1;
+        }
+       void push(Type data);	// 将数据压入堆栈
+       Type pop();				// 将数据从堆栈中弹出
+};
+template &lt; class Type, int size &gt;
+void Stack&lt; Type, size &gt; :: push ( Type data )
+{
+    st[ ++top ] = data;
+}
+template &lt; class Type, int size &gt;
+Type Stack&lt;Type, size&gt; :: pop()
+{
+    return st[ top-- ];
+}
+int main()
+{
+    Stack&lt;&gt; stk_1;			// 声明一个堆栈对象, 并使用其默认值
+    Stack&lt;char*, 4&gt; stk_2;	// 声明堆栈对象, 其类型为字符串, 大小为4
+    stk_1.push( 11 );
+    stk_1.push( 22 );
+    stk_1.push( 33 );
+    cout &lt;&lt; &#34;stack_1 [1] = &#34; &lt;&lt; stk_1.pop() &lt;&lt; endl;
+    cout &lt;&lt; &#34;stack_1 [2] = &#34; &lt;&lt; stk_1.pop() &lt;&lt; endl;
+    cout &lt;&lt; &#34;stack_1 [3] = &#34; &lt;&lt; stk_1.pop() &lt;&lt; endl;
+    cout &lt;&lt; endl;
+    stk_2.push( &#34;第一名&#34; );
+    stk_2.push( &#34;第二名&#34; );
+    stk_2.push( &#34;第三名&#34; );
+    cout &lt;&lt; &#34;stack_2 [1] = &#34; &lt;&lt; stk_2.pop() &lt;&lt; endl;
+    cout &lt;&lt; &#34;stack_2 [2] = &#34; &lt;&lt; stk_2.pop() &lt;&lt; endl;  
+    cout &lt;&lt; &#34;stack_2 [3] = &#34; &lt;&lt; stk_2.pop() &lt;&lt; endl;
+    cout &lt;&lt; endl;
+
+    return 0; 	
+}
+</code></pre></div><h2 id="递归法详解">递归法详解<a hidden class="anchor" aria-hidden="true" href="#递归法详解">#</a></h2>
+<h3 id="斐波那契数列">斐波那契数列<a hidden class="anchor" aria-hidden="true" href="#斐波那契数列">#</a></h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">/*
+[示范]：斐波那契数列的递归程序
+*/
+#include&lt;iostream&gt;
+using namespace std;
+
+int fib(int);	//fib()函数的原型声明
+
+int main()
+{
+    int i,n;
+    cout&lt;&lt;&#34;请输入要计算到第几项斐波那契数列：&#34;;//如果输入的数字太大会导致算到负数 ，后面会越来越慢 
+    cin&gt;&gt;n;
+    for(i=0;i&lt;=n;i++) 	//计算前n项斐波那契数列
+		cout&lt;&lt;&#34;fib(&#34;&lt;&lt;i&lt;&lt;&#34;)=&#34;&lt;&lt;fib(i)&lt;&lt;endl;
+    return 0;
+}
+
+int fib(int n) 	// 定义函数fib()
+{
+
+    if (n==0)
+        return 0;       // 如果n=0，则返回0
+    else if(n==1 || n==2)	//如果n=1或n=2，则返回1 
+        return 1;
+    else				// 否则返回 fib(n-1)+fib(n-2) 
+        return (fib(n-1)+fib(n-2));
+}
+</code></pre></div><h3 id="汉诺塔问题">汉诺塔问题<a hidden class="anchor" aria-hidden="true" href="#汉诺塔问题">#</a></h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">/*
+[示范]:利用汉诺塔函数求出不同圆盘数时圆盘的移动步骤
+*/
+#include &lt;iostream&gt;
+using namespace std;
+void hanoi(int, int, int, int);    // 函数原型
+int main(void)
+{
+    int j;
+    cout&lt;&lt;&#34;请输入圆盘数量：&#34;;
+    cin&gt;&gt;j;
+    hanoi(j,1, 2, 3);
+    return 0;
+}
+void hanoi(int n, int p1, int p2, int p3)
+{
+    if (n==1)
+        cout&lt;&lt;&#34;圆盘从 &#34;&lt;&lt;p1&lt;&lt;&#34; 号木桩移到 &#34;&lt;&lt;p3&lt;&lt;&#34; 号木桩&#34;&lt;&lt;endl;
+    else
+    {
+        hanoi(n-1, p1, p3, p2);
+        cout&lt;&lt;&#34;圆盘从 &#34;&lt;&lt;p1&lt;&lt;&#34; 号木桩移到 &#34;&lt;&lt;p3&lt;&lt;&#34; 号木桩&#34;&lt;&lt;endl;
+        hanoi(n-1, p2, p1, p3);
+    }
+}
+</code></pre></div><p>由一些数学公式可得汉诺塔的执行步骤最小为$2^{n} -1$,n代表圆盘的个数</p>
+<h3 id="动态规划法dpa">动态规划法（DPA）<a hidden class="anchor" aria-hidden="true" href="#动态规划法dpa">#</a></h3>
+<p>动态规划法（Dynamic Programming Aigorithm）是一种优化算法策略，主要应用于求解具有重叠子问题和最优子结构性质的问题。动态规划法的核心思想是将问题分解为更小的子问题(和分治法类似)，并将子问题的解存储在一个表中（分治法没有的），从而避免了对相同子问题的重复计算。</p>
+<p>动态规划法的基本步骤如下：</p>
+<ol>
+<li>定义子问题：将原问题分解为若干个子问题。</li>
+<li>定义状态：用数学表示子问题的解。</li>
+<li>定义状态转移方程：描述子问题之间的关系，如何通过子问题的解计算原问题的解。</li>
+<li>初始化边界条件：确定状态转移方程的初始值。</li>
+<li>自底向上或自顶向下计算：根据状态转移方程逐步计算子问题的解，最终得到原问题的解。</li>
+</ol>
+<p>动态规划法可以应用于各种问题，如最短路径问题、背包问题、字符串匹配问题等。动态规划法的一个重要应用场景是求解最优化问题，例如最大（最小）问题。通过动态规划，可以在多项式时间内求解这些问题，而其他方法（如穷举法）可能需要指数级时间。</p>
+<p>例如使用递归法进行斐波那契数列的Fib(9)计算时，需要反复计算Fib(4),Fib(5)等值，浪费了时间，使用动态规划算法将计算过的结果储存起来，在后续的计算中只需要判断数值的存在与否，若存在就直接调用。</p>
+<p>Dijkstra 算法 Dijkstra算法,中文名音译作迪杰斯特拉算法或戴克斯特拉算法。</p>
+<h3 id="回溯法老鼠走迷宫">回溯法—老鼠走迷宫<a hidden class="anchor" aria-hidden="true" href="#回溯法老鼠走迷宫">#</a></h3>
+<p>回溯法（Backtracking）是一种用于搜索解空间的算法，通常在组合问题、优化问题和约束满足问题等领域中使用。回溯法通过对解空间的节点进行深度优先搜索，尝试找到问题的解。当搜索到某个节点时，如果该节点不能继续搜索下去，就回溯到该节点的父节点并尝试其他分支。回溯法的基本思想是：先广搜索，后深入搜索。</p>
+<p>以下是回溯法的一般步骤：</p>
+<ol>
+<li>定义问题的解空间：首先需要明确问题的解空间，即所有可能的解的集合。</li>
+<li>确定解空间的组织结构：将解空间组织成树形结构，每个节点表示一个部分解。</li>
+<li>设计回溯算法的递归函数：递归函数需要完成以下功能：
+a. 判断当前节点是否包含问题的解，如果是，则保存解并返回。
+b. 如果当前节点不能包含问题的解，则回溯到父节点并尝试其他分支。</li>
+</ol>
+<p>回溯法是枚举法的一种。</p>
+<p>老鼠走迷宫就是一种回溯法的应用。老鼠走迷宫问题的描述是:假设把一只老鼠放在一个没有盖子的大迷宫盒的入口处，盒中有许多墙，使得大部分路径都被挡住而无法前进。老鼠可以采用尝试错误的方法找到出口。不过，这只老鼠必须在走错路时就退回来并把走过的路记下来，避免下次走重复的路，就这样直到找到出口为止。简单来说，老鼠行进时必须遵守以下3 个原则:</p>
+<p>(1)一次只能走一格。</p>
+<p>(2) 遇到墙无法往前走时，则退回一步找找看是否有其他的路可以走。</p>
+<p>(3)走过的路不会再走第二次。</p>
+<p>人们对这个问题感兴趣的原因是它可以提供一种典型堆栈应用的思考方法。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">/*题目：设计一个 C++程序，使用链表堆栈来找出老鼠走迷宫的路线，1 表示该处有墙无法通过，
+0表示[i][i]处无墙可通行，并且将走过的位置对应的数组元素内容标记为 2。*/
+
+
+
+#include &lt;iostream&gt;
+#define EAST  MAZE[x][y+1]   //定义东方的相对位置
+#define WEST  MAZE[x][y-1]   //定义西方的相对位置
+#define SOUTH MAZE[x+1][y]	//定义南方的相对位置
+#define NORTH MAZE[x-1][y]	//定义北方的相对位置
+using namespace std;
+const int ExitX = 8;   //定义出口的X坐标在第8列
+const int ExitY = 10; //定义出口的Y坐标在第10行
+struct list
+{
+    int x,y;
+    struct list* next;
+};
+typedef struct list node;
+typedef node* link;
+int MAZE[10][12] = {1,1,1,1,1,1,1,1,1,1,1,1, //声明迷宫数组
+                    1,0,0,0,1,1,1,1,1,1,1,1,
+                    1,1,1,0,1,1,0,0,0,0,1,1,
+                    1,1,1,0,1,1,0,1,1,0,1,1,
+                    1,1,1,0,0,0,0,1,1,0,1,1,//1是墙，0是可走的路
+                    1,1,1,0,1,1,0,1,1,0,1,1,
+                    1,1,1,0,1,1,0,1,1,0,1,1,
+                    1,1,1,1,1,1,0,1,1,0,1,1,
+                    1,1,0,0,0,0,0,0,1,0,0,1,//最右下角的0代表出口
+                    1,1,1,1,1,1,1,1,1,1,1,1};
+link push(link stack,int x,int y);
+link pop(link stack,int* x,int* y);
+int chkExit(int ,int ,int,int);
+int main(void)
+{
+    int i,j;
+    link path = NULL;
+    int x=1;	//入口的X坐标
+    int y=1;    //入口的Y坐标
+    cout&lt;&lt;&#34;[迷宫的路径(0的部分)]\n&#34;&lt;&lt;endl; //打印出迷宫的路径图
+    for(i=0;i&lt;10;i++)
+    {
+        for(j=0;j&lt;12;j++)
+            cout&lt;&lt;MAZE[i][j]&lt;&lt;&#34; &#34;;
+        cout&lt;&lt;endl;
+    }
+    while(x&lt;=ExitX&amp;&amp;y&lt;=ExitY)
+    {
+        MAZE[x][y]=2;
+        if(NORTH==0)
+        {
+            x -= 1;
+            path=push(path,x,y);
+        }
+        else if(SOUTH==0)
+        {
+            x+=1;
+            path=push(path,x,y);
+        }
+        else if(WEST==0)
+        {
+            y-=1;
+            path=push(path,x,y);
+        }
+        else if(EAST==0)
+        {
+            y+=1;
+            path=push(path,x,y);
+        }
+        else if(chkExit(x,y,ExitX,ExitY)==1) // 检查是否走到出口了
+            break;
+        else
+        {
+            MAZE[x][y]=2;
+            path=pop(path,&amp;x,&amp;y);
+        }
+    }
+    cout&lt;&lt;&#34;[老鼠走过的路径(2的部分)]&#34;&lt;&lt;endl; // 打印出老鼠走完迷宫后的路径图
+    for(i=0;i&lt;10;i++)
+    {
+        for(j=0;j&lt;12;j++)
+            cout&lt;&lt;MAZE[i][j]&lt;&lt;&#34; &#34;;
+        cout&lt;&lt;endl;
+    }
+
+    return 0;
+}
+link push(link stack,int x,int y)
+{
+    link newnode;
+    newnode = new node;
+    if(!newnode)
+    {
+        cout&lt;&lt;&#34;Error！内存分配失败！&#34;&lt;&lt;endl;
+        return NULL;
+    }
+    newnode-&gt;x=x;
+    newnode-&gt;y=y;
+    newnode-&gt;next=stack;
+    stack=newnode;
+    return stack;
+}
+link pop(link stack,int* x,int* y)
+{
+    link top;
+    if(stack!=NULL)
+    {
+        top=stack;
+        stack=stack-&gt;next;
+        *x=top-&gt;x;
+        *y=top-&gt;y;
+        delete top;
+        return stack;
+    }
+    else
+        *x=-1;
+    return stack;
+}
+int chkExit(int x,int y,int ex,int ey)
+{
+    if(x==ex&amp;&amp;y==ey)
+    {
+        if(NORTH==1||SOUTH==1||WEST==1||EAST==2)
+            return 1;
+        if(NORTH==1||SOUTH==1||WEST==2||EAST==1)
+            return 1;
+        if(NORTH==1||SOUTH==2||WEST==1||EAST==1)
+            return 1;
+        if(NORTH==2||SOUTH==1||WEST==1||EAST==1)
+            return 1;
+    }
+    return 0;
+}
+
+
+</code></pre></div><h3 id="八皇后问题">八皇后问题<a hidden class="anchor" aria-hidden="true" href="#八皇后问题">#</a></h3>
+<p>八皇后问题也是一种常见的堆栈应用实例。在国际象棋中的皇后可以对棋盘中的其他棋子直吃、横吃和对角斜吃(左斜吃或右斜吃都可)。现在要放入多个皇后到棋盘上，后放入的新皇后，放入前必须考虑所放位置的直线方向、横线方向或对角线方向是否已被放置了旧皇后，否则就会被先放入的旧皇后吃掉。这个问题难倒了高斯，但如果使用计算机思维和计算机的算力可以比较轻松的求得结果。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">#include &lt;iostream&gt;
+#include &lt;iomanip&gt;
+#include &lt;cmath&gt;
+#define EIGHT 8     //定义堆栈的最大容量
+#define TRUE 1
+#define FALSE 0
+using namespace std;
+int queen[EIGHT];  //存放8个皇后的行位置
+int number=0;       //计算总共有几组解
+//决定皇后存放的位置
+//输出所需要的结果
+int attack(int ,int);
+void print_table()
+{
+    int x=0,y=0;
+    number+=1;
+    cout&lt;&lt;endl;
+    cout&lt;&lt;&#34;八皇后问题的第&#34;&lt;&lt;setw(2)&lt;&lt;number&lt;&lt;&#34;组解&#34;&lt;&lt;endl&lt;&lt;&#34;\t&#34;;
+    for(x=0;x&lt;EIGHT;x++)
+    {
+        for(y=0;y&lt;EIGHT;y++)
+            if(x==queen[y])
+                cout&lt;&lt;&#34;&lt;q&gt;&#34;;
+            else
+                cout&lt;&lt;&#34;&lt;-&gt;&#34;;
+        cout&lt;&lt;endl&lt;&lt;&#34;\t&#34;;
+    }
+    system(&#34;pause&#34;);
+}
+void decide_position(int value)
+{
+    int i=0;
+    while(i&lt;EIGHT)
+    {
+        //是否受到攻击的判断式
+        if(attack(i,value)!=1)
+        {
+            queen[value]=i;
+            if(value==7)
+                print_table();
+            else
+                decide_position(value+1);
+        }
+        i++;
+    }
+}
+//测试在(row,col)上的皇后是否遭受攻击
+//若遭受攻击则返回值为1,否则返回0
+int attack(int row,int col)
+{
+    int i=0,atk=FALSE;
+    int offset_row=0,offset_col=0;
+    while((atk!=1)&amp;&amp;i&lt;col)
+    {
+        offset_col=abs(i-col);
+        offset_row=abs(queen[i]-row);
+        //判断两皇后是否在同一行或同一对角线上
+        if((queen[i]==row)||(offset_row==offset_col))
+            atk=TRUE;
+        i++;
+    }
+    return atk;
+}
+//主程序
+int main(void)
+{
+    decide_position(0);
+    return 0;
+}
+</code></pre></div><p><img loading="lazy" src="/vx_images/221571916254095.png" alt=""  />
+</p>
+<h2 id="算术表达式的表示法">算术表达式的表示法<a hidden class="anchor" aria-hidden="true" href="#算术表达式的表示法">#</a></h2>
+<p>我们正常的算数公式书写是中序法，而对于计算机来说处理较为复杂，解决方法就是使用前序法与后序法（后序法只使用一个堆栈缓冲区，前序法两个）。</p>
+<h3 id="中序法转为前序法与后序法">中序法转为前序法与后序法<a hidden class="anchor" aria-hidden="true" href="#中序法转为前序法与后序法">#</a></h3>
+<p>可以使用括号法，值得注意的是每两个数进行一次运算就要一次括号。</p>
+<p>也可以使用堆栈法。</p>
+<p>(1)从右到左读进中序法表达式的每个字符</p>
+<p>(2)如果读进的字符为操作数，则直接输出到前序法表达式中。</p>
+<p>(3) 如果遇到“(”，则弹出堆内的运算符，直到弹出到一个“)”，两者互相抵消。</p>
+<p>(4)“)”的优先级在堆内比任何运算符都小，任何运算符的优先级都高过它，不过在堆栈外却是优先级最高者。</p>
+<p>(5)当运算符准备进入堆栈内时，必须和堆顶端的运算符比较，如果外面的运算符优先级高于或等于堆栈顶端的运算符则压入堆栈，如果优先级低于堆栈顶端的运算符就把堆栈顶端的运算符弹出直到堆栈顶端的运算符优先级低于外面的运算符或堆栈为空时，就再把外面这个运算符压入堆栈</p>
+<p>(6) 中序法表达式读完后，如果运算符堆栈不是空的，则将其内的运算符逐一弹出，输出到前序法表达式中即可。
+<img loading="lazy" src="/vx_images/140110216250445.png" alt=""  />
+</p>
+<p><img loading="lazy" src="/vx_images/113250916243439.jpg" alt=""  />
+</p>
+<h3 id="前序法与后序法表达式转为中序法表达式">前序法与后序法表达式转为中序法表达式<a hidden class="anchor" aria-hidden="true" href="#前序法与后序法表达式转为中序法表达式">#</a></h3>
+<p>也可以使用括号法或堆栈法。</p>
+<ul>
+<li>括号法的乘法除法运算符在前序法向后括一个，加减法括两个。符号向右取代</li>
+<li>括号法的乘法除法运算符在后序法向前括一个，加减法括两个。符号向左取代</li>
+</ul>
+<h3 id="中序法求值">中序法求值<a hidden class="anchor" aria-hidden="true" href="#中序法求值">#</a></h3>
+<p>需要两个堆栈，一个用于存储运算符，一个存放操作数。
+但计算方法和人算大同小异。</p>
+<h3 id="前序法求值">前序法求值<a hidden class="anchor" aria-hidden="true" href="#前序法求值">#</a></h3>
+<p>需要两个堆栈，一个用于存储表达式，一个存放操作数。不需要比较操作符的优先级。</p>
+<h3 id="后序法求值">后序法求值<a hidden class="anchor" aria-hidden="true" href="#后序法求值">#</a></h3>
+<p>只需要一个堆栈。不需要比较操作符的优先级，计算非常直观简单</p>
+<h2 id="队列">队列<a hidden class="anchor" aria-hidden="true" href="#队列">#</a></h2>
+<p>(1)图遍历的广度优先搜索法 (BFS) 就是使用队列。
+(2)可用于计算机的模拟，在模拟过程中，由于各种事件 的输入时间不一定，可以使用队列来反映真实的情况。
+(3)可用于 CPU 的作业调度 ，利用队列来处理，可实现作业先到先执行的要求。
+(4)外围设备联机并发处理系统的应用，也就是让输入/输出的数据先在高速磁驱动器中完成，把磁盘当成一个大型的工作缓冲区，如此可让输入/输出操作快速完成，因而缩短了系统响应的时间，接下来由系统软件负责将磁盘数据输出到打印机，其中就应用了队列的工作原理。</p>
+<h3 id="认识队列">认识队列<a hidden class="anchor" aria-hidden="true" href="#认识队列">#</a></h3>
+<h4 id="队列的基本操作">队列的基本操作<a hidden class="anchor" aria-hidden="true" href="#队列的基本操作">#</a></h4>
+<p>create,add,delete,front,empty</p>
+<h4 id="用数组来实现队列">用数组来实现队列<a hidden class="anchor" aria-hidden="true" href="#用数组来实现队列">#</a></h4>
+<p>好处是算法简单，只需要front和rear来指队首和队尾，初始值都赋上-1，add,delete时对数据增加。
+rear指向最后的元素，front指向最前面的元素的前一个位置，刚开始就是-1。
+坏处是只能声明固定长度。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">/*
+[示范]：实现往队列中加入数据和从队列中取出数据
+*/
+#include &lt;iostream&gt;
+using namespace std;
+const int MAX=20;  //定义队列的大小
+int main(void)
+{
+    int front,rear,val,queue[MAX]={0};
+    char ch;
+    front=rear=-1;
+    while(rear&lt;MAX-1&amp;&amp;ch!=&#39;E&#39;)
+    {
+        cout&lt;&lt;&#34;输入I：往队列加入一个数据 输入G：从队列中取出一个数据\n输入E：结束程序\n请输入：&#34;;
+        cin&gt;&gt;ch;
+        switch(ch)
+        {
+            case &#39;I&#39;:
+                cout&lt;&lt;&#34;[请输入数据]：&#34;;
+                cin&gt;&gt;val;
+                rear++;
+                queue[rear]=val;
+                break;
+            case &#39;G&#39;:
+                if(rear&gt;front)
+                {
+                     front++;
+                     cout&lt;&lt;&#34;[从队列中取出的数据为]: [&#34;&lt;&lt;queue[front]&lt;&lt;&#34;]&#34;;
+                     cout&lt;&lt;endl;
+                     queue[front]=0;
+                }
+                else
+                {
+                    cout&lt;&lt;&#34;[队列已经空了]&#34;&lt;&lt;endl;
+                    exit(0);
+                }
+                break;
+            default:
+                cout&lt;&lt;endl;
+                break;
+        }
+    }
+    if(rear==MAX-1) cout&lt;&lt;&#34;[队列已经满了]&#34;&lt;&lt;endl;
+    cout&lt;&lt;&#34;[目前队列中的数据]:&#34;;
+    if (front&gt;=rear)
+    {
+        cout&lt;&lt;&#34;没有&#34;&lt;&lt;endl;
+        cout&lt;&lt;&#34;[队列已经空了]&#34;&lt;&lt;endl;
+    }
+    else
+    {
+        while (rear&gt;front)
+        {
+            front++;
+            cout&lt;&lt;&#34;[&#34;&lt;&lt;queue[front]&lt;&lt;&#34;]\t&#34;;
+        }
+        cout&lt;&lt;endl;
+    }
+    return 0;
+}
+</code></pre></div><p><img loading="lazy" src="/vx_images/131245522243206.png" alt=""  />
+</p>
+<h4 id="用链表实现队列">用链表实现队列<a hidden class="anchor" aria-hidden="true" href="#用链表实现队列">#</a></h4>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">/*
+[示范]：以链表来实现队列
+*/
+#include &lt;iostream&gt;
+#include &lt;cstdlib&gt;
+#include &lt;iomanip&gt;
+using namespace std;
+class Node
+{
+    public:
+        int data;
+        class Node *next;
+};
+typedef class Node QueueNode;
+typedef QueueNode *QueueByLinkedList;
+QueueByLinkedList front=NULL;
+QueueByLinkedList rear=NULL;
+//方法enqueue：把数据加入队列
+void enqueue(int value) {
+    QueueByLinkedList node; //建立节点
+    node=new QueueNode;
+    node-&gt;data=value;
+    node-&gt;next=NULL;
+    //检查是否为空队列
+    if (rear==NULL)
+        front=node;        //如果rear为NULL，表示这是队列的第一个元素（节点）
+    else
+        rear-&gt;next=node;  //将新元素（新节点）连接至队列末尾
+    rear=node;             //将队列的末尾指针指向新加入的节点
+}
+//方法dequeue：从队列中取出数据
+int dequeue()
+{
+    int value;
+    //检查队列是否为空队列
+    if (!(front==NULL))
+    {
+        if(front==rear) rear=NULL;
+        value=front-&gt;data; //从队列中取出数据
+        front=front-&gt;next; //将队列的前端指针指向下一个
+        return value;
+    }
+    else return -1;
+}
+int main(void)
+{
+    int temp;
+    cout&lt;&lt;&#34;用链表来实现队列&#34;&lt;&lt;endl;
+    cout&lt;&lt;&#34;====================================&#34;&lt;&lt;endl;
+    cout&lt;&lt;&#34;在队列前端加入第1个数据，此数据为1&#34;&lt;&lt;endl;
+    enqueue(1);
+    cout&lt;&lt;&#34;在队列前端加入第2个数据，此数据为3&#34;&lt;&lt;endl;
+    enqueue(3);
+    cout&lt;&lt;&#34;在队列前端加入第3个数据，此数据为5&#34;&lt;&lt;endl;
+    enqueue(5);
+    cout&lt;&lt;&#34;在队列前端加入第4个数据，此数据为7&#34;&lt;&lt;endl;
+    enqueue(7);
+    cout&lt;&lt;&#34;在队列前端加入第5个数据，此数据为9&#34;&lt;&lt;endl;
+    enqueue(9);
+    cout&lt;&lt;&#34;====================================&#34;&lt;&lt;endl;
+    while (1)
+    {
+        if (!(front==NULL))
+        {
+            temp=dequeue();
+            cout&lt;&lt;&#34;从队列前端按序取出的数据为：&#34;&lt;&lt;setw(1)&lt;&lt;temp&lt;&lt;endl;
+        }
+        else
+            break;
+    }
+    cout&lt;&lt;endl;
+    return 0;
+}
+</code></pre></div><h3 id="环形队列">环形队列<a hidden class="anchor" aria-hidden="true" href="#环形队列">#</a></h3>
+<p>上述的数组程序可以实现先进先出的排队策略，但没有办法模拟排队的人走了接下来几位向前走的情形，没法加入其他数据。可以利用环形队列解决这个问题。</p>
+<p>当数据满了，把rear的值重写为0.
+(rear+1)mod n</p>
+<p>front指向最前面的元素的前一个位置。</p>
+<p>rear指向的下一个是front时判断队列已经满了，队列只可以存放n-1个数据。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">/*
+[示范]：实现环状队列数据的进队和出队
+*/
+#include &lt;iostream&gt;
+using namespace std;
+int main(void)
+{  
+    int front,rear,val=0,queue[5]={0};
+    front=rear=-1;
+    while(rear&lt;5&amp;&amp;val!=-1)
+    {  
+        cout&lt;&lt;&#34;请输入一个值以存入队列，欲取出值请输入-2。(结束输入-1)：&#34;;
+        cin&gt;&gt;val;
+        if(val==-2)
+        {  
+            if(front==rear)
+            {  
+                cout&lt;&lt;&#34;[队列已经空了]&#34;&lt;&lt;endl;
+                break;
+            }
+            front++;
+            if (front==5)
+                front=0;
+            cout&lt;&lt;&#34;取出队列值 [&#34;&lt;&lt;queue[front]&lt;&lt;&#34;]&#34;&lt;&lt;endl;
+            queue[front]=0;
+        }
+        else if(val!=-1 &amp;&amp; rear&lt;5)
+        {  
+            if(rear+1==front || rear==4 &amp;&amp; front&lt;=0)
+            {  
+                cout&lt;&lt;&#34;[队列已经满了]&#34;&lt;&lt;endl;
+                break;
+            }
+            rear++;
+            if(rear==5)
+                rear=0;
+            queue[rear]=val;
+        }
+    }
+    cout&lt;&lt;&#34;\n队列剩余数据：&#34;&lt;&lt;endl;
+    if (front==rear)
+        cout&lt;&lt;&#34;队列已空!!&#34;&lt;&lt;endl;
+    else 
+    { 
+        while(front!=rear)
+        {  
+            front++;
+            if (front==5)
+                front=0;
+            cout&lt;&lt;&#34;[&#34;&lt;&lt;queue[front]&lt;&lt;&#34;]&#34;;
+            queue[front]=0;
+        }
+    }
+    cout&lt;&lt;endl;
+    return 0;
+}
+</code></pre></div><p><img loading="lazy" src="/vx_images/327862123248245.png" alt=""  />
+</p>
+<h3 id="双向队列">双向队列<a hidden class="anchor" aria-hidden="true" href="#双向队列">#</a></h3>
+<p>一般双向队列的应用可以分为2种，一种是两端都可以加入数据但只有一段可以取出数据，另一种是两端都可以取出数据但只有一段可以加入数据。</p>
+<h3 id="优先队列">优先队列<a hidden class="anchor" aria-hidden="true" href="#优先队列">#</a></h3>
+<p>每一个元素都赋给了一个优先级，加入任意，但取出时优先级高的先出，不是FIFO了。</p>
+<h2 id="后记">后记<a hidden class="anchor" aria-hidden="true" href="#后记">#</a></h2>
+<p>我是使用devc++打开源代码的，其中可能会用目录寻找错误而导致打不开文件，这是因为编码方式不一样，容易出现汉字乱码，可以试试把文件打开路径的中文改成英文或拼音。</p>
+
+
+  </div>
+
+  <footer class="post-footer">
+    <ul class="post-tags">
+    </ul>
+<nav class="paginav">
+  <a class="next" href="https://tassel234.github.io/posts/note/%E4%BD%BF%E7%94%A8cpp%E5%AE%9E%E7%8E%B0%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84-1%E9%93%BE%E8%A1%A8/">
+    <span class="title">Next »</span>
+    <br>
+    <span>使用Cpp实现数据结构-1（链表）</span>
+  </a>
+</nav>
+
+
+<div class="share-buttons">
+    <a target="_blank" rel="noopener noreferrer" aria-label="share 使用Cpp实现数据结构-2（栈和队列） on twitter"
+        href="https://twitter.com/intent/tweet/?text=%e4%bd%bf%e7%94%a8Cpp%e5%ae%9e%e7%8e%b0%e6%95%b0%e6%8d%ae%e7%bb%93%e6%9e%84-2%ef%bc%88%e6%a0%88%e5%92%8c%e9%98%9f%e5%88%97%ef%bc%89&amp;url=https%3a%2f%2ftassel234.github.io%2fposts%2fnote%2f%25E4%25BD%25BF%25E7%2594%25A8cpp%25E5%25AE%259E%25E7%258E%25B0%25E6%2595%25B0%25E6%258D%25AE%25E7%25BB%2593%25E6%259E%2584-2%25E6%25A0%2588%25E5%2592%258C%25E9%2598%259F%25E5%2588%2597%2f&amp;hashtags=">
+        <svg version="1.1" viewBox="0 0 512 512" xml:space="preserve" height="30px" width="30px" fill="currentColor">
+            <path
+                d="M449.446,0c34.525,0 62.554,28.03 62.554,62.554l0,386.892c0,34.524 -28.03,62.554 -62.554,62.554l-386.892,0c-34.524,0 -62.554,-28.03 -62.554,-62.554l0,-386.892c0,-34.524 28.029,-62.554 62.554,-62.554l386.892,0Zm-253.927,424.544c135.939,0 210.268,-112.643 210.268,-210.268c0,-3.218 0,-6.437 -0.153,-9.502c14.406,-10.421 26.973,-23.448 36.935,-38.314c-13.18,5.824 -27.433,9.809 -42.452,11.648c15.326,-9.196 26.973,-23.602 32.49,-40.92c-14.252,8.429 -30.038,14.56 -46.896,17.931c-13.487,-14.406 -32.644,-23.295 -53.946,-23.295c-40.767,0 -73.87,33.104 -73.87,73.87c0,5.824 0.613,11.494 1.992,16.858c-61.456,-3.065 -115.862,-32.49 -152.337,-77.241c-6.284,10.881 -9.962,23.601 -9.962,37.088c0,25.594 13.027,48.276 32.95,61.456c-12.107,-0.307 -23.448,-3.678 -33.41,-9.196l0,0.92c0,35.862 25.441,65.594 59.311,72.49c-6.13,1.686 -12.72,2.606 -19.464,2.606c-4.751,0 -9.348,-0.46 -13.946,-1.38c9.349,29.426 36.628,50.728 68.965,51.341c-25.287,19.771 -57.164,31.571 -91.8,31.571c-5.977,0 -11.801,-0.306 -17.625,-1.073c32.337,21.15 71.264,33.41 112.95,33.41Z" />
+        </svg>
+    </a>
+    <a target="_blank" rel="noopener noreferrer" aria-label="share 使用Cpp实现数据结构-2（栈和队列） on linkedin"
+        href="https://www.linkedin.com/shareArticle?mini=true&amp;url=https%3a%2f%2ftassel234.github.io%2fposts%2fnote%2f%25E4%25BD%25BF%25E7%2594%25A8cpp%25E5%25AE%259E%25E7%258E%25B0%25E6%2595%25B0%25E6%258D%25AE%25E7%25BB%2593%25E6%259E%2584-2%25E6%25A0%2588%25E5%2592%258C%25E9%2598%259F%25E5%2588%2597%2f&amp;title=%e4%bd%bf%e7%94%a8Cpp%e5%ae%9e%e7%8e%b0%e6%95%b0%e6%8d%ae%e7%bb%93%e6%9e%84-2%ef%bc%88%e6%a0%88%e5%92%8c%e9%98%9f%e5%88%97%ef%bc%89&amp;summary=%e4%bd%bf%e7%94%a8Cpp%e5%ae%9e%e7%8e%b0%e6%95%b0%e6%8d%ae%e7%bb%93%e6%9e%84-2%ef%bc%88%e6%a0%88%e5%92%8c%e9%98%9f%e5%88%97%ef%bc%89&amp;source=https%3a%2f%2ftassel234.github.io%2fposts%2fnote%2f%25E4%25BD%25BF%25E7%2594%25A8cpp%25E5%25AE%259E%25E7%258E%25B0%25E6%2595%25B0%25E6%258D%25AE%25E7%25BB%2593%25E6%259E%2584-2%25E6%25A0%2588%25E5%2592%258C%25E9%2598%259F%25E5%2588%2597%2f">
+        <svg version="1.1" viewBox="0 0 512 512" xml:space="preserve" height="30px" width="30px" fill="currentColor">
+            <path
+                d="M449.446,0c34.525,0 62.554,28.03 62.554,62.554l0,386.892c0,34.524 -28.03,62.554 -62.554,62.554l-386.892,0c-34.524,0 -62.554,-28.03 -62.554,-62.554l0,-386.892c0,-34.524 28.029,-62.554 62.554,-62.554l386.892,0Zm-288.985,423.278l0,-225.717l-75.04,0l0,225.717l75.04,0Zm270.539,0l0,-129.439c0,-69.333 -37.018,-101.586 -86.381,-101.586c-39.804,0 -57.634,21.891 -67.617,37.266l0,-31.958l-75.021,0c0.995,21.181 0,225.717 0,225.717l75.02,0l0,-126.056c0,-6.748 0.486,-13.492 2.474,-18.315c5.414,-13.475 17.767,-27.434 38.494,-27.434c27.135,0 38.007,20.707 38.007,51.037l0,120.768l75.024,0Zm-307.552,-334.556c-25.674,0 -42.448,16.879 -42.448,39.002c0,21.658 16.264,39.002 41.455,39.002l0.484,0c26.165,0 42.452,-17.344 42.452,-39.002c-0.485,-22.092 -16.241,-38.954 -41.943,-39.002Z" />
+        </svg>
+    </a>
+    <a target="_blank" rel="noopener noreferrer" aria-label="share 使用Cpp实现数据结构-2（栈和队列） on reddit"
+        href="https://reddit.com/submit?url=https%3a%2f%2ftassel234.github.io%2fposts%2fnote%2f%25E4%25BD%25BF%25E7%2594%25A8cpp%25E5%25AE%259E%25E7%258E%25B0%25E6%2595%25B0%25E6%258D%25AE%25E7%25BB%2593%25E6%259E%2584-2%25E6%25A0%2588%25E5%2592%258C%25E9%2598%259F%25E5%2588%2597%2f&title=%e4%bd%bf%e7%94%a8Cpp%e5%ae%9e%e7%8e%b0%e6%95%b0%e6%8d%ae%e7%bb%93%e6%9e%84-2%ef%bc%88%e6%a0%88%e5%92%8c%e9%98%9f%e5%88%97%ef%bc%89">
+        <svg version="1.1" viewBox="0 0 512 512" xml:space="preserve" height="30px" width="30px" fill="currentColor">
+            <path
+                d="M449.446,0c34.525,0 62.554,28.03 62.554,62.554l0,386.892c0,34.524 -28.03,62.554 -62.554,62.554l-386.892,0c-34.524,0 -62.554,-28.03 -62.554,-62.554l0,-386.892c0,-34.524 28.029,-62.554 62.554,-62.554l386.892,0Zm-3.446,265.638c0,-22.964 -18.616,-41.58 -41.58,-41.58c-11.211,0 -21.361,4.457 -28.841,11.666c-28.424,-20.508 -67.586,-33.757 -111.204,-35.278l18.941,-89.121l61.884,13.157c0.756,15.734 13.642,28.29 29.56,28.29c16.407,0 29.706,-13.299 29.706,-29.701c0,-16.403 -13.299,-29.702 -29.706,-29.702c-11.666,0 -21.657,6.792 -26.515,16.578l-69.105,-14.69c-1.922,-0.418 -3.939,-0.042 -5.585,1.036c-1.658,1.073 -2.811,2.761 -3.224,4.686l-21.152,99.438c-44.258,1.228 -84.046,14.494 -112.837,35.232c-7.468,-7.164 -17.589,-11.591 -28.757,-11.591c-22.965,0 -41.585,18.616 -41.585,41.58c0,16.896 10.095,31.41 24.568,37.918c-0.639,4.135 -0.99,8.328 -0.99,12.576c0,63.977 74.469,115.836 166.33,115.836c91.861,0 166.334,-51.859 166.334,-115.836c0,-4.218 -0.347,-8.387 -0.977,-12.493c14.564,-6.47 24.735,-21.034 24.735,-38.001Zm-119.474,108.193c-20.27,20.241 -59.115,21.816 -70.534,21.816c-11.428,0 -50.277,-1.575 -70.522,-21.82c-3.007,-3.008 -3.007,-7.882 0,-10.889c3.003,-2.999 7.882,-3.003 10.885,0c12.777,12.781 40.11,17.317 59.637,17.317c19.522,0 46.86,-4.536 59.657,-17.321c3.016,-2.999 7.886,-2.995 10.885,0.008c3.008,3.011 3.003,7.882 -0.008,10.889Zm-5.23,-48.781c-16.373,0 -29.701,-13.324 -29.701,-29.698c0,-16.381 13.328,-29.714 29.701,-29.714c16.378,0 29.706,13.333 29.706,29.714c0,16.374 -13.328,29.698 -29.706,29.698Zm-160.386,-29.702c0,-16.381 13.328,-29.71 29.714,-29.71c16.369,0 29.689,13.329 29.689,29.71c0,16.373 -13.32,29.693 -29.689,29.693c-16.386,0 -29.714,-13.32 -29.714,-29.693Z" />
+        </svg>
+    </a>
+    <a target="_blank" rel="noopener noreferrer" aria-label="share 使用Cpp实现数据结构-2（栈和队列） on facebook"
+        href="https://facebook.com/sharer/sharer.php?u=https%3a%2f%2ftassel234.github.io%2fposts%2fnote%2f%25E4%25BD%25BF%25E7%2594%25A8cpp%25E5%25AE%259E%25E7%258E%25B0%25E6%2595%25B0%25E6%258D%25AE%25E7%25BB%2593%25E6%259E%2584-2%25E6%25A0%2588%25E5%2592%258C%25E9%2598%259F%25E5%2588%2597%2f">
+        <svg version="1.1" viewBox="0 0 512 512" xml:space="preserve" height="30px" width="30px" fill="currentColor">
+            <path
+                d="M449.446,0c34.525,0 62.554,28.03 62.554,62.554l0,386.892c0,34.524 -28.03,62.554 -62.554,62.554l-106.468,0l0,-192.915l66.6,0l12.672,-82.621l-79.272,0l0,-53.617c0,-22.603 11.073,-44.636 46.58,-44.636l36.042,0l0,-70.34c0,0 -32.71,-5.582 -63.982,-5.582c-65.288,0 -107.96,39.569 -107.96,111.204l0,62.971l-72.573,0l0,82.621l72.573,0l0,192.915l-191.104,0c-34.524,0 -62.554,-28.03 -62.554,-62.554l0,-386.892c0,-34.524 28.029,-62.554 62.554,-62.554l386.892,0Z" />
+        </svg>
+    </a>
+    <a target="_blank" rel="noopener noreferrer" aria-label="share 使用Cpp实现数据结构-2（栈和队列） on whatsapp"
+        href="https://api.whatsapp.com/send?text=%e4%bd%bf%e7%94%a8Cpp%e5%ae%9e%e7%8e%b0%e6%95%b0%e6%8d%ae%e7%bb%93%e6%9e%84-2%ef%bc%88%e6%a0%88%e5%92%8c%e9%98%9f%e5%88%97%ef%bc%89%20-%20https%3a%2f%2ftassel234.github.io%2fposts%2fnote%2f%25E4%25BD%25BF%25E7%2594%25A8cpp%25E5%25AE%259E%25E7%258E%25B0%25E6%2595%25B0%25E6%258D%25AE%25E7%25BB%2593%25E6%259E%2584-2%25E6%25A0%2588%25E5%2592%258C%25E9%2598%259F%25E5%2588%2597%2f">
+        <svg version="1.1" viewBox="0 0 512 512" xml:space="preserve" height="30px" width="30px" fill="currentColor">
+            <path
+                d="M449.446,0c34.525,0 62.554,28.03 62.554,62.554l0,386.892c0,34.524 -28.03,62.554 -62.554,62.554l-386.892,0c-34.524,0 -62.554,-28.03 -62.554,-62.554l0,-386.892c0,-34.524 28.029,-62.554 62.554,-62.554l386.892,0Zm-58.673,127.703c-33.842,-33.881 -78.847,-52.548 -126.798,-52.568c-98.799,0 -179.21,80.405 -179.249,179.234c-0.013,31.593 8.241,62.428 23.927,89.612l-25.429,92.884l95.021,-24.925c26.181,14.28 55.659,21.807 85.658,21.816l0.074,0c98.789,0 179.206,-80.413 179.247,-179.243c0.018,-47.895 -18.61,-92.93 -52.451,-126.81Zm-126.797,275.782l-0.06,0c-26.734,-0.01 -52.954,-7.193 -75.828,-20.767l-5.441,-3.229l-56.386,14.792l15.05,-54.977l-3.542,-5.637c-14.913,-23.72 -22.791,-51.136 -22.779,-79.287c0.033,-82.142 66.867,-148.971 149.046,-148.971c39.793,0.014 77.199,15.531 105.329,43.692c28.128,28.16 43.609,65.592 43.594,105.4c-0.034,82.149 -66.866,148.983 -148.983,148.984Zm81.721,-111.581c-4.479,-2.242 -26.499,-13.075 -30.604,-14.571c-4.105,-1.495 -7.091,-2.241 -10.077,2.241c-2.986,4.483 -11.569,14.572 -14.182,17.562c-2.612,2.988 -5.225,3.364 -9.703,1.12c-4.479,-2.241 -18.91,-6.97 -36.017,-22.23c-13.314,-11.876 -22.304,-26.542 -24.916,-31.026c-2.612,-4.484 -0.279,-6.908 1.963,-9.14c2.016,-2.007 4.48,-5.232 6.719,-7.847c2.24,-2.615 2.986,-4.484 4.479,-7.472c1.493,-2.99 0.747,-5.604 -0.374,-7.846c-1.119,-2.241 -10.077,-24.288 -13.809,-33.256c-3.635,-8.733 -7.327,-7.55 -10.077,-7.688c-2.609,-0.13 -5.598,-0.158 -8.583,-0.158c-2.986,0 -7.839,1.121 -11.944,5.604c-4.105,4.484 -15.675,15.32 -15.675,37.364c0,22.046 16.048,43.342 18.287,46.332c2.24,2.99 31.582,48.227 76.511,67.627c10.685,4.615 19.028,7.371 25.533,9.434c10.728,3.41 20.492,2.929 28.209,1.775c8.605,-1.285 26.499,-10.833 30.231,-21.295c3.732,-10.464 3.732,-19.431 2.612,-21.298c-1.119,-1.869 -4.105,-2.99 -8.583,-5.232Z" />
+        </svg>
+    </a>
+    <a target="_blank" rel="noopener noreferrer" aria-label="share 使用Cpp实现数据结构-2（栈和队列） on telegram"
+        href="https://telegram.me/share/url?text=%e4%bd%bf%e7%94%a8Cpp%e5%ae%9e%e7%8e%b0%e6%95%b0%e6%8d%ae%e7%bb%93%e6%9e%84-2%ef%bc%88%e6%a0%88%e5%92%8c%e9%98%9f%e5%88%97%ef%bc%89&amp;url=https%3a%2f%2ftassel234.github.io%2fposts%2fnote%2f%25E4%25BD%25BF%25E7%2594%25A8cpp%25E5%25AE%259E%25E7%258E%25B0%25E6%2595%25B0%25E6%258D%25AE%25E7%25BB%2593%25E6%259E%2584-2%25E6%25A0%2588%25E5%2592%258C%25E9%2598%259F%25E5%2588%2597%2f">
+        <svg version="1.1" xml:space="preserve" viewBox="2 2 28 28" height="30px" width="30px" fill="currentColor">
+            <path
+                d="M26.49,29.86H5.5a3.37,3.37,0,0,1-2.47-1,3.35,3.35,0,0,1-1-2.47V5.48A3.36,3.36,0,0,1,3,3,3.37,3.37,0,0,1,5.5,2h21A3.38,3.38,0,0,1,29,3a3.36,3.36,0,0,1,1,2.46V26.37a3.35,3.35,0,0,1-1,2.47A3.38,3.38,0,0,1,26.49,29.86Zm-5.38-6.71a.79.79,0,0,0,.85-.66L24.73,9.24a.55.55,0,0,0-.18-.46.62.62,0,0,0-.41-.17q-.08,0-16.53,6.11a.59.59,0,0,0-.41.59.57.57,0,0,0,.43.52l4,1.24,1.61,4.83a.62.62,0,0,0,.63.43.56.56,0,0,0,.4-.17L16.54,20l4.09,3A.9.9,0,0,0,21.11,23.15ZM13.8,20.71l-1.21-4q8.72-5.55,8.78-5.55c.15,0,.23,0,.23.16a.18.18,0,0,1,0,.06s-2.51,2.3-7.52,6.8Z" />
+        </svg>
+    </a>
+</div>
+  </footer>
+</article>
+    </main>
+    
+<footer class="footer">
+    <span>&copy; 2023 <a href="https://tassel234.github.io/">hrkr&#39;s Blog</a></span>
+    <span>
+        Powered by
+        <a href="https://gohugo.io/" rel="noopener noreferrer" target="_blank">Hugo</a> &
+        <a href="https://github.com/adityatelange/hugo-PaperMod/" rel="noopener" target="_blank">PaperMod</a>
+    </span>
+</footer>
+<a href="#top" aria-label="go to top" title="Go to Top (Alt + G)" class="top-link" id="top-link" accesskey="g">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentColor">
+        <path d="M12 6H0l6-6z" />
+    </svg>
+</a>
+
+<script>
+    let menu = document.getElementById('menu')
+    if (menu) {
+        menu.scrollLeft = localStorage.getItem("menu-scroll-position");
+        menu.onscroll = function () {
+            localStorage.setItem("menu-scroll-position", menu.scrollLeft);
+        }
+    }
+
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener("click", function (e) {
+            e.preventDefault();
+            var id = this.getAttribute("href").substr(1);
+            if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView({
+                    behavior: "smooth"
+                });
+            } else {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView();
+            }
+            if (id === "top") {
+                history.replaceState(null, null, " ");
+            } else {
+                history.pushState(null, null, `#${id}`);
+            }
+        });
+    });
+
+</script>
+<script>
+    var mybutton = document.getElementById("top-link");
+    window.onscroll = function () {
+        if (document.body.scrollTop > 800 || document.documentElement.scrollTop > 800) {
+            mybutton.style.visibility = "visible";
+            mybutton.style.opacity = "1";
+        } else {
+            mybutton.style.visibility = "hidden";
+            mybutton.style.opacity = "0";
+        }
+    };
+
+</script>
+<script>
+    document.getElementById("theme-toggle").addEventListener("click", () => {
+        if (document.body.className.includes("dark")) {
+            document.body.classList.remove('dark');
+            localStorage.setItem("pref-theme", 'light');
+        } else {
+            document.body.classList.add('dark');
+            localStorage.setItem("pref-theme", 'dark');
+        }
+    })
+
+</script>
+<script>
+    document.querySelectorAll('pre > code').forEach((codeblock) => {
+        const container = codeblock.parentNode.parentNode;
+
+        const copybutton = document.createElement('button');
+        copybutton.classList.add('copy-code');
+        copybutton.innerHTML = 'copy';
+
+        function copyingDone() {
+            copybutton.innerHTML = 'copied!';
+            setTimeout(() => {
+                copybutton.innerHTML = 'copy';
+            }, 2000);
+        }
+
+        copybutton.addEventListener('click', (cb) => {
+            if ('clipboard' in navigator) {
+                navigator.clipboard.writeText(codeblock.textContent);
+                copyingDone();
+                return;
+            }
+
+            const range = document.createRange();
+            range.selectNodeContents(codeblock);
+            const selection = window.getSelection();
+            selection.removeAllRanges();
+            selection.addRange(range);
+            try {
+                document.execCommand('copy');
+                copyingDone();
+            } catch (e) { };
+            selection.removeRange(range);
+        });
+
+        if (container.classList.contains("highlight")) {
+            container.appendChild(copybutton);
+        } else if (container.parentNode.firstChild == container) {
+            
+        } else if (codeblock.parentNode.parentNode.parentNode.parentNode.parentNode.nodeName == "TABLE") {
+            
+            codeblock.parentNode.parentNode.parentNode.parentNode.parentNode.appendChild(copybutton);
+        } else {
+            
+            codeblock.parentNode.appendChild(copybutton);
+        }
+    });
+</script>
+</body>
+
+</html>
