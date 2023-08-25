@@ -103,8 +103,8 @@
   "keywords": [
     
   ],
-  "articleBody": "堆栈简介 基本知识 也可以简写为栈，具有后进先出的特性（LIFO）\n与链表和数组一样，栈的数据也是线性排列，但在栈中，添加和删除数据的操作只能在一端进行，访问数据也只能访问到顶端的数据。想要访问中间的数据时，就必须通过出栈操作将目标数据移到栈顶才行。\n放入栈的顶端，称为压入PUSH,从顶端取出，称为弹出pop\n栈只能在一端操作，这一点看起来似乎十分不便，但在只需要访问最新数据时，使用它就比较方便了。另外，我们将要在接下来学习深度优先搜索算法，通常会选择最新的数据作为候补顶点。在候补顶点的管理上就可以使用栈。\n代码实现 使用数组实现堆栈 #include  #include  #define MAXSTACK 100\t//定义堆栈的最大容量 using namespace std; int stack[MAXSTACK];\t//声明用于堆栈操作的数组 int top=-1;\t//堆栈的顶端 //判断是否为空堆栈 int isEmpty() { if(top==-1) return 1; else return 0; } //将指定的数据压入堆栈 int push(int data) { if(top=MAXSTACK) { coutvalue; push(value); } cout//发牌程序 #include  #include  #include  #include  using namespace std; void Swap(int*,int*); void push(int statck[],int MAX,int val); int pop(int stack[]); int top=-1; int main(void) { int card[52],stack[52]={0}; int i,j,k=0, ascVal; char suit[4][10]={\"草花\",\"方块\",\"红桃\",\"黑桃\"}; int style; srand((unsigned)time(NULL));//srand函数是C语言中的种子函数,它的功能是生成一个随机数。 //srand(1); 直接使用1来初始化种子。不过为了防止随机数每次重复，常常使用系统时间来初始化， //即使用 time函数来获得系统时间，它的返回值为从 00:00:00 GMT, January 1, 1970 到现在所持续的秒数， //然后将time_t型数据转化为(unsigned)型再传给srand函数，即: srand((unsigned) time(\u0026t)); //还有一个经常用法，不需要定义time_t型t变量,即: srand((unsigned) time(NULL)); //直接传入一个空指针，因为你的程序中往往并不需要经过参数获得的数据。 //若去掉这段语句，会造成接下来的数据一直保持在同一个值 for (i=0;i=0) { style = stack[top]/13;\t//计算扑克牌的花色 switch(style)\t//扑克牌花色对应的图标 { case 0:\t//梅花 ascVal=0; break; case 1:\t//方块 ascVal=1; break; case 2:\t//红心 ascVal=2; break; case 3:\t//黑桃 ascVal=3; break; } cout=MAX-1) cout使用链表实现堆栈 使用链表设计堆栈的好处是链表的大小是可以变动的，不会造成内存空间的浪费 缺点是设计复杂\n#include  #include  #include  using namespace std; class Node\t//声明堆栈链表节点 { public: int data;\t//声明存放堆栈数据的变量 class Node *next;\t//堆栈中用来指向下一个节点的指针 }; typedef class Node Stack_Node;\t//定义堆栈中节点的新类型 typedef Stack_Node *Linked_Stack;\t//定义链表堆栈的新类型 Linked_Stack top=NULL;\t//指向堆栈顶端的指针 //判断是否为空堆栈 int isEmpty() { if(top==NULL) return 1; else return 0; } //将指定的数据压入堆栈 void push(int data) { Linked_Stack new_add_node;\t//新加入节点的指针 new_add_node=new Stack_Node;//分配内存给新节点 new_add_node-data=data;\t//将传入的值赋值给节点的数据变量 new_add_node-next=top;\t//将新节点指向堆栈的顶端 top=new_add_node;\t//新节点成为堆栈的顶端 } //从堆栈弹出数据 int pop() { Linked_Stack ptr;\t//指向堆栈顶端的指针 int temp; if(isEmpty())\t//判断堆栈是否为空,如果是则返回-1 { coutnext;\t//将堆栈顶端的指针指向下一个节点 temp=ptr-data;\t//取出堆栈的数据 free(ptr);\t//将节点占用的内存释放 return temp;\t//将从堆栈取出的数据返回给主程序 } } //主程序 int main(void) { int value; int i; coutvalue; push(value); } cout堆栈类模板的实现 样板的设计概念也被称为泛型编程，通过对模板输入特定的数据类型可以形成对应的函数或类。 C++有stl模板库，但本书并没有使用。\n#include  #include  using namespace std; template // 定义链表中的节点 struct Node { Type data;\t// 记录数据 Node* next;\t// 记录下一笔节点的地址 }; template class LinkedList\t// 链表类型 { private: Node* first;\t// 指到第一个节点的指针 public: LinkedList()\t// 构造函数 { first = NULL; } void addNode(Type data);\t// 加入节点 void display();\t// 显示所有的节点 }; templatevoid LinkedList::addNode(Type data) { Node* newNode = new Node;\t// 新增一个节点 newNode-data = data;\t// 记录数据 newNode-next = first;\t// 指向前一个节点 first = newNode;\t// 指向新的节点 } templatevoid LinkedList::display() { Node* currentNode = first; // 从第一个节点开始显示 while( currentNode != NULL ) { cout data \"; currentNode = currentNode-next; } } int main() { LinkedList dblList;\t// 建立一个存储double类型数据的链表 double num;\t// 记录输入的数据 char ch;\t// 记录用户的选择 do{ cout  num; dblList.addNode( num ); cout  ch; }while( ch != 'n' ); cout #include  #include  using namespace std; // 设置类样版的类型参数Type的默认值为整数int,非类型参数的类型为整数int,默认值为5 template // 声明类样板 class Stack { private: Type st[size];\t// 声明一数组作为堆栈的存储空间 int top;\t// 堆栈数据顶端的索引 public: Stack() { top = -1; } void push(Type data);\t// 将数据压入堆栈 Type pop();\t// 将数据从堆栈中弹出 }; template void Stack:: push ( Type data ) { st[ ++top ] = data; } template Type Stack:: pop() { return st[ top-- ]; } int main() { Stack stk_1;\t// 声明一个堆栈对象, 并使用其默认值 Stackstk_2;\t// 声明堆栈对象, 其类型为字符串, 大小为4 stk_1.push( 11 ); stk_1.push( 22 ); stk_1.push( 33 ); cout 递归法详解 斐波那契数列 /* [示范]：斐波那契数列的递归程序 */ #include using namespace std; int fib(int);\t//fib()函数的原型声明 int main() { int i,n; coutn; for(i=0;i汉诺塔问题 /* [示范]:利用汉诺塔函数求出不同圆盘数时圆盘的移动步骤 */ #include  using namespace std; void hanoi(int, int, int, int); // 函数原型 int main(void) { int j; coutj; hanoi(j,1, 2, 3); return 0; } void hanoi(int n, int p1, int p2, int p3) { if (n==1) cout由一些数学公式可得汉诺塔的执行步骤最小为$2^{n} -1$,n代表圆盘的个数\n动态规划法（DPA） 动态规划法（Dynamic Programming Aigorithm）是一种优化算法策略，主要应用于求解具有重叠子问题和最优子结构性质的问题。动态规划法的核心思想是将问题分解为更小的子问题(和分治法类似)，并将子问题的解存储在一个表中（分治法没有的），从而避免了对相同子问题的重复计算。\n动态规划法的基本步骤如下：\n 定义子问题：将原问题分解为若干个子问题。 定义状态：用数学表示子问题的解。 定义状态转移方程：描述子问题之间的关系，如何通过子问题的解计算原问题的解。 初始化边界条件：确定状态转移方程的初始值。 自底向上或自顶向下计算：根据状态转移方程逐步计算子问题的解，最终得到原问题的解。  动态规划法可以应用于各种问题，如最短路径问题、背包问题、字符串匹配问题等。动态规划法的一个重要应用场景是求解最优化问题，例如最大（最小）问题。通过动态规划，可以在多项式时间内求解这些问题，而其他方法（如穷举法）可能需要指数级时间。\n例如使用递归法进行斐波那契数列的Fib(9)计算时，需要反复计算Fib(4),Fib(5)等值，浪费了时间，使用动态规划算法将计算过的结果储存起来，在后续的计算中只需要判断数值的存在与否，若存在就直接调用。\nDijkstra 算法 Dijkstra算法,中文名音译作迪杰斯特拉算法或戴克斯特拉算法。\n回溯法—老鼠走迷宫 回溯法（Backtracking）是一种用于搜索解空间的算法，通常在组合问题、优化问题和约束满足问题等领域中使用。回溯法通过对解空间的节点进行深度优先搜索，尝试找到问题的解。当搜索到某个节点时，如果该节点不能继续搜索下去，就回溯到该节点的父节点并尝试其他分支。回溯法的基本思想是：先广搜索，后深入搜索。\n以下是回溯法的一般步骤：\n 定义问题的解空间：首先需要明确问题的解空间，即所有可能的解的集合。 确定解空间的组织结构：将解空间组织成树形结构，每个节点表示一个部分解。 设计回溯算法的递归函数：递归函数需要完成以下功能： a. 判断当前节点是否包含问题的解，如果是，则保存解并返回。 b. 如果当前节点不能包含问题的解，则回溯到父节点并尝试其他分支。  回溯法是枚举法的一种。\n老鼠走迷宫就是一种回溯法的应用。老鼠走迷宫问题的描述是:假设把一只老鼠放在一个没有盖子的大迷宫盒的入口处，盒中有许多墙，使得大部分路径都被挡住而无法前进。老鼠可以采用尝试错误的方法找到出口。不过，这只老鼠必须在走错路时就退回来并把走过的路记下来，避免下次走重复的路，就这样直到找到出口为止。简单来说，老鼠行进时必须遵守以下3 个原则:\n(1)一次只能走一格。\n(2) 遇到墙无法往前走时，则退回一步找找看是否有其他的路可以走。\n(3)走过的路不会再走第二次。\n人们对这个问题感兴趣的原因是它可以提供一种典型堆栈应用的思考方法。\n/*题目：设计一个 C++程序，使用链表堆栈来找出老鼠走迷宫的路线，1 表示该处有墙无法通过， 0表示[i][i]处无墙可通行，并且将走过的位置对应的数组元素内容标记为 2。*/ #include  #define EAST MAZE[x][y+1] //定义东方的相对位置 #define WEST MAZE[x][y-1] //定义西方的相对位置 #define SOUTH MAZE[x+1][y]\t//定义南方的相对位置 #define NORTH MAZE[x-1][y]\t//定义北方的相对位置 using namespace std; const int ExitX = 8; //定义出口的X坐标在第8列 const int ExitY = 10; //定义出口的Y坐标在第10行 struct list { int x,y; struct list* next; }; typedef struct list node; typedef node* link; int MAZE[10][12] = {1,1,1,1,1,1,1,1,1,1,1,1, //声明迷宫数组 1,0,0,0,1,1,1,1,1,1,1,1, 1,1,1,0,1,1,0,0,0,0,1,1, 1,1,1,0,1,1,0,1,1,0,1,1, 1,1,1,0,0,0,0,1,1,0,1,1,//1是墙，0是可走的路 1,1,1,0,1,1,0,1,1,0,1,1, 1,1,1,0,1,1,0,1,1,0,1,1, 1,1,1,1,1,1,0,1,1,0,1,1, 1,1,0,0,0,0,0,0,1,0,0,1,//最右下角的0代表出口 1,1,1,1,1,1,1,1,1,1,1,1}; link push(link stack,int x,int y); link pop(link stack,int* x,int* y); int chkExit(int ,int ,int,int); int main(void) { int i,j; link path = NULL; int x=1;\t//入口的X坐标 int y=1; //入口的Y坐标 coutx=x; newnode-y=y; newnode-next=stack; stack=newnode; return stack; } link pop(link stack,int* x,int* y) { link top; if(stack!=NULL) { top=stack; stack=stack-next; *x=top-x; *y=top-y; delete top; return stack; } else *x=-1; return stack; } int chkExit(int x,int y,int ex,int ey) { if(x==ex\u0026\u0026y==ey) { if(NORTH==1||SOUTH==1||WEST==1||EAST==2) return 1; if(NORTH==1||SOUTH==1||WEST==2||EAST==1) return 1; if(NORTH==1||SOUTH==2||WEST==1||EAST==1) return 1; if(NORTH==2||SOUTH==1||WEST==1||EAST==1) return 1; } return 0; } 八皇后问题 八皇后问题也是一种常见的堆栈应用实例。在国际象棋中的皇后可以对棋盘中的其他棋子直吃、横吃和对角斜吃(左斜吃或右斜吃都可)。现在要放入多个皇后到棋盘上，后放入的新皇后，放入前必须考虑所放位置的直线方向、横线方向或对角线方向是否已被放置了旧皇后，否则就会被先放入的旧皇后吃掉。这个问题难倒了高斯，但如果使用计算机思维和计算机的算力可以比较轻松的求得结果。\n#include  #include  #include  #define EIGHT 8 //定义堆栈的最大容量 #define TRUE 1 #define FALSE 0 using namespace std; int queen[EIGHT]; //存放8个皇后的行位置 int number=0; //计算总共有几组解 //决定皇后存放的位置 //输出所需要的结果 int attack(int ,int); void print_table() { int x=0,y=0; number+=1; cout\"; else cout\"; cout算术表达式的表示法 我们正常的算数公式书写是中序法，而对于计算机来说处理较为复杂，解决方法就是使用前序法与后序法（后序法只使用一个堆栈缓冲区，前序法两个）。\n中序法转为前序法与后序法 可以使用括号法，值得注意的是每两个数进行一次运算就要一次括号。\n也可以使用堆栈法。\n(1)从右到左读进中序法表达式的每个字符\n(2)如果读进的字符为操作数，则直接输出到前序法表达式中。\n(3) 如果遇到“(”，则弹出堆内的运算符，直到弹出到一个“)”，两者互相抵消。\n(4)“)”的优先级在堆内比任何运算符都小，任何运算符的优先级都高过它，不过在堆栈外却是优先级最高者。\n(5)当运算符准备进入堆栈内时，必须和堆顶端的运算符比较，如果外面的运算符优先级高于或等于堆栈顶端的运算符则压入堆栈，如果优先级低于堆栈顶端的运算符就把堆栈顶端的运算符弹出直到堆栈顶端的运算符优先级低于外面的运算符或堆栈为空时，就再把外面这个运算符压入堆栈\n(6) 中序法表达式读完后，如果运算符堆栈不是空的，则将其内的运算符逐一弹出，输出到前序法表达式中即可。 前序法与后序法表达式转为中序法表达式 也可以使用括号法或堆栈法。\n 括号法的乘法除法运算符在前序法向后括一个，加减法括两个。符号向右取代 括号法的乘法除法运算符在后序法向前括一个，加减法括两个。符号向左取代  中序法求值 需要两个堆栈，一个用于存储运算符，一个存放操作数。 但计算方法和人算大同小异。\n前序法求值 需要两个堆栈，一个用于存储表达式，一个存放操作数。不需要比较操作符的优先级。\n后序法求值 只需要一个堆栈。不需要比较操作符的优先级，计算非常直观简单\n队列 (1)图遍历的广度优先搜索法 (BFS) 就是使用队列。 (2)可用于计算机的模拟，在模拟过程中，由于各种事件 的输入时间不一定，可以使用队列来反映真实的情况。 (3)可用于 CPU 的作业调度 ，利用队列来处理，可实现作业先到先执行的要求。 (4)外围设备联机并发处理系统的应用，也就是让输入/输出的数据先在高速磁驱动器中完成，把磁盘当成一个大型的工作缓冲区，如此可让输入/输出操作快速完成，因而缩短了系统响应的时间，接下来由系统软件负责将磁盘数据输出到打印机，其中就应用了队列的工作原理。\n认识队列 队列的基本操作 create,add,delete,front,empty\n用数组来实现队列 好处是算法简单，只需要front和rear来指队首和队尾，初始值都赋上-1，add,delete时对数据增加。 rear指向最后的元素，front指向最前面的元素的前一个位置，刚开始就是-1。 坏处是只能声明固定长度。\n/* [示范]：实现往队列中加入数据和从队列中取出数据 */ #include  using namespace std; const int MAX=20; //定义队列的大小 int main(void) { int front,rear,val,queue[MAX]={0}; char ch; front=rear=-1; while(rearch; switch(ch) { case 'I': coutval; rear++; queue[rear]=val; break; case 'G': if(rearfront) { front++; cout=rear) { coutfront) { front++; cout用链表实现队列 /* [示范]：以链表来实现队列 */ #include  #include  #include  using namespace std; class Node { public: int data; class Node *next; }; typedef class Node QueueNode; typedef QueueNode *QueueByLinkedList; QueueByLinkedList front=NULL; QueueByLinkedList rear=NULL; //方法enqueue：把数据加入队列 void enqueue(int value) { QueueByLinkedList node; //建立节点 node=new QueueNode; node-data=value; node-next=NULL; //检查是否为空队列 if (rear==NULL) front=node; //如果rear为NULL，表示这是队列的第一个元素（节点） else rear-next=node; //将新元素（新节点）连接至队列末尾 rear=node; //将队列的末尾指针指向新加入的节点 } //方法dequeue：从队列中取出数据 int dequeue() { int value; //检查队列是否为空队列 if (!(front==NULL)) { if(front==rear) rear=NULL; value=front-data; //从队列中取出数据 front=front-next; //将队列的前端指针指向下一个 return value; } else return -1; } int main(void) { int temp; cout环形队列 上述的数组程序可以实现先进先出的排队策略，但没有办法模拟排队的人走了接下来几位向前走的情形，没法加入其他数据。可以利用环形队列解决这个问题。\n当数据满了，把rear的值重写为0. (rear+1)mod n\nfront指向最前面的元素的前一个位置。\nrear指向的下一个是front时判断队列已经满了，队列只可以存放n-1个数据。\n/* [示范]：实现环状队列数据的进队和出队 */ #include  using namespace std; int main(void) { int front,rear,val=0,queue[5]={0}; front=rear=-1; while(rearval; if(val==-2) { if(front==rear) { cout双向队列 一般双向队列的应用可以分为2种，一种是两端都可以加入数据但只有一段可以取出数据，另一种是两端都可以取出数据但只有一段可以加入数据。\n优先队列 每一个元素都赋给了一个优先级，加入任意，但取出时优先级高的先出，不是FIFO了。\n后记 我是使用devc++打开源代码的，其中可能会用目录寻找错误而导致打不开文件，这是因为编码方式不一样，容易出现汉字乱码，可以试试把文件打开路径的中文改成英文或拼音。\n",
-  "wordCount" : "8465",
+  "articleBody": "堆栈简介 基本知识 也可以简写为栈，具有后进先出的特性（LIFO）\n与链表和数组一样，栈的数据也是线性排列，但在栈中，添加和删除数据的操作只能在一端进行，访问数据也只能访问到顶端的数据。想要访问中间的数据时，就必须通过出栈操作将目标数据移到栈顶才行。\n放入栈的顶端，称为压入PUSH,从顶端取出，称为弹出pop\n栈只能在一端操作，这一点看起来似乎十分不便，但在只需要访问最新数据时，使用它就比较方便了。另外，我们将要在接下来学习深度优先搜索算法，通常会选择最新的数据作为候补顶点。在候补顶点的管理上就可以使用栈。\n代码实现 使用数组实现堆栈 #include  #include  #define MAXSTACK 100\t//定义堆栈的最大容量 using namespace std; int stack[MAXSTACK];\t//声明用于堆栈操作的数组 int top=-1;\t//堆栈的顶端 //判断是否为空堆栈 int isEmpty() { if(top==-1) return 1; else return 0; } //将指定的数据压入堆栈 int push(int data) { if(top=MAXSTACK) { coutvalue; push(value); } cout//发牌程序 #include  #include  #include  #include  using namespace std; void Swap(int*,int*); void push(int statck[],int MAX,int val); int pop(int stack[]); int top=-1; int main(void) { int card[52],stack[52]={0}; int i,j,k=0, ascVal; char suit[4][10]={\"草花\",\"方块\",\"红桃\",\"黑桃\"}; int style; srand((unsigned)time(NULL));//srand函数是C语言中的种子函数,它的功能是生成一个随机数。 //srand(1); 直接使用1来初始化种子。不过为了防止随机数每次重复，常常使用系统时间来初始化， //即使用 time函数来获得系统时间，它的返回值为从 00:00:00 GMT, January 1, 1970 到现在所持续的秒数， //然后将time_t型数据转化为(unsigned)型再传给srand函数，即: srand((unsigned) time(\u0026t)); //还有一个经常用法，不需要定义time_t型t变量,即: srand((unsigned) time(NULL)); //直接传入一个空指针，因为你的程序中往往并不需要经过参数获得的数据。 //若去掉这段语句，会造成接下来的数据一直保持在同一个值 for (i=0;i=0) { style = stack[top]/13;\t//计算扑克牌的花色 switch(style)\t//扑克牌花色对应的图标 { case 0:\t//梅花 ascVal=0; break; case 1:\t//方块 ascVal=1; break; case 2:\t//红心 ascVal=2; break; case 3:\t//黑桃 ascVal=3; break; } cout=MAX-1) cout使用链表实现堆栈 使用链表设计堆栈的好处是链表的大小是可以变动的，不会造成内存空间的浪费 缺点是设计复杂\n#include  #include  #include  using namespace std; class Node\t//声明堆栈链表节点 { public: int data;\t//声明存放堆栈数据的变量 class Node *next;\t//堆栈中用来指向下一个节点的指针 }; typedef class Node Stack_Node;\t//定义堆栈中节点的新类型 typedef Stack_Node *Linked_Stack;\t//定义链表堆栈的新类型 Linked_Stack top=NULL;\t//指向堆栈顶端的指针 //判断是否为空堆栈 int isEmpty() { if(top==NULL) return 1; else return 0; } //将指定的数据压入堆栈 void push(int data) { Linked_Stack new_add_node;\t//新加入节点的指针 new_add_node=new Stack_Node;//分配内存给新节点 new_add_node-data=data;\t//将传入的值赋值给节点的数据变量 new_add_node-next=top;\t//将新节点指向堆栈的顶端 top=new_add_node;\t//新节点成为堆栈的顶端 } //从堆栈弹出数据 int pop() { Linked_Stack ptr;\t//指向堆栈顶端的指针 int temp; if(isEmpty())\t//判断堆栈是否为空,如果是则返回-1 { coutnext;\t//将堆栈顶端的指针指向下一个节点 temp=ptr-data;\t//取出堆栈的数据 free(ptr);\t//将节点占用的内存释放 return temp;\t//将从堆栈取出的数据返回给主程序 } } //主程序 int main(void) { int value; int i; coutvalue; push(value); } cout堆栈类模板的实现 样板的设计概念也被称为泛型编程，通过对模板输入特定的数据类型可以形成对应的函数或类。 C++有stl模板库，但本书并没有使用。\n#include  #include  using namespace std; template // 定义链表中的节点 struct Node { Type data;\t// 记录数据 Node* next;\t// 记录下一笔节点的地址 }; template class LinkedList\t// 链表类型 { private: Node* first;\t// 指到第一个节点的指针 public: LinkedList()\t// 构造函数 { first = NULL; } void addNode(Type data);\t// 加入节点 void display();\t// 显示所有的节点 }; templatevoid LinkedList::addNode(Type data) { Node* newNode = new Node;\t// 新增一个节点 newNode-data = data;\t// 记录数据 newNode-next = first;\t// 指向前一个节点 first = newNode;\t// 指向新的节点 } templatevoid LinkedList::display() { Node* currentNode = first; // 从第一个节点开始显示 while( currentNode != NULL ) { cout data \"; currentNode = currentNode-next; } } int main() { LinkedList dblList;\t// 建立一个存储double类型数据的链表 double num;\t// 记录输入的数据 char ch;\t// 记录用户的选择 do{ cout  num; dblList.addNode( num ); cout  ch; }while( ch != 'n' ); cout #include  #include  using namespace std; // 设置类样版的类型参数Type的默认值为整数int,非类型参数的类型为整数int,默认值为5 template // 声明类样板 class Stack { private: Type st[size];\t// 声明一数组作为堆栈的存储空间 int top;\t// 堆栈数据顶端的索引 public: Stack() { top = -1; } void push(Type data);\t// 将数据压入堆栈 Type pop();\t// 将数据从堆栈中弹出 }; template void Stack:: push ( Type data ) { st[ ++top ] = data; } template Type Stack:: pop() { return st[ top-- ]; } int main() { Stack stk_1;\t// 声明一个堆栈对象, 并使用其默认值 Stackstk_2;\t// 声明堆栈对象, 其类型为字符串, 大小为4 stk_1.push( 11 ); stk_1.push( 22 ); stk_1.push( 33 ); cout 队列 (1)图遍历的广度优先搜索法 (BFS) 就是使用队列。 (2)可用于计算机的模拟，在模拟过程中，由于各种事件 的输入时间不一定，可以使用队列来反映真实的情况。 (3)可用于 CPU 的作业调度 ，利用队列来处理，可实现作业先到先执行的要求。 (4)外围设备联机并发处理系统的应用，也就是让输入/输出的数据先在高速磁驱动器中完成，把磁盘当成一个大型的工作缓冲区，如此可让输入/输出操作快速完成，因而缩短了系统响应的时间，接下来由系统软件负责将磁盘数据输出到打印机，其中就应用了队列的工作原理。\n认识队列 队列的基本操作 create,add,delete,front,empty\n用数组来实现队列 好处是算法简单，只需要front和rear来指队首和队尾，初始值都赋上-1，add,delete时对数据增加。 rear指向最后的元素，front指向最前面的元素的前一个位置，刚开始就是-1。 坏处是只能声明固定长度。\n/* [示范]：实现往队列中加入数据和从队列中取出数据 */ #include  using namespace std; const int MAX=20; //定义队列的大小 int main(void) { int front,rear,val,queue[MAX]={0}; char ch; front=rear=-1; while(rearch; switch(ch) { case 'I': coutval; rear++; queue[rear]=val; break; case 'G': if(rearfront) { front++; cout=rear) { coutfront) { front++; cout用链表实现队列 /* [示范]：以链表来实现队列 */ #include  #include  #include  using namespace std; class Node { public: int data; class Node *next; }; typedef class Node QueueNode; typedef QueueNode *QueueByLinkedList; QueueByLinkedList front=NULL; QueueByLinkedList rear=NULL; //方法enqueue：把数据加入队列 void enqueue(int value) { QueueByLinkedList node; //建立节点 node=new QueueNode; node-data=value; node-next=NULL; //检查是否为空队列 if (rear==NULL) front=node; //如果rear为NULL，表示这是队列的第一个元素（节点） else rear-next=node; //将新元素（新节点）连接至队列末尾 rear=node; //将队列的末尾指针指向新加入的节点 } //方法dequeue：从队列中取出数据 int dequeue() { int value; //检查队列是否为空队列 if (!(front==NULL)) { if(front==rear) rear=NULL; value=front-data; //从队列中取出数据 front=front-next; //将队列的前端指针指向下一个 return value; } else return -1; } int main(void) { int temp; cout环形队列 上述的数组程序可以实现先进先出的排队策略，但没有办法模拟排队的人走了接下来几位向前走的情形，没法加入其他数据。可以利用环形队列解决这个问题。\n当数据满了，把rear的值重写为0. (rear+1)mod n\nfront指向最前面的元素的前一个位置。\nrear指向的下一个是front时判断队列已经满了，队列只可以存放n-1个数据。\n/* [示范]：实现环状队列数据的进队和出队 */ #include  using namespace std; int main(void) { int front,rear,val=0,queue[5]={0}; front=rear=-1; while(rearval; if(val==-2) { if(front==rear) { cout双向队列 一般双向队列的应用可以分为2种，一种是两端都可以加入数据但只有一段可以取出数据，另一种是两端都可以取出数据但只有一段可以加入数据。\n优先队列 每一个元素都赋给了一个优先级，加入任意，但取出时优先级高的先出，不是FIFO了。\n后记 我是使用devc++打开源代码的，其中可能会用目录寻找错误而导致打不开文件，这是因为编码方式不一样，容易出现汉字乱码，可以试试把文件打开路径的中文改成英文或拼音。\n",
+  "wordCount" : "5060",
   "inLanguage": "en",
   "datePublished": "2023-08-24T23:29:13+08:00",
   "dateModified": "2023-08-24T23:29:13+08:00",
@@ -216,7 +216,7 @@
     <h1 class="post-title">
       使用Cpp实现数据结构-2（栈和队列）
     </h1>
-    <div class="post-meta"><span title='2023-08-24 23:29:13 +0800 CST'>2023-08-24</span>&nbsp;·&nbsp;17 min&nbsp;·&nbsp;hrkr
+    <div class="post-meta"><span title='2023-08-24 23:29:13 +0800 CST'>2023-08-24</span>&nbsp;·&nbsp;11 min&nbsp;·&nbsp;hrkr
 
 </div>
   </header> <div class="toc">
@@ -241,34 +241,6 @@
                 <li>
                     <a href="#%e5%a0%86%e6%a0%88%e7%b1%bb%e6%a8%a1%e6%9d%bf%e7%9a%84%e5%ae%9e%e7%8e%b0" aria-label="堆栈类模板的实现">堆栈类模板的实现</a></li></ul>
                 </li></ul>
-                </li>
-                <li>
-                    <a href="#%e9%80%92%e5%bd%92%e6%b3%95%e8%af%a6%e8%a7%a3" aria-label="递归法详解">递归法详解</a><ul>
-                        
-                <li>
-                    <a href="#%e6%96%90%e6%b3%a2%e9%82%a3%e5%a5%91%e6%95%b0%e5%88%97" aria-label="斐波那契数列">斐波那契数列</a></li>
-                <li>
-                    <a href="#%e6%b1%89%e8%af%ba%e5%a1%94%e9%97%ae%e9%a2%98" aria-label="汉诺塔问题">汉诺塔问题</a></li>
-                <li>
-                    <a href="#%e5%8a%a8%e6%80%81%e8%a7%84%e5%88%92%e6%b3%95dpa" aria-label="动态规划法（DPA）">动态规划法（DPA）</a></li>
-                <li>
-                    <a href="#%e5%9b%9e%e6%ba%af%e6%b3%95%e8%80%81%e9%bc%a0%e8%b5%b0%e8%bf%b7%e5%ae%ab" aria-label="回溯法—老鼠走迷宫">回溯法—老鼠走迷宫</a></li>
-                <li>
-                    <a href="#%e5%85%ab%e7%9a%87%e5%90%8e%e9%97%ae%e9%a2%98" aria-label="八皇后问题">八皇后问题</a></li></ul>
-                </li>
-                <li>
-                    <a href="#%e7%ae%97%e6%9c%af%e8%a1%a8%e8%be%be%e5%bc%8f%e7%9a%84%e8%a1%a8%e7%a4%ba%e6%b3%95" aria-label="算术表达式的表示法">算术表达式的表示法</a><ul>
-                        
-                <li>
-                    <a href="#%e4%b8%ad%e5%ba%8f%e6%b3%95%e8%bd%ac%e4%b8%ba%e5%89%8d%e5%ba%8f%e6%b3%95%e4%b8%8e%e5%90%8e%e5%ba%8f%e6%b3%95" aria-label="中序法转为前序法与后序法">中序法转为前序法与后序法</a></li>
-                <li>
-                    <a href="#%e5%89%8d%e5%ba%8f%e6%b3%95%e4%b8%8e%e5%90%8e%e5%ba%8f%e6%b3%95%e8%a1%a8%e8%be%be%e5%bc%8f%e8%bd%ac%e4%b8%ba%e4%b8%ad%e5%ba%8f%e6%b3%95%e8%a1%a8%e8%be%be%e5%bc%8f" aria-label="前序法与后序法表达式转为中序法表达式">前序法与后序法表达式转为中序法表达式</a></li>
-                <li>
-                    <a href="#%e4%b8%ad%e5%ba%8f%e6%b3%95%e6%b1%82%e5%80%bc" aria-label="中序法求值">中序法求值</a></li>
-                <li>
-                    <a href="#%e5%89%8d%e5%ba%8f%e6%b3%95%e6%b1%82%e5%80%bc" aria-label="前序法求值">前序法求值</a></li>
-                <li>
-                    <a href="#%e5%90%8e%e5%ba%8f%e6%b3%95%e6%b1%82%e5%80%bc" aria-label="后序法求值">后序法求值</a></li></ul>
                 </li>
                 <li>
                     <a href="#%e9%98%9f%e5%88%97" aria-label="队列">队列</a><ul>
@@ -642,329 +614,7 @@ int main()
 
     return 0; 	
 }
-</code></pre></div><h2 id="递归法详解">递归法详解<a hidden class="anchor" aria-hidden="true" href="#递归法详解">#</a></h2>
-<h3 id="斐波那契数列">斐波那契数列<a hidden class="anchor" aria-hidden="true" href="#斐波那契数列">#</a></h3>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">/*
-[示范]：斐波那契数列的递归程序
-*/
-#include&lt;iostream&gt;
-using namespace std;
-
-int fib(int);	//fib()函数的原型声明
-
-int main()
-{
-    int i,n;
-    cout&lt;&lt;&#34;请输入要计算到第几项斐波那契数列：&#34;;//如果输入的数字太大会导致算到负数 ，后面会越来越慢 
-    cin&gt;&gt;n;
-    for(i=0;i&lt;=n;i++) 	//计算前n项斐波那契数列
-		cout&lt;&lt;&#34;fib(&#34;&lt;&lt;i&lt;&lt;&#34;)=&#34;&lt;&lt;fib(i)&lt;&lt;endl;
-    return 0;
-}
-
-int fib(int n) 	// 定义函数fib()
-{
-
-    if (n==0)
-        return 0;       // 如果n=0，则返回0
-    else if(n==1 || n==2)	//如果n=1或n=2，则返回1 
-        return 1;
-    else				// 否则返回 fib(n-1)+fib(n-2) 
-        return (fib(n-1)+fib(n-2));
-}
-</code></pre></div><h3 id="汉诺塔问题">汉诺塔问题<a hidden class="anchor" aria-hidden="true" href="#汉诺塔问题">#</a></h3>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">/*
-[示范]:利用汉诺塔函数求出不同圆盘数时圆盘的移动步骤
-*/
-#include &lt;iostream&gt;
-using namespace std;
-void hanoi(int, int, int, int);    // 函数原型
-int main(void)
-{
-    int j;
-    cout&lt;&lt;&#34;请输入圆盘数量：&#34;;
-    cin&gt;&gt;j;
-    hanoi(j,1, 2, 3);
-    return 0;
-}
-void hanoi(int n, int p1, int p2, int p3)
-{
-    if (n==1)
-        cout&lt;&lt;&#34;圆盘从 &#34;&lt;&lt;p1&lt;&lt;&#34; 号木桩移到 &#34;&lt;&lt;p3&lt;&lt;&#34; 号木桩&#34;&lt;&lt;endl;
-    else
-    {
-        hanoi(n-1, p1, p3, p2);
-        cout&lt;&lt;&#34;圆盘从 &#34;&lt;&lt;p1&lt;&lt;&#34; 号木桩移到 &#34;&lt;&lt;p3&lt;&lt;&#34; 号木桩&#34;&lt;&lt;endl;
-        hanoi(n-1, p2, p1, p3);
-    }
-}
-</code></pre></div><p>由一些数学公式可得汉诺塔的执行步骤最小为$2^{n} -1$,n代表圆盘的个数</p>
-<h3 id="动态规划法dpa">动态规划法（DPA）<a hidden class="anchor" aria-hidden="true" href="#动态规划法dpa">#</a></h3>
-<p>动态规划法（Dynamic Programming Aigorithm）是一种优化算法策略，主要应用于求解具有重叠子问题和最优子结构性质的问题。动态规划法的核心思想是将问题分解为更小的子问题(和分治法类似)，并将子问题的解存储在一个表中（分治法没有的），从而避免了对相同子问题的重复计算。</p>
-<p>动态规划法的基本步骤如下：</p>
-<ol>
-<li>定义子问题：将原问题分解为若干个子问题。</li>
-<li>定义状态：用数学表示子问题的解。</li>
-<li>定义状态转移方程：描述子问题之间的关系，如何通过子问题的解计算原问题的解。</li>
-<li>初始化边界条件：确定状态转移方程的初始值。</li>
-<li>自底向上或自顶向下计算：根据状态转移方程逐步计算子问题的解，最终得到原问题的解。</li>
-</ol>
-<p>动态规划法可以应用于各种问题，如最短路径问题、背包问题、字符串匹配问题等。动态规划法的一个重要应用场景是求解最优化问题，例如最大（最小）问题。通过动态规划，可以在多项式时间内求解这些问题，而其他方法（如穷举法）可能需要指数级时间。</p>
-<p>例如使用递归法进行斐波那契数列的Fib(9)计算时，需要反复计算Fib(4),Fib(5)等值，浪费了时间，使用动态规划算法将计算过的结果储存起来，在后续的计算中只需要判断数值的存在与否，若存在就直接调用。</p>
-<p>Dijkstra 算法 Dijkstra算法,中文名音译作迪杰斯特拉算法或戴克斯特拉算法。</p>
-<h3 id="回溯法老鼠走迷宫">回溯法—老鼠走迷宫<a hidden class="anchor" aria-hidden="true" href="#回溯法老鼠走迷宫">#</a></h3>
-<p>回溯法（Backtracking）是一种用于搜索解空间的算法，通常在组合问题、优化问题和约束满足问题等领域中使用。回溯法通过对解空间的节点进行深度优先搜索，尝试找到问题的解。当搜索到某个节点时，如果该节点不能继续搜索下去，就回溯到该节点的父节点并尝试其他分支。回溯法的基本思想是：先广搜索，后深入搜索。</p>
-<p>以下是回溯法的一般步骤：</p>
-<ol>
-<li>定义问题的解空间：首先需要明确问题的解空间，即所有可能的解的集合。</li>
-<li>确定解空间的组织结构：将解空间组织成树形结构，每个节点表示一个部分解。</li>
-<li>设计回溯算法的递归函数：递归函数需要完成以下功能：
-a. 判断当前节点是否包含问题的解，如果是，则保存解并返回。
-b. 如果当前节点不能包含问题的解，则回溯到父节点并尝试其他分支。</li>
-</ol>
-<p>回溯法是枚举法的一种。</p>
-<p>老鼠走迷宫就是一种回溯法的应用。老鼠走迷宫问题的描述是:假设把一只老鼠放在一个没有盖子的大迷宫盒的入口处，盒中有许多墙，使得大部分路径都被挡住而无法前进。老鼠可以采用尝试错误的方法找到出口。不过，这只老鼠必须在走错路时就退回来并把走过的路记下来，避免下次走重复的路，就这样直到找到出口为止。简单来说，老鼠行进时必须遵守以下3 个原则:</p>
-<p>(1)一次只能走一格。</p>
-<p>(2) 遇到墙无法往前走时，则退回一步找找看是否有其他的路可以走。</p>
-<p>(3)走过的路不会再走第二次。</p>
-<p>人们对这个问题感兴趣的原因是它可以提供一种典型堆栈应用的思考方法。</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">/*题目：设计一个 C++程序，使用链表堆栈来找出老鼠走迷宫的路线，1 表示该处有墙无法通过，
-0表示[i][i]处无墙可通行，并且将走过的位置对应的数组元素内容标记为 2。*/
-
-
-
-#include &lt;iostream&gt;
-#define EAST  MAZE[x][y+1]   //定义东方的相对位置
-#define WEST  MAZE[x][y-1]   //定义西方的相对位置
-#define SOUTH MAZE[x+1][y]	//定义南方的相对位置
-#define NORTH MAZE[x-1][y]	//定义北方的相对位置
-using namespace std;
-const int ExitX = 8;   //定义出口的X坐标在第8列
-const int ExitY = 10; //定义出口的Y坐标在第10行
-struct list
-{
-    int x,y;
-    struct list* next;
-};
-typedef struct list node;
-typedef node* link;
-int MAZE[10][12] = {1,1,1,1,1,1,1,1,1,1,1,1, //声明迷宫数组
-                    1,0,0,0,1,1,1,1,1,1,1,1,
-                    1,1,1,0,1,1,0,0,0,0,1,1,
-                    1,1,1,0,1,1,0,1,1,0,1,1,
-                    1,1,1,0,0,0,0,1,1,0,1,1,//1是墙，0是可走的路
-                    1,1,1,0,1,1,0,1,1,0,1,1,
-                    1,1,1,0,1,1,0,1,1,0,1,1,
-                    1,1,1,1,1,1,0,1,1,0,1,1,
-                    1,1,0,0,0,0,0,0,1,0,0,1,//最右下角的0代表出口
-                    1,1,1,1,1,1,1,1,1,1,1,1};
-link push(link stack,int x,int y);
-link pop(link stack,int* x,int* y);
-int chkExit(int ,int ,int,int);
-int main(void)
-{
-    int i,j;
-    link path = NULL;
-    int x=1;	//入口的X坐标
-    int y=1;    //入口的Y坐标
-    cout&lt;&lt;&#34;[迷宫的路径(0的部分)]\n&#34;&lt;&lt;endl; //打印出迷宫的路径图
-    for(i=0;i&lt;10;i++)
-    {
-        for(j=0;j&lt;12;j++)
-            cout&lt;&lt;MAZE[i][j]&lt;&lt;&#34; &#34;;
-        cout&lt;&lt;endl;
-    }
-    while(x&lt;=ExitX&amp;&amp;y&lt;=ExitY)
-    {
-        MAZE[x][y]=2;
-        if(NORTH==0)
-        {
-            x -= 1;
-            path=push(path,x,y);
-        }
-        else if(SOUTH==0)
-        {
-            x+=1;
-            path=push(path,x,y);
-        }
-        else if(WEST==0)
-        {
-            y-=1;
-            path=push(path,x,y);
-        }
-        else if(EAST==0)
-        {
-            y+=1;
-            path=push(path,x,y);
-        }
-        else if(chkExit(x,y,ExitX,ExitY)==1) // 检查是否走到出口了
-            break;
-        else
-        {
-            MAZE[x][y]=2;
-            path=pop(path,&amp;x,&amp;y);
-        }
-    }
-    cout&lt;&lt;&#34;[老鼠走过的路径(2的部分)]&#34;&lt;&lt;endl; // 打印出老鼠走完迷宫后的路径图
-    for(i=0;i&lt;10;i++)
-    {
-        for(j=0;j&lt;12;j++)
-            cout&lt;&lt;MAZE[i][j]&lt;&lt;&#34; &#34;;
-        cout&lt;&lt;endl;
-    }
-
-    return 0;
-}
-link push(link stack,int x,int y)
-{
-    link newnode;
-    newnode = new node;
-    if(!newnode)
-    {
-        cout&lt;&lt;&#34;Error！内存分配失败！&#34;&lt;&lt;endl;
-        return NULL;
-    }
-    newnode-&gt;x=x;
-    newnode-&gt;y=y;
-    newnode-&gt;next=stack;
-    stack=newnode;
-    return stack;
-}
-link pop(link stack,int* x,int* y)
-{
-    link top;
-    if(stack!=NULL)
-    {
-        top=stack;
-        stack=stack-&gt;next;
-        *x=top-&gt;x;
-        *y=top-&gt;y;
-        delete top;
-        return stack;
-    }
-    else
-        *x=-1;
-    return stack;
-}
-int chkExit(int x,int y,int ex,int ey)
-{
-    if(x==ex&amp;&amp;y==ey)
-    {
-        if(NORTH==1||SOUTH==1||WEST==1||EAST==2)
-            return 1;
-        if(NORTH==1||SOUTH==1||WEST==2||EAST==1)
-            return 1;
-        if(NORTH==1||SOUTH==2||WEST==1||EAST==1)
-            return 1;
-        if(NORTH==2||SOUTH==1||WEST==1||EAST==1)
-            return 1;
-    }
-    return 0;
-}
-
-
-</code></pre></div><h3 id="八皇后问题">八皇后问题<a hidden class="anchor" aria-hidden="true" href="#八皇后问题">#</a></h3>
-<p>八皇后问题也是一种常见的堆栈应用实例。在国际象棋中的皇后可以对棋盘中的其他棋子直吃、横吃和对角斜吃(左斜吃或右斜吃都可)。现在要放入多个皇后到棋盘上，后放入的新皇后，放入前必须考虑所放位置的直线方向、横线方向或对角线方向是否已被放置了旧皇后，否则就会被先放入的旧皇后吃掉。这个问题难倒了高斯，但如果使用计算机思维和计算机的算力可以比较轻松的求得结果。</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">#include &lt;iostream&gt;
-#include &lt;iomanip&gt;
-#include &lt;cmath&gt;
-#define EIGHT 8     //定义堆栈的最大容量
-#define TRUE 1
-#define FALSE 0
-using namespace std;
-int queen[EIGHT];  //存放8个皇后的行位置
-int number=0;       //计算总共有几组解
-//决定皇后存放的位置
-//输出所需要的结果
-int attack(int ,int);
-void print_table()
-{
-    int x=0,y=0;
-    number+=1;
-    cout&lt;&lt;endl;
-    cout&lt;&lt;&#34;八皇后问题的第&#34;&lt;&lt;setw(2)&lt;&lt;number&lt;&lt;&#34;组解&#34;&lt;&lt;endl&lt;&lt;&#34;\t&#34;;
-    for(x=0;x&lt;EIGHT;x++)
-    {
-        for(y=0;y&lt;EIGHT;y++)
-            if(x==queen[y])
-                cout&lt;&lt;&#34;&lt;q&gt;&#34;;
-            else
-                cout&lt;&lt;&#34;&lt;-&gt;&#34;;
-        cout&lt;&lt;endl&lt;&lt;&#34;\t&#34;;
-    }
-    system(&#34;pause&#34;);
-}
-void decide_position(int value)
-{
-    int i=0;
-    while(i&lt;EIGHT)
-    {
-        //是否受到攻击的判断式
-        if(attack(i,value)!=1)
-        {
-            queen[value]=i;
-            if(value==7)
-                print_table();
-            else
-                decide_position(value+1);
-        }
-        i++;
-    }
-}
-//测试在(row,col)上的皇后是否遭受攻击
-//若遭受攻击则返回值为1,否则返回0
-int attack(int row,int col)
-{
-    int i=0,atk=FALSE;
-    int offset_row=0,offset_col=0;
-    while((atk!=1)&amp;&amp;i&lt;col)
-    {
-        offset_col=abs(i-col);
-        offset_row=abs(queen[i]-row);
-        //判断两皇后是否在同一行或同一对角线上
-        if((queen[i]==row)||(offset_row==offset_col))
-            atk=TRUE;
-        i++;
-    }
-    return atk;
-}
-//主程序
-int main(void)
-{
-    decide_position(0);
-    return 0;
-}
-</code></pre></div><p><img loading="lazy" src="/vx_images/221571916254095.png" alt=""  />
-</p>
-<h2 id="算术表达式的表示法">算术表达式的表示法<a hidden class="anchor" aria-hidden="true" href="#算术表达式的表示法">#</a></h2>
-<p>我们正常的算数公式书写是中序法，而对于计算机来说处理较为复杂，解决方法就是使用前序法与后序法（后序法只使用一个堆栈缓冲区，前序法两个）。</p>
-<h3 id="中序法转为前序法与后序法">中序法转为前序法与后序法<a hidden class="anchor" aria-hidden="true" href="#中序法转为前序法与后序法">#</a></h3>
-<p>可以使用括号法，值得注意的是每两个数进行一次运算就要一次括号。</p>
-<p>也可以使用堆栈法。</p>
-<p>(1)从右到左读进中序法表达式的每个字符</p>
-<p>(2)如果读进的字符为操作数，则直接输出到前序法表达式中。</p>
-<p>(3) 如果遇到“(”，则弹出堆内的运算符，直到弹出到一个“)”，两者互相抵消。</p>
-<p>(4)“)”的优先级在堆内比任何运算符都小，任何运算符的优先级都高过它，不过在堆栈外却是优先级最高者。</p>
-<p>(5)当运算符准备进入堆栈内时，必须和堆顶端的运算符比较，如果外面的运算符优先级高于或等于堆栈顶端的运算符则压入堆栈，如果优先级低于堆栈顶端的运算符就把堆栈顶端的运算符弹出直到堆栈顶端的运算符优先级低于外面的运算符或堆栈为空时，就再把外面这个运算符压入堆栈</p>
-<p>(6) 中序法表达式读完后，如果运算符堆栈不是空的，则将其内的运算符逐一弹出，输出到前序法表达式中即可。
-<img loading="lazy" src="/vx_images/140110216250445.png" alt=""  />
-</p>
-<p><img loading="lazy" src="/vx_images/113250916243439.jpg" alt=""  />
-</p>
-<h3 id="前序法与后序法表达式转为中序法表达式">前序法与后序法表达式转为中序法表达式<a hidden class="anchor" aria-hidden="true" href="#前序法与后序法表达式转为中序法表达式">#</a></h3>
-<p>也可以使用括号法或堆栈法。</p>
-<ul>
-<li>括号法的乘法除法运算符在前序法向后括一个，加减法括两个。符号向右取代</li>
-<li>括号法的乘法除法运算符在后序法向前括一个，加减法括两个。符号向左取代</li>
-</ul>
-<h3 id="中序法求值">中序法求值<a hidden class="anchor" aria-hidden="true" href="#中序法求值">#</a></h3>
-<p>需要两个堆栈，一个用于存储运算符，一个存放操作数。
-但计算方法和人算大同小异。</p>
-<h3 id="前序法求值">前序法求值<a hidden class="anchor" aria-hidden="true" href="#前序法求值">#</a></h3>
-<p>需要两个堆栈，一个用于存储表达式，一个存放操作数。不需要比较操作符的优先级。</p>
-<h3 id="后序法求值">后序法求值<a hidden class="anchor" aria-hidden="true" href="#后序法求值">#</a></h3>
-<p>只需要一个堆栈。不需要比较操作符的优先级，计算非常直观简单</p>
-<h2 id="队列">队列<a hidden class="anchor" aria-hidden="true" href="#队列">#</a></h2>
+</code></pre></div><h2 id="队列">队列<a hidden class="anchor" aria-hidden="true" href="#队列">#</a></h2>
 <p>(1)图遍历的广度优先搜索法 (BFS) 就是使用队列。
 (2)可用于计算机的模拟，在模拟过程中，由于各种事件 的输入时间不一定，可以使用队列来反映真实的情况。
 (3)可用于 CPU 的作业调度 ，利用队列来处理，可实现作业先到先执行的要求。
@@ -1190,6 +840,11 @@ int main(void)
     <ul class="post-tags">
     </ul>
 <nav class="paginav">
+  <a class="prev" href="https://tassel234.github.io/posts/note/%E7%AE%97%E6%B3%95%E9%A2%84%E8%A7%88%E9%80%92%E5%BD%92%E6%B3%95%E5%92%8C%E7%AE%97%E6%95%B0%E8%A1%A8%E8%BE%BE%E5%BC%8F/">
+    <span class="title">« Prev</span>
+    <br>
+    <span>算法预览（递归法和算数表达式）</span>
+  </a>
   <a class="next" href="https://tassel234.github.io/posts/note/%E4%BD%BF%E7%94%A8cpp%E5%AE%9E%E7%8E%B0%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84-1%E9%93%BE%E8%A1%A8/">
     <span class="title">Next »</span>
     <br>
