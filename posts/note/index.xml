@@ -6,7 +6,16 @@
     <description>Recent content in 学习记录&amp;笔记 on hrkr&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Fri, 25 Aug 2023 23:23:09 +0800</lastBuildDate><atom:link href="https://tassel234.github.io/posts/note/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sat, 26 Aug 2023 16:58:19 +0800</lastBuildDate><atom:link href="https://tassel234.github.io/posts/note/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>图论入门_2</title>
+      <link>https://tassel234.github.io/posts/note/%E5%9B%BE%E8%AE%BA%E5%85%A5%E9%97%A8_2/</link>
+      <pubDate>Sat, 26 Aug 2023 16:58:19 +0800</pubDate>
+      
+      <guid>https://tassel234.github.io/posts/note/%E5%9B%BE%E8%AE%BA%E5%85%A5%E9%97%A8_2/</guid>
+      <description>图论入门_2 图着色 图着色可以应用于调度问题，平面图的点着色也和著名的四色问题也有很深的联系。 点着色 即一条边上两点的颜色均不相同。顶点着色可以应用于调度问题，即日程安排或工作安排问题。对不同的人执行两种或以上的操作构成图，对着色相同的各个事件，在同一段时间平行的去做，节约时间成本。</description>
+    </item>
+    
     <item>
       <title>算法预览（安全篇）</title>
       <link>https://tassel234.github.io/posts/note/%E7%AE%97%E6%B3%95%E9%A2%84%E8%A7%88%E5%AE%89%E5%85%A8%E7%AF%87/</link>
@@ -67,7 +76,7 @@
       <pubDate>Mon, 21 Aug 2023 17:37:33 +0800</pubDate>
       
       <guid>https://tassel234.github.io/posts/note/%E5%9B%BE%E8%AE%BA%E5%85%A5%E9%97%A8-1/</guid>
-      <description>前言 使用资源 （主）程序员的数学4：图论 算法图解动画软件演示 计算之魂&amp;ndash;吴军 目标指向 了解图的基本知识，可以对图论模型进行数学建模和程序求解。 图的基础知识 什么是图 在数学中，图是描述于一组对象的结构，其中某些对象对在某种意义上是“相关的”。这些对象对应于称为顶点的数学抽象（也</description>
+      <description>前言 使用资源 （主）程序员的数学4：图论 算法图解动画软件演示 b站视频图解 目标指向 了解图的基本知识，可以对图论模型进行数学建模和程序求解。 图的基础知识 什么是图 在数学中，图是描述于一组对象的结构，其中某些对象对在某种意义上是“相关的”。这些对象对应于称为顶点的数学抽象（也称为节点或点）</description>
     </item>
     
     <item>
