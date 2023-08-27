@@ -6,7 +6,16 @@
     <description>Recent content in 学习记录&amp;笔记 on hrkr&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Sat, 26 Aug 2023 16:58:19 +0800</lastBuildDate><atom:link href="https://tassel234.github.io/posts/note/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 27 Aug 2023 23:39:05 +0800</lastBuildDate><atom:link href="https://tassel234.github.io/posts/note/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>C&#43;&#43;入门学习笔记-2(数组，指针，结构体)</title>
+      <link>https://tassel234.github.io/posts/note/%E6%95%B0%E7%BB%84%E6%8C%87%E9%92%88%E7%BB%93%E6%9E%84%E4%BD%93/</link>
+      <pubDate>Sun, 27 Aug 2023 23:39:05 +0800</pubDate>
+      
+      <guid>https://tassel234.github.io/posts/note/%E6%95%B0%E7%BB%84%E6%8C%87%E9%92%88%E7%BB%93%E6%9E%84%E4%BD%93/</guid>
+      <description>数组的定义和使用 （1）一维数组的定义、初始化、引用 使用数组，可以方便地定义一个名字（数组名）来表示大批量数据，并能够通过循环批处理大量数据。 一维数组是由元素类型、数组名和长度组成的构造类型。例如： int A[10], B[20]; // 元素是整型 常量表达式表示数组中元素的个数，称为数组长度。常量表达式的值必须为</description>
+    </item>
+    
     <item>
       <title>图论入门_2</title>
       <link>https://tassel234.github.io/posts/note/%E5%9B%BE%E8%AE%BA%E5%85%A5%E9%97%A8_2/</link>
@@ -77,6 +86,15 @@
       
       <guid>https://tassel234.github.io/posts/note/%E5%9B%BE%E8%AE%BA%E5%85%A5%E9%97%A8-1/</guid>
       <description>前言 使用资源 （主）程序员的数学4：图论 算法图解动画软件演示 b站视频图解 目标指向 了解图的基本知识，可以对图论模型进行数学建模和程序求解。 图的基础知识 什么是图 在数学中，图是描述于一组对象的结构，其中某些对象对在某种意义上是“相关的”。这些对象对应于称为顶点的数学抽象（也称为节点或点）</description>
+    </item>
+    
+    <item>
+      <title>Python数学建模算法-2（回归分析）</title>
+      <link>https://tassel234.github.io/posts/note/python%E6%95%B0%E5%AD%A6%E5%BB%BA%E6%A8%A1%E7%AE%97%E6%B3%95-2%E5%9B%9E%E5%BD%92%E5%88%86%E6%9E%90/</link>
+      <pubDate>Sun, 20 Aug 2023 22:49:44 +0800</pubDate>
+      
+      <guid>https://tassel234.github.io/posts/note/python%E6%95%B0%E5%AD%A6%E5%BB%BA%E6%A8%A1%E7%AE%97%E6%B3%95-2%E5%9B%9E%E5%BD%92%E5%88%86%E6%9E%90/</guid>
+      <description>参考资源 python数学建模算法与应用 https://blog.csdn.net/weixin_35757704/article/details/117808073 https://blog.csdn.net/chuididehuayiren/article/details/109765279 图表解释 第一部分左边 Dep. Variable:即dependent variable，因变量 OLS:普通最小二乘法 least squares：最小化残差平方和 No. Observations:个案数，即样本容量 df residuals：残差自由度(观测数No.Obs</description>
     </item>
     
     <item>
