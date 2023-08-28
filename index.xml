@@ -6,13 +6,22 @@
     <description>Recent content on hrkr&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Sun, 27 Aug 2023 23:39:05 +0800</lastBuildDate><atom:link href="https://tassel234.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 28 Aug 2023 21:42:53 +0800</lastBuildDate><atom:link href="https://tassel234.github.io/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>C&#43;&#43;入门学习笔记-2(数组，指针，结构体)</title>
-      <link>https://tassel234.github.io/posts/note/%E6%95%B0%E7%BB%84%E6%8C%87%E9%92%88%E7%BB%93%E6%9E%84%E4%BD%93/</link>
+      <title>使用Cpp实现数据结构 3（树和图论）</title>
+      <link>https://tassel234.github.io/posts/note/%E4%BD%BF%E7%94%A8cpp%E5%AE%9E%E7%8E%B0%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84-3%E6%A0%91%E5%92%8C%E5%9B%BE%E8%AE%BA/</link>
+      <pubDate>Mon, 28 Aug 2023 21:42:53 +0800</pubDate>
+      
+      <guid>https://tassel234.github.io/posts/note/%E4%BD%BF%E7%94%A8cpp%E5%AE%9E%E7%8E%B0%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84-3%E6%A0%91%E5%92%8C%E5%9B%BE%E8%AE%BA/</guid>
+      <description>树结构 树的基本概念 树广泛应用于计算机的操作系统，数据库管理系统。 树可以形成森林。 二叉树 二叉树的定义 二叉树的链接浪费率最低，约为1/2。 树根是上面的那个节点，最下面的是树叶。 二叉树的左子数存放比较小的数字，右边存放比较大的数字。 空集合可以是二叉树，但不能是树，很奇怪，但是就是这样规</description>
+    </item>
+    
+    <item>
+      <title>C&#43;&#43;入门学习笔记-3(数组，指针，结构体)</title>
+      <link>https://tassel234.github.io/posts/note/c&#43;&#43;%E5%85%A5%E9%97%A8%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0-3%E6%95%B0%E7%BB%84%E6%8C%87%E9%92%88%E7%BB%93%E6%9E%84%E4%BD%93/</link>
       <pubDate>Sun, 27 Aug 2023 23:39:05 +0800</pubDate>
       
-      <guid>https://tassel234.github.io/posts/note/%E6%95%B0%E7%BB%84%E6%8C%87%E9%92%88%E7%BB%93%E6%9E%84%E4%BD%93/</guid>
+      <guid>https://tassel234.github.io/posts/note/c&#43;&#43;%E5%85%A5%E9%97%A8%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0-3%E6%95%B0%E7%BB%84%E6%8C%87%E9%92%88%E7%BB%93%E6%9E%84%E4%BD%93/</guid>
       <description>数组的定义和使用 （1）一维数组的定义、初始化、引用 使用数组，可以方便地定义一个名字（数组名）来表示大批量数据，并能够通过循环批处理大量数据。 一维数组是由元素类型、数组名和长度组成的构造类型。例如： int A[10], B[20]; // 元素是整型 常量表达式表示数组中元素的个数，称为数组长度。常量表达式的值必须为</description>
     </item>
     

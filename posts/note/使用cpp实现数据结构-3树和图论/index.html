@@ -1,0 +1,1257 @@
+<!DOCTYPE html>
+<html lang="en" dir="auto">
+
+<head><meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="robots" content="index, follow">
+<title>使用Cpp实现数据结构 3（树和图论） | hrkr&#39;s Blog</title>
+<meta name="keywords" content="">
+<meta name="description" content="树结构 树的基本概念 树广泛应用于计算机的操作系统，数据库管理系统。 树可以形成森林。 二叉树 二叉树的定义 二叉树的链接浪费率最低，约为1/2。 树根是上面的那个节点，最下面的是树叶。 二叉树的左子数存放比较小的数字，右边存放比较大的数字。 空集合可以是二叉树，但不能是树，很奇怪，但是就是这样规">
+<meta name="author" content="hrkr">
+<link rel="canonical" href="https://tassel234.github.io/posts/note/%E4%BD%BF%E7%94%A8cpp%E5%AE%9E%E7%8E%B0%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84-3%E6%A0%91%E5%92%8C%E5%9B%BE%E8%AE%BA/">
+<link crossorigin="anonymous" href="/assets/css/stylesheet.css" rel="preload stylesheet" as="style">
+<script defer crossorigin="anonymous" src="/assets/js/highlight.js" onload="hljs.initHighlightingOnLoad();"></script>
+<link rel="icon" href="https://tassel234.github.io/img/">
+<link rel="icon" type="image/png" sizes="16x16" href="https://tassel234.github.io/img/">
+<link rel="icon" type="image/png" sizes="32x32" href="https://tassel234.github.io/img/">
+<link rel="apple-touch-icon" href="https://tassel234.github.io/img/Q.jpg">
+<link rel="mask-icon" href="https://tassel234.github.io/img/Q.jpg">
+<meta name="theme-color" content="#2e2e33">
+<meta name="msapplication-TileColor" content="#2e2e33">
+<noscript>
+    <style>
+        #theme-toggle,
+        .top-link {
+            display: none;
+        }
+
+    </style>
+    <style>
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --theme: rgb(29, 30, 32);
+                --entry: rgb(46, 46, 51);
+                --primary: rgb(218, 218, 219);
+                --secondary: rgb(155, 156, 157);
+                --tertiary: rgb(65, 66, 68);
+                --content: rgb(196, 196, 197);
+                --hljs-bg: rgb(46, 46, 51);
+                --code-bg: rgb(55, 56, 62);
+                --border: rgb(51, 51, 51);
+            }
+
+            .list {
+                background: var(--theme);
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-track {
+                background: 0 0;
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-thumb {
+                border-color: var(--theme);
+            }
+        }
+
+    </style>
+</noscript><meta property="og:title" content="使用Cpp实现数据结构 3（树和图论）" />
+<meta property="og:description" content="树结构 树的基本概念 树广泛应用于计算机的操作系统，数据库管理系统。 树可以形成森林。 二叉树 二叉树的定义 二叉树的链接浪费率最低，约为1/2。 树根是上面的那个节点，最下面的是树叶。 二叉树的左子数存放比较小的数字，右边存放比较大的数字。 空集合可以是二叉树，但不能是树，很奇怪，但是就是这样规" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://tassel234.github.io/posts/note/%E4%BD%BF%E7%94%A8cpp%E5%AE%9E%E7%8E%B0%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84-3%E6%A0%91%E5%92%8C%E5%9B%BE%E8%AE%BA/" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2023-08-28T21:42:53+08:00" />
+<meta property="article:modified_time" content="2023-08-28T21:42:53+08:00" />
+
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="使用Cpp实现数据结构 3（树和图论）"/>
+<meta name="twitter:description" content="树结构 树的基本概念 树广泛应用于计算机的操作系统，数据库管理系统。 树可以形成森林。 二叉树 二叉树的定义 二叉树的链接浪费率最低，约为1/2。 树根是上面的那个节点，最下面的是树叶。 二叉树的左子数存放比较小的数字，右边存放比较大的数字。 空集合可以是二叉树，但不能是树，很奇怪，但是就是这样规"/>
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position":  1 ,
+      "name": "Posts",
+      "item": "https://tassel234.github.io/posts/"
+    }, 
+    {
+      "@type": "ListItem",
+      "position":  2 ,
+      "name": "学习记录\u0026笔记",
+      "item": "https://tassel234.github.io/posts/note/"
+    }, 
+    {
+      "@type": "ListItem",
+      "position":  3 ,
+      "name": "使用Cpp实现数据结构 3（树和图论）",
+      "item": "https://tassel234.github.io/posts/note/%E4%BD%BF%E7%94%A8cpp%E5%AE%9E%E7%8E%B0%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84-3%E6%A0%91%E5%92%8C%E5%9B%BE%E8%AE%BA/"
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "使用Cpp实现数据结构 3（树和图论）",
+  "name": "使用Cpp实现数据结构 3（树和图论）",
+  "description": "树结构 树的基本概念 树广泛应用于计算机的操作系统，数据库管理系统。 树可以形成森林。 二叉树 二叉树的定义 二叉树的链接浪费率最低，约为1/2。 树根是上面的那个节点，最下面的是树叶。 二叉树的左子数存放比较小的数字，右边存放比较大的数字。 空集合可以是二叉树，但不能是树，很奇怪，但是就是这样规",
+  "keywords": [
+    
+  ],
+  "articleBody": "树结构 树的基本概念 树广泛应用于计算机的操作系统，数据库管理系统。\n树可以形成森林。\n二叉树 二叉树的定义 二叉树的链接浪费率最低，约为1/2。\n树根是上面的那个节点，最下面的是树叶。\n二叉树的左子数存放比较小的数字，右边存放比较大的数字。\n空集合可以是二叉树，但不能是树，很奇怪，但是就是这样规定的。\n两个定理： 高度为k的满二叉树的节点为2的K次方-1。 度数为2的节点数是树叶节点的个数减一。  特殊二叉树 满二叉树，完全二叉树，斜二叉树，严格二叉树。 从上到下，从左到右，编号一一对应。\n二叉树的存储方式 用一维数组来实现二叉树 从上到下，从左到右，编号一一对应。空的地方填0.\n用链表来实现二叉树 #include  #include  #define ArraySize 10 using namespace std; class Node //二叉树的节点声明 { public: int value; //节点数据 struct Node *left_Node; //指向左子树的指针 struct Node *right_Node; //指向右子树的指针 }; typedef class Node TreeNode; //定义新的二叉树节点数据类型 typedef TreeNode *BinaryTree; //定义新的二叉树指针数据类型 BinaryTree rootNode; //二叉树的根节点的指针 //将指定的值加入到二叉树中适当的节点 void Add_Node_To_Tree(int value) { BinaryTree currentNode; BinaryTree newnode; int flag=0; //用来记录是否插入了新的节点 newnode=(BinaryTree) new TreeNode; //建立节点内容 newnode-value=value; newnode-left_Node=NULL; newnode-right_Node=NULL; //如果为空的二叉树，则将新的节点设置为根节点 if(rootNode==NULL) rootNode=newnode; else { currentNode=rootNode; //设置一个指针指向根节点 while(!flag) if (valuevalue) { //在左子树 if(currentNode-left_Node==NULL) { currentNode-left_Node=newnode; flag=1; } else currentNode=currentNode-left_Node; } else { //在右子树 if(currentNode-right_Node==NULL) { currentNode-right_Node=newnode; flag=1; } else currentNode=currentNode-right_Node; } } } int main(void) { int tempdata; int content[ArraySize]; int i=0; rootNode=(BinaryTree) new TreeNode; rootNode=NULL; couttempdata; content[i]=tempdata; } for(i=0;i二叉树的遍历 中序遍历, 后序遍历 ,前序遍历 中序遍历, 后序遍历 ,前序遍历 指的顺序都是树根什么时候被查。\n#include  #include  using namespace std; class tree //节点链表结构声明 { public : int data; //节点数据 class tree *left,*right; //节点左指针和右指针 }; typedef class tree node; typedef node *btree; btree creat_tree(btree,int); void pre(btree); void in(btree); void post(btree); int main(void) { int arr[]={7,4,1,5,16,8,11,12,15,9,2}; //原始数组内容 btree ptr=NULL; //声明树根 coutdata=val; //设置新节点的数据及左右指针 newnode-left=NULL; newnode-right=NULL; if (root==NULL) //如果root为空值，则把新节点返回当作树根 { root=newnode; return root; } else //若root不是树根，则建立二叉树 { for(current=root;current!=NULL;) //current复制root以保留当前的树根值 { backup=current; //暂存父节点 if(current-data  val) //比较树根节点和新节点的数据 current=current-left; else current=current-right; } if(backup-data  val) //把新节点和树根链接起来 backup-left=newnode; else backup-right=newnode; } return root; //返回指向树的指针，即指向树根的指针 } void pre(btree ptr) //前序遍历 { if (ptr != NULL) { coutdataleft); pre(ptr-right); } } void in(btree ptr) //中序遍历 { if (ptr != NULL) { in(ptr-left); coutdataright); } } void post(btree ptr) //后序遍历 { if (ptr != NULL) { post(ptr-left); post(ptr-right); coutdata二叉树节点的插入与删除 #include  using namespace std; struct tree { int data; struct tree *left,*right; }; typedef struct tree node; typedef node *btree; btree creat_tree(btree root,int val) { btree newnode,current,backup; newnode=(btree)new node; newnode-data=val; newnode-left=NULL; newnode-right=NULL; if(root==NULL) { root=newnode; return root; } else { for(current=root;current!=NULL;) { backup=current; if(current-data  val) current=current-left; else current=current-right; } if(backup-data  val) backup-left=newnode; else backup-right=newnode; } return root; } btree search(btree ptr,int val) //查找二叉树的子程序 { while(1) { if(ptr==NULL) //没找到就返回NULL return NULL; if(ptr-data==val) //节点值等于查找值 return ptr; else if(ptr-data  val) //节点值大于查找值 ptr=ptr-left; else ptr=ptr-right; } } void inorder(btree ptr) //中序遍历的子程序 { if(ptr!=NULL) { inorder(ptr-left); coutdataright); } } int main() { int i,data,arr[]={7, 1, 4, 2, 8, 13, 12, 11, 15, 9, 5}; btree ptr=NULL; coutdata; if((search(ptr,data))!=NULL) //查找二叉树 cout二叉运算树 线索二叉树 可以提高节点的利用率，中序遍历时不需要使用栈堆与递归。但运行速度较慢。\n按中序遍历顺序，空连接指针如果是该节点的左指针，指向中序遍历顺序下的前一个节点；空连接指针如果是该节点的右指针，指向中序遍历顺序下的后一个节点。没有前后的就空着。 树的二叉树表示法 （左儿子，右兄弟） 树转化为二叉树 二叉树转化为树 实际上是上述过程的逆运算，先把右子树旋转45度，然后删除兄弟连接，改为父子。\n森林转化为二叉树 方法基本一样，把根节点当兄弟节点连接到一起。\n二叉树转化为森林 逆运算。\n树与森林的遍历 中序遍历, 后序遍历 ,前序遍历 指的顺序都是树根什么时候被查。 方向是从左到右。\n确定唯一二叉树 知道中序遍历, 后序遍历或知道中序遍历, 前序遍历都可以确定唯一的树，但知道后序遍历 ,前序遍历 不能确定唯一的树。\n优化二叉查找树 扩充二叉树 对空链接加上外节点，其他的节点都是内节点。\n内径长是所有内节点的到根节点的距离。外径长也顾名思义。\n可对外径长进行加权处理。\n哈夫曼树 平衡树 （AVL树） 所有内部节点的左右子树的高度大概平衡，左右子树的节点相差小于或等于1.\n高级树结构的研究 博弈树 博弈树(game tree)是一种特殊的根树,它是人工智能领域一个重要的研究课题。博弈树就是符合博弈规则的决策树。\n博弈决策形成人工智能的方式是查找，在所有情况下找出获胜的情况。\nB树 平衡树概念的延申。 一棵m阶B树(balanced tree of order m)是一棵平衡的m路搜索树。它或者是空树，或者是满足下列性质的树： 1、根结点至少有两个子女； 2、每个非根节点所包含的关键字个数 j 满足：┌m/2┐ - 1 二叉空间分割树 属于二叉树，特点是每一个节点都有两个子节点。这是游戏空间常用的一种分割方法，通常应用于平面绘图软件。\n二叉树节点内的数据结构以平面方式分割场景。\n四叉树与八叉树 提供更好的分类能力。\n堆 树的形状取决于数据的个数。结点的排列顺序为从上到下，同一行里则为从左到右。\n在堆中存储数据时必须遵守这样一条规则:子结点必定大于父结点。因此最小值被存储在顶端的根结点中。往堆中添加数据时，为了遵守这条规则，一般会把新数据放在最下面一行靠左的位置。当最下面一行里没有多余空间时，就再往下另起一行，把数据加在这一行的最左端。\n按顺序加入 在堆中取出数字，取得是上面最小的数据。 然后把最后的数据移到上面，和下面的节点按照规则比较并移动。最终的结果如下。\n图的数据表示法 邻接矩阵法 无向图的邻接矩阵是对称的，因为连接是双向的，而有向图不是。\n声明的元素个数是6x6个，而点只有5个 ,声明7个可以，方便填入。\n#include  using namespace std; int main(void) { int arr[6][6];\t//声明矩阵arr， int data[14][2]={{1,2},{2,1},{1,5},{5,1}, //无向图各边的起点值和终点值 {2,3},{3,2},{2,4},{4,2}, {3,4},{4,3},{3,5},{5,3}, {4,5},{5,4}}; for (int i=0;i有向图的表示方法类似。 只是修改了一点。\nint data[5][2]={{1,2},{2,1},{2,3},{2,4},{4,3}} 邻接链表法 空间利用率高。\n/* [示范]:使用邻接表来表示图(a)和(b) */ #include  using namespace std; class list { public: int val; class list *next; }; class list head[6];//声明一个节点类型的数组 int main(void) { list *ptr,*newnode; int data[14][2]={{1,2},{2,1},{1,5},{5,1},//声明存储图的数组 {2,3},{3,2},{2,4},{4,2}, {3,4},{4,3},{3,5},{5,3}, {4,5},{5,4}}; cout\";\t//把顶点值打印出来 ptr=\u0026(head[i]); //暂存节点ptr for (int j=0;jval=data[j][1];//声明新节点，值为终点值 newnode-next=NULL; while(ptr!=NULL) //判断是否为链表的末尾 ptr=ptr-next; ptr=newnode; //加入新节点 coutval其他方法 邻接复合链表法 索引表格法\n图的遍历 深度优先遍历 首先需要生成邻接链表，方便之后遍历。\n然后使用递归和堆栈的知识去进行广度优先搜索。压入一个点相邻的所有顶点，然后用堆栈去取出一个点，压入这个点相邻的所有顶点，递归调用，循环往复。\n/* [示范]:深度优先遍历法(BFS) */ #include  using namespace std; class list { public: int val; class list *next; }; typedef class list node; typedef node *link; class list* head[9]; void dfs(int); int run[9]; int main(void) { link ptr,newnode; int data[20][2]={{1,2},{2,1},{1,3},{3,1},//声明存放图的边的数组 {2,4},{4,2},{2,5},{5,2}, {3,6},{6,3},{3,7},{7,3}, {4,5},{5,4},{6,7},{7,6}, {5,8},{8,5},{6,8},{8,6}}; for (int i=1;ival=i; //设置各个链表头的初值 head[i]-next=NULL; ptr=head[i]; //设置指针为链表头 for(int j=0;jval=data[j][1]; newnode-next=NULL; do { ptr-next=newnode;//加入新节点 ptr=ptr-next; }while(ptr-next!=NULL); } } } cout\"; ptr = ptr-next; while(ptr!=NULL) { coutvalnext; } coutnext; while(ptr!=NULL) {\tif (run[ptr-val]==0) //如果顶点尚未遍历， dfs(ptr-val); //就进行dfs的递归调用 ptr=ptr-next; } } 广度优先遍历 仍然先 生成邻接链表，然后使用队列进行广度优先搜索。\n部分实现如下。\n/* [示范]:广度优先遍历法(BFS) */ void bfs(int current) { link tempnode;\t//临时的节点指针 enqueue(current);\t//将第一个顶点加入队列 run[current]=1;\t//将遍历过的顶点设置为1 coutx]==0) { enqueue(tempnode-x); run[tempnode-x]=1; //记录已遍历过 coutxnext; } } } 生成树 深度优先生成树和广度优先生成树 又叫花费树，成本树。联通所有的顶点。可以利用bfs或者dfs来生成。\n最小生成树 又叫最小花费树，最小成本树。如果路径上有权重，就使用最小权重和的生成树。\nKruskal算法 先把权值从小到大排列，从最小的边开始，建立最小生成树，如果形成圈就舍弃不用，直到加入n-1条边。\n/* [示范]:最小成本生成树 */ #include  #define VERTS 6 //图的顶点数 using namespace std; void mintree(mst head) //最小成本生成树子程序 { mst ptr,mceptr; int result=0; ptr=head; for(int i=0;ifrom]++; v[mceptr-to]++; if(v[mceptr-from]1 \u0026\u0026 v[mceptr-to]1) { v[mceptr-from]--; v[mceptr-to]--; result=1; } else result=0; if(result==0) coutfrom tovalnext; } } Prim算法 图的最短路径 单点对全部顶点——Dijkstra算法 果然福特算法过于费时间，所以这本书没有提及。可以看看其他的图论笔记。\n/* [示范]:Dijkstra算法(单点对全部顶点的最短路径) */ #include  #include  #include  #define SIZE 7 #define NUMBER 6 #define INFINITE 99999\t//无穷大 using namespace std; int Graph_Matrix[SIZE][SIZE];\t//存放图的数组 int distance[SIZE];\t//路径的长度 //建立图 void BuildGraph_Matrix(int *Path_Cost) { int Start_Point;\t//边的起点 int End_Point;\t//边的终点 int i, j; for ( i = 1; i distance[j]) { shortest_distance=distance[j]; shortest_vertex=j; } goal[shortest_vertex] = 1; //计算开始顶点到各顶点的最短距离 for (j=1;jA*算法 引用推测权重，使用距离预估函数，但有一定可能会出错而造成找不到最短路径。\n两两顶点间的最短路径——Floyd算法 弗洛伊德算法，可以找到任意两点之间的最小路径。\nAOV网络与拓扑排序 也叫顶点活动网络，在一个表示工程的有向图中，用顶点表示活动，用弧表示活动之间的优先关系。这样的有向图为顶点表示活动的网，我们称为AOV网（Activity On Vertex Network）。先做某些工作才可以做接下来的工作。\n一个AOV网应该是一个有向无环图，即不应该带有回路，因为若带有回路，则回路上的所有活动都无法进行。\n在AOV网中，若不存在回路，则所有活动可排列成一个线性序列，使得每个活动的所有前驱活动都排在该活动的前面，我们把此序列叫做拓扑序列(Topological order)，由AOV网构造拓扑序列的过程叫做拓扑排序(Topological sort)。AOV网的拓扑序列不是唯一的，满足上述定义的任一线性序列都称作它的拓扑序列。\nAOE网络 在带权有向图中若以顶点表示事件，有向边表示活动，边上的权值表示该活动持续的时间，这样的图简称为AOE网。\n完成工程的最短时间：从工程开始点（源点）到完成点（汇点）的最短路径称为完成工程的最短时间。\n关键路径：路径长度最长的路径称为关键路径。\n",
+  "wordCount" : "5756",
+  "inLanguage": "en",
+  "datePublished": "2023-08-28T21:42:53+08:00",
+  "dateModified": "2023-08-28T21:42:53+08:00",
+  "author":{
+    "@type": "Person",
+    "name": "hrkr"
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://tassel234.github.io/posts/note/%E4%BD%BF%E7%94%A8cpp%E5%AE%9E%E7%8E%B0%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84-3%E6%A0%91%E5%92%8C%E5%9B%BE%E8%AE%BA/"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "hrkr's Blog",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://tassel234.github.io/img/"
+    }
+  }
+}
+</script>
+</head>
+
+<body class="" id="top">
+<script>
+    if (localStorage.getItem("pref-theme") === "dark") {
+        document.body.classList.add('dark');
+    } else if (localStorage.getItem("pref-theme") === "light") {
+        document.body.classList.remove('dark')
+    } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        document.body.classList.add('dark');
+    }
+
+</script>
+
+<header class="header">
+    <nav class="nav">
+        <div class="logo">
+            <a href="https://tassel234.github.io/" accesskey="h" title="hrkr&#39;s Blog (Alt + H)">
+                <img src="https://tassel234.github.io/img/Q.jpg" alt="" aria-label="logo"
+                    height="35">hrkr&#39;s Blog</a>
+            <div class="logo-switches">
+                <button id="theme-toggle" accesskey="t" title="(Alt + T)">
+                    <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                    <svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                </button>
+            </div>
+        </div>
+        <ul id="menu">
+            <li>
+                <a href="https://tassel234.github.io/search" title="🔍 搜索 (Alt &#43; /)" accesskey=/>
+                    <span>🔍 搜索</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://tassel234.github.io/" title="🏠 主页">
+                    <span>🏠 主页</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://tassel234.github.io/posts" title="📚 文章">
+                    <span>📚 文章</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://tassel234.github.io/tags" title="🧩 标签">
+                    <span>🧩 标签</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://tassel234.github.io/archives/" title="⏱️ 时间轴">
+                    <span>⏱️ 时间轴</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://tassel234.github.io/about" title="🙋🏻‍♂️ 关于">
+                    <span>🙋🏻‍♂️ 关于</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://tassel234.github.io/links" title="🤝 友链">
+                    <span>🤝 友链</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+</header>
+<main class="main">
+
+<article class="post-single">
+  <header class="post-header">
+    <div class="breadcrumbs"><a href="https://tassel234.github.io/">Home</a>&nbsp;»&nbsp;<a href="https://tassel234.github.io/posts/">Posts</a>&nbsp;»&nbsp;<a href="https://tassel234.github.io/posts/note/">学习记录&amp;笔记</a></div>
+    <h1 class="post-title">
+      使用Cpp实现数据结构 3（树和图论）
+    </h1>
+    <div class="post-meta"><span title='2023-08-28 21:42:53 +0800 CST'>2023-08-28</span>&nbsp;·&nbsp;12 min&nbsp;·&nbsp;hrkr
+
+</div>
+  </header> <div class="toc">
+    <details  open>
+        <summary accesskey="c" title="(Alt + C)">
+            <span class="details">Table of Contents</span>
+        </summary>
+
+        <div class="inner"><ul>
+                <li>
+                    <a href="#%e6%a0%91%e7%bb%93%e6%9e%84" aria-label="树结构">树结构</a><ul>
+                        
+                <li>
+                    <a href="#%e6%a0%91%e7%9a%84%e5%9f%ba%e6%9c%ac%e6%a6%82%e5%bf%b5" aria-label="树的基本概念">树的基本概念</a></li>
+                <li>
+                    <a href="#%e4%ba%8c%e5%8f%89%e6%a0%91" aria-label="二叉树">二叉树</a><ul>
+                        
+                <li>
+                    <a href="#%e4%ba%8c%e5%8f%89%e6%a0%91%e7%9a%84%e5%ae%9a%e4%b9%89" aria-label="二叉树的定义">二叉树的定义</a></li>
+                <li>
+                    <a href="#%e7%89%b9%e6%ae%8a%e4%ba%8c%e5%8f%89%e6%a0%91" aria-label="特殊二叉树">特殊二叉树</a></li></ul>
+                </li>
+                <li>
+                    <a href="#%e4%ba%8c%e5%8f%89%e6%a0%91%e7%9a%84%e5%ad%98%e5%82%a8%e6%96%b9%e5%bc%8f" aria-label="二叉树的存储方式">二叉树的存储方式</a><ul>
+                        
+                <li>
+                    <a href="#%e7%94%a8%e4%b8%80%e7%bb%b4%e6%95%b0%e7%bb%84%e6%9d%a5%e5%ae%9e%e7%8e%b0%e4%ba%8c%e5%8f%89%e6%a0%91" aria-label="用一维数组来实现二叉树">用一维数组来实现二叉树</a></li>
+                <li>
+                    <a href="#%e7%94%a8%e9%93%be%e8%a1%a8%e6%9d%a5%e5%ae%9e%e7%8e%b0%e4%ba%8c%e5%8f%89%e6%a0%91" aria-label="用链表来实现二叉树">用链表来实现二叉树</a></li></ul>
+                </li>
+                <li>
+                    <a href="#%e4%ba%8c%e5%8f%89%e6%a0%91%e7%9a%84%e9%81%8d%e5%8e%86" aria-label="二叉树的遍历">二叉树的遍历</a><ul>
+                        
+                <li>
+                    <a href="#%e4%b8%ad%e5%ba%8f%e9%81%8d%e5%8e%86-%e5%90%8e%e5%ba%8f%e9%81%8d%e5%8e%86-%e5%89%8d%e5%ba%8f%e9%81%8d%e5%8e%86" aria-label="中序遍历, 后序遍历 ,前序遍历">中序遍历, 后序遍历 ,前序遍历</a></li>
+                <li>
+                    <a href="#%e4%ba%8c%e5%8f%89%e6%a0%91%e8%8a%82%e7%82%b9%e7%9a%84%e6%8f%92%e5%85%a5%e4%b8%8e%e5%88%a0%e9%99%a4" aria-label="二叉树节点的插入与删除">二叉树节点的插入与删除</a></li>
+                <li>
+                    <a href="#%e4%ba%8c%e5%8f%89%e8%bf%90%e7%ae%97%e6%a0%91" aria-label="二叉运算树">二叉运算树</a></li></ul>
+                </li>
+                <li>
+                    <a href="#%e7%ba%bf%e7%b4%a2%e4%ba%8c%e5%8f%89%e6%a0%91" aria-label="线索二叉树">线索二叉树</a></li>
+                <li>
+                    <a href="#%e6%a0%91%e7%9a%84%e4%ba%8c%e5%8f%89%e6%a0%91%e8%a1%a8%e7%a4%ba%e6%b3%95-%e5%b7%a6%e5%84%bf%e5%ad%90%e5%8f%b3%e5%85%84%e5%bc%9f" aria-label="树的二叉树表示法 （左儿子，右兄弟）">树的二叉树表示法 （左儿子，右兄弟）</a><ul>
+                        
+                <li>
+                    <a href="#%e6%a0%91%e8%bd%ac%e5%8c%96%e4%b8%ba%e4%ba%8c%e5%8f%89%e6%a0%91" aria-label="树转化为二叉树">树转化为二叉树</a></li>
+                <li>
+                    <a href="#%e4%ba%8c%e5%8f%89%e6%a0%91%e8%bd%ac%e5%8c%96%e4%b8%ba%e6%a0%91" aria-label="二叉树转化为树">二叉树转化为树</a></li>
+                <li>
+                    <a href="#%e6%a3%ae%e6%9e%97%e8%bd%ac%e5%8c%96%e4%b8%ba%e4%ba%8c%e5%8f%89%e6%a0%91" aria-label="森林转化为二叉树">森林转化为二叉树</a></li>
+                <li>
+                    <a href="#%e4%ba%8c%e5%8f%89%e6%a0%91%e8%bd%ac%e5%8c%96%e4%b8%ba%e6%a3%ae%e6%9e%97" aria-label="二叉树转化为森林">二叉树转化为森林</a></li>
+                <li>
+                    <a href="#%e6%a0%91%e4%b8%8e%e6%a3%ae%e6%9e%97%e7%9a%84%e9%81%8d%e5%8e%86" aria-label="树与森林的遍历">树与森林的遍历</a></li>
+                <li>
+                    <a href="#%e7%a1%ae%e5%ae%9a%e5%94%af%e4%b8%80%e4%ba%8c%e5%8f%89%e6%a0%91" aria-label="确定唯一二叉树">确定唯一二叉树</a></li></ul>
+                </li>
+                <li>
+                    <a href="#%e4%bc%98%e5%8c%96%e4%ba%8c%e5%8f%89%e6%9f%a5%e6%89%be%e6%a0%91" aria-label="优化二叉查找树">优化二叉查找树</a><ul>
+                        
+                <li>
+                    <a href="#%e6%89%a9%e5%85%85%e4%ba%8c%e5%8f%89%e6%a0%91" aria-label="扩充二叉树">扩充二叉树</a></li>
+                <li>
+                    <a href="#%e5%93%88%e5%a4%ab%e6%9b%bc%e6%a0%91" aria-label="哈夫曼树">哈夫曼树</a></li></ul>
+                </li>
+                <li>
+                    <a href="#%e5%b9%b3%e8%a1%a1%e6%a0%91-avl%e6%a0%91" aria-label="平衡树 （AVL树）">平衡树 （AVL树）</a></li>
+                <li>
+                    <a href="#%e9%ab%98%e7%ba%a7%e6%a0%91%e7%bb%93%e6%9e%84%e7%9a%84%e7%a0%94%e7%a9%b6" aria-label="高级树结构的研究">高级树结构的研究</a><ul>
+                        
+                <li>
+                    <a href="#%e5%8d%9a%e5%bc%88%e6%a0%91" aria-label="博弈树">博弈树</a></li>
+                <li>
+                    <a href="#b%e6%a0%91" aria-label="B树">B树</a></li>
+                <li>
+                    <a href="#%e4%ba%8c%e5%8f%89%e7%a9%ba%e9%97%b4%e5%88%86%e5%89%b2%e6%a0%91" aria-label="二叉空间分割树">二叉空间分割树</a></li>
+                <li>
+                    <a href="#%e5%9b%9b%e5%8f%89%e6%a0%91%e4%b8%8e%e5%85%ab%e5%8f%89%e6%a0%91" aria-label="四叉树与八叉树">四叉树与八叉树</a></li></ul>
+                </li>
+                <li>
+                    <a href="#%e5%a0%86" aria-label="堆">堆</a></li></ul>
+                </li>
+                <li>
+                    <a href="#%e5%9b%be%e7%9a%84%e6%95%b0%e6%8d%ae%e8%a1%a8%e7%a4%ba%e6%b3%95" aria-label="图的数据表示法">图的数据表示法</a><ul>
+                        
+                <li>
+                    <a href="#%e9%82%bb%e6%8e%a5%e7%9f%a9%e9%98%b5%e6%b3%95" aria-label="邻接矩阵法">邻接矩阵法</a></li>
+                <li>
+                    <a href="#%e9%82%bb%e6%8e%a5%e9%93%be%e8%a1%a8%e6%b3%95" aria-label="邻接链表法">邻接链表法</a></li>
+                <li>
+                    <a href="#%e5%85%b6%e4%bb%96%e6%96%b9%e6%b3%95" aria-label="其他方法">其他方法</a></li></ul>
+                </li>
+                <li>
+                    <a href="#%e5%9b%be%e7%9a%84%e9%81%8d%e5%8e%86" aria-label="图的遍历">图的遍历</a><ul>
+                        
+                <li>
+                    <a href="#%e6%b7%b1%e5%ba%a6%e4%bc%98%e5%85%88%e9%81%8d%e5%8e%86" aria-label="深度优先遍历">深度优先遍历</a></li>
+                <li>
+                    <a href="#%e5%b9%bf%e5%ba%a6%e4%bc%98%e5%85%88%e9%81%8d%e5%8e%86" aria-label="广度优先遍历">广度优先遍历</a></li></ul>
+                </li>
+                <li>
+                    <a href="#%e7%94%9f%e6%88%90%e6%a0%91" aria-label="生成树">生成树</a><ul>
+                        
+                <li>
+                    <a href="#%e6%b7%b1%e5%ba%a6%e4%bc%98%e5%85%88%e7%94%9f%e6%88%90%e6%a0%91%e5%92%8c%e5%b9%bf%e5%ba%a6%e4%bc%98%e5%85%88%e7%94%9f%e6%88%90%e6%a0%91" aria-label="深度优先生成树和广度优先生成树">深度优先生成树和广度优先生成树</a></li>
+                <li>
+                    <a href="#%e6%9c%80%e5%b0%8f%e7%94%9f%e6%88%90%e6%a0%91" aria-label="最小生成树">最小生成树</a></li>
+                <li>
+                    <a href="#kruskal%e7%ae%97%e6%b3%95" aria-label="Kruskal算法">Kruskal算法</a></li>
+                <li>
+                    <a href="#prim%e7%ae%97%e6%b3%95" aria-label="Prim算法">Prim算法</a></li></ul>
+                </li>
+                <li>
+                    <a href="#%e5%9b%be%e7%9a%84%e6%9c%80%e7%9f%ad%e8%b7%af%e5%be%84" aria-label="图的最短路径">图的最短路径</a><ul>
+                        
+                <li>
+                    <a href="#%e5%8d%95%e7%82%b9%e5%af%b9%e5%85%a8%e9%83%a8%e9%a1%b6%e7%82%b9dijkstra%e7%ae%97%e6%b3%95" aria-label="单点对全部顶点——Dijkstra算法">单点对全部顶点——Dijkstra算法</a></li>
+                <li>
+                    <a href="#a%e7%ae%97%e6%b3%95" aria-label="A*算法">A*算法</a></li>
+                <li>
+                    <a href="#%e4%b8%a4%e4%b8%a4%e9%a1%b6%e7%82%b9%e9%97%b4%e7%9a%84%e6%9c%80%e7%9f%ad%e8%b7%af%e5%be%84floyd%e7%ae%97%e6%b3%95" aria-label="两两顶点间的最短路径——Floyd算法">两两顶点间的最短路径——Floyd算法</a></li>
+                <li>
+                    <a href="#aov%e7%bd%91%e7%bb%9c%e4%b8%8e%e6%8b%93%e6%89%91%e6%8e%92%e5%ba%8f" aria-label="AOV网络与拓扑排序">AOV网络与拓扑排序</a></li>
+                <li>
+                    <a href="#aoe%e7%bd%91%e7%bb%9c" aria-label="AOE网络">AOE网络</a>
+                </li>
+            </ul>
+            </li>
+            </ul>
+        </div>
+    </details>
+</div>
+
+  <div class="post-content"><h2 id="树结构">树结构<a hidden class="anchor" aria-hidden="true" href="#树结构">#</a></h2>
+<h3 id="树的基本概念">树的基本概念<a hidden class="anchor" aria-hidden="true" href="#树的基本概念">#</a></h3>
+<p>树广泛应用于计算机的操作系统，数据库管理系统。</p>
+<p>树可以形成森林。</p>
+<h3 id="二叉树">二叉树<a hidden class="anchor" aria-hidden="true" href="#二叉树">#</a></h3>
+<h4 id="二叉树的定义">二叉树的定义<a hidden class="anchor" aria-hidden="true" href="#二叉树的定义">#</a></h4>
+<p>二叉树的链接浪费率最低，约为1/2。</p>
+<p>树根是上面的那个节点，最下面的是树叶。</p>
+<p>二叉树的左子数存放比较小的数字，右边存放比较大的数字。</p>
+<p>空集合可以是二叉树，但不能是树，很奇怪，但是就是这样规定的。</p>
+<pre><code>两个定理：
+高度为k的满二叉树的节点为2的K次方-1。
+度数为2的节点数是树叶节点的个数减一。
+</code></pre>
+<h4 id="特殊二叉树">特殊二叉树<a hidden class="anchor" aria-hidden="true" href="#特殊二叉树">#</a></h4>
+<p>满二叉树，完全二叉树，斜二叉树，严格二叉树。
+从上到下，从左到右，编号一一对应。</p>
+<h3 id="二叉树的存储方式">二叉树的存储方式<a hidden class="anchor" aria-hidden="true" href="#二叉树的存储方式">#</a></h3>
+<h4 id="用一维数组来实现二叉树">用一维数组来实现二叉树<a hidden class="anchor" aria-hidden="true" href="#用一维数组来实现二叉树">#</a></h4>
+<p>从上到下，从左到右，编号一一对应。空的地方填0.</p>
+<h4 id="用链表来实现二叉树">用链表来实现二叉树<a hidden class="anchor" aria-hidden="true" href="#用链表来实现二叉树">#</a></h4>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">#include &lt;iostream&gt;
+#include &lt;iomanip&gt;
+#define ArraySize 10
+using namespace std;
+class Node  //二叉树的节点声明
+{
+    public:
+    int value;  //节点数据
+    struct Node *left_Node;   //指向左子树的指针
+    struct Node *right_Node; //指向右子树的指针
+};
+typedef class Node TreeNode;   //定义新的二叉树节点数据类型
+typedef TreeNode *BinaryTree;  //定义新的二叉树指针数据类型
+BinaryTree rootNode;  //二叉树的根节点的指针 
+
+//将指定的值加入到二叉树中适当的节点
+void Add_Node_To_Tree(int value)
+{
+    BinaryTree currentNode;
+    BinaryTree newnode;
+    int flag=0;  //用来记录是否插入了新的节点
+    newnode=(BinaryTree) new TreeNode;
+    //建立节点内容
+    newnode-&gt;value=value;
+    newnode-&gt;left_Node=NULL;
+    newnode-&gt;right_Node=NULL;
+    //如果为空的二叉树，则将新的节点设置为根节点
+    if(rootNode==NULL)
+        rootNode=newnode;
+    else
+    {
+        currentNode=rootNode;  //设置一个指针指向根节点
+        while(!flag)
+        if (value&lt;currentNode-&gt;value)
+        { //在左子树
+            if(currentNode-&gt;left_Node==NULL)
+            {
+                currentNode-&gt;left_Node=newnode;
+                flag=1;
+            }
+            else
+                currentNode=currentNode-&gt;left_Node;
+        }
+        else
+        { //在右子树
+            if(currentNode-&gt;right_Node==NULL)
+            {
+                currentNode-&gt;right_Node=newnode;
+                flag=1;
+            }
+            else
+                currentNode=currentNode-&gt;right_Node;
+        }
+    }
+}
+int main(void)
+{
+    int tempdata;
+    int content[ArraySize];
+    int i=0;
+    rootNode=(BinaryTree) new TreeNode;
+    rootNode=NULL;
+    cout&lt;&lt;&#34;请连续输入10个数据：&#34;&lt;&lt;endl;
+    for(i=0;i&lt;ArraySize;i++)
+    {
+        cout&lt;&lt;&#34;请输入第&#34;&lt;&lt;setw(1)&lt;&lt;(i+1)&lt;&lt;&#34;个数据：&#34;;
+        cin&gt;&gt;tempdata;
+        content[i]=tempdata;
+    }
+    for(i=0;i&lt;ArraySize;i++)
+        Add_Node_To_Tree(content[i]);
+    cout&lt;&lt;&#34;完成了用链表建立二叉树！&#34;;
+    cout&lt;&lt;endl;
+    return 0;
+}
+</code></pre></div><h3 id="二叉树的遍历">二叉树的遍历<a hidden class="anchor" aria-hidden="true" href="#二叉树的遍历">#</a></h3>
+<h4 id="中序遍历-后序遍历-前序遍历">中序遍历, 后序遍历 ,前序遍历<a hidden class="anchor" aria-hidden="true" href="#中序遍历-后序遍历-前序遍历">#</a></h4>
+<p>中序遍历, 后序遍历 ,前序遍历 指的顺序都是树根什么时候被查。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">#include &lt;iostream&gt;
+#include &lt;iomanip&gt;
+using namespace std;
+class tree //节点链表结构声明
+{
+    public :
+        int data;  //节点数据 
+        class tree *left,*right;  //节点左指针和右指针
+};
+typedef class tree node;
+typedef node *btree;
+btree creat_tree(btree,int);
+void pre(btree);
+void in(btree);
+void post(btree);
+int main(void)
+{
+    int arr[]={7,4,1,5,16,8,11,12,15,9,2};  //原始数组内容 
+    btree ptr=NULL;  //声明树根 
+    cout&lt;&lt;&#34;[原始数组内容]&#34;&lt;&lt;endl;
+    for (int i=0;i&lt;11;i++)  //建立二叉树，并将二叉树的内容打印出来
+    {
+        ptr=creat_tree(ptr,arr[i]);
+        cout&lt;&lt;&#34;[&#34;&lt;&lt;setw(2)&lt;&lt;arr[i]&lt;&lt;&#34;] &#34;;
+    }
+    cout&lt;&lt;endl;
+    cout&lt;&lt;&#34;[二叉树的内容]&#34;&lt;&lt;endl;
+    cout&lt;&lt;&#34;前序遍历的结果：&#34;&lt;&lt;endl;  //打印前、中、后序遍历的结果
+    pre(ptr);
+    cout&lt;&lt;endl;
+    cout&lt;&lt;&#34;中序遍历的结果：&#34;&lt;&lt;endl;
+    in(ptr);
+    cout&lt;&lt;endl;
+    cout&lt;&lt;&#34;后序遍历的结果：&#34;&lt;&lt;endl;
+    post(ptr);
+    cout&lt;&lt;endl;
+    return 0;
+}
+btree creat_tree(btree root,int val)  //建立二叉树的子程序 
+{
+    btree newnode,current,backup;  //声明一个新节点newnode来存放数组中的数据
+    newnode = new node;              //其中current和backup用于暂存指针
+    newnode-&gt;data=val;  //设置新节点的数据及左右指针
+    newnode-&gt;left=NULL;
+    newnode-&gt;right=NULL;
+    if (root==NULL)     //如果root为空值，则把新节点返回当作树根
+    {
+        root=newnode;
+        return root;
+    }
+else  //若root不是树根，则建立二叉树
+{
+        for(current=root;current!=NULL;) //current复制root以保留当前的树根值 
+        {
+            backup=current;  //暂存父节点
+            if(current-&gt;data &gt; val)  //比较树根节点和新节点的数据
+                current=current-&gt;left;
+            else
+                current=current-&gt;right;
+        }
+        if(backup-&gt;data &gt; val)  //把新节点和树根链接起来
+            backup-&gt;left=newnode;
+        else
+            backup-&gt;right=newnode;
+    }
+    return root; //返回指向树的指针，即指向树根的指针
+}
+void pre(btree ptr)  //前序遍历
+{
+    if (ptr != NULL)
+    {
+        cout&lt;&lt;&#34;[&#34;&lt;&lt;setw(2)&lt;&lt;ptr-&gt;data&lt;&lt;&#34;] &#34;;
+        pre(ptr-&gt;left);
+        pre(ptr-&gt;right);
+    }
+}
+void in(btree ptr)  //中序遍历
+{
+    if (ptr != NULL)
+    {
+        in(ptr-&gt;left);
+        cout&lt;&lt;&#34;[&#34;&lt;&lt;setw(2)&lt;&lt;ptr-&gt;data&lt;&lt;&#34;] &#34;;
+        in(ptr-&gt;right);
+    }
+}
+void post(btree ptr)  //后序遍历
+{
+    if (ptr != NULL)
+    {
+        post(ptr-&gt;left);
+        post(ptr-&gt;right);
+        cout&lt;&lt;&#34;[&#34;&lt;&lt;setw(2)&lt;&lt;ptr-&gt;data&lt;&lt;&#34;] &#34;;
+    }
+}
+</code></pre></div><p><img loading="lazy" src="/vx_images/189723715240784.jpg" alt=""  />
+</p>
+<h4 id="二叉树节点的插入与删除">二叉树节点的插入与删除<a hidden class="anchor" aria-hidden="true" href="#二叉树节点的插入与删除">#</a></h4>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">#include &lt;iostream&gt;
+using namespace std;
+
+struct tree
+{
+    int data;
+    struct tree *left,*right;
+};
+
+typedef struct tree node;
+typedef node *btree;
+
+btree creat_tree(btree root,int val)
+{
+    btree newnode,current,backup;
+    newnode=(btree)new node;
+    newnode-&gt;data=val;
+    newnode-&gt;left=NULL;
+    newnode-&gt;right=NULL;
+    if(root==NULL)
+    {
+        root=newnode;
+        return root;
+    }
+    else
+    {
+        for(current=root;current!=NULL;)
+        {
+            backup=current;
+            if(current-&gt;data &gt; val)
+                current=current-&gt;left;
+            else
+                current=current-&gt;right;
+        }
+        if(backup-&gt;data &gt; val)
+            backup-&gt;left=newnode;
+        else
+            backup-&gt;right=newnode;
+    }
+    return root;
+}
+btree search(btree ptr,int val)  //查找二叉树的子程序
+{
+    while(1)
+    {
+        if(ptr==NULL)        //没找到就返回NULL
+            return NULL;
+        if(ptr-&gt;data==val)  //节点值等于查找值
+            return ptr;
+        else if(ptr-&gt;data &gt; val)  //节点值大于查找值
+            ptr=ptr-&gt;left;
+        else
+            ptr=ptr-&gt;right;
+    }
+}
+void inorder(btree ptr)    //中序遍历的子程序
+{
+    if(ptr!=NULL)
+    {
+        inorder(ptr-&gt;left);
+        cout&lt;&lt;&#34;[&#34;&lt;&lt;ptr-&gt;data&lt;&lt;&#34;]&#34;;
+        inorder(ptr-&gt;right);
+    }
+}
+int main()
+{
+    int i,data,arr[]={7, 1, 4, 2, 8, 13, 12, 11, 15, 9, 5};
+    btree ptr=NULL;
+    cout&lt;&lt;&#34;[原始数组内容]&#34;&lt;&lt;endl;
+    for (i=0;i&lt;11;i++)
+    {
+        ptr=creat_tree(ptr,arr[i]); //建立二叉树
+        cout&lt;&lt;&#34;[&#34;&lt;&lt;arr[i]&lt;&lt;&#34;] &#34;;
+    }
+    cout&lt;&lt;endl;
+    cout&lt;&lt;&#34;请输入要查找的值：&#34;;
+    cin&gt;&gt;data;
+    if((search(ptr,data))!=NULL)    //查找二叉树
+        cout&lt;&lt;&#34;二叉树中有此节点了!&#34;&lt;&lt;data&lt;&lt;endl;
+    else
+    {
+        ptr=creat_tree(ptr,data);
+        inorder(ptr);
+    }
+    return 0;
+}
+</code></pre></div><h4 id="二叉运算树">二叉运算树<a hidden class="anchor" aria-hidden="true" href="#二叉运算树">#</a></h4>
+<p><img loading="lazy" src="/vx_images/144674415231314.png" alt=""  />
+</p>
+<h3 id="线索二叉树">线索二叉树<a hidden class="anchor" aria-hidden="true" href="#线索二叉树">#</a></h3>
+<p>可以提高节点的利用率，中序遍历时不需要使用栈堆与递归。但运行速度较慢。</p>
+<p>按中序遍历顺序，空连接指针如果是该节点的左指针，指向中序遍历顺序下的前一个节点；空连接指针如果是该节点的右指针，指向中序遍历顺序下的后一个节点。没有前后的就空着。
+<img loading="lazy" src="/vx_images/475534415233818.jpg" alt=""  />
+</p>
+<h3 id="树的二叉树表示法-左儿子右兄弟">树的二叉树表示法 （左儿子，右兄弟）<a hidden class="anchor" aria-hidden="true" href="#树的二叉树表示法-左儿子右兄弟">#</a></h3>
+<h4 id="树转化为二叉树">树转化为二叉树<a hidden class="anchor" aria-hidden="true" href="#树转化为二叉树">#</a></h4>
+<p><img loading="lazy" src="/vx_images/244674715242765.jpg" alt=""  />
+</p>
+<p><img loading="lazy" src="/vx_images/367544715235650.jpg" alt=""  />
+</p>
+<h4 id="二叉树转化为树">二叉树转化为树<a hidden class="anchor" aria-hidden="true" href="#二叉树转化为树">#</a></h4>
+<p>实际上是上述过程的逆运算，先把右子树旋转45度，然后删除兄弟连接，改为父子。</p>
+<h4 id="森林转化为二叉树">森林转化为二叉树<a hidden class="anchor" aria-hidden="true" href="#森林转化为二叉树">#</a></h4>
+<p>方法基本一样，把根节点当兄弟节点连接到一起。</p>
+<h4 id="二叉树转化为森林">二叉树转化为森林<a hidden class="anchor" aria-hidden="true" href="#二叉树转化为森林">#</a></h4>
+<p>逆运算。</p>
+<h4 id="树与森林的遍历">树与森林的遍历<a hidden class="anchor" aria-hidden="true" href="#树与森林的遍历">#</a></h4>
+<p>中序遍历, 后序遍历 ,前序遍历 指的顺序都是树根什么时候被查。
+方向是从左到右。</p>
+<h4 id="确定唯一二叉树">确定唯一二叉树<a hidden class="anchor" aria-hidden="true" href="#确定唯一二叉树">#</a></h4>
+<p>知道中序遍历, 后序遍历或知道中序遍历, 前序遍历都可以确定唯一的树，但知道后序遍历 ,前序遍历 不能确定唯一的树。</p>
+<h3 id="优化二叉查找树">优化二叉查找树<a hidden class="anchor" aria-hidden="true" href="#优化二叉查找树">#</a></h3>
+<h4 id="扩充二叉树">扩充二叉树<a hidden class="anchor" aria-hidden="true" href="#扩充二叉树">#</a></h4>
+<p>对空链接加上外节点，其他的节点都是内节点。</p>
+<p>内径长是所有内节点的到根节点的距离。外径长也顾名思义。</p>
+<p>可对外径长进行加权处理。</p>
+<h4 id="哈夫曼树">哈夫曼树<a hidden class="anchor" aria-hidden="true" href="#哈夫曼树">#</a></h4>
+<p><img loading="lazy" src="/vx_images/92800416236259.jpg" alt=""  />
+</p>
+<h3 id="平衡树-avl树">平衡树 （AVL树）<a hidden class="anchor" aria-hidden="true" href="#平衡树-avl树">#</a></h3>
+<p>所有内部节点的左右子树的高度大概平衡，左右子树的节点相差小于或等于1.</p>
+<h3 id="高级树结构的研究">高级树结构的研究<a hidden class="anchor" aria-hidden="true" href="#高级树结构的研究">#</a></h3>
+<h4 id="博弈树">博弈树<a hidden class="anchor" aria-hidden="true" href="#博弈树">#</a></h4>
+<p>博弈树(game tree)是一种特殊的根树,它是人工智能领域一个重要的研究课题。博弈树就是符合博弈规则的决策树。</p>
+<p>博弈决策形成人工智能的方式是查找，在所有情况下找出获胜的情况。</p>
+<h4 id="b树">B树<a hidden class="anchor" aria-hidden="true" href="#b树">#</a></h4>
+<p>平衡树概念的延申。
+一棵m阶B树(balanced tree of order m)是一棵平衡的m路搜索树。它或者是空树，或者是满足下列性质的树：
+1、根结点至少有两个子女；
+2、每个非根节点所包含的关键字个数 j 满足：┌m/2┐ - 1 &lt;= j &lt;= m - 1；
+3、除根结点以外的所有结点（不包括叶子结点）的度数正好是关键字总数加1，故内部子树个数 k 满足：┌m/2┐ &lt;= k &lt;= m ；
+4、所有的叶子结点都位于同一层。</p>
+<h4 id="二叉空间分割树">二叉空间分割树<a hidden class="anchor" aria-hidden="true" href="#二叉空间分割树">#</a></h4>
+<p>属于二叉树，特点是每一个节点都有两个子节点。这是游戏空间常用的一种分割方法，通常应用于平面绘图软件。</p>
+<p>二叉树节点内的数据结构以平面方式分割场景。</p>
+<h4 id="四叉树与八叉树">四叉树与八叉树<a hidden class="anchor" aria-hidden="true" href="#四叉树与八叉树">#</a></h4>
+<p>提供更好的分类能力。</p>
+<h3 id="堆">堆<a hidden class="anchor" aria-hidden="true" href="#堆">#</a></h3>
+<p>树的形状取决于数据的个数。结点的排列顺序为从上到下，同一行里则为从左到右。</p>
+<p>在堆中存储数据时必须遵守这样一条规则:子结点必定大于父结点。因此最小值被存储在顶端的根结点中。往堆中添加数据时，为了遵守这条规则，一般会把新数据放在最下面一行靠左的位置。当最下面一行里没有多余空间时，就再往下另起一行，把数据加在这一行的最左端。</p>
+<p><img loading="lazy" src="/vx_images/257825216260177.png" alt=""  />
+
+按顺序加入
+<img loading="lazy" src="/vx_images/444315616258964.png" alt=""  />
+</p>
+<p><img loading="lazy" src="/vx_images/494795216257781.png" alt=""  />
+
+<img loading="lazy" src="/vx_images/218535416255283.png" alt=""  />
+</p>
+<p>在堆中取出数字，取得是上面最小的数据。
+<img loading="lazy" src="/vx_images/338055516236524.png" alt=""  />
+
+然后把最后的数据移到上面，和下面的节点按照规则比较并移动。最终的结果如下。</p>
+<p><img loading="lazy" src="/vx_images/170675816254100.png" alt=""  />
+</p>
+<h2 id="图的数据表示法">图的数据表示法<a hidden class="anchor" aria-hidden="true" href="#图的数据表示法">#</a></h2>
+<h3 id="邻接矩阵法">邻接矩阵法<a hidden class="anchor" aria-hidden="true" href="#邻接矩阵法">#</a></h3>
+<p>无向图的邻接矩阵是对称的，因为连接是双向的，而有向图不是。</p>
+<p>声明的元素个数是6x6个，而点只有5个 ,声明7个可以，方便填入。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">#include &lt;iostream&gt;
+using namespace std;
+int main(void)
+{  
+	int arr[6][6];		//声明矩阵arr，
+	int data[14][2]={{1,2},{2,1},{1,5},{5,1}, //无向图各边的起点值和终点值
+					{2,3},{3,2},{2,4},{4,2},
+					{3,4},{4,3},{3,5},{5,3},
+					{4,5},{5,4}};
+	for (int i=0;i&lt;6;i++)		//把矩阵清为0
+		for (int j=0;j&lt;6;j++)
+			arr[i][j]=0;
+	for (int i=0;i&lt;14;i++)		//读取图的数据
+		//for (int j=0;j&lt;6;j++)	//填入arr矩阵,源代码加上了这一行和下面一行，
+			//for (int k=0;k&lt;6;k++)//但貌似没什么用，可以直接去掉
+			{  
+				int tmpi, tmpj;
+				tmpi=data[i][0];	//tmpi为起始顶点
+				tmpj=data[i][1];	//tmpj为终止顶点
+				arr[tmpi][tmpj]=1;	//有边的点填入1
+			}
+	cout&lt;&lt;&#34;无向图矩阵：&#34;&lt;&lt;endl;
+	for (int i=1;i&lt;6;i++)
+	{  
+		for (int j=1;j&lt;6;j++)
+	    cout&lt;&lt;&#34;[&#34;&lt;&lt;arr[i][j]&lt;&lt;&#34;] &#34;;  //打印矩阵内容
+		cout&lt;&lt;endl;
+	}
+}
+</code></pre></div><p>有向图的表示方法类似。
+只是修改了一点。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">int data[5][2]={{1,2},{2,1},{2,3},{2,4},{4,3}}
+</code></pre></div><h3 id="邻接链表法">邻接链表法<a hidden class="anchor" aria-hidden="true" href="#邻接链表法">#</a></h3>
+<p>空间利用率高。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">/*
+[示范]:使用邻接表来表示图(a)和(b)
+*/
+#include &lt;iostream&gt;
+using namespace std;
+class list
+{
+	public:
+	int val;
+	class list *next;
+};
+class list head[6];//声明一个节点类型的数组
+int main(void)
+{  
+	list *ptr,*newnode;
+ 	int data[14][2]={{1,2},{2,1},{1,5},{5,1},//声明存储图的数组
+					{2,3},{3,2},{2,4},{4,2},
+					{3,4},{4,3},{3,5},{5,3},
+					{4,5},{5,4}};
+	cout&lt;&lt;&#34;图(a)的邻接表内容：&#34;&lt;&lt;endl;
+	for (int i=1;i&lt;6;i++)
+	{  
+		head[i].val=i; //链表头head
+		head[i].next=NULL;
+		cout&lt;&lt;&#34;顶点 &#34;&lt;&lt;i&lt;&lt;&#34; =&gt;&#34;;	//把顶点值打印出来
+		ptr=&amp;(head[i]);          	//暂存节点ptr
+		for (int j=0;j&lt;14;j++)      //遍历图数组
+		{  
+			if (data[j][0]==i)    	//如果节点值=i，加入节点到链表头
+			{  
+				newnode = new list;
+    			newnode-&gt;val=data[j][1];//声明新节点，值为终点值
+				newnode-&gt;next=NULL;
+				while(ptr!=NULL)        //判断是否为链表的末尾
+					ptr=ptr-&gt;next;
+				ptr=newnode;            //加入新节点
+				cout&lt;&lt;&#34;[&#34;&lt;&lt;newnode-&gt;val&lt;&lt;&#34;] &#34;;//打印相邻顶点
+			}
+		}   
+		cout&lt;&lt;endl;
+	}
+}
+</code></pre></div><h3 id="其他方法">其他方法<a hidden class="anchor" aria-hidden="true" href="#其他方法">#</a></h3>
+<p>邻接复合链表法
+索引表格法</p>
+<h2 id="图的遍历">图的遍历<a hidden class="anchor" aria-hidden="true" href="#图的遍历">#</a></h2>
+<h3 id="深度优先遍历">深度优先遍历<a hidden class="anchor" aria-hidden="true" href="#深度优先遍历">#</a></h3>
+<p>首先需要生成邻接链表，方便之后遍历。</p>
+<p>然后使用递归和堆栈的知识去进行广度优先搜索。压入一个点相邻的所有顶点，然后用堆栈去取出一个点，压入这个点相邻的所有顶点，递归调用，循环往复。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">/*
+[示范]:深度优先遍历法(BFS)
+*/
+#include &lt;iostream&gt;
+using namespace std;
+class list
+{  
+	public:
+	int val;
+    class list *next;
+};
+typedef class list node;
+typedef node *link;
+class list* head[9];
+void dfs(int);
+int run[9];
+int main(void)
+{  
+	link ptr,newnode;
+	int data[20][2]={{1,2},{2,1},{1,3},{3,1},//声明存放图的边的数组
+					{2,4},{4,2},{2,5},{5,2},
+					{3,6},{6,3},{3,7},{7,3},
+					{4,5},{5,4},{6,7},{7,6},
+					{5,8},{8,5},{6,8},{8,6}};
+	for (int i=1;i&lt;=8;i++)//共有八个顶点
+	{  
+		run[i]=0;         //把所有顶点设置为尚未遍历过
+		head[i]= new node;   
+		head[i]-&gt;val=i;    //设置各个链表头的初值
+		head[i]-&gt;next=NULL;
+		ptr=head[i];      //设置指针为链表头
+		for(int j=0;j&lt;20;j++) //二十条边
+		{  
+			if(data[j][0]==i) //如果起点和链表头相等，则把顶点加入链表
+			{  
+				newnode =new node;
+				newnode-&gt;val=data[j][1];
+				newnode-&gt;next=NULL;
+				do
+				{
+					ptr-&gt;next=newnode;//加入新节点
+					ptr=ptr-&gt;next;
+				}while(ptr-&gt;next!=NULL);
+			}
+		} 
+	}
+	cout&lt;&lt;&#34;图的邻接表内容：&#34;&lt;&lt;endl;//打印图的邻接表内容
+	for(int i=1;i&lt;=8;i++)
+	{
+		ptr=head[i];
+		cout&lt;&lt;&#34;顶点 &#34;&lt;&lt;i&lt;&lt;&#34;=&gt; &#34;;
+		ptr = ptr-&gt;next;
+		while(ptr!=NULL)
+		{
+			cout&lt;&lt;&#34;[&#34;&lt;&lt;ptr-&gt;val&lt;&lt;&#34;] &#34;;
+			ptr=ptr-&gt;next;
+		}
+		cout&lt;&lt;endl;
+	}
+
+	cout&lt;&lt;&#34;深度优先遍历顶点：&#34;&lt;&lt;endl;//打印深度优先遍历的顶点
+	dfs(1);
+	cout&lt;&lt;endl;
+}
+void dfs(int current) //深度优先遍历子程序
+{  
+	link ptr;
+	run[current]=1;
+	cout&lt;&lt;&#34;[&#34;&lt;&lt;current&lt;&lt;&#34;] &#34;;
+	ptr=head[current]-&gt;next;
+	while(ptr!=NULL)
+	{		
+		if (run[ptr-&gt;val]==0) 	//如果顶点尚未遍历，
+			dfs(ptr-&gt;val);   	//就进行dfs的递归调用
+		ptr=ptr-&gt;next;
+	}
+}
+</code></pre></div><h3 id="广度优先遍历">广度优先遍历<a hidden class="anchor" aria-hidden="true" href="#广度优先遍历">#</a></h3>
+<p>仍然先 生成邻接链表，然后使用队列进行广度优先搜索。</p>
+<p>部分实现如下。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">/*
+[示范]:广度优先遍历法(BFS)
+*/
+
+void bfs(int current)
+{
+   link tempnode;		//临时的节点指针
+   enqueue(current);	//将第一个顶点加入队列
+   run[current]=1;		//将遍历过的顶点设置为1
+   cout&lt;&lt;&#34;[&#34;&lt;&lt;current&lt;&lt;&#34;]&#34;;		//打印出该遍历过的顶点
+   while(front!=rear) {	 		//判断当前是否为空队列
+      current=dequeue();		//将顶点从队列中取出
+      tempnode=Head[current].first; //先记录当前顶点的位置
+      while(tempnode!=NULL)
+      {
+         if(run[tempnode-&gt;x]==0)
+         {
+            enqueue(tempnode-&gt;x);
+            run[tempnode-&gt;x]=1; //记录已遍历过
+            cout&lt;&lt;&#34;[&#34;&lt;&lt;tempnode-&gt;x&lt;&lt;&#34;]&#34;;
+         }
+         tempnode=tempnode-&gt;next;
+      }
+   }
+} 
+</code></pre></div><h2 id="生成树">生成树<a hidden class="anchor" aria-hidden="true" href="#生成树">#</a></h2>
+<h3 id="深度优先生成树和广度优先生成树">深度优先生成树和广度优先生成树<a hidden class="anchor" aria-hidden="true" href="#深度优先生成树和广度优先生成树">#</a></h3>
+<p>又叫花费树，成本树。联通所有的顶点。可以利用bfs或者dfs来生成。</p>
+<h3 id="最小生成树">最小生成树<a hidden class="anchor" aria-hidden="true" href="#最小生成树">#</a></h3>
+<p>又叫最小花费树，最小成本树。如果路径上有权重，就使用最小权重和的生成树。</p>
+<h3 id="kruskal算法">Kruskal算法<a hidden class="anchor" aria-hidden="true" href="#kruskal算法">#</a></h3>
+<p>先把权值从小到大排列，从最小的边开始，建立最小生成树，如果形成圈就舍弃不用，直到加入n-1条边。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">/*
+[示范]:最小成本生成树
+*/
+#include &lt;iostream&gt;
+#define VERTS    6     	//图的顶点数
+using namespace std;
+
+void mintree(mst head) //最小成本生成树子程序
+{
+    mst ptr,mceptr;
+    int result=0;
+    ptr=head;
+
+    for(int i=0;i&lt;=VERTS;i++)
+        v[i]=0;
+
+    while(ptr!=NULL)
+    {
+        mceptr=findmincost(head);
+        v[mceptr-&gt;from]++;
+        v[mceptr-&gt;to]++;
+        if(v[mceptr-&gt;from]&gt;1 &amp;&amp; v[mceptr-&gt;to]&gt;1)
+        {
+            v[mceptr-&gt;from]--;
+            v[mceptr-&gt;to]--;
+            result=1;
+        }
+        else
+            result=0;
+        if(result==0)
+            cout&lt;&lt;&#34;起始顶点 [&#34;&lt;&lt;mceptr-&gt;from
+            &lt;&lt;&#34;]\t终止顶点 [&#34;&lt;&lt;mceptr-&gt;to&lt;&lt;&#34;]\t路径长度 [&#34;
+            &lt;&lt;mceptr-&gt;val&lt;&lt;&#34;]&#34;&lt;&lt;endl;
+        ptr=ptr-&gt;next;
+    }
+}
+</code></pre></div><h3 id="prim算法">Prim算法<a hidden class="anchor" aria-hidden="true" href="#prim算法">#</a></h3>
+<p><img loading="lazy" src="/vx_images/245422121233863.jpg" alt=""  />
+</p>
+<h2 id="图的最短路径">图的最短路径<a hidden class="anchor" aria-hidden="true" href="#图的最短路径">#</a></h2>
+<h3 id="单点对全部顶点dijkstra算法">单点对全部顶点——Dijkstra算法<a hidden class="anchor" aria-hidden="true" href="#单点对全部顶点dijkstra算法">#</a></h3>
+<p>果然福特算法过于费时间，所以这本书没有提及。可以看看其他的图论笔记。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">/*
+[示范]:Dijkstra算法(单点对全部顶点的最短路径)
+*/
+#include &lt;iostream&gt;
+#include &lt;cstdlib&gt;
+#include &lt;iomanip&gt;
+#define SIZE   7  
+#define NUMBER 6
+#define INFINITE  99999			//无穷大
+using namespace std;
+int Graph_Matrix[SIZE][SIZE];	//存放图的数组
+int distance[SIZE];				//路径的长度
+//建立图 
+void BuildGraph_Matrix(int *Path_Cost)
+{
+    int Start_Point;	//边的起点 
+    int End_Point;		//边的终点
+    int i, j;
+    for ( i = 1; i &lt; SIZE; i++ )
+        for ( j = 1; j &lt; SIZE; j++ )
+            if ( i == j )
+                Graph_Matrix[i][j] = 0;	//对角线设为0
+            else
+                Graph_Matrix[i][j] = INFINITE;  
+   //存入图的边 
+    i=0;
+    while(i&lt;SIZE)
+    {
+        Start_Point = Path_Cost[i*3]; 
+        End_Point = Path_Cost[i*3+1]; 
+        Graph_Matrix[Start_Point][End_Point]=Path_Cost[i*3+2];
+        i++;
+    }
+}
+//打印出图
+void printGraph_Matrix()
+{
+    int i, j;
+    for ( i = 1; i &lt; SIZE; i++ )
+    {
+        cout&lt;&lt;&#34;vex&#34;&lt;&lt;i;
+        for ( j = 1; j &lt; SIZE; j++ )
+            if ( Graph_Matrix[i][j] == INFINITE )
+                cout&lt;&lt;setw(5)&lt;&lt;&#39;x&#39;;
+            else
+                cout&lt;&lt;setw(5)&lt;&lt;Graph_Matrix[i][j];
+        cout&lt;&lt;endl;
+    }
+}
+//单点对全部顶点的最短距离 
+void shortestPath(int vertex1, int vertex_total)
+{       
+    extern int distance[SIZE];		//声明为外部变量 
+    int shortest_vertex = 1; 		//记录最短距离的顶点
+    int shortest_distance;   		//记录最短距离
+    int goal[SIZE]; 				//用来记录该顶点是否被选取
+    int i,j;
+    for ( i = 1; i &lt;= vertex_total; i++ )
+    { 
+        goal[i] = 0;    
+        distance[i] = Graph_Matrix[vertex1][i]; 
+    }
+    goal[vertex1] = 1;  
+    distance[vertex1] = 0;  
+    cout&lt;&lt;endl;   
+    for (i=1; i&lt;=vertex_total-1; i++ ) 
+    {      
+        shortest_distance = INFINITE;      
+        //找出最短距离的顶点
+        for (j=1;j&lt;=vertex_total;j++ )
+            if (goal[j]==0&amp;&amp;shortest_distance&gt;distance[j])
+            {
+                shortest_distance=distance[j];                                              
+                shortest_vertex=j;              
+            }
+        goal[shortest_vertex] = 1;   
+        //计算开始顶点到各顶点的最短距离
+        for (j=1;j&lt;=vertex_total;j++ )
+        {
+            if ( goal[j] == 0 &amp;&amp; distance[shortest_vertex]
+			    +Graph_Matrix[shortest_vertex][j]&lt;distance[j])
+            {
+                distance[j]=distance[shortest_vertex]
+                            +Graph_Matrix[shortest_vertex][j];
+            }       
+        }
+    }
+}
+//主程序
+int main(void) 
+{
+    extern int distance[SIZE];		//声明为外部变量
+    int Path_Cost[7][3] = { {1, 2, 10}, 
+                            {2, 3, 20},
+                            {2, 4, 25},
+                            {3, 5, 18},
+                            {4, 5, 22},
+                            {4, 6, 95},
+                            {5, 6, 77} }; 
+    int j;
+    BuildGraph_Matrix(&amp;Path_Cost[0][0]);
+    cout&lt;&lt;&#34;==================================&#34;&lt;&lt;endl;
+    cout&lt;&lt;&#34;此范例图的邻接矩阵如下: &#34;&lt;&lt;endl;
+    cout&lt;&lt;&#34;==================================&#34;&lt;&lt;endl;
+    cout&lt;&lt;&#34;顶点 vex1 vex2 vex3 vex4 vex5 vex6&#34;&lt;&lt;endl;
+    printGraph_Matrix();  //显示图
+    shortestPath(1,NUMBER); //查找最短路径
+    cout&lt;&lt;&#34;==================================&#34;&lt;&lt;endl;
+    cout&lt;&lt;&#34;顶点1到各顶点最短距离的最终结果&#34;&lt;&lt;endl;
+    cout&lt;&lt;&#34;==================================&#34;&lt;&lt;endl;
+    for (j=1;j&lt;SIZE;j++) 
+        cout&lt;&lt;&#34;顶点 1到顶点&#34;&lt;&lt;setw(2)&lt;&lt;j&lt;&lt;&#34;的最短距离=&#34;
+            &lt;&lt;setw(3)&lt;&lt;distance[j]&lt;&lt;endl;
+    cout&lt;&lt;endl;
+    return 0; 
+}
+</code></pre></div><p><img loading="lazy" src="/vx_images/241272421253018.png" alt=""  />
+</p>
+<h3 id="a算法">A*算法<a hidden class="anchor" aria-hidden="true" href="#a算法">#</a></h3>
+<p>引用推测权重，使用距离预估函数，但有一定可能会出错而造成找不到最短路径。</p>
+<h3 id="两两顶点间的最短路径floyd算法">两两顶点间的最短路径——Floyd算法<a hidden class="anchor" aria-hidden="true" href="#两两顶点间的最短路径floyd算法">#</a></h3>
+<p>弗洛伊德算法，可以找到任意两点之间的最小路径。</p>
+<h3 id="aov网络与拓扑排序">AOV网络与拓扑排序<a hidden class="anchor" aria-hidden="true" href="#aov网络与拓扑排序">#</a></h3>
+<p>也叫顶点活动网络，在一个表示工程的有向图中，用顶点表示活动，用弧表示活动之间的优先关系。这样的有向图为顶点表示活动的网，我们称为AOV网（Activity On Vertex Network）。先做某些工作才可以做接下来的工作。</p>
+<p>一个AOV网应该是一个有向无环图，即不应该带有回路，因为若带有回路，则回路上的所有活动都无法进行。</p>
+<p>在AOV网中，若不存在回路，则所有活动可排列成一个线性序列，使得每个活动的所有前驱活动都排在该活动的前面，我们把此序列叫做拓扑序列(Topological order)，由AOV网构造拓扑序列的过程叫做拓扑排序(Topological sort)。AOV网的拓扑序列不是唯一的，满足上述定义的任一线性序列都称作它的拓扑序列。</p>
+<h3 id="aoe网络">AOE网络<a hidden class="anchor" aria-hidden="true" href="#aoe网络">#</a></h3>
+<p>在带权有向图中若以顶点表示事件，有向边表示活动，边上的权值表示该活动持续的时间，这样的图简称为AOE网。</p>
+<p>完成工程的最短时间：从工程开始点（源点）到完成点（汇点）的最短路径称为完成工程的最短时间。</p>
+<p>关键路径：路径长度最长的路径称为关键路径。</p>
+
+
+  </div>
+
+  <footer class="post-footer">
+    <ul class="post-tags">
+    </ul>
+<nav class="paginav">
+  <a class="next" href="https://tassel234.github.io/posts/note/c&#43;&#43;%E5%85%A5%E9%97%A8%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0-3%E6%95%B0%E7%BB%84%E6%8C%87%E9%92%88%E7%BB%93%E6%9E%84%E4%BD%93/">
+    <span class="title">Next »</span>
+    <br>
+    <span>C&#43;&#43;入门学习笔记-3(数组，指针，结构体)</span>
+  </a>
+</nav>
+
+
+<div class="share-buttons">
+    <a target="_blank" rel="noopener noreferrer" aria-label="share 使用Cpp实现数据结构 3（树和图论） on twitter"
+        href="https://twitter.com/intent/tweet/?text=%e4%bd%bf%e7%94%a8Cpp%e5%ae%9e%e7%8e%b0%e6%95%b0%e6%8d%ae%e7%bb%93%e6%9e%84%203%ef%bc%88%e6%a0%91%e5%92%8c%e5%9b%be%e8%ae%ba%ef%bc%89&amp;url=https%3a%2f%2ftassel234.github.io%2fposts%2fnote%2f%25E4%25BD%25BF%25E7%2594%25A8cpp%25E5%25AE%259E%25E7%258E%25B0%25E6%2595%25B0%25E6%258D%25AE%25E7%25BB%2593%25E6%259E%2584-3%25E6%25A0%2591%25E5%2592%258C%25E5%259B%25BE%25E8%25AE%25BA%2f&amp;hashtags=">
+        <svg version="1.1" viewBox="0 0 512 512" xml:space="preserve" height="30px" width="30px" fill="currentColor">
+            <path
+                d="M449.446,0c34.525,0 62.554,28.03 62.554,62.554l0,386.892c0,34.524 -28.03,62.554 -62.554,62.554l-386.892,0c-34.524,0 -62.554,-28.03 -62.554,-62.554l0,-386.892c0,-34.524 28.029,-62.554 62.554,-62.554l386.892,0Zm-253.927,424.544c135.939,0 210.268,-112.643 210.268,-210.268c0,-3.218 0,-6.437 -0.153,-9.502c14.406,-10.421 26.973,-23.448 36.935,-38.314c-13.18,5.824 -27.433,9.809 -42.452,11.648c15.326,-9.196 26.973,-23.602 32.49,-40.92c-14.252,8.429 -30.038,14.56 -46.896,17.931c-13.487,-14.406 -32.644,-23.295 -53.946,-23.295c-40.767,0 -73.87,33.104 -73.87,73.87c0,5.824 0.613,11.494 1.992,16.858c-61.456,-3.065 -115.862,-32.49 -152.337,-77.241c-6.284,10.881 -9.962,23.601 -9.962,37.088c0,25.594 13.027,48.276 32.95,61.456c-12.107,-0.307 -23.448,-3.678 -33.41,-9.196l0,0.92c0,35.862 25.441,65.594 59.311,72.49c-6.13,1.686 -12.72,2.606 -19.464,2.606c-4.751,0 -9.348,-0.46 -13.946,-1.38c9.349,29.426 36.628,50.728 68.965,51.341c-25.287,19.771 -57.164,31.571 -91.8,31.571c-5.977,0 -11.801,-0.306 -17.625,-1.073c32.337,21.15 71.264,33.41 112.95,33.41Z" />
+        </svg>
+    </a>
+    <a target="_blank" rel="noopener noreferrer" aria-label="share 使用Cpp实现数据结构 3（树和图论） on linkedin"
+        href="https://www.linkedin.com/shareArticle?mini=true&amp;url=https%3a%2f%2ftassel234.github.io%2fposts%2fnote%2f%25E4%25BD%25BF%25E7%2594%25A8cpp%25E5%25AE%259E%25E7%258E%25B0%25E6%2595%25B0%25E6%258D%25AE%25E7%25BB%2593%25E6%259E%2584-3%25E6%25A0%2591%25E5%2592%258C%25E5%259B%25BE%25E8%25AE%25BA%2f&amp;title=%e4%bd%bf%e7%94%a8Cpp%e5%ae%9e%e7%8e%b0%e6%95%b0%e6%8d%ae%e7%bb%93%e6%9e%84%203%ef%bc%88%e6%a0%91%e5%92%8c%e5%9b%be%e8%ae%ba%ef%bc%89&amp;summary=%e4%bd%bf%e7%94%a8Cpp%e5%ae%9e%e7%8e%b0%e6%95%b0%e6%8d%ae%e7%bb%93%e6%9e%84%203%ef%bc%88%e6%a0%91%e5%92%8c%e5%9b%be%e8%ae%ba%ef%bc%89&amp;source=https%3a%2f%2ftassel234.github.io%2fposts%2fnote%2f%25E4%25BD%25BF%25E7%2594%25A8cpp%25E5%25AE%259E%25E7%258E%25B0%25E6%2595%25B0%25E6%258D%25AE%25E7%25BB%2593%25E6%259E%2584-3%25E6%25A0%2591%25E5%2592%258C%25E5%259B%25BE%25E8%25AE%25BA%2f">
+        <svg version="1.1" viewBox="0 0 512 512" xml:space="preserve" height="30px" width="30px" fill="currentColor">
+            <path
+                d="M449.446,0c34.525,0 62.554,28.03 62.554,62.554l0,386.892c0,34.524 -28.03,62.554 -62.554,62.554l-386.892,0c-34.524,0 -62.554,-28.03 -62.554,-62.554l0,-386.892c0,-34.524 28.029,-62.554 62.554,-62.554l386.892,0Zm-288.985,423.278l0,-225.717l-75.04,0l0,225.717l75.04,0Zm270.539,0l0,-129.439c0,-69.333 -37.018,-101.586 -86.381,-101.586c-39.804,0 -57.634,21.891 -67.617,37.266l0,-31.958l-75.021,0c0.995,21.181 0,225.717 0,225.717l75.02,0l0,-126.056c0,-6.748 0.486,-13.492 2.474,-18.315c5.414,-13.475 17.767,-27.434 38.494,-27.434c27.135,0 38.007,20.707 38.007,51.037l0,120.768l75.024,0Zm-307.552,-334.556c-25.674,0 -42.448,16.879 -42.448,39.002c0,21.658 16.264,39.002 41.455,39.002l0.484,0c26.165,0 42.452,-17.344 42.452,-39.002c-0.485,-22.092 -16.241,-38.954 -41.943,-39.002Z" />
+        </svg>
+    </a>
+    <a target="_blank" rel="noopener noreferrer" aria-label="share 使用Cpp实现数据结构 3（树和图论） on reddit"
+        href="https://reddit.com/submit?url=https%3a%2f%2ftassel234.github.io%2fposts%2fnote%2f%25E4%25BD%25BF%25E7%2594%25A8cpp%25E5%25AE%259E%25E7%258E%25B0%25E6%2595%25B0%25E6%258D%25AE%25E7%25BB%2593%25E6%259E%2584-3%25E6%25A0%2591%25E5%2592%258C%25E5%259B%25BE%25E8%25AE%25BA%2f&title=%e4%bd%bf%e7%94%a8Cpp%e5%ae%9e%e7%8e%b0%e6%95%b0%e6%8d%ae%e7%bb%93%e6%9e%84%203%ef%bc%88%e6%a0%91%e5%92%8c%e5%9b%be%e8%ae%ba%ef%bc%89">
+        <svg version="1.1" viewBox="0 0 512 512" xml:space="preserve" height="30px" width="30px" fill="currentColor">
+            <path
+                d="M449.446,0c34.525,0 62.554,28.03 62.554,62.554l0,386.892c0,34.524 -28.03,62.554 -62.554,62.554l-386.892,0c-34.524,0 -62.554,-28.03 -62.554,-62.554l0,-386.892c0,-34.524 28.029,-62.554 62.554,-62.554l386.892,0Zm-3.446,265.638c0,-22.964 -18.616,-41.58 -41.58,-41.58c-11.211,0 -21.361,4.457 -28.841,11.666c-28.424,-20.508 -67.586,-33.757 -111.204,-35.278l18.941,-89.121l61.884,13.157c0.756,15.734 13.642,28.29 29.56,28.29c16.407,0 29.706,-13.299 29.706,-29.701c0,-16.403 -13.299,-29.702 -29.706,-29.702c-11.666,0 -21.657,6.792 -26.515,16.578l-69.105,-14.69c-1.922,-0.418 -3.939,-0.042 -5.585,1.036c-1.658,1.073 -2.811,2.761 -3.224,4.686l-21.152,99.438c-44.258,1.228 -84.046,14.494 -112.837,35.232c-7.468,-7.164 -17.589,-11.591 -28.757,-11.591c-22.965,0 -41.585,18.616 -41.585,41.58c0,16.896 10.095,31.41 24.568,37.918c-0.639,4.135 -0.99,8.328 -0.99,12.576c0,63.977 74.469,115.836 166.33,115.836c91.861,0 166.334,-51.859 166.334,-115.836c0,-4.218 -0.347,-8.387 -0.977,-12.493c14.564,-6.47 24.735,-21.034 24.735,-38.001Zm-119.474,108.193c-20.27,20.241 -59.115,21.816 -70.534,21.816c-11.428,0 -50.277,-1.575 -70.522,-21.82c-3.007,-3.008 -3.007,-7.882 0,-10.889c3.003,-2.999 7.882,-3.003 10.885,0c12.777,12.781 40.11,17.317 59.637,17.317c19.522,0 46.86,-4.536 59.657,-17.321c3.016,-2.999 7.886,-2.995 10.885,0.008c3.008,3.011 3.003,7.882 -0.008,10.889Zm-5.23,-48.781c-16.373,0 -29.701,-13.324 -29.701,-29.698c0,-16.381 13.328,-29.714 29.701,-29.714c16.378,0 29.706,13.333 29.706,29.714c0,16.374 -13.328,29.698 -29.706,29.698Zm-160.386,-29.702c0,-16.381 13.328,-29.71 29.714,-29.71c16.369,0 29.689,13.329 29.689,29.71c0,16.373 -13.32,29.693 -29.689,29.693c-16.386,0 -29.714,-13.32 -29.714,-29.693Z" />
+        </svg>
+    </a>
+    <a target="_blank" rel="noopener noreferrer" aria-label="share 使用Cpp实现数据结构 3（树和图论） on facebook"
+        href="https://facebook.com/sharer/sharer.php?u=https%3a%2f%2ftassel234.github.io%2fposts%2fnote%2f%25E4%25BD%25BF%25E7%2594%25A8cpp%25E5%25AE%259E%25E7%258E%25B0%25E6%2595%25B0%25E6%258D%25AE%25E7%25BB%2593%25E6%259E%2584-3%25E6%25A0%2591%25E5%2592%258C%25E5%259B%25BE%25E8%25AE%25BA%2f">
+        <svg version="1.1" viewBox="0 0 512 512" xml:space="preserve" height="30px" width="30px" fill="currentColor">
+            <path
+                d="M449.446,0c34.525,0 62.554,28.03 62.554,62.554l0,386.892c0,34.524 -28.03,62.554 -62.554,62.554l-106.468,0l0,-192.915l66.6,0l12.672,-82.621l-79.272,0l0,-53.617c0,-22.603 11.073,-44.636 46.58,-44.636l36.042,0l0,-70.34c0,0 -32.71,-5.582 -63.982,-5.582c-65.288,0 -107.96,39.569 -107.96,111.204l0,62.971l-72.573,0l0,82.621l72.573,0l0,192.915l-191.104,0c-34.524,0 -62.554,-28.03 -62.554,-62.554l0,-386.892c0,-34.524 28.029,-62.554 62.554,-62.554l386.892,0Z" />
+        </svg>
+    </a>
+    <a target="_blank" rel="noopener noreferrer" aria-label="share 使用Cpp实现数据结构 3（树和图论） on whatsapp"
+        href="https://api.whatsapp.com/send?text=%e4%bd%bf%e7%94%a8Cpp%e5%ae%9e%e7%8e%b0%e6%95%b0%e6%8d%ae%e7%bb%93%e6%9e%84%203%ef%bc%88%e6%a0%91%e5%92%8c%e5%9b%be%e8%ae%ba%ef%bc%89%20-%20https%3a%2f%2ftassel234.github.io%2fposts%2fnote%2f%25E4%25BD%25BF%25E7%2594%25A8cpp%25E5%25AE%259E%25E7%258E%25B0%25E6%2595%25B0%25E6%258D%25AE%25E7%25BB%2593%25E6%259E%2584-3%25E6%25A0%2591%25E5%2592%258C%25E5%259B%25BE%25E8%25AE%25BA%2f">
+        <svg version="1.1" viewBox="0 0 512 512" xml:space="preserve" height="30px" width="30px" fill="currentColor">
+            <path
+                d="M449.446,0c34.525,0 62.554,28.03 62.554,62.554l0,386.892c0,34.524 -28.03,62.554 -62.554,62.554l-386.892,0c-34.524,0 -62.554,-28.03 -62.554,-62.554l0,-386.892c0,-34.524 28.029,-62.554 62.554,-62.554l386.892,0Zm-58.673,127.703c-33.842,-33.881 -78.847,-52.548 -126.798,-52.568c-98.799,0 -179.21,80.405 -179.249,179.234c-0.013,31.593 8.241,62.428 23.927,89.612l-25.429,92.884l95.021,-24.925c26.181,14.28 55.659,21.807 85.658,21.816l0.074,0c98.789,0 179.206,-80.413 179.247,-179.243c0.018,-47.895 -18.61,-92.93 -52.451,-126.81Zm-126.797,275.782l-0.06,0c-26.734,-0.01 -52.954,-7.193 -75.828,-20.767l-5.441,-3.229l-56.386,14.792l15.05,-54.977l-3.542,-5.637c-14.913,-23.72 -22.791,-51.136 -22.779,-79.287c0.033,-82.142 66.867,-148.971 149.046,-148.971c39.793,0.014 77.199,15.531 105.329,43.692c28.128,28.16 43.609,65.592 43.594,105.4c-0.034,82.149 -66.866,148.983 -148.983,148.984Zm81.721,-111.581c-4.479,-2.242 -26.499,-13.075 -30.604,-14.571c-4.105,-1.495 -7.091,-2.241 -10.077,2.241c-2.986,4.483 -11.569,14.572 -14.182,17.562c-2.612,2.988 -5.225,3.364 -9.703,1.12c-4.479,-2.241 -18.91,-6.97 -36.017,-22.23c-13.314,-11.876 -22.304,-26.542 -24.916,-31.026c-2.612,-4.484 -0.279,-6.908 1.963,-9.14c2.016,-2.007 4.48,-5.232 6.719,-7.847c2.24,-2.615 2.986,-4.484 4.479,-7.472c1.493,-2.99 0.747,-5.604 -0.374,-7.846c-1.119,-2.241 -10.077,-24.288 -13.809,-33.256c-3.635,-8.733 -7.327,-7.55 -10.077,-7.688c-2.609,-0.13 -5.598,-0.158 -8.583,-0.158c-2.986,0 -7.839,1.121 -11.944,5.604c-4.105,4.484 -15.675,15.32 -15.675,37.364c0,22.046 16.048,43.342 18.287,46.332c2.24,2.99 31.582,48.227 76.511,67.627c10.685,4.615 19.028,7.371 25.533,9.434c10.728,3.41 20.492,2.929 28.209,1.775c8.605,-1.285 26.499,-10.833 30.231,-21.295c3.732,-10.464 3.732,-19.431 2.612,-21.298c-1.119,-1.869 -4.105,-2.99 -8.583,-5.232Z" />
+        </svg>
+    </a>
+    <a target="_blank" rel="noopener noreferrer" aria-label="share 使用Cpp实现数据结构 3（树和图论） on telegram"
+        href="https://telegram.me/share/url?text=%e4%bd%bf%e7%94%a8Cpp%e5%ae%9e%e7%8e%b0%e6%95%b0%e6%8d%ae%e7%bb%93%e6%9e%84%203%ef%bc%88%e6%a0%91%e5%92%8c%e5%9b%be%e8%ae%ba%ef%bc%89&amp;url=https%3a%2f%2ftassel234.github.io%2fposts%2fnote%2f%25E4%25BD%25BF%25E7%2594%25A8cpp%25E5%25AE%259E%25E7%258E%25B0%25E6%2595%25B0%25E6%258D%25AE%25E7%25BB%2593%25E6%259E%2584-3%25E6%25A0%2591%25E5%2592%258C%25E5%259B%25BE%25E8%25AE%25BA%2f">
+        <svg version="1.1" xml:space="preserve" viewBox="2 2 28 28" height="30px" width="30px" fill="currentColor">
+            <path
+                d="M26.49,29.86H5.5a3.37,3.37,0,0,1-2.47-1,3.35,3.35,0,0,1-1-2.47V5.48A3.36,3.36,0,0,1,3,3,3.37,3.37,0,0,1,5.5,2h21A3.38,3.38,0,0,1,29,3a3.36,3.36,0,0,1,1,2.46V26.37a3.35,3.35,0,0,1-1,2.47A3.38,3.38,0,0,1,26.49,29.86Zm-5.38-6.71a.79.79,0,0,0,.85-.66L24.73,9.24a.55.55,0,0,0-.18-.46.62.62,0,0,0-.41-.17q-.08,0-16.53,6.11a.59.59,0,0,0-.41.59.57.57,0,0,0,.43.52l4,1.24,1.61,4.83a.62.62,0,0,0,.63.43.56.56,0,0,0,.4-.17L16.54,20l4.09,3A.9.9,0,0,0,21.11,23.15ZM13.8,20.71l-1.21-4q8.72-5.55,8.78-5.55c.15,0,.23,0,.23.16a.18.18,0,0,1,0,.06s-2.51,2.3-7.52,6.8Z" />
+        </svg>
+    </a>
+</div>
+  </footer>
+</article>
+    </main>
+    
+<footer class="footer">
+    <span>&copy; 2023 <a href="https://tassel234.github.io/">hrkr&#39;s Blog</a></span>
+    <span>
+        Powered by
+        <a href="https://gohugo.io/" rel="noopener noreferrer" target="_blank">Hugo</a> &
+        <a href="https://github.com/adityatelange/hugo-PaperMod/" rel="noopener" target="_blank">PaperMod</a>
+    </span>
+</footer>
+<a href="#top" aria-label="go to top" title="Go to Top (Alt + G)" class="top-link" id="top-link" accesskey="g">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentColor">
+        <path d="M12 6H0l6-6z" />
+    </svg>
+</a>
+
+<script>
+    let menu = document.getElementById('menu')
+    if (menu) {
+        menu.scrollLeft = localStorage.getItem("menu-scroll-position");
+        menu.onscroll = function () {
+            localStorage.setItem("menu-scroll-position", menu.scrollLeft);
+        }
+    }
+
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener("click", function (e) {
+            e.preventDefault();
+            var id = this.getAttribute("href").substr(1);
+            if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView({
+                    behavior: "smooth"
+                });
+            } else {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView();
+            }
+            if (id === "top") {
+                history.replaceState(null, null, " ");
+            } else {
+                history.pushState(null, null, `#${id}`);
+            }
+        });
+    });
+
+</script>
+<script>
+    var mybutton = document.getElementById("top-link");
+    window.onscroll = function () {
+        if (document.body.scrollTop > 800 || document.documentElement.scrollTop > 800) {
+            mybutton.style.visibility = "visible";
+            mybutton.style.opacity = "1";
+        } else {
+            mybutton.style.visibility = "hidden";
+            mybutton.style.opacity = "0";
+        }
+    };
+
+</script>
+<script>
+    document.getElementById("theme-toggle").addEventListener("click", () => {
+        if (document.body.className.includes("dark")) {
+            document.body.classList.remove('dark');
+            localStorage.setItem("pref-theme", 'light');
+        } else {
+            document.body.classList.add('dark');
+            localStorage.setItem("pref-theme", 'dark');
+        }
+    })
+
+</script>
+<script>
+    document.querySelectorAll('pre > code').forEach((codeblock) => {
+        const container = codeblock.parentNode.parentNode;
+
+        const copybutton = document.createElement('button');
+        copybutton.classList.add('copy-code');
+        copybutton.innerHTML = 'copy';
+
+        function copyingDone() {
+            copybutton.innerHTML = 'copied!';
+            setTimeout(() => {
+                copybutton.innerHTML = 'copy';
+            }, 2000);
+        }
+
+        copybutton.addEventListener('click', (cb) => {
+            if ('clipboard' in navigator) {
+                navigator.clipboard.writeText(codeblock.textContent);
+                copyingDone();
+                return;
+            }
+
+            const range = document.createRange();
+            range.selectNodeContents(codeblock);
+            const selection = window.getSelection();
+            selection.removeAllRanges();
+            selection.addRange(range);
+            try {
+                document.execCommand('copy');
+                copyingDone();
+            } catch (e) { };
+            selection.removeRange(range);
+        });
+
+        if (container.classList.contains("highlight")) {
+            container.appendChild(copybutton);
+        } else if (container.parentNode.firstChild == container) {
+            
+        } else if (codeblock.parentNode.parentNode.parentNode.parentNode.parentNode.nodeName == "TABLE") {
+            
+            codeblock.parentNode.parentNode.parentNode.parentNode.parentNode.appendChild(copybutton);
+        } else {
+            
+            codeblock.parentNode.appendChild(copybutton);
+        }
+    });
+</script>
+</body>
+
+</html>
