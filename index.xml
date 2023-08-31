@@ -6,7 +6,16 @@
     <description>Recent content on hrkr&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Wed, 30 Aug 2023 23:45:15 +0800</lastBuildDate><atom:link href="https://tassel234.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 31 Aug 2023 22:11:59 +0800</lastBuildDate><atom:link href="https://tassel234.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>爬虫入门-1</title>
+      <link>https://tassel234.github.io/posts/note/%E7%88%AC%E8%99%AB%E5%85%A5%E9%97%A8-1/</link>
+      <pubDate>Thu, 31 Aug 2023 22:11:59 +0800</pubDate>
+      
+      <guid>https://tassel234.github.io/posts/note/%E7%88%AC%E8%99%AB%E5%85%A5%E9%97%A8-1/</guid>
+      <description>使用资源 （主）目前爬虫真正的应用 （主）爬虫实例视频 基础知识 爬虫大概可以分为网页爬虫（也就是搜索引擎）和精确爬虫（爬取单个页面的数据，比如建模使用的机场数据）。 Robots协议 (也称为爬虫协议、机器人协议等) 的全称是&amp;quot;网络爬虫排除标准”，robots.txt是报索引警访问</description>
+    </item>
+    
     <item>
       <title>《消失的十三级台阶》读后感</title>
       <link>https://tassel234.github.io/posts/read/%E6%B6%88%E5%A4%B1%E7%9A%84%E5%8D%81%E4%B8%89%E7%BA%A7%E5%8F%B0%E9%98%B6%E8%AF%BB%E5%90%8E%E6%84%9F/</link>
