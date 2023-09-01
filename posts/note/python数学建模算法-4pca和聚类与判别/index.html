@@ -1,0 +1,743 @@
+<!DOCTYPE html>
+<html lang="en" dir="auto">
+
+<head><meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="robots" content="index, follow">
+<title>Python数学建模算法-4（pca和聚类与判别） | hrkr&#39;s Blog</title>
+<meta name="keywords" content="">
+<meta name="description" content="py数模（pca，聚类和判别） 前言 使用资源： https://blog.csdn.net/weixin_43584807/article/details/105539675 https://blog.csdn.net/qq_46092061/article/details/119045393 https://zhuanlan.zhihu.com/p/37777074 python数学建模算法与应用（司守奎） aim 知道编程可以做到什么 会看每一行代码在表达什么意思 知道生成数据或者表格的意义 提高建模水平，对各种应用问题进行归纳总结 聚类分析与判别分析 聚类分析 聚类分析的目标就是在相似的基础上收集数据来分类。">
+<meta name="author" content="hrkr">
+<link rel="canonical" href="https://tassel234.github.io/posts/note/python%E6%95%B0%E5%AD%A6%E5%BB%BA%E6%A8%A1%E7%AE%97%E6%B3%95-4pca%E5%92%8C%E8%81%9A%E7%B1%BB%E4%B8%8E%E5%88%A4%E5%88%AB/">
+<link crossorigin="anonymous" href="/assets/css/stylesheet.css" rel="preload stylesheet" as="style">
+<script defer crossorigin="anonymous" src="/assets/js/highlight.js" onload="hljs.initHighlightingOnLoad();"></script>
+<link rel="icon" href="https://tassel234.github.io/img/">
+<link rel="icon" type="image/png" sizes="16x16" href="https://tassel234.github.io/img/">
+<link rel="icon" type="image/png" sizes="32x32" href="https://tassel234.github.io/img/">
+<link rel="apple-touch-icon" href="https://tassel234.github.io/img/Q.jpg">
+<link rel="mask-icon" href="https://tassel234.github.io/img/Q.jpg">
+<meta name="theme-color" content="#2e2e33">
+<meta name="msapplication-TileColor" content="#2e2e33">
+<noscript>
+    <style>
+        #theme-toggle,
+        .top-link {
+            display: none;
+        }
+
+    </style>
+    <style>
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --theme: rgb(29, 30, 32);
+                --entry: rgb(46, 46, 51);
+                --primary: rgb(218, 218, 219);
+                --secondary: rgb(155, 156, 157);
+                --tertiary: rgb(65, 66, 68);
+                --content: rgb(196, 196, 197);
+                --hljs-bg: rgb(46, 46, 51);
+                --code-bg: rgb(55, 56, 62);
+                --border: rgb(51, 51, 51);
+            }
+
+            .list {
+                background: var(--theme);
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-track {
+                background: 0 0;
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-thumb {
+                border-color: var(--theme);
+            }
+        }
+
+    </style>
+</noscript><meta property="og:title" content="Python数学建模算法-4（pca和聚类与判别）" />
+<meta property="og:description" content="py数模（pca，聚类和判别） 前言 使用资源： https://blog.csdn.net/weixin_43584807/article/details/105539675 https://blog.csdn.net/qq_46092061/article/details/119045393 https://zhuanlan.zhihu.com/p/37777074 python数学建模算法与应用（司守奎） aim 知道编程可以做到什么 会看每一行代码在表达什么意思 知道生成数据或者表格的意义 提高建模水平，对各种应用问题进行归纳总结 聚类分析与判别分析 聚类分析 聚类分析的目标就是在相似的基础上收集数据来分类。" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://tassel234.github.io/posts/note/python%E6%95%B0%E5%AD%A6%E5%BB%BA%E6%A8%A1%E7%AE%97%E6%B3%95-4pca%E5%92%8C%E8%81%9A%E7%B1%BB%E4%B8%8E%E5%88%A4%E5%88%AB/" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2023-09-01T23:40:03+08:00" />
+<meta property="article:modified_time" content="2023-09-01T23:40:03+08:00" />
+
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Python数学建模算法-4（pca和聚类与判别）"/>
+<meta name="twitter:description" content="py数模（pca，聚类和判别） 前言 使用资源： https://blog.csdn.net/weixin_43584807/article/details/105539675 https://blog.csdn.net/qq_46092061/article/details/119045393 https://zhuanlan.zhihu.com/p/37777074 python数学建模算法与应用（司守奎） aim 知道编程可以做到什么 会看每一行代码在表达什么意思 知道生成数据或者表格的意义 提高建模水平，对各种应用问题进行归纳总结 聚类分析与判别分析 聚类分析 聚类分析的目标就是在相似的基础上收集数据来分类。"/>
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position":  1 ,
+      "name": "Posts",
+      "item": "https://tassel234.github.io/posts/"
+    }, 
+    {
+      "@type": "ListItem",
+      "position":  2 ,
+      "name": "学习记录\u0026笔记",
+      "item": "https://tassel234.github.io/posts/note/"
+    }, 
+    {
+      "@type": "ListItem",
+      "position":  3 ,
+      "name": "Python数学建模算法-4（pca和聚类与判别）",
+      "item": "https://tassel234.github.io/posts/note/python%E6%95%B0%E5%AD%A6%E5%BB%BA%E6%A8%A1%E7%AE%97%E6%B3%95-4pca%E5%92%8C%E8%81%9A%E7%B1%BB%E4%B8%8E%E5%88%A4%E5%88%AB/"
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "Python数学建模算法-4（pca和聚类与判别）",
+  "name": "Python数学建模算法-4（pca和聚类与判别）",
+  "description": "py数模（pca，聚类和判别） 前言 使用资源： https://blog.csdn.net/weixin_43584807/article/details/105539675 https://blog.csdn.net/qq_46092061/article/details/119045393 https://zhuanlan.zhihu.com/p/37777074 python数学建模算法与应用（司守奎） aim 知道编程可以做到什么 会看每一行代码在表达什么意思 知道生成数据或者表格的意义 提高建模水平，对各种应用问题进行归纳总结 聚类分析与判别分析 聚类分析 聚类分析的目标就是在相似的基础上收集数据来分类。",
+  "keywords": [
+    
+  ],
+  "articleBody": "py数模（pca，聚类和判别） 前言 使用资源： https://blog.csdn.net/weixin_43584807/article/details/105539675\nhttps://blog.csdn.net/qq_46092061/article/details/119045393\nhttps://zhuanlan.zhihu.com/p/37777074\npython数学建模算法与应用（司守奎）\naim  知道编程可以做到什么 会看每一行代码在表达什么意思 知道生成数据或者表格的意义 提高建模水平，对各种应用问题进行归纳总结  聚类分析与判别分析 聚类分析 聚类分析的目标就是在相似的基础上收集数据来分类。聚类源于很多领域，包括数学，计算机科学，统计学，生物学和经济学。在不同的应用领域，很多聚类技术都得到了发展，这些技术方法被用作描述数据，衡量不同数据源间的相似性，以及把数据源分类到不同的簇中。\n聚类是将数据分类到不同的类或者簇这样的一个过程，所以同一个簇中的对象有很大的相似性，而不同簇间的对象有很大的相异性。\n从机器学习的角度讲，聚类是搜索簇的无监督学习过程。与分类不同，无监督学习不依赖预先定义的类或带类标记的训练实例，需要由聚类学习算法自动确定标记，而分类学习的实例或数据对象有类别标记。聚类是观察式学习，而不是示例式的学习。\n聚类分析是一种探索性的分析，在分类的过程中，人们不必事先给出一个分类的标准，聚类分析能够从样本数据出发，自动进行分类。聚类分析所使用方法的不同，常常会得到不同的结论。不同研究者对于同一组数据进行聚类分析，所得到的聚类数未必一致。\n从实际应用的角度看，聚类分析是数据挖掘的主要任务之一。而且聚类能够作为一个独立的工具获得数据的分布状况，观察每一簇数据的特征，集中对特定的聚簇集合作进一步地分析。聚类分析还可以作为其他算法（如分类和定性归纳算法）的预处理步骤。\n数据变换 拿到数据首先要消除量纲的影响，常用的处理方法为：\n 中心化处理（坐标轴平移） 规格化处理（最大值减去最小值做分母） 标准化处理（使用标准差）  样本（或指标）间亲疏程度的测度计算 在聚类分析中， 对于两个m维样本常用的距离度量有欧式距离、曼哈顿距离、切比雪夫距离和明可夫斯基距离等。\n欧式距离（Euclidean Distance）是计算欧式空间中两点之间的距离，是最容易理解的距离计算方法。\n曼哈顿距离（Manhattan Distance）也称城市街区距离，欧式距离表明了空间中两点间的直线距离，但是在城市中，两个地点之间的实际距离是要沿着道路行驶的距离，而不能计算直接穿过大楼的直线距离，曼哈顿距离就用于度量这样的实际行驶距离。\n切比雪夫距离（Chebyshev Distance）是向量空间中的一种度量，将空间坐标中两个点的距离定义为其各坐标数值差绝对值的最大值。切比雪夫距离在国际象棋棋盘中，表示国王从一个格子移动到此外一个格子所走的步数。\n明可夫斯基距离（Minkowski Distance）是欧式空间的一种测度，是一组距离的定义，被看作是欧式距离和曼哈顿距离的一种推广。\n基于类间距离的系统聚类 使用linkage,默认是使用最短距离的方法，使用欧几里得距离进行计算。\nimport numpy as np import scipy.cluster.hierarchy as sch import pylab as plt plt.rc('text', usetex=True); plt.rc('font', size=16) a=np.loadtxt('data11_2.txt'); n=a.shape[0] b=(a-a.min(axis=0))/(a.max(axis=0)-a.min(axis=0)) z=sch.linkage(b) s=['$\\\\omega_'+str(i+1)+'$' for i in range(n)] sch.dendrogram(z, labels=s); plt.show() 最长距离的方法和最短距离的步骤基本相似，但距离的定义不同以及计算新类与类的方法不同。 下面的例子是使用马氏距离进行计算的。\nimport numpy as np import scipy.cluster.hierarchy as sch import pylab as plt plt.rc('text',usetex=True) a=np.array([[2, 3, 3.5, 7, 9]]).T; n=len(a) c=sch.linkage(a, 'complete', 'mahalanobis') s=['$\\\\omega_'+str(i+1)+'$' for i in range(n)] sch.dendrogram(c, labels=s); plt.show() n0=eval(input('请输入聚类的类数n0:\\n')) cluster= sch.fcluster(c, t=n0, criterion='maxclust') print('聚类的结果为：',cluster) 可以从图像看出是通过高度进行划分的。\n动态聚类法 k‐均值聚类是基于划分的聚类算法，计算样本点与类簇质心的距离，与类簇质心相近的样本点划分为同一类簇。k‐均值通过样本间的距离来衡量它们之间的相似度，两个样本距离越远，则相似度越低，否则相似度越高。属于一种动态聚类，可以降低内存占用以及运行时间。适用于大量的数据，可以用来简化数据处理的作用。\n#程序文件ex11_5.py import numpy as np from sklearn.cluster import KMeans a = np.array([[2,3,3.5,7,9]]).T md = KMeans(2).fit(a) #构造并求解模型 labels = md.labels_ #提取聚类标签 centers = md.cluster_centers_ #每一行是一个聚类中心 print(labels,'\\n-----------\\n',centers) 最佳的簇数可以使用探索法，多改几次参数运行代码，然后人工选择。\n还可以采用程序编写的轮廓系数法或者拐点法。\nR型聚类法 研究变量之间的相似程度，按变量的相似程度聚合成多个类。\nimport pandas as pd import scipy.cluster.hierarchy as sch import pylab as plt import numpy as np a = pd.read_excel('data11_8.xlsx', header=None) b = a.values.T; b = np.triu(b, k=1) #取对角线上方元素 r = b[np.nonzero(b)]; d = 1 - abs(r) z = sch.linkage(d,'complete') sch.dendrogram(z,labels=range(1,15)); plt.show() 判别分析 已经确定了分类的结果（比如病人和正常人），对这些分类的大量数据进行判别分析，然后对未知样本进行所属类别的判定。\n距离判别法 通过计算样本均值和协方差来获得马氏距离和判别函数，然后进行判别。inv\nimport numpy as np import sympy as sp from numpy.linalg import inv f = open('data11_9.txt'); d = f.readlines() a = []; b = [] for i in range(2): a.extend(d[i].split()) a = np.array([eval(e) for e in a]).reshape(2,-1) mu1 = a.mean(axis=1, keepdims=True); s1 = np.cov(a, ddof=1) for i in range(2,4): b.extend(d[i].split()) b = np.array([eval(e) for e in b]).reshape(2,-1) mu2 = b.mean(axis=1, keepdims=True); s2 = np.cov(b, ddof=1) sp.var('x1,x2'); X = sp.Matrix([x1, x2]) #X为列向量 d1 = (X-mu1).T@inv(s1)@(X-mu1) d1 = sp.expand(d1) d2 = (X-mu2).T@inv(s2)@(X-mu2) d2 = sp.expand(d2) W = sp.lambdify('x1,x2', d1-d2, 'numpy') sol = W(np.array([1.24,1.28,1.40]), np.array([1.80,1.84,2.04])) check1 = W(a[0], a[1]); check2 = W (b[0], b[1]) print(np.round(sol,4)) #输出3个判别函数值 Fisher判别 基本思想是投影。LDA\nimport numpy as np from numpy.linalg import inv from sklearn.discriminant_analysis import LinearDiscriminantAnalysis as LDA a = np.loadtxt('data11_11.txt') a1 = a[:5, :]; a2 = a[5:10, :]; x = a[10:, :] V = np.cov(a[:10, :].T, ddof=1) #计算协方差阵 VI = inv(V) #计算协方差阵的逆阵 mu1 = a1.mean(axis=0); mu2 = a2.mean(axis=0) k = VI @ (mu1-mu2) #判别函数系数向量 b = -(mu1+mu2) @ VI @ (mu1-mu2)/2 #判别函数常数项 val = x @ k + b #计算判别函数的值 print('判别函数的值：', val) d = {0:'B', 1:'A'} print('直接计算结果：',[d[e0] for e in val]) #输出判别结果 y0 = np.hstack([np.ones(5), np.zeros(5)]) md = LDA().fit(a[:10, :], y0) #直接使用库函数 k2 = md.coef_; b2 = md.intercept_ c = b2/b; check = k * c #验证直接计算和库函数调用等价 val2 = md.predict(x) print('库函数结果： ',[d[e] for e in val2]) print('k=',k, ',b=',b); print('k2=',k2, ',b2=',b2); print('比例c=', c) print('已知样本误判率为：', 1-md.score(a[:10, :], y0)) 判别准则的评价 一种评价的估计方法是回代法，估计是有一些偏小的，便于计算。\n还有一种评价的方法是交叉法，较为真实。\n#程序文件ex11_12.py import pandas as pd from sklearn.discriminant_analysis import LinearDiscriminantAnalysis as LDA from sklearn.model_selection import cross_val_score a=pd.read_excel(\"data11_10.xlsx\",header=None) b=a.values; x0=b[:-2,:-1].astype(float) y0=b[:-2,-1].astype(float) md = LDA(); print(cross_val_score(md, x0, y0,cv=2)) 主成分分析与因子分析 降维到底是什么，原来的变量和生成的是一样的吗。答案是否定的，他只是多个变量间系数不同的多种组合方式。\n提取成分和降维的区别。 降维和特征提取是机器学习和数据分析中常用的技术，它们之间有一定的区别，但也有很多相似之处。\n  目标： 降维的目标是将高维数据转化为低维数据，同时尽量保留原始数据的重要信息和结构。降维技术通常应用于可视化、压缩和加速计算等领域。 特征提取的目标是从原始数据中提取有意义的特征，以便更好地描述数据。特征提取技术通常应用于分类、回归和聚类等机器学习任务。\n  概念： 降维是一种数据预处理方法，旨在减少数据的复杂性，同时保留数据中的重要信息。降维技术主要包括线性降维（如主成分分析（PCA））和非线性降维（如局部线性嵌入（LLE）和t-分布邻域嵌入算法（t-SNE））。 特征提取是数据预处理的一种形式，旨在从原始数据中提取相关信息，以便更好地用于机器学习算法。特征提取方法包括从原始数据中提取特征，例如图像处理中的边缘检测、形状检测等。\n  数据类型： 降维通常应用于数值型数据，如多维数组和矩阵。降维技术可以将高维数据转换为低维数据，同时保留数据的重要信息。 特征提取通常应用于非数值型数据，如图像、文本和音频数据。特征提取技术可以从原始数据中提取有意义的特征，以便更好地描述数据。\n  总之，降维和特征提取都是数据预处理的重要方法。降维主要关注将高维数据转化为低维数据，以便更好地进行可视化、压缩和加速计算等操作。而特征提取关注从原始数据中提取有意义的特征，以便更好地应用于分类、回归和聚类等机器学习任务。\n降维的两种方式：\n特征选择 主成分分析（可以理解一种特征提取的方式）  主成分分析 主成分分析的基本原理和步骤 数学建模中的降维是指将高维数据转化为低维数据的过程。在这个过程中，数据从高维空间映射到低维空间，同时保留数据的重要信息。降维技术在数学建模中具有很多应用，包括数据可视化、特征选择、模型解释和数据压缩等。降维的主要目的是减少数据中的冗余信息，降低计算复杂度，提高模型的效率和准确性。同时，降维有助于我们更好地理解数据的结构和内在规律。\n在减少需要分析的指标同时，尽量减少原指标包含信息的损失，以达到对所收集数据进行全面分析的目的。由于各变量之间存在一定的相关关系，因此可以考虑将关系紧密的变量变成尽可能少的新变量，使这些新变量是两两不相关的，那么就可以用较少的综合指标分别代表存在于各个变量中的各类信息。主成分分析与因子分析就属于这类降维算法。\n在实际应用中，选择哪种降维方法取决于数据本身的特性、任务需求和模型性能。通过对数据进行有效的降维处理，可以提高模型的解释性、预测准确性和计算效率。\n主成分分析的应用 pca函数的系数分析 （1）在第一主成分的表达式中,可以看出第一、二四五六七项的系数比较大,这6项指标对城镇居民消费水平的影响较大,其中食品消费和医疗保健消费系数比另外几项都大,说明居民现在很注重吃和健康两方面。\n(2)在第二主成分的表达式中 只有第八项的系数比较大,远远超过其他指标的系数,因此可以单独看作是杂项商品与服务的影响,说明杂项商品与服务在消费水平中也据了很大的比例。\n主成分回归分析\n为了减少最小二乘法估计在数据矩阵存在多重共线性而出现的不稳定性提出来的。\n就是把回归的变量改为主成分。\nimport numpy as np from sklearn.decomposition import PCA import statsmodels.api as sm a=np.loadtxt('data12_2.txt') mu=a.mean(axis=0) #逐列求均值 s=a.std(axis=0,ddof=1) #逐列求标准差 b=(a-mu)/s #数据标准化 r=np.corrcoef(b[:,:-1].T) #计算相关系数矩阵 md1=PCA().fit(b[:,:-1]) #构造并拟合模型 print('特征值为：', md1.explained_variance_) print('各主成分贡献率：', md1.explained_variance_ratio_) xs=md1.components_ #提出各主成分系数，每行是一个主成分 print('主成分系数：\\n', np.round(xs,4)) print('累积贡献率：', np.cumsum(md1.explained_variance_ratio_)) n=3 #选定主成分的个数 f=b[:,:-1]@(xs[:n,:].T) #主成分的得分 d2={'y':a[:,-1],'x': a[:,:-1]} md2=sm.formula.ols('y~x',d2).fit() #原始数据线性回归 d3={'y':a[:,-1], 'z':f} md3=sm.formula.ols('y~z',d3).fit() #对主成分的回归方程 xs3=md3.params #提取主成分回归方程的系数 xs40=xs3[0]-sum(xs3[1:]@xs[:n,:]*mu[:-1]/s[:-1]) #常数项 xs4=xs3[1:]@xs[:n,:]/s[:-1] #原始变量回归方程的其他系数 print('回归方程的常数项：',round(xs40,4)) print('回归方程的其他系数：',np.round(xs4,4)) print('直接回归的残差方差：',md2.mse_resid) print('主成分回归的残差方差：',md3.mse_resid) 核主成分分析\n即KPCA。PCA可以出来线型相关的问题，但没有考虑那些非线性相关的关系，KPCA就是用来解决这个问题的，还可以提供更多的特征信息。\n因子分析 因子分析的数学理论 因子分析是把原始变量分解为若干个因子的线型组合。\n 因子分析模型 因子旋转 因子得分  import numpy as np r=np.array([[1, 1/5, -1/5],[1/5, 1, -2/5],[-1/5, -2/5, 1]]) val,vec=np.linalg.eig(r) #求相关系数阵的特征值和特征向量 A0=vec*np.sqrt(val) #利用广播运算求载荷矩阵 print('特征值:',val,'\\n载荷矩阵：\\n',A0,'\\n----------') num=int(input(\"请输入选择公共因子的个数：\")) A=A0[:,:num] #提出num个因子的载荷矩阵 Ac=np.sum(A**2, axis=0) #逐列元素求和，求信息贡献 Ar=np.sum(A**2, axis=1) #逐行元素求和，求共同度 print(\"对x的贡献为：\",Ac) print(\"共同度为：\",Ar) u是期望向量，A因子载荷矩阵，艾布西隆是特殊因子向量。\n公共因子的贡献率不同，可以提取较强的公共因子，其他都归为特殊因子艾布西隆。\n不同变量之间有较强的相关性，这些也有一个或者多个公共因子在驱动。\n",
+  "wordCount" : "4580",
+  "inLanguage": "en",
+  "datePublished": "2023-09-01T23:40:03+08:00",
+  "dateModified": "2023-09-01T23:40:03+08:00",
+  "author":{
+    "@type": "Person",
+    "name": "hrkr"
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://tassel234.github.io/posts/note/python%E6%95%B0%E5%AD%A6%E5%BB%BA%E6%A8%A1%E7%AE%97%E6%B3%95-4pca%E5%92%8C%E8%81%9A%E7%B1%BB%E4%B8%8E%E5%88%A4%E5%88%AB/"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "hrkr's Blog",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://tassel234.github.io/img/"
+    }
+  }
+}
+</script>
+</head>
+
+<body class="" id="top">
+<script>
+    if (localStorage.getItem("pref-theme") === "dark") {
+        document.body.classList.add('dark');
+    } else if (localStorage.getItem("pref-theme") === "light") {
+        document.body.classList.remove('dark')
+    } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        document.body.classList.add('dark');
+    }
+
+</script>
+
+<header class="header">
+    <nav class="nav">
+        <div class="logo">
+            <a href="https://tassel234.github.io/" accesskey="h" title="hrkr&#39;s Blog (Alt + H)">
+                <img src="https://tassel234.github.io/img/Q.jpg" alt="" aria-label="logo"
+                    height="35">hrkr&#39;s Blog</a>
+            <div class="logo-switches">
+                <button id="theme-toggle" accesskey="t" title="(Alt + T)">
+                    <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                    <svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                </button>
+            </div>
+        </div>
+        <ul id="menu">
+            <li>
+                <a href="https://tassel234.github.io/search" title="🔍 搜索 (Alt &#43; /)" accesskey=/>
+                    <span>🔍 搜索</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://tassel234.github.io/" title="🏠 主页">
+                    <span>🏠 主页</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://tassel234.github.io/posts" title="📚 文章">
+                    <span>📚 文章</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://tassel234.github.io/tags" title="🧩 标签">
+                    <span>🧩 标签</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://tassel234.github.io/archives/" title="⏱️ 时间轴">
+                    <span>⏱️ 时间轴</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://tassel234.github.io/about" title="🙋🏻‍♂️ 关于">
+                    <span>🙋🏻‍♂️ 关于</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://tassel234.github.io/links" title="🤝 友链">
+                    <span>🤝 友链</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+</header>
+<main class="main">
+
+<article class="post-single">
+  <header class="post-header">
+    <div class="breadcrumbs"><a href="https://tassel234.github.io/">Home</a>&nbsp;»&nbsp;<a href="https://tassel234.github.io/posts/">Posts</a>&nbsp;»&nbsp;<a href="https://tassel234.github.io/posts/note/">学习记录&amp;笔记</a></div>
+    <h1 class="post-title">
+      Python数学建模算法-4（pca和聚类与判别）
+    </h1>
+    <div class="post-meta"><span title='2023-09-01 23:40:03 +0800 CST'>2023-09-01</span>&nbsp;·&nbsp;10 min&nbsp;·&nbsp;hrkr
+
+</div>
+  </header> <div class="toc">
+    <details  open>
+        <summary accesskey="c" title="(Alt + C)">
+            <span class="details">Table of Contents</span>
+        </summary>
+
+        <div class="inner"><ul>
+                <li>
+                    <a href="#py%e6%95%b0%e6%a8%a1pca%e8%81%9a%e7%b1%bb%e5%92%8c%e5%88%a4%e5%88%ab" aria-label="py数模（pca，聚类和判别）">py数模（pca，聚类和判别）</a><ul>
+                        
+                <li>
+                    <a href="#%e5%89%8d%e8%a8%80" aria-label="前言">前言</a><ul>
+                        
+                <li>
+                    <a href="#%e4%bd%bf%e7%94%a8%e8%b5%84%e6%ba%90" aria-label="使用资源：">使用资源：</a></li>
+                <li>
+                    <a href="#aim" aria-label="aim">aim</a></li></ul>
+                </li>
+                <li>
+                    <a href="#%e8%81%9a%e7%b1%bb%e5%88%86%e6%9e%90%e4%b8%8e%e5%88%a4%e5%88%ab%e5%88%86%e6%9e%90" aria-label="聚类分析与判别分析">聚类分析与判别分析</a><ul>
+                        
+                <li>
+                    <a href="#%e8%81%9a%e7%b1%bb%e5%88%86%e6%9e%90" aria-label="聚类分析">聚类分析</a><ul>
+                        
+                <li>
+                    <a href="#%e6%95%b0%e6%8d%ae%e5%8f%98%e6%8d%a2" aria-label="数据变换">数据变换</a></li>
+                <li>
+                    <a href="#%e6%a0%b7%e6%9c%ac%e6%88%96%e6%8c%87%e6%a0%87%e9%97%b4%e4%ba%b2%e7%96%8f%e7%a8%8b%e5%ba%a6%e7%9a%84%e6%b5%8b%e5%ba%a6%e8%ae%a1%e7%ae%97" aria-label="样本（或指标）间亲疏程度的测度计算">样本（或指标）间亲疏程度的测度计算</a></li>
+                <li>
+                    <a href="#%e5%9f%ba%e4%ba%8e%e7%b1%bb%e9%97%b4%e8%b7%9d%e7%a6%bb%e7%9a%84%e7%b3%bb%e7%bb%9f%e8%81%9a%e7%b1%bb" aria-label="基于类间距离的系统聚类">基于类间距离的系统聚类</a></li>
+                <li>
+                    <a href="#%e5%8a%a8%e6%80%81%e8%81%9a%e7%b1%bb%e6%b3%95" aria-label="动态聚类法">动态聚类法</a></li>
+                <li>
+                    <a href="#r%e5%9e%8b%e8%81%9a%e7%b1%bb%e6%b3%95" aria-label="R型聚类法">R型聚类法</a></li></ul>
+                </li>
+                <li>
+                    <a href="#%e5%88%a4%e5%88%ab%e5%88%86%e6%9e%90" aria-label="判别分析">判别分析</a><ul>
+                        
+                <li>
+                    <a href="#%e8%b7%9d%e7%a6%bb%e5%88%a4%e5%88%ab%e6%b3%95" aria-label="距离判别法">距离判别法</a></li>
+                <li>
+                    <a href="#fisher%e5%88%a4%e5%88%ab" aria-label="Fisher判别">Fisher判别</a></li>
+                <li>
+                    <a href="#%e5%88%a4%e5%88%ab%e5%87%86%e5%88%99%e7%9a%84%e8%af%84%e4%bb%b7" aria-label="判别准则的评价">判别准则的评价</a></li></ul>
+                </li></ul>
+                </li>
+                <li>
+                    <a href="#%e4%b8%bb%e6%88%90%e5%88%86%e5%88%86%e6%9e%90%e4%b8%8e%e5%9b%a0%e5%ad%90%e5%88%86%e6%9e%90" aria-label="主成分分析与因子分析">主成分分析与因子分析</a><ul>
+                        
+                <li>
+                    <a href="#%e4%b8%bb%e6%88%90%e5%88%86%e5%88%86%e6%9e%90" aria-label="主成分分析">主成分分析</a><ul>
+                        
+                <li>
+                    <a href="#%e4%b8%bb%e6%88%90%e5%88%86%e5%88%86%e6%9e%90%e7%9a%84%e5%9f%ba%e6%9c%ac%e5%8e%9f%e7%90%86%e5%92%8c%e6%ad%a5%e9%aa%a4" aria-label="主成分分析的基本原理和步骤">主成分分析的基本原理和步骤</a></li>
+                <li>
+                    <a href="#%e4%b8%bb%e6%88%90%e5%88%86%e5%88%86%e6%9e%90%e7%9a%84%e5%ba%94%e7%94%a8" aria-label="主成分分析的应用">主成分分析的应用</a></li></ul>
+                </li>
+                <li>
+                    <a href="#%e5%9b%a0%e5%ad%90%e5%88%86%e6%9e%90" aria-label="因子分析">因子分析</a><ul>
+                        
+                <li>
+                    <a href="#%e5%9b%a0%e5%ad%90%e5%88%86%e6%9e%90%e7%9a%84%e6%95%b0%e5%ad%a6%e7%90%86%e8%ae%ba" aria-label="因子分析的数学理论">因子分析的数学理论</a>
+                </li>
+            </ul>
+            </li>
+            </ul>
+            </li>
+            </ul>
+            </li>
+            </ul>
+        </div>
+    </details>
+</div>
+
+  <div class="post-content"><h1 id="py数模pca聚类和判别">py数模（pca，聚类和判别）<a hidden class="anchor" aria-hidden="true" href="#py数模pca聚类和判别">#</a></h1>
+<h2 id="前言">前言<a hidden class="anchor" aria-hidden="true" href="#前言">#</a></h2>
+<h3 id="使用资源">使用资源：<a hidden class="anchor" aria-hidden="true" href="#使用资源">#</a></h3>
+<p><a href="https://blog.csdn.net/weixin_43584807/article/details/105539675">https://blog.csdn.net/weixin_43584807/article/details/105539675</a></p>
+<p><a href="https://blog.csdn.net/qq_46092061/article/details/119045393">https://blog.csdn.net/qq_46092061/article/details/119045393</a></p>
+<p><a href="https://zhuanlan.zhihu.com/p/37777074">https://zhuanlan.zhihu.com/p/37777074</a></p>
+<p>python数学建模算法与应用（司守奎）</p>
+<h3 id="aim">aim<a hidden class="anchor" aria-hidden="true" href="#aim">#</a></h3>
+<ol>
+<li>知道编程可以做到什么</li>
+<li>会看每一行代码在表达什么意思</li>
+<li>知道生成数据或者表格的意义</li>
+<li>提高建模水平，对各种应用问题进行归纳总结</li>
+</ol>
+<h2 id="聚类分析与判别分析">聚类分析与判别分析<a hidden class="anchor" aria-hidden="true" href="#聚类分析与判别分析">#</a></h2>
+<h3 id="聚类分析">聚类分析<a hidden class="anchor" aria-hidden="true" href="#聚类分析">#</a></h3>
+<p>聚类分析的目标就是在相似的基础上收集数据来分类。聚类源于很多领域，包括数学，计算机科学，统计学，生物学和经济学。在不同的应用领域，很多聚类技术都得到了发展，这些技术方法被用作描述数据，衡量不同数据源间的相似性，以及把数据源分类到不同的簇中。</p>
+<p>聚类是将数据分类到不同的类或者簇这样的一个过程，所以同一个簇中的对象有很大的相似性，而不同簇间的对象有很大的相异性。</p>
+<p>从机器学习的角度讲，聚类是搜索簇的无监督学习过程。与分类不同，无监督学习不依赖预先定义的类或带类标记的训练实例，需要由聚类学习算法自动确定标记，而分类学习的实例或数据对象有类别标记。聚类是观察式学习，而不是示例式的学习。</p>
+<p>聚类分析是一种探索性的分析，在分类的过程中，人们不必事先给出一个分类的标准，聚类分析能够从样本数据出发，自动进行分类。聚类分析所使用方法的不同，常常会得到不同的结论。不同研究者对于同一组数据进行聚类分析，所得到的聚类数未必一致。</p>
+<p>从实际应用的角度看，聚类分析是数据挖掘的主要任务之一。而且聚类能够作为一个独立的工具获得数据的分布状况，观察每一簇数据的特征，集中对特定的聚簇集合作进一步地分析。聚类分析还可以作为其他算法（如分类和定性归纳算法）的预处理步骤。</p>
+<h4 id="数据变换">数据变换<a hidden class="anchor" aria-hidden="true" href="#数据变换">#</a></h4>
+<p>拿到数据首先要消除量纲的影响，常用的处理方法为：</p>
+<ol>
+<li>中心化处理（坐标轴平移）</li>
+<li>规格化处理（最大值减去最小值做分母）</li>
+<li>标准化处理（使用标准差）</li>
+</ol>
+<h4 id="样本或指标间亲疏程度的测度计算">样本（或指标）间亲疏程度的测度计算<a hidden class="anchor" aria-hidden="true" href="#样本或指标间亲疏程度的测度计算">#</a></h4>
+<p>在聚类分析中，
+对于两个m维样本常用的距离度量有欧式距离、曼哈顿距离、切比雪夫距离和明可夫斯基距离等。</p>
+<p>欧式距离（Euclidean Distance）是计算欧式空间中两点之间的距离，是最容易理解的距离计算方法。</p>
+<p>曼哈顿距离（Manhattan Distance）也称城市街区距离，欧式距离表明了空间中两点间的直线距离，但是在城市中，两个地点之间的实际距离是要沿着道路行驶的距离，而不能计算直接穿过大楼的直线距离，曼哈顿距离就用于度量这样的实际行驶距离。</p>
+<p>切比雪夫距离（Chebyshev Distance）是向量空间中的一种度量，将空间坐标中两个点的距离定义为其各坐标数值差绝对值的最大值。切比雪夫距离在国际象棋棋盘中，表示国王从一个格子移动到此外一个格子所走的步数。</p>
+<p>明可夫斯基距离（Minkowski Distance）是欧式空间的一种测度，是一组距离的定义，被看作是欧式距离和曼哈顿距离的一种推广。</p>
+<h4 id="基于类间距离的系统聚类">基于类间距离的系统聚类<a hidden class="anchor" aria-hidden="true" href="#基于类间距离的系统聚类">#</a></h4>
+<p>使用linkage,默认是使用最短距离的方法，使用欧几里得距离进行计算。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">
+import numpy as np
+import scipy.cluster.hierarchy as sch
+import pylab as plt
+
+plt.rc(&#39;text&#39;, usetex=True); plt.rc(&#39;font&#39;, size=16)
+a=np.loadtxt(&#39;data11_2.txt&#39;); n=a.shape[0]
+b=(a-a.min(axis=0))/(a.max(axis=0)-a.min(axis=0))
+z=sch.linkage(b)
+s=[&#39;$\\omega_&#39;+str(i+1)+&#39;$&#39; for i in range(n)]
+sch.dendrogram(z, labels=s); plt.show()
+</code></pre></div><p>最长距离的方法和最短距离的步骤基本相似，但距离的定义不同以及计算新类与类的方法不同。
+下面的例子是使用马氏距离进行计算的。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">
+import numpy as np
+import scipy.cluster.hierarchy as sch
+import pylab as plt
+
+plt.rc(&#39;text&#39;,usetex=True)
+a=np.array([[2, 3, 3.5, 7, 9]]).T; n=len(a)
+c=sch.linkage(a, &#39;complete&#39;, &#39;mahalanobis&#39;)
+s=[&#39;$\\omega_&#39;+str(i+1)+&#39;$&#39; for i in range(n)]
+sch.dendrogram(c, labels=s); plt.show()
+n0=eval(input(&#39;请输入聚类的类数n0:\n&#39;))
+cluster= sch.fcluster(c, t=n0, criterion=&#39;maxclust&#39;)
+print(&#39;聚类的结果为：&#39;,cluster)
+
+</code></pre></div><p><img loading="lazy" src="/vx_images/219315521257863.png" alt=""  />
+</p>
+<p>可以从图像看出是通过高度进行划分的。</p>
+<h4 id="动态聚类法">动态聚类法<a hidden class="anchor" aria-hidden="true" href="#动态聚类法">#</a></h4>
+<p>k‐均值聚类是基于划分的聚类算法，计算样本点与类簇质心的距离，与类簇质心相近的样本点划分为同一类簇。k‐均值通过样本间的距离来衡量它们之间的相似度，两个样本距离越远，则相似度越低，否则相似度越高。属于一种动态聚类，可以降低内存占用以及运行时间。适用于大量的数据，可以用来简化数据处理的作用。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">#程序文件ex11_5.py
+import numpy as np
+from sklearn.cluster import KMeans
+
+a = np.array([[2,3,3.5,7,9]]).T
+md = KMeans(2).fit(a)  #构造并求解模型
+labels = md.labels_   #提取聚类标签
+centers = md.cluster_centers_   #每一行是一个聚类中心
+print(labels,&#39;\n-----------\n&#39;,centers)
+
+
+</code></pre></div><p>最佳的簇数可以使用探索法，多改几次参数运行代码，然后人工选择。</p>
+<p>还可以采用程序编写的轮廓系数法或者拐点法。</p>
+<h4 id="r型聚类法">R型聚类法<a hidden class="anchor" aria-hidden="true" href="#r型聚类法">#</a></h4>
+<p>研究变量之间的相似程度，按变量的相似程度聚合成多个类。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">
+import pandas as pd
+import scipy.cluster.hierarchy as sch
+import pylab as plt
+import numpy as np
+
+a = pd.read_excel(&#39;data11_8.xlsx&#39;, header=None)
+b = a.values.T; b = np.triu(b, k=1)  #取对角线上方元素
+r = b[np.nonzero(b)]; d = 1 - abs(r)
+z = sch.linkage(d,&#39;complete&#39;)
+sch.dendrogram(z,labels=range(1,15)); plt.show()
+
+
+</code></pre></div><h3 id="判别分析">判别分析<a hidden class="anchor" aria-hidden="true" href="#判别分析">#</a></h3>
+<p>已经确定了分类的结果（比如病人和正常人），对这些分类的大量数据进行判别分析，然后对未知样本进行所属类别的判定。</p>
+<h4 id="距离判别法">距离判别法<a hidden class="anchor" aria-hidden="true" href="#距离判别法">#</a></h4>
+<p>通过计算样本均值和协方差来获得马氏距离和判别函数，然后进行判别。inv</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">
+import numpy as np
+import sympy as sp
+from numpy.linalg import inv
+f = open(&#39;data11_9.txt&#39;); d = f.readlines()
+a = []; b = []
+for i in range(2): a.extend(d[i].split())
+a = np.array([eval(e) for e in a]).reshape(2,-1)
+mu1 = a.mean(axis=1, keepdims=True); s1 = np.cov(a, ddof=1)
+for i in range(2,4): b.extend(d[i].split())
+b = np.array([eval(e) for e in b]).reshape(2,-1)
+mu2 = b.mean(axis=1, keepdims=True); s2 = np.cov(b, ddof=1)
+sp.var(&#39;x1,x2&#39;); X = sp.Matrix([x1, x2]) #X为列向量
+d1 = (X-mu1).T@inv(s1)@(X-mu1)
+d1 = sp.expand(d1)
+d2 = (X-mu2).T@inv(s2)@(X-mu2)
+d2 = sp.expand(d2)
+W = sp.lambdify(&#39;x1,x2&#39;, d1-d2, &#39;numpy&#39;)
+sol = W(np.array([1.24,1.28,1.40]), np.array([1.80,1.84,2.04]))
+check1 = W(a[0], a[1]); check2 = W (b[0], b[1])
+print(np.round(sol,4))  #输出3个判别函数值
+
+</code></pre></div><h4 id="fisher判别">Fisher判别<a hidden class="anchor" aria-hidden="true" href="#fisher判别">#</a></h4>
+<p>基本思想是投影。LDA</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">
+import numpy as np
+from numpy.linalg import inv
+from sklearn.discriminant_analysis import LinearDiscriminantAnalysis as LDA
+
+a = np.loadtxt(&#39;data11_11.txt&#39;)
+a1 = a[:5, :]; a2 = a[5:10, :]; x = a[10:, :]
+V = np.cov(a[:10, :].T, ddof=1)  #计算协方差阵
+VI = inv(V)  #计算协方差阵的逆阵
+mu1 = a1.mean(axis=0); mu2 = a2.mean(axis=0)
+k = VI @ (mu1-mu2)  #判别函数系数向量
+b = -(mu1+mu2) @ VI @ (mu1-mu2)/2  #判别函数常数项
+val = x @ k + b  #计算判别函数的值
+print(&#39;判别函数的值：&#39;, val)
+d = {0:&#39;B&#39;, 1:&#39;A&#39;}
+print(&#39;直接计算结果：&#39;,[d[e&gt;0] for e in val])  #输出判别结果
+y0 = np.hstack([np.ones(5), np.zeros(5)])
+md = LDA().fit(a[:10, :], y0)  #直接使用库函数
+k2 = md.coef_; b2 = md.intercept_ 
+c = b2/b; check = k * c  #验证直接计算和库函数调用等价
+val2 = md.predict(x)
+print(&#39;库函数结果：  &#39;,[d[e] for e in val2])
+print(&#39;k=&#39;,k, &#39;,b=&#39;,b);
+print(&#39;k2=&#39;,k2, &#39;,b2=&#39;,b2); print(&#39;比例c=&#39;, c)
+print(&#39;已知样本误判率为：&#39;, 1-md.score(a[:10, :], y0))
+
+</code></pre></div><h4 id="判别准则的评价">判别准则的评价<a hidden class="anchor" aria-hidden="true" href="#判别准则的评价">#</a></h4>
+<p>一种评价的估计方法是回代法，估计是有一些偏小的，便于计算。</p>
+<p>还有一种评价的方法是交叉法，较为真实。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">#程序文件ex11_12.py
+import pandas as pd
+from sklearn.discriminant_analysis import LinearDiscriminantAnalysis as LDA
+from sklearn.model_selection import cross_val_score
+
+a=pd.read_excel(&#34;data11_10.xlsx&#34;,header=None)
+b=a.values; x0=b[:-2,:-1].astype(float)
+y0=b[:-2,-1].astype(float)
+md = LDA(); print(cross_val_score(md, x0, y0,cv=2))
+   
+
+</code></pre></div><h2 id="主成分分析与因子分析">主成分分析与因子分析<a hidden class="anchor" aria-hidden="true" href="#主成分分析与因子分析">#</a></h2>
+<p>降维到底是什么，原来的变量和生成的是一样的吗。答案是否定的，他只是多个变量间系数不同的多种组合方式。</p>
+<p>提取成分和降维的区别。
+降维和特征提取是机器学习和数据分析中常用的技术，它们之间有一定的区别，但也有很多相似之处。</p>
+<ol>
+<li>
+<p>目标：
+降维的目标是将高维数据转化为低维数据，同时尽量保留原始数据的重要信息和结构。降维技术通常应用于可视化、压缩和加速计算等领域。
+特征提取的目标是从原始数据中提取有意义的特征，以便更好地描述数据。特征提取技术通常应用于分类、回归和聚类等机器学习任务。</p>
+</li>
+<li>
+<p>概念：
+降维是一种数据预处理方法，旨在减少数据的复杂性，同时保留数据中的重要信息。降维技术主要包括线性降维（如主成分分析（PCA））和非线性降维（如局部线性嵌入（LLE）和t-分布邻域嵌入算法（t-SNE））。
+特征提取是数据预处理的一种形式，旨在从原始数据中提取相关信息，以便更好地用于机器学习算法。特征提取方法包括从原始数据中提取特征，例如图像处理中的边缘检测、形状检测等。</p>
+</li>
+<li>
+<p>数据类型：
+降维通常应用于数值型数据，如多维数组和矩阵。降维技术可以将高维数据转换为低维数据，同时保留数据的重要信息。
+特征提取通常应用于非数值型数据，如图像、文本和音频数据。特征提取技术可以从原始数据中提取有意义的特征，以便更好地描述数据。</p>
+</li>
+</ol>
+<p>总之，降维和特征提取都是数据预处理的重要方法。降维主要关注将高维数据转化为低维数据，以便更好地进行可视化、压缩和加速计算等操作。而特征提取关注从原始数据中提取有意义的特征，以便更好地应用于分类、回归和聚类等机器学习任务。</p>
+<p>降维的两种方式：</p>
+<pre><code>特征选择  
+主成分分析（可以理解一种特征提取的方式）
+</code></pre>
+<h3 id="主成分分析">主成分分析<a hidden class="anchor" aria-hidden="true" href="#主成分分析">#</a></h3>
+<h4 id="主成分分析的基本原理和步骤">主成分分析的基本原理和步骤<a hidden class="anchor" aria-hidden="true" href="#主成分分析的基本原理和步骤">#</a></h4>
+<p>数学建模中的降维是指将高维数据转化为低维数据的过程。在这个过程中，数据从高维空间映射到低维空间，同时保留数据的重要信息。降维技术在数学建模中具有很多应用，包括数据可视化、特征选择、模型解释和数据压缩等。降维的主要目的是减少数据中的冗余信息，降低计算复杂度，提高模型的效率和准确性。同时，降维有助于我们更好地理解数据的结构和内在规律。</p>
+<p>在减少需要分析的指标同时，尽量减少原指标包含信息的损失，以达到对所收集数据进行全面分析的目的。由于各变量之间存在一定的相关关系，因此可以考虑将关系紧密的变量变成尽可能少的新变量，使这些新变量是两两不相关的，那么就可以用较少的综合指标分别代表存在于各个变量中的各类信息。主成分分析与因子分析就属于这类降维算法。</p>
+<p>在实际应用中，选择哪种降维方法取决于数据本身的特性、任务需求和模型性能。通过对数据进行有效的降维处理，可以提高模型的解释性、预测准确性和计算效率。</p>
+<h4 id="主成分分析的应用">主成分分析的应用<a hidden class="anchor" aria-hidden="true" href="#主成分分析的应用">#</a></h4>
+<p>pca函数的系数分析
+<img loading="lazy" src="/vx_images/463741523259046.png" alt=""  />
+
+（1）在第一主成分的表达式中,可以看出第一、二四五六七项的系数比较大,这6项指标对城镇居民消费水平的影响较大,其中食品消费和医疗保健消费系数比另外几项都大,说明居民现在很注重吃和健康两方面。</p>
+<p>(2)在第二主成分的表达式中 只有第八项的系数比较大,远远超过其他指标的系数,因此可以单独看作是杂项商品与服务的影响,说明杂项商品与服务在消费水平中也据了很大的比例。</p>
+<p><strong>主成分回归分析</strong></p>
+<p>为了减少最小二乘法估计在数据矩阵存在多重共线性而出现的不稳定性提出来的。</p>
+<p>就是把回归的变量改为主成分。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">
+import numpy as np
+from sklearn.decomposition import PCA
+import statsmodels.api as sm
+
+a=np.loadtxt(&#39;data12_2.txt&#39;)
+mu=a.mean(axis=0)  #逐列求均值
+s=a.std(axis=0,ddof=1)  #逐列求标准差
+b=(a-mu)/s  #数据标准化
+r=np.corrcoef(b[:,:-1].T)  #计算相关系数矩阵
+md1=PCA().fit(b[:,:-1])  #构造并拟合模型
+print(&#39;特征值为：&#39;, md1.explained_variance_)
+print(&#39;各主成分贡献率：&#39;, md1.explained_variance_ratio_)
+xs=md1.components_  #提出各主成分系数，每行是一个主成分
+print(&#39;主成分系数：\n&#39;, np.round(xs,4))
+print(&#39;累积贡献率：&#39;, np.cumsum(md1.explained_variance_ratio_))
+
+n=3  #选定主成分的个数
+f=b[:,:-1]@(xs[:n,:].T)  #主成分的得分
+d2={&#39;y&#39;:a[:,-1],&#39;x&#39;: a[:,:-1]}
+md2=sm.formula.ols(&#39;y~x&#39;,d2).fit()  #原始数据线性回归
+d3={&#39;y&#39;:a[:,-1], &#39;z&#39;:f}
+md3=sm.formula.ols(&#39;y~z&#39;,d3).fit()  #对主成分的回归方程
+xs3=md3.params  #提取主成分回归方程的系数
+xs40=xs3[0]-sum(xs3[1:]@xs[:n,:]*mu[:-1]/s[:-1]) #常数项
+xs4=xs3[1:]@xs[:n,:]/s[:-1]  #原始变量回归方程的其他系数
+print(&#39;回归方程的常数项：&#39;,round(xs40,4))
+print(&#39;回归方程的其他系数：&#39;,np.round(xs4,4))
+print(&#39;直接回归的残差方差：&#39;,md2.mse_resid)
+print(&#39;主成分回归的残差方差：&#39;,md3.mse_resid)
+
+
+</code></pre></div><p><strong>核主成分分析</strong></p>
+<p>即KPCA。PCA可以出来线型相关的问题，但没有考虑那些非线性相关的关系，KPCA就是用来解决这个问题的，还可以提供更多的特征信息。</p>
+<h3 id="因子分析">因子分析<a hidden class="anchor" aria-hidden="true" href="#因子分析">#</a></h3>
+<h4 id="因子分析的数学理论">因子分析的数学理论<a hidden class="anchor" aria-hidden="true" href="#因子分析的数学理论">#</a></h4>
+<p>因子分析是把原始变量分解为若干个因子的线型组合。</p>
+<ol>
+<li>因子分析模型</li>
+<li>因子旋转</li>
+<li>因子得分</li>
+</ol>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">import numpy as np
+
+r=np.array([[1, 1/5, -1/5],[1/5, 1, -2/5],[-1/5, -2/5, 1]])
+val,vec=np.linalg.eig(r)  #求相关系数阵的特征值和特征向量
+A0=vec*np.sqrt(val)   #利用广播运算求载荷矩阵
+print(&#39;特征值:&#39;,val,&#39;\n载荷矩阵：\n&#39;,A0,&#39;\n----------&#39;)
+num=int(input(&#34;请输入选择公共因子的个数：&#34;))
+A=A0[:,:num]  #提出num个因子的载荷矩阵
+Ac=np.sum(A**2, axis=0)   #逐列元素求和，求信息贡献
+Ar=np.sum(A**2, axis=1)   #逐行元素求和，求共同度
+print(&#34;对x的贡献为：&#34;,Ac)
+print(&#34;共同度为：&#34;,Ar)
+
+
+</code></pre></div><p><img loading="lazy" src="/vx_images/168292723254182.jpg" alt=""  />
+</p>
+<p>u是期望向量，A因子载荷矩阵，艾布西隆是特殊因子向量。</p>
+<p>公共因子的贡献率不同，可以提取较强的公共因子，其他都归为特殊因子艾布西隆。</p>
+<p>不同变量之间有较强的相关性，这些也有一个或者多个公共因子在驱动。</p>
+
+
+  </div>
+
+  <footer class="post-footer">
+    <ul class="post-tags">
+    </ul>
+<nav class="paginav">
+  <a class="next" href="https://tassel234.github.io/posts/note/%E7%88%AC%E8%99%AB%E5%85%A5%E9%97%A8-1/">
+    <span class="title">Next »</span>
+    <br>
+    <span>爬虫入门-1</span>
+  </a>
+</nav>
+
+
+<div class="share-buttons">
+    <a target="_blank" rel="noopener noreferrer" aria-label="share Python数学建模算法-4（pca和聚类与判别） on twitter"
+        href="https://twitter.com/intent/tweet/?text=Python%e6%95%b0%e5%ad%a6%e5%bb%ba%e6%a8%a1%e7%ae%97%e6%b3%95-4%ef%bc%88pca%e5%92%8c%e8%81%9a%e7%b1%bb%e4%b8%8e%e5%88%a4%e5%88%ab%ef%bc%89&amp;url=https%3a%2f%2ftassel234.github.io%2fposts%2fnote%2fpython%25E6%2595%25B0%25E5%25AD%25A6%25E5%25BB%25BA%25E6%25A8%25A1%25E7%25AE%2597%25E6%25B3%2595-4pca%25E5%2592%258C%25E8%2581%259A%25E7%25B1%25BB%25E4%25B8%258E%25E5%2588%25A4%25E5%2588%25AB%2f&amp;hashtags=">
+        <svg version="1.1" viewBox="0 0 512 512" xml:space="preserve" height="30px" width="30px" fill="currentColor">
+            <path
+                d="M449.446,0c34.525,0 62.554,28.03 62.554,62.554l0,386.892c0,34.524 -28.03,62.554 -62.554,62.554l-386.892,0c-34.524,0 -62.554,-28.03 -62.554,-62.554l0,-386.892c0,-34.524 28.029,-62.554 62.554,-62.554l386.892,0Zm-253.927,424.544c135.939,0 210.268,-112.643 210.268,-210.268c0,-3.218 0,-6.437 -0.153,-9.502c14.406,-10.421 26.973,-23.448 36.935,-38.314c-13.18,5.824 -27.433,9.809 -42.452,11.648c15.326,-9.196 26.973,-23.602 32.49,-40.92c-14.252,8.429 -30.038,14.56 -46.896,17.931c-13.487,-14.406 -32.644,-23.295 -53.946,-23.295c-40.767,0 -73.87,33.104 -73.87,73.87c0,5.824 0.613,11.494 1.992,16.858c-61.456,-3.065 -115.862,-32.49 -152.337,-77.241c-6.284,10.881 -9.962,23.601 -9.962,37.088c0,25.594 13.027,48.276 32.95,61.456c-12.107,-0.307 -23.448,-3.678 -33.41,-9.196l0,0.92c0,35.862 25.441,65.594 59.311,72.49c-6.13,1.686 -12.72,2.606 -19.464,2.606c-4.751,0 -9.348,-0.46 -13.946,-1.38c9.349,29.426 36.628,50.728 68.965,51.341c-25.287,19.771 -57.164,31.571 -91.8,31.571c-5.977,0 -11.801,-0.306 -17.625,-1.073c32.337,21.15 71.264,33.41 112.95,33.41Z" />
+        </svg>
+    </a>
+    <a target="_blank" rel="noopener noreferrer" aria-label="share Python数学建模算法-4（pca和聚类与判别） on linkedin"
+        href="https://www.linkedin.com/shareArticle?mini=true&amp;url=https%3a%2f%2ftassel234.github.io%2fposts%2fnote%2fpython%25E6%2595%25B0%25E5%25AD%25A6%25E5%25BB%25BA%25E6%25A8%25A1%25E7%25AE%2597%25E6%25B3%2595-4pca%25E5%2592%258C%25E8%2581%259A%25E7%25B1%25BB%25E4%25B8%258E%25E5%2588%25A4%25E5%2588%25AB%2f&amp;title=Python%e6%95%b0%e5%ad%a6%e5%bb%ba%e6%a8%a1%e7%ae%97%e6%b3%95-4%ef%bc%88pca%e5%92%8c%e8%81%9a%e7%b1%bb%e4%b8%8e%e5%88%a4%e5%88%ab%ef%bc%89&amp;summary=Python%e6%95%b0%e5%ad%a6%e5%bb%ba%e6%a8%a1%e7%ae%97%e6%b3%95-4%ef%bc%88pca%e5%92%8c%e8%81%9a%e7%b1%bb%e4%b8%8e%e5%88%a4%e5%88%ab%ef%bc%89&amp;source=https%3a%2f%2ftassel234.github.io%2fposts%2fnote%2fpython%25E6%2595%25B0%25E5%25AD%25A6%25E5%25BB%25BA%25E6%25A8%25A1%25E7%25AE%2597%25E6%25B3%2595-4pca%25E5%2592%258C%25E8%2581%259A%25E7%25B1%25BB%25E4%25B8%258E%25E5%2588%25A4%25E5%2588%25AB%2f">
+        <svg version="1.1" viewBox="0 0 512 512" xml:space="preserve" height="30px" width="30px" fill="currentColor">
+            <path
+                d="M449.446,0c34.525,0 62.554,28.03 62.554,62.554l0,386.892c0,34.524 -28.03,62.554 -62.554,62.554l-386.892,0c-34.524,0 -62.554,-28.03 -62.554,-62.554l0,-386.892c0,-34.524 28.029,-62.554 62.554,-62.554l386.892,0Zm-288.985,423.278l0,-225.717l-75.04,0l0,225.717l75.04,0Zm270.539,0l0,-129.439c0,-69.333 -37.018,-101.586 -86.381,-101.586c-39.804,0 -57.634,21.891 -67.617,37.266l0,-31.958l-75.021,0c0.995,21.181 0,225.717 0,225.717l75.02,0l0,-126.056c0,-6.748 0.486,-13.492 2.474,-18.315c5.414,-13.475 17.767,-27.434 38.494,-27.434c27.135,0 38.007,20.707 38.007,51.037l0,120.768l75.024,0Zm-307.552,-334.556c-25.674,0 -42.448,16.879 -42.448,39.002c0,21.658 16.264,39.002 41.455,39.002l0.484,0c26.165,0 42.452,-17.344 42.452,-39.002c-0.485,-22.092 -16.241,-38.954 -41.943,-39.002Z" />
+        </svg>
+    </a>
+    <a target="_blank" rel="noopener noreferrer" aria-label="share Python数学建模算法-4（pca和聚类与判别） on reddit"
+        href="https://reddit.com/submit?url=https%3a%2f%2ftassel234.github.io%2fposts%2fnote%2fpython%25E6%2595%25B0%25E5%25AD%25A6%25E5%25BB%25BA%25E6%25A8%25A1%25E7%25AE%2597%25E6%25B3%2595-4pca%25E5%2592%258C%25E8%2581%259A%25E7%25B1%25BB%25E4%25B8%258E%25E5%2588%25A4%25E5%2588%25AB%2f&title=Python%e6%95%b0%e5%ad%a6%e5%bb%ba%e6%a8%a1%e7%ae%97%e6%b3%95-4%ef%bc%88pca%e5%92%8c%e8%81%9a%e7%b1%bb%e4%b8%8e%e5%88%a4%e5%88%ab%ef%bc%89">
+        <svg version="1.1" viewBox="0 0 512 512" xml:space="preserve" height="30px" width="30px" fill="currentColor">
+            <path
+                d="M449.446,0c34.525,0 62.554,28.03 62.554,62.554l0,386.892c0,34.524 -28.03,62.554 -62.554,62.554l-386.892,0c-34.524,0 -62.554,-28.03 -62.554,-62.554l0,-386.892c0,-34.524 28.029,-62.554 62.554,-62.554l386.892,0Zm-3.446,265.638c0,-22.964 -18.616,-41.58 -41.58,-41.58c-11.211,0 -21.361,4.457 -28.841,11.666c-28.424,-20.508 -67.586,-33.757 -111.204,-35.278l18.941,-89.121l61.884,13.157c0.756,15.734 13.642,28.29 29.56,28.29c16.407,0 29.706,-13.299 29.706,-29.701c0,-16.403 -13.299,-29.702 -29.706,-29.702c-11.666,0 -21.657,6.792 -26.515,16.578l-69.105,-14.69c-1.922,-0.418 -3.939,-0.042 -5.585,1.036c-1.658,1.073 -2.811,2.761 -3.224,4.686l-21.152,99.438c-44.258,1.228 -84.046,14.494 -112.837,35.232c-7.468,-7.164 -17.589,-11.591 -28.757,-11.591c-22.965,0 -41.585,18.616 -41.585,41.58c0,16.896 10.095,31.41 24.568,37.918c-0.639,4.135 -0.99,8.328 -0.99,12.576c0,63.977 74.469,115.836 166.33,115.836c91.861,0 166.334,-51.859 166.334,-115.836c0,-4.218 -0.347,-8.387 -0.977,-12.493c14.564,-6.47 24.735,-21.034 24.735,-38.001Zm-119.474,108.193c-20.27,20.241 -59.115,21.816 -70.534,21.816c-11.428,0 -50.277,-1.575 -70.522,-21.82c-3.007,-3.008 -3.007,-7.882 0,-10.889c3.003,-2.999 7.882,-3.003 10.885,0c12.777,12.781 40.11,17.317 59.637,17.317c19.522,0 46.86,-4.536 59.657,-17.321c3.016,-2.999 7.886,-2.995 10.885,0.008c3.008,3.011 3.003,7.882 -0.008,10.889Zm-5.23,-48.781c-16.373,0 -29.701,-13.324 -29.701,-29.698c0,-16.381 13.328,-29.714 29.701,-29.714c16.378,0 29.706,13.333 29.706,29.714c0,16.374 -13.328,29.698 -29.706,29.698Zm-160.386,-29.702c0,-16.381 13.328,-29.71 29.714,-29.71c16.369,0 29.689,13.329 29.689,29.71c0,16.373 -13.32,29.693 -29.689,29.693c-16.386,0 -29.714,-13.32 -29.714,-29.693Z" />
+        </svg>
+    </a>
+    <a target="_blank" rel="noopener noreferrer" aria-label="share Python数学建模算法-4（pca和聚类与判别） on facebook"
+        href="https://facebook.com/sharer/sharer.php?u=https%3a%2f%2ftassel234.github.io%2fposts%2fnote%2fpython%25E6%2595%25B0%25E5%25AD%25A6%25E5%25BB%25BA%25E6%25A8%25A1%25E7%25AE%2597%25E6%25B3%2595-4pca%25E5%2592%258C%25E8%2581%259A%25E7%25B1%25BB%25E4%25B8%258E%25E5%2588%25A4%25E5%2588%25AB%2f">
+        <svg version="1.1" viewBox="0 0 512 512" xml:space="preserve" height="30px" width="30px" fill="currentColor">
+            <path
+                d="M449.446,0c34.525,0 62.554,28.03 62.554,62.554l0,386.892c0,34.524 -28.03,62.554 -62.554,62.554l-106.468,0l0,-192.915l66.6,0l12.672,-82.621l-79.272,0l0,-53.617c0,-22.603 11.073,-44.636 46.58,-44.636l36.042,0l0,-70.34c0,0 -32.71,-5.582 -63.982,-5.582c-65.288,0 -107.96,39.569 -107.96,111.204l0,62.971l-72.573,0l0,82.621l72.573,0l0,192.915l-191.104,0c-34.524,0 -62.554,-28.03 -62.554,-62.554l0,-386.892c0,-34.524 28.029,-62.554 62.554,-62.554l386.892,0Z" />
+        </svg>
+    </a>
+    <a target="_blank" rel="noopener noreferrer" aria-label="share Python数学建模算法-4（pca和聚类与判别） on whatsapp"
+        href="https://api.whatsapp.com/send?text=Python%e6%95%b0%e5%ad%a6%e5%bb%ba%e6%a8%a1%e7%ae%97%e6%b3%95-4%ef%bc%88pca%e5%92%8c%e8%81%9a%e7%b1%bb%e4%b8%8e%e5%88%a4%e5%88%ab%ef%bc%89%20-%20https%3a%2f%2ftassel234.github.io%2fposts%2fnote%2fpython%25E6%2595%25B0%25E5%25AD%25A6%25E5%25BB%25BA%25E6%25A8%25A1%25E7%25AE%2597%25E6%25B3%2595-4pca%25E5%2592%258C%25E8%2581%259A%25E7%25B1%25BB%25E4%25B8%258E%25E5%2588%25A4%25E5%2588%25AB%2f">
+        <svg version="1.1" viewBox="0 0 512 512" xml:space="preserve" height="30px" width="30px" fill="currentColor">
+            <path
+                d="M449.446,0c34.525,0 62.554,28.03 62.554,62.554l0,386.892c0,34.524 -28.03,62.554 -62.554,62.554l-386.892,0c-34.524,0 -62.554,-28.03 -62.554,-62.554l0,-386.892c0,-34.524 28.029,-62.554 62.554,-62.554l386.892,0Zm-58.673,127.703c-33.842,-33.881 -78.847,-52.548 -126.798,-52.568c-98.799,0 -179.21,80.405 -179.249,179.234c-0.013,31.593 8.241,62.428 23.927,89.612l-25.429,92.884l95.021,-24.925c26.181,14.28 55.659,21.807 85.658,21.816l0.074,0c98.789,0 179.206,-80.413 179.247,-179.243c0.018,-47.895 -18.61,-92.93 -52.451,-126.81Zm-126.797,275.782l-0.06,0c-26.734,-0.01 -52.954,-7.193 -75.828,-20.767l-5.441,-3.229l-56.386,14.792l15.05,-54.977l-3.542,-5.637c-14.913,-23.72 -22.791,-51.136 -22.779,-79.287c0.033,-82.142 66.867,-148.971 149.046,-148.971c39.793,0.014 77.199,15.531 105.329,43.692c28.128,28.16 43.609,65.592 43.594,105.4c-0.034,82.149 -66.866,148.983 -148.983,148.984Zm81.721,-111.581c-4.479,-2.242 -26.499,-13.075 -30.604,-14.571c-4.105,-1.495 -7.091,-2.241 -10.077,2.241c-2.986,4.483 -11.569,14.572 -14.182,17.562c-2.612,2.988 -5.225,3.364 -9.703,1.12c-4.479,-2.241 -18.91,-6.97 -36.017,-22.23c-13.314,-11.876 -22.304,-26.542 -24.916,-31.026c-2.612,-4.484 -0.279,-6.908 1.963,-9.14c2.016,-2.007 4.48,-5.232 6.719,-7.847c2.24,-2.615 2.986,-4.484 4.479,-7.472c1.493,-2.99 0.747,-5.604 -0.374,-7.846c-1.119,-2.241 -10.077,-24.288 -13.809,-33.256c-3.635,-8.733 -7.327,-7.55 -10.077,-7.688c-2.609,-0.13 -5.598,-0.158 -8.583,-0.158c-2.986,0 -7.839,1.121 -11.944,5.604c-4.105,4.484 -15.675,15.32 -15.675,37.364c0,22.046 16.048,43.342 18.287,46.332c2.24,2.99 31.582,48.227 76.511,67.627c10.685,4.615 19.028,7.371 25.533,9.434c10.728,3.41 20.492,2.929 28.209,1.775c8.605,-1.285 26.499,-10.833 30.231,-21.295c3.732,-10.464 3.732,-19.431 2.612,-21.298c-1.119,-1.869 -4.105,-2.99 -8.583,-5.232Z" />
+        </svg>
+    </a>
+    <a target="_blank" rel="noopener noreferrer" aria-label="share Python数学建模算法-4（pca和聚类与判别） on telegram"
+        href="https://telegram.me/share/url?text=Python%e6%95%b0%e5%ad%a6%e5%bb%ba%e6%a8%a1%e7%ae%97%e6%b3%95-4%ef%bc%88pca%e5%92%8c%e8%81%9a%e7%b1%bb%e4%b8%8e%e5%88%a4%e5%88%ab%ef%bc%89&amp;url=https%3a%2f%2ftassel234.github.io%2fposts%2fnote%2fpython%25E6%2595%25B0%25E5%25AD%25A6%25E5%25BB%25BA%25E6%25A8%25A1%25E7%25AE%2597%25E6%25B3%2595-4pca%25E5%2592%258C%25E8%2581%259A%25E7%25B1%25BB%25E4%25B8%258E%25E5%2588%25A4%25E5%2588%25AB%2f">
+        <svg version="1.1" xml:space="preserve" viewBox="2 2 28 28" height="30px" width="30px" fill="currentColor">
+            <path
+                d="M26.49,29.86H5.5a3.37,3.37,0,0,1-2.47-1,3.35,3.35,0,0,1-1-2.47V5.48A3.36,3.36,0,0,1,3,3,3.37,3.37,0,0,1,5.5,2h21A3.38,3.38,0,0,1,29,3a3.36,3.36,0,0,1,1,2.46V26.37a3.35,3.35,0,0,1-1,2.47A3.38,3.38,0,0,1,26.49,29.86Zm-5.38-6.71a.79.79,0,0,0,.85-.66L24.73,9.24a.55.55,0,0,0-.18-.46.62.62,0,0,0-.41-.17q-.08,0-16.53,6.11a.59.59,0,0,0-.41.59.57.57,0,0,0,.43.52l4,1.24,1.61,4.83a.62.62,0,0,0,.63.43.56.56,0,0,0,.4-.17L16.54,20l4.09,3A.9.9,0,0,0,21.11,23.15ZM13.8,20.71l-1.21-4q8.72-5.55,8.78-5.55c.15,0,.23,0,.23.16a.18.18,0,0,1,0,.06s-2.51,2.3-7.52,6.8Z" />
+        </svg>
+    </a>
+</div>
+  </footer>
+</article>
+    </main>
+    
+<footer class="footer">
+    <span>&copy; 2023 <a href="https://tassel234.github.io/">hrkr&#39;s Blog</a></span>
+    <span>
+        Powered by
+        <a href="https://gohugo.io/" rel="noopener noreferrer" target="_blank">Hugo</a> &
+        <a href="https://github.com/adityatelange/hugo-PaperMod/" rel="noopener" target="_blank">PaperMod</a>
+    </span>
+</footer>
+<a href="#top" aria-label="go to top" title="Go to Top (Alt + G)" class="top-link" id="top-link" accesskey="g">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentColor">
+        <path d="M12 6H0l6-6z" />
+    </svg>
+</a>
+
+<script>
+    let menu = document.getElementById('menu')
+    if (menu) {
+        menu.scrollLeft = localStorage.getItem("menu-scroll-position");
+        menu.onscroll = function () {
+            localStorage.setItem("menu-scroll-position", menu.scrollLeft);
+        }
+    }
+
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener("click", function (e) {
+            e.preventDefault();
+            var id = this.getAttribute("href").substr(1);
+            if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView({
+                    behavior: "smooth"
+                });
+            } else {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView();
+            }
+            if (id === "top") {
+                history.replaceState(null, null, " ");
+            } else {
+                history.pushState(null, null, `#${id}`);
+            }
+        });
+    });
+
+</script>
+<script>
+    var mybutton = document.getElementById("top-link");
+    window.onscroll = function () {
+        if (document.body.scrollTop > 800 || document.documentElement.scrollTop > 800) {
+            mybutton.style.visibility = "visible";
+            mybutton.style.opacity = "1";
+        } else {
+            mybutton.style.visibility = "hidden";
+            mybutton.style.opacity = "0";
+        }
+    };
+
+</script>
+<script>
+    document.getElementById("theme-toggle").addEventListener("click", () => {
+        if (document.body.className.includes("dark")) {
+            document.body.classList.remove('dark');
+            localStorage.setItem("pref-theme", 'light');
+        } else {
+            document.body.classList.add('dark');
+            localStorage.setItem("pref-theme", 'dark');
+        }
+    })
+
+</script>
+<script>
+    document.querySelectorAll('pre > code').forEach((codeblock) => {
+        const container = codeblock.parentNode.parentNode;
+
+        const copybutton = document.createElement('button');
+        copybutton.classList.add('copy-code');
+        copybutton.innerHTML = 'copy';
+
+        function copyingDone() {
+            copybutton.innerHTML = 'copied!';
+            setTimeout(() => {
+                copybutton.innerHTML = 'copy';
+            }, 2000);
+        }
+
+        copybutton.addEventListener('click', (cb) => {
+            if ('clipboard' in navigator) {
+                navigator.clipboard.writeText(codeblock.textContent);
+                copyingDone();
+                return;
+            }
+
+            const range = document.createRange();
+            range.selectNodeContents(codeblock);
+            const selection = window.getSelection();
+            selection.removeAllRanges();
+            selection.addRange(range);
+            try {
+                document.execCommand('copy');
+                copyingDone();
+            } catch (e) { };
+            selection.removeRange(range);
+        });
+
+        if (container.classList.contains("highlight")) {
+            container.appendChild(copybutton);
+        } else if (container.parentNode.firstChild == container) {
+            
+        } else if (codeblock.parentNode.parentNode.parentNode.parentNode.parentNode.nodeName == "TABLE") {
+            
+            codeblock.parentNode.parentNode.parentNode.parentNode.parentNode.appendChild(copybutton);
+        } else {
+            
+            codeblock.parentNode.appendChild(copybutton);
+        }
+    });
+</script>
+</body>
+
+</html>
