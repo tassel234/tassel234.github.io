@@ -6,7 +6,16 @@
     <description>Recent content on hrkr&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Fri, 01 Sep 2023 23:40:03 +0800</lastBuildDate><atom:link href="https://tassel234.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sat, 02 Sep 2023 23:58:26 +0800</lastBuildDate><atom:link href="https://tassel234.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Python数学建模算法 5（图论）</title>
+      <link>https://tassel234.github.io/posts/note/python%E6%95%B0%E5%AD%A6%E5%BB%BA%E6%A8%A1%E7%AE%97%E6%B3%95-5%E5%9B%BE%E8%AE%BA/</link>
+      <pubDate>Sat, 02 Sep 2023 23:58:26 +0800</pubDate>
+      
+      <guid>https://tassel234.github.io/posts/note/python%E6%95%B0%E5%AD%A6%E5%BB%BA%E6%A8%A1%E7%AE%97%E6%B3%95-5%E5%9B%BE%E8%AE%BA/</guid>
+      <description>Python数学建模算法-3（图论） 6.1 图与网络的基础理论 图是描述于一组对象的结构，其中某些对象对在某种意义上是“相关的”。这些对象对应于称为顶点的数学抽象（也称为节点或点），并且每个相关的顶点对都称为边（也称为链接或线）。图论的主要表示方式是邻接矩阵或者邻接表。 6.2 NetworkX</description>
+    </item>
+    
     <item>
       <title>Python数学建模算法-4（pca和聚类与判别）</title>
       <link>https://tassel234.github.io/posts/note/python%E6%95%B0%E5%AD%A6%E5%BB%BA%E6%A8%A1%E7%AE%97%E6%B3%95-4pca%E5%92%8C%E8%81%9A%E7%B1%BB%E4%B8%8E%E5%88%A4%E5%88%AB/</link>
