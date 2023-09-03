@@ -6,14 +6,23 @@
     <description>Recent content on hrkr&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Sat, 02 Sep 2023 23:58:26 +0800</lastBuildDate><atom:link href="https://tassel234.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 03 Sep 2023 22:17:36 +0800</lastBuildDate><atom:link href="https://tassel234.github.io/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>Python数学建模算法 5（图论）</title>
+      <title>Python数学建模算法-6（评价和预测）</title>
+      <link>https://tassel234.github.io/posts/note/python%E6%95%B0%E5%AD%A6%E5%BB%BA%E6%A8%A1%E7%AE%97%E6%B3%95-6%E8%AF%84%E4%BB%B7%E5%92%8C%E9%A2%84%E6%B5%8B/</link>
+      <pubDate>Sun, 03 Sep 2023 22:17:36 +0800</pubDate>
+      
+      <guid>https://tassel234.github.io/posts/note/python%E6%95%B0%E5%AD%A6%E5%BB%BA%E6%A8%A1%E7%AE%97%E6%B3%95-6%E8%AF%84%E4%BB%B7%E5%92%8C%E9%A2%84%E6%B5%8B/</guid>
+      <description>Python数学建模算法-6（评价和预测） 14.1 综合评价指标体系 综合评价（Comprehensive Evaluation，CE），也叫综合评价方法或多指标综合评价方法，是指使用比较系统的、规范的方法对于多个指标、多个单位同时进行评价的方法。它不只是一种方法，而是一个方法系统，是指对多</description>
+    </item>
+    
+    <item>
+      <title>Python数学建模算法-5（图论）</title>
       <link>https://tassel234.github.io/posts/note/python%E6%95%B0%E5%AD%A6%E5%BB%BA%E6%A8%A1%E7%AE%97%E6%B3%95-5%E5%9B%BE%E8%AE%BA/</link>
       <pubDate>Sat, 02 Sep 2023 23:58:26 +0800</pubDate>
       
       <guid>https://tassel234.github.io/posts/note/python%E6%95%B0%E5%AD%A6%E5%BB%BA%E6%A8%A1%E7%AE%97%E6%B3%95-5%E5%9B%BE%E8%AE%BA/</guid>
-      <description>Python数学建模算法-3（图论） 6.1 图与网络的基础理论 图是描述于一组对象的结构，其中某些对象对在某种意义上是“相关的”。这些对象对应于称为顶点的数学抽象（也称为节点或点），并且每个相关的顶点对都称为边（也称为链接或线）。图论的主要表示方式是邻接矩阵或者邻接表。 6.2 NetworkX</description>
+      <description>6.1 图与网络的基础理论 图是描述于一组对象的结构，其中某些对象对在某种意义上是“相关的”。这些对象对应于称为顶点的数学抽象（也称为节点或点），并且每个相关的顶点对都称为边（也称为链接或线）。图论的主要表示方式是邻接矩阵或者邻接表。 6.2 NetworkX简介 是Python的一个库，用来创建</description>
     </item>
     
     <item>
