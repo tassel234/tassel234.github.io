@@ -6,7 +6,16 @@
     <description>Recent content in 学习&amp;笔记 on hrkr&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Sun, 03 Sep 2023 22:17:36 +0800</lastBuildDate><atom:link href="https://tassel234.github.io/posts/note/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 04 Sep 2023 23:55:20 +0800</lastBuildDate><atom:link href="https://tassel234.github.io/posts/note/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>算法预览（数学建模篇-1）</title>
+      <link>https://tassel234.github.io/posts/note/%E7%AE%97%E6%B3%95%E9%A2%84%E8%A7%88%E6%95%B0%E5%AD%A6%E5%BB%BA%E6%A8%A1%E7%AF%87-1/</link>
+      <pubDate>Mon, 04 Sep 2023 23:55:20 +0800</pubDate>
+      
+      <guid>https://tassel234.github.io/posts/note/%E7%AE%97%E6%B3%95%E9%A2%84%E8%A7%88%E6%95%B0%E5%AD%A6%E5%BB%BA%E6%A8%A1%E7%AF%87-1/</guid>
+      <description>前言 使用资源： https://github.com/rishal-hurbans/Grokking-Artificial-Intelligence-Algorithms https://www.zhihu.com/people/MicrostrongAI/posts?page=2 chatgtp aim 知道算法可以解决什么问题 对一些重要的算法要知道每行代码代表代码，然后可以进行修改 智能算法预览 遗传算法：优点是能很好的处理约束，能很好的跳出局部最优，最终得到全局最优解，全局搜索能力强；缺点是收敛较慢，局部搜索能力较弱，运行时间长，且容易受参数的影响。 遗传算法</description>
+    </item>
+    
     <item>
       <title>Python数学建模算法-6（评价和预测）</title>
       <link>https://tassel234.github.io/posts/note/python%E6%95%B0%E5%AD%A6%E5%BB%BA%E6%A8%A1%E7%AE%97%E6%B3%95-6%E8%AF%84%E4%BB%B7%E5%92%8C%E9%A2%84%E6%B5%8B/</link>
@@ -157,7 +166,7 @@
       <pubDate>Sat, 19 Aug 2023 23:56:42 +0800</pubDate>
       
       <guid>https://tassel234.github.io/posts/note/python%E6%95%B0%E5%AD%A6%E5%BB%BA%E6%A8%A1%E7%AE%97%E6%B3%95-1%E5%BA%93%E7%9A%84%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8%E5%92%8C%E7%BB%98%E5%9B%BE%E5%9F%BA%E7%A1%80/</guid>
-      <description>python数模算法-1（库的基本使用和绘图基础） 前言 使用学习资源 python数学建模算法与应用（司守奎） 比较全面的建模算法视频（但编程语言是matlab） 目标指向 只需要会看那些代码并运行实现一次代码和理解用途就可以了，需要使用的时候查阅复制粘贴就可以了。 算法具体实现的逻辑步骤要</description>
+      <description>python数模算法-1（库的基本使用和绘图基础） 前言 使用学习资源 python数学建模算法与应用（司守奎） 比较全面的建模算法视频（编程语言是matlab） 目标指向 只需要会看那些代码并运行实现一次代码和理解用途就可以了，需要使用的时候查阅复制粘贴就可以了。 算法具体实现的逻辑步骤要搞</description>
     </item>
     
     <item>
