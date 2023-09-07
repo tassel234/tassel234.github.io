@@ -6,7 +6,16 @@
     <description>Recent content in 学习&amp;笔记 on hrkr&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Wed, 06 Sep 2023 22:19:43 +0800</lastBuildDate><atom:link href="https://tassel234.github.io/posts/note/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 07 Sep 2023 23:56:05 +0800</lastBuildDate><atom:link href="https://tassel234.github.io/posts/note/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>数学模型</title>
+      <link>https://tassel234.github.io/posts/note/%E6%95%B0%E5%AD%A6%E6%A8%A1%E5%9E%8B.%E5%A7%9C%E5%90%AF%E6%BA%90-1/</link>
+      <pubDate>Thu, 07 Sep 2023 23:56:05 +0800</pubDate>
+      
+      <guid>https://tassel234.github.io/posts/note/%E6%95%B0%E5%AD%A6%E6%A8%A1%E5%9E%8B.%E5%A7%9C%E5%90%AF%E6%BA%90-1/</guid>
+      <description>第一章 1.1包饺子模型，一斤面和一斤馅原本可以包100个饺子，但某次馅做多了，而面不变，请问是应该少用面多包几个饺子，还是应该多用面包较少的饺子。 分析：以我建模还没入门的思维，以日常的经验。实际操作中好像不管比例多少，只要别太离谱，都可以把饺子包完。我一开始是想不到馅就是体积。 但</description>
+    </item>
+    
     <item>
       <title>算法预览（数学建模篇-3）</title>
       <link>https://tassel234.github.io/posts/note/%E7%AE%97%E6%B3%95%E9%A2%84%E8%A7%88%E6%95%B0%E5%AD%A6%E5%BB%BA%E6%A8%A1%E7%AF%87-3/</link>
