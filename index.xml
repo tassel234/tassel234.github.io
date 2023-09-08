@@ -6,9 +6,18 @@
     <description>Recent content on hrkr&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Thu, 07 Sep 2023 23:56:05 +0800</lastBuildDate><atom:link href="https://tassel234.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Fri, 08 Sep 2023 23:50:17 +0800</lastBuildDate><atom:link href="https://tassel234.github.io/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>数学模型</title>
+      <title>数学建模和算法应用举例-1</title>
+      <link>https://tassel234.github.io/posts/note/%E6%95%B0%E5%AD%A6%E5%BB%BA%E6%A8%A1%E5%92%8C%E7%AE%97%E6%B3%95%E5%BA%94%E7%94%A8%E4%B8%BE%E4%BE%8B-1/</link>
+      <pubDate>Fri, 08 Sep 2023 23:50:17 +0800</pubDate>
+      
+      <guid>https://tassel234.github.io/posts/note/%E6%95%B0%E5%AD%A6%E5%BB%BA%E6%A8%A1%E5%92%8C%E7%AE%97%E6%B3%95%E5%BA%94%E7%94%A8%E4%B8%BE%E4%BE%8B-1/</guid>
+      <description>数学建模和算法应用举例-1 前言 使用资源 2017年高教社杯全国大学生数学建模竞赛题目 B题 “拍照赚钱”的任务定价B248 上海市数学建模教学视频（过上一段时间就自动失效） 127413453 chatgpt aim 我无意了解算法的每一个实现细节，理论推导，只求可以将现实的东西转化为数学的结构，然后可以使用别人写好的算法解决</description>
+    </item>
+    
+    <item>
+      <title>数学模型.姜启源-1</title>
       <link>https://tassel234.github.io/posts/note/%E6%95%B0%E5%AD%A6%E6%A8%A1%E5%9E%8B.%E5%A7%9C%E5%90%AF%E6%BA%90-1/</link>
       <pubDate>Thu, 07 Sep 2023 23:56:05 +0800</pubDate>
       
