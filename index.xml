@@ -6,7 +6,16 @@
     <description>Recent content on hrkr&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Fri, 15 Sep 2023 23:52:01 +0800</lastBuildDate><atom:link href="https://tassel234.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sat, 16 Sep 2023 22:28:44 +0800</lastBuildDate><atom:link href="https://tassel234.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>概率论入门 2</title>
+      <link>https://tassel234.github.io/posts/note/%E6%A6%82%E7%8E%87%E8%AE%BA%E5%85%A5%E9%97%A8-2/</link>
+      <pubDate>Sat, 16 Sep 2023 22:28:44 +0800</pubDate>
+      
+      <guid>https://tassel234.github.io/posts/note/%E6%A6%82%E7%8E%87%E8%AE%BA%E5%85%A5%E9%97%A8-2/</guid>
+      <description>概率论入门-2 前言 使用资源：概率论和数理统计（同济课本） 后续还会针对学校课程的学习对内容进行补充 随机事件与概率 第一节 随机事件及其运算 样本空间和分割 第二节 概率的定义及其性质 第三节 等可能概型 第四节 条件概率与事件的相互独立性 第五节 全概率公式与贝叶斯公式 随机变量及其分布 第一节 随机变量及其</description>
+    </item>
+    
     <item>
       <title>概率论入门-1</title>
       <link>https://tassel234.github.io/posts/note/%E6%A6%82%E7%8E%87%E8%AE%BA%E5%85%A5%E9%97%A8-1/</link>
