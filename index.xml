@@ -6,7 +6,16 @@
     <description>Recent content on hrkr&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Sun, 17 Sep 2023 23:46:23 +0800</lastBuildDate><atom:link href="https://tassel234.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 18 Sep 2023 23:52:04 +0800</lastBuildDate><atom:link href="https://tassel234.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>工业大数据建模理论和案例 3</title>
+      <link>https://tassel234.github.io/posts/note/%E5%B7%A5%E4%B8%9A%E5%A4%A7%E6%95%B0%E6%8D%AE%E5%BB%BA%E6%A8%A1%E7%90%86%E8%AE%BA%E5%92%8C%E6%A1%88%E4%BE%8B-3/</link>
+      <pubDate>Mon, 18 Sep 2023 23:52:04 +0800</pubDate>
+      
+      <guid>https://tassel234.github.io/posts/note/%E5%B7%A5%E4%B8%9A%E5%A4%A7%E6%95%B0%E6%8D%AE%E5%BB%BA%E6%A8%A1%E7%90%86%E8%AE%BA%E5%92%8C%E6%A1%88%E4%BE%8B-3/</guid>
+      <description>工业大数据应用模型 生产安全分析 7.1.1 微观管理 7.1.2 宏观管理 营销优化分析 研发数据分析 工业大数据的分析算法 数据和特征决定了机器学习的上限，而模型和算法只是逼近这个上限而已。 时序数据常常呈现自相关（时间维度）、互相关（多个变量间）、多尺度（时间颗粒度）等特性，因而有不少针对这些时序数据特征的领</description>
+    </item>
+    
     <item>
       <title>Ps入门-1</title>
       <link>https://tassel234.github.io/posts/note/ps%E5%85%A5%E9%97%A8-1/</link>
@@ -22,7 +31,7 @@
       <pubDate>Sat, 16 Sep 2023 23:39:41 +0800</pubDate>
       
       <guid>https://tassel234.github.io/posts/note/%E6%95%B0%E5%AD%A6%E5%BB%BA%E6%A8%A1%E5%92%8C%E7%AE%97%E6%B3%95%E5%BA%94%E7%94%A8%E4%B8%BE%E4%BE%8B-2%E6%99%BA%E8%83%BDrgv%E7%9A%84%E5%8A%A8%E6%80%81%E8%B0%83%E5%BA%A6%E7%AD%96%E7%95%A5/</guid>
-      <description>数学建模和算法应用举例-2(智能RGV的动态调度策略) 前言 更新中 使用资源 2018年高教社杯全国大学生数学建模竞赛题目 B题 智能RGV的动态调度策略 即其相应的优秀论文：B203,225，334. chatgpt aim 考虑不一样的因素。不同的视角。 学会建立模型和求解解决实际问题。 问题重述 问题B 智能RGV</description>
+      <description>数学建模和算法应用举例-2(智能RGV的动态调度策略) 前言 更新中 使用资源 2018年高教社杯全国大学生数学建模竞赛题目 B题 智能RGV的动态调度策略 即其相应的优秀论文：B203,225，334. chatgpt aim 考虑不一样的因素。不同的视角，看到不一样的东西。 学会建立模型和求解解决实际问题。 问题重</description>
     </item>
     
     <item>
