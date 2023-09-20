@@ -6,13 +6,22 @@
     <description>Recent content on hrkr&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Tue, 19 Sep 2023 23:30:10 +0800</lastBuildDate><atom:link href="https://tassel234.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 20 Sep 2023 23:51:11 +0800</lastBuildDate><atom:link href="https://tassel234.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>工业大数据建模理论和案例-2</title>
+      <link>https://tassel234.github.io/posts/note/%E5%B7%A5%E4%B8%9A%E5%A4%A7%E6%95%B0%E6%8D%AE%E5%BB%BA%E6%A8%A1%E7%90%86%E8%AE%BA%E5%92%8C%E6%A1%88%E4%BE%8B-2/</link>
+      <pubDate>Wed, 20 Sep 2023 23:51:11 +0800</pubDate>
+      
+      <guid>https://tassel234.github.io/posts/note/%E5%B7%A5%E4%B8%9A%E5%A4%A7%E6%95%B0%E6%8D%AE%E5%BB%BA%E6%A8%A1%E7%90%86%E8%AE%BA%E5%92%8C%E6%A1%88%E4%BE%8B-2/</guid>
+      <description>工业大数据建模理论和案例-2 更新中 前言 使用资源： 工业大数据分析实例（21w）这本书的内容很全面，广度很大，深度也不小。目前只针对这本书大致了解工业大数据的理论应用。 智能制造标准案例集(20w) 工业大数据技术与应用实践（5.5w） chatgpt 平台技术 基本介绍 工业大数据平台的特点由工业大数据的</description>
+    </item>
+    
     <item>
       <title>《奥本海默》观后感</title>
-      <link>https://tassel234.github.io/posts/note/%E5%A5%A5%E6%9C%AC%E6%B5%B7%E9%BB%98%E8%A7%82%E5%90%8E%E6%84%9F/</link>
+      <link>https://tassel234.github.io/posts/read/%E5%A5%A5%E6%9C%AC%E6%B5%B7%E9%BB%98%E8%A7%82%E5%90%8E%E6%84%9F/</link>
       <pubDate>Tue, 19 Sep 2023 23:30:10 +0800</pubDate>
       
-      <guid>https://tassel234.github.io/posts/note/%E5%A5%A5%E6%9C%AC%E6%B5%B7%E9%BB%98%E8%A7%82%E5%90%8E%E6%84%9F/</guid>
+      <guid>https://tassel234.github.io/posts/read/%E5%A5%A5%E6%9C%AC%E6%B5%B7%E9%BB%98%E8%A7%82%E5%90%8E%E6%84%9F/</guid>
       <description>《奥本海默》观后感 现代盗火的普罗米修斯，通过毁灭人类的威慑，阻止了可能爆发的超大规模的战争。 古巴导弹危机，导弹都快在美国头上爆炸了，眼瞅着核战争就要爆发力，不过最后还是谈判解决了。在那个时候美国总统的口号是为了我们下一代的孩子都可以在和平的世界里面生活。我不知道最后苏联为什么会解</description>
     </item>
     
@@ -46,7 +55,7 @@
     <item>
       <title>概率论入门-2</title>
       <link>https://tassel234.github.io/posts/note/%E6%A6%82%E7%8E%87%E8%AE%BA%E5%85%A5%E9%97%A8-2/</link>
-      <pubDate>Sat, 16 Sep 2023 22:28:44 +0800</pubDate>
+      <pubDate>Fri, 15 Sep 2023 22:28:44 +0800</pubDate>
       
       <guid>https://tassel234.github.io/posts/note/%E6%A6%82%E7%8E%87%E8%AE%BA%E5%85%A5%E9%97%A8-2/</guid>
       <description>概率论入门-2 前言 使用资源：概率论和数理统计（同济课本） 后续还会针对学校课程的学习对内容进行补充 随机事件与概率 第一节 随机事件及其运算 样本空间和分割 第二节 概率的定义及其性质 第三节 等可能概型 第四节 条件概率与事件的相互独立性 第五节 全概率公式与贝叶斯公式 随机变量及其分布 第一节 随机变量及其</description>
@@ -55,7 +64,7 @@
     <item>
       <title>概率论入门-1</title>
       <link>https://tassel234.github.io/posts/note/%E6%A6%82%E7%8E%87%E8%AE%BA%E5%85%A5%E9%97%A8-1/</link>
-      <pubDate>Fri, 15 Sep 2023 23:52:01 +0800</pubDate>
+      <pubDate>Thu, 14 Sep 2023 23:52:01 +0800</pubDate>
       
       <guid>https://tassel234.github.io/posts/note/%E6%A6%82%E7%8E%87%E8%AE%BA%E5%85%A5%E9%97%A8-1/</guid>
       <description>前言 使用资源：概率论和数理统计（同济课本） 大数定律及中心极限定理 超几何分布的极限是二项分布以及泊松定理，即二项分布的极限是泊松分布。 大数定律 得到频率的极限是概率 依概率收敛，稳定. 在大量相互独立重复试验中可以用某个事件A发生的频率来近似每次试验中事件A发生的概率，这就是伯努利大数定</description>
