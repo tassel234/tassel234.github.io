@@ -6,7 +6,16 @@
     <description>Recent content in 学习&amp;笔记 on hrkr&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Tue, 26 Sep 2023 23:52:14 +0800</lastBuildDate><atom:link href="https://tassel234.github.io/posts/note/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 27 Sep 2023 00:01:20 +0800</lastBuildDate><atom:link href="https://tassel234.github.io/posts/note/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Sa</title>
+      <link>https://tassel234.github.io/posts/note/sa/</link>
+      <pubDate>Wed, 27 Sep 2023 00:01:20 +0800</pubDate>
+      
+      <guid>https://tassel234.github.io/posts/note/sa/</guid>
+      <description></description>
+    </item>
+    
     <item>
       <title>A</title>
       <link>https://tassel234.github.io/posts/note/a/</link>
@@ -23,15 +32,6 @@
       
       <guid>https://tassel234.github.io/posts/note/c&#43;&#43;%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0-2%E7%B1%BB%E5%92%8C%E5%AF%B9%E8%B1%A1-2/</guid>
       <description>对象数组和对象指针 （1）对象数组的定义和使用 可以简单的理解类就是我们自定义的数据类型，而对象就是类的实例，因此我们也可以构造对象数组和对象的指针。 Point points[100]; //表示100个点 （2）指向对象的指针 class Time { public: Time(int h=0,int m=0,int s=0): hour(h),minute(m),second(s) { } void set(int h=0,int m=0,int s=0) { hour=h,minute=m,second=s; } int hour,minute,second; }; Time now(12,0,0), *pt; //指向对象的指针变量 pt=&amp;amp;now; //指向对象 pt-&amp;gt;set(13,13,0); pt-&amp;gt;hour=1; 可</description>
-    </item>
-    
-    <item>
-      <title>《艾迪芬奇的记忆》体验</title>
-      <link>https://tassel234.github.io/posts/note/%E8%89%BE%E8%BF%AA%E8%8A%AC%E5%A5%87%E7%9A%84%E8%AE%B0%E5%BF%86%E4%BD%93%E9%AA%8C/</link>
-      <pubDate>Sun, 24 Sep 2023 23:57:48 +0800</pubDate>
-      
-      <guid>https://tassel234.github.io/posts/note/%E8%89%BE%E8%BF%AA%E8%8A%AC%E5%A5%87%E7%9A%84%E8%AE%B0%E5%BF%86%E4%BD%93%E9%AA%8C/</guid>
-      <description></description>
     </item>
     
     <item>
