@@ -2,13 +2,19 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
-    <loc>https://tassel234.github.io/posts/note/aada/</loc>
-    <lastmod>2023-10-03T00:21:37+08:00</lastmod>
-  </url><url>
     <loc>https://tassel234.github.io/</loc>
-    <lastmod>2023-10-03T00:21:37+08:00</lastmod>
+    <lastmod>2023-10-08T23:59:15+08:00</lastmod>
   </url><url>
     <loc>https://tassel234.github.io/posts/</loc>
+    <lastmod>2023-10-08T23:59:15+08:00</lastmod>
+  </url><url>
+    <loc>https://tassel234.github.io/posts/read/%E4%BB%8A%E6%97%A5%E7%AE%80%E5%8F%B2%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0-1/</loc>
+    <lastmod>2023-10-08T23:59:15+08:00</lastmod>
+  </url><url>
+    <loc>https://tassel234.github.io/posts/read/</loc>
+    <lastmod>2023-10-08T23:59:15+08:00</lastmod>
+  </url><url>
+    <loc>https://tassel234.github.io/posts/note/aada/</loc>
     <lastmod>2023-10-03T00:21:37+08:00</lastmod>
   </url><url>
     <loc>https://tassel234.github.io/posts/note/</loc>
@@ -39,9 +45,6 @@
     <lastmod>2023-09-25T23:48:50+08:00</lastmod>
   </url><url>
     <loc>https://tassel234.github.io/posts/read/%E8%89%BE%E8%BF%AA%E8%8A%AC%E5%A5%87%E7%9A%84%E8%AE%B0%E5%BF%86%E4%BD%93%E9%AA%8C/</loc>
-    <lastmod>2023-09-24T23:58:11+08:00</lastmod>
-  </url><url>
-    <loc>https://tassel234.github.io/posts/read/</loc>
     <lastmod>2023-09-24T23:58:11+08:00</lastmod>
   </url><url>
     <loc>https://tassel234.github.io/posts/note/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E7%9A%84%E6%95%B0%E5%AD%A6%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0-2/</loc>
