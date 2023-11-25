@@ -6,7 +6,16 @@
     <description>Recent content in 学习&amp;笔记 on hrkr&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Fri, 03 Nov 2023 23:47:57 +0800</lastBuildDate><atom:link href="https://tassel234.github.io/posts/note/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Fri, 24 Nov 2023 23:54:55 +0800</lastBuildDate><atom:link href="https://tassel234.github.io/posts/note/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>《统计陷阱》读书笔记 1</title>
+      <link>https://tassel234.github.io/posts/note/%E7%BB%9F%E8%AE%A1%E9%99%B7%E9%98%B1%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0-1/</link>
+      <pubDate>Fri, 24 Nov 2023 23:54:55 +0800</pubDate>
+      
+      <guid>https://tassel234.github.io/posts/note/%E7%BB%9F%E8%AE%A1%E9%99%B7%E9%98%B1%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0-1/</guid>
+      <description>第一章 内在有偏的样本 样本的选择可能会影响统计结果的准确性。例如，一家公司在商场门口调查顾客对其产品的满意度，但路过商场的顾客可能不代表整个消费者群体。 民意调查并不一定被操纵了。也就是说，并不一定 要为了制造假相而恶意扭曲结果。样本有偏的趋势可以自动地操纵结果，使其变得扭曲。 第二章 精</description>
+    </item>
+    
     <item>
       <title>《大模型应用开发技术体系串讲》直播课笔记</title>
       <link>https://tassel234.github.io/posts/note/%E5%A4%A7%E6%A8%A1%E5%9E%8B%E5%BA%94%E7%94%A8%E5%BC%80%E5%8F%91%E6%8A%80%E6%9C%AF%E4%BD%93%E7%B3%BB%E4%B8%B2%E8%AE%B2%E7%9B%B4%E6%92%AD%E8%AF%BE%E7%AC%94%E8%AE%B0/</link>
